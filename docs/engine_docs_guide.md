@@ -149,3 +149,10 @@ Task coding dianggap siap dikerjakan jika:
 ## Report layout V2
 
 Report layout reading reference: [Database report output layout](report_output_layout.md) owns grouped output roots, path compatibility, manifest ownership/cleanup, and report-only cross-tool boundaries. It does not alter source-of-truth/history semantics.
+
+
+## Audit object precision (2026-10-12)
+
+Baca review_report_object_precision_20261012.md dan fixtures/report_object_precision untuk corpus evidence, support boundaries, regression proof serta release validation audit report.
+
+Detail bukti: review_report_object_precision_20261012.md.

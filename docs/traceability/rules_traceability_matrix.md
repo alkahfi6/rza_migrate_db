@@ -64,3 +64,10 @@ Residual risk aktif saat ini:
 ## Report layout V2
 
 Report layout V2 control → internal/migreport/layout.go + report.go + CLI flags; evidence → layout_test.go, CLI discovery/custom-root tests, QA-31 golden/layout integration; no-write → collision and symlink preflight plus source/history hash regression; stale cleanup → previous manifest path whitelist + SHA-256. Capability is report-only; extractor/checker/generator behavior unchanged, complete binary release parity required.
+
+
+## Audit object precision (2026-10-12)
+
+Controls: SQLTokens/ReadTableMetadata/ReadIndexMetadata -> documentation_ddl_test.go; scoped relationship catalog -> TestObservedJoinPrecision; mapping/parameters/dynamic/identity/encoding -> object_precision_test.go; shared MERGE JOIN -> sqlparse regression. TestRealObjectPrecisionFixtureReadOnlyAndIdempotent membuktikan golden/no-write/rerun; TestReportRealSnapshotCorpus mengaudit local corpus opsional. Release/source identity dan checker no-write tetap existing gates.
+
+Detail bukti: ../review_report_object_precision_20261012.md.

@@ -1,0 +1,7 @@
+{
+  "scenario": "report_object_precision",
+  "source": "real local Bond/Reksa snapshots",
+  "read_only": true,
+  "second_run_identical": true,
+  "cross_tool_boundary": "report-only observation; extractor, checker apply/check, generator and migrations remain unchanged"
+}

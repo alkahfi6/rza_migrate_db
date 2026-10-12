@@ -131,7 +131,7 @@ func renderProcedureProfile(docs DesiredStateDocs, p *ProcedureProfile) string {
 		b.WriteString(fmt.Sprintf("| `%s` | `%s` | `%s` | %s | `%s` | %d | `%s` |\n", a.Ref, a.Operation, md(a.Object), codeOrDash(a.Guard), a.Resolution, a.Line, md(compactEvidence(a.Source))))
 	}
 
-	b.WriteString("\n## Exact write mapping\n\nMapping hanya ditampilkan jika analyzer dapat memisahkan target column dan source expression secara konservatif. Untuk `UPDATE`, filter juga ditampilkan bila dapat diparse. Statement yang tidak aman diparse tetap ada di Direct object access untuk manual review.\n\n| Ref | Target | Target column | Source expression | Filter | Resolution |\n| --- | --- | --- | --- | --- | --- |\n")
+	b.WriteString("\n## Exact write mapping\n\nTarget column dan source expression dipisahkan secara konservatif. `COLUMN_NOT_FOUND` atau `AMBIGUOUS` mempertahankan expression sebagai evidence untuk review; bukan mapping kolom terverifikasi. Untuk `UPDATE`, filter ditampilkan bila ada; `—` berarti tidak ada filter yang dipetakan, termasuk UPDATE tanpa WHERE. Statement yang tidak aman diparse tetap ada di Direct object access untuk manual review.\n\n| Ref | Target | Target column | Source expression | Filter | Resolution |\n| --- | --- | --- | --- | --- | --- |\n")
 	if len(p.Mappings) == 0 {
 		b.WriteString("| — | — | — | — | — | Tidak ada mapping INSERT/UPDATE yang dapat dibuktikan secara konservatif. |\n")
 	}
@@ -1162,6 +1162,7 @@ func procedureResolutionReference() string {
 		"| `UNRESOLVED_DYNAMIC` | Target bergantung pada variable, parameter, metadata, configuration, atau runtime data. |\n" +
 		"| `NOT_PERSISTED` | Temporary table atau table variable; bukan persisted database object. |\n" +
 		"| `NOT_FOUND` | Nama terbaca tetapi tidak ditemukan pada snapshot `db_object` yang sesuai. |\n" +
+		"| `COLUMN_NOT_FOUND` | Table ditemukan tetapi target column tidak ada pada snapshot; expression dipertahankan sebagai evidence untuk review. |\n" +
 		"| `AMBIGUOUS` | Nama cocok ke lebih dari satu kind/object dan tidak aman dipilih otomatis. |\n" +
 		"| `SYSTEM_OBJECT` | Built-in/system procedure; bukan application procedure dalam `db_object/procedures`. |\n\n" +
 		"`db_object` digunakan untuk memvalidasi kandidat, bukan menebak nilai runtime.\n"

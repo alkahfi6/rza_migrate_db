@@ -750,3 +750,10 @@ Hardening update (2026-09-09):
 Report layout V2: grouped publication, navigation, conservative ownership cleanup, QA-31 coverage dan CLI/integration proof. Release gate: full Go suite, hardening/fixture gates, full build_all.bat, source/checksum identity, dan smoke Linux MR/report. Tidak ada perubahan authoring/diff planning. Lihat [delivery contract](docs/report_output_layout.md).
 
 Report layout V2 delivery complete (2026-10-12): full tests/hardening, complete release build 20261012.020616, Windows/Linux shared-checkout report regeneration, manifest/link/hash validation, and Linux MR smoke passed. Learning examples are the existing missing-directory skip; no new parser/schema/migration residual scope. Details in docs/report_output_layout.md.
+
+
+## Audit object precision (2026-10-12)
+
+Audit object precision selesai pada implementation dan focused regression; completion gate tetap full Go/hardening, complete Windows/Linux rebuild, source/checksum identity dan released checker/report smoke. Residual scope: full T-SQL AST, CTE projection, correlated scope, runtime dynamic metadata dan MERGE branch mapping tetap manual; lihat audit bertanggal untuk bukti dan hasil gate.
+
+Detail bukti: docs/review_report_object_precision_20261012.md.

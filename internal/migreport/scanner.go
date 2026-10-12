@@ -9,6 +9,7 @@ import (
 
 	"rza_migrate_db/internal/config"
 	"rza_migrate_db/internal/history"
+	"rza_migrate_db/internal/sqlfmt"
 )
 
 const (
@@ -96,7 +97,11 @@ func ScanMigrations(repoRoot string) ([]MigrationPair, []FileInfo, []string, []s
 			}
 		}
 		info.RelPath = relPath
-		info.RawBytes = content
+		decoded, _, decodeErr := sqlfmt.NormalizeSQLToUTF8(content)
+		if decodeErr != nil {
+			return nil, nil, nil, nil, fmt.Errorf("read SQL %s: %w", relPath, decodeErr)
+		}
+		info.RawBytes = decoded
 		allFiles = append(allFiles, info)
 
 		// Key for pairing: migration_id + category + object_name + object_version

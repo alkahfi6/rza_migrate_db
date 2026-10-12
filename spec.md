@@ -770,3 +770,10 @@ Alat pelaporan offline untuk merekonstruksi histori perubahan objek database dar
 ## Report layout V2
 
 Report layout V2 acceptance: default docs/database berisi README/manifest, identifiers, relationships, procedures, dan migrations/datasets. -docs mengendalikan root; default audit mengikuti root/migrations; explicit -out tetap didukung dengan datasets child. Root index/backlinks, concrete hash manifest, no out default, repeatable rerun, manual collision preflight/no-write, ownership-only stale cleanup, nested symlink/overlap rejection wajib teruji. CSV/history semantics tidak berubah; extractor/checker apply/CI/generator tidak mendapat schema action. Lihat [layout contract](docs/report_output_layout.md).
+
+
+## Audit object precision (2026-10-12)
+
+Acceptance report object precision: token-based multiline DDL, inline/ALTER FK, complete datatype, function consumers, scoped JOIN dengan OUTER/hint dan quoted identifier, canonical case, unfiltered UPDATE assignments, COLUMN_NOT_FOUND, strict INSERT targets, parameter literal preservation, actual complete dynamic literal, Unicode no-write, serta actionable filename identity failure. Real corpus dan committed fixture membuktikan no-write/idempotence. Extractor/checker/generator tidak mendapat schema correction baru; shared MERGE JOIN grammar berlaku pada semua consumers.
+
+Detail bukti: docs/review_report_object_precision_20261012.md.

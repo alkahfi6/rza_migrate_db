@@ -347,3 +347,10 @@ Lulus jika:
 Layout V2 scenarios: run default tanpa out/; -docs saja memindahkan audit juga; explicit -out + -docs memiliki valid backlink; nested file/directory symlink dan root overlap gagal sebelum publication; existing manual collision tidak mengubah file; stale generated profile dihapus hanya jika hash owned cocok; edited stale/manual notes dipertahankan; equivalent legacy flat docs/CSV dipindahkan dengan conservative cleanup. Jalankan TestUnifiedDocumentationLayoutManifestAndLinks, TestReportCleanupPreservesManualFilesAndModifiedStaleProfiles, TestManualCollisionAndEditedCurrentOutputBlockBeforeWriting, TestLegacyLayoutRemovesOnlyEquivalentGeneratedFiles, TestOutputOverlapAndNestedSymlinkFailWithoutSourceWrites, TestPreviousManifestCannotDeleteAnUnlistedManualPath; QA-31 listing juga membuktikan layout fixture.
 
 Layout relocation: TestDocumentationOwnershipSurvivesRepositoryClone membuktikan cloned output menerima genuine source delta tanpa menyentuh checkout lama; TestOutputFileSymlinkAndAliasedRootsCannotEscapePreflight membuktikan file symlink/root alias tidak menghasilkan partial output.
+
+
+## Audit object precision (2026-10-12)
+
+Gate tambahan: committed fixtures/report_object_precision (18 real SQL files), golden 13 tables/3 modules/4 multiline indexes, LEFT JOIN, function consumer dan COLUMN_NOT_FOUND. Negative regressions: CTE/duplicate alias/case collision, quoted keywords, nested/no-semicolon scope, invalid INSERT, fake/partial EXEC, parameter literals, Unicode/invalid encoding, identity mismatch dan dynamic return assignment. Jalankan report dua kali dan hash authored source/history. Corpus lokal opsional memeriksa 9.419 files; CI tetap menjalankan committed fixture. Full Go/hardening dan complete release checksum/source identity plus released Windows/Linux report/checker wajib lulus.
+
+Detail bukti: ../review_report_object_precision_20261012.md.

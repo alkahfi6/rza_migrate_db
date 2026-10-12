@@ -7,6 +7,7 @@ import (
 	"sort"
 	"strings"
 
+	"rza_migrate_db/internal/sqlfmt"
 	"rza_migrate_db/internal/sqlparse"
 )
 
@@ -76,9 +77,10 @@ type ObservedRelationship struct {
 }
 
 type ModuleDependency struct {
-	Module string
-	Kind   string
-	Object string
+	Module     string
+	Kind       string
+	Object     string
+	Resolution string
 }
 
 type DocumentedModule struct {
@@ -90,23 +92,39 @@ type DocumentedModule struct {
 // db_object is valid for a history-only repository and produces empty docs.
 func BuildDesiredStateDocs(repoRoot string) (DesiredStateDocs, error) {
 	root := filepath.Join(repoRoot, "db_object")
-	if info, err := os.Stat(root); err != nil || !info.IsDir() {
-		if os.IsNotExist(err) {
+	info, statErr := os.Stat(root)
+	if statErr != nil {
+		if os.IsNotExist(statErr) {
 			return DesiredStateDocs{}, nil
 		}
-		return DesiredStateDocs{}, fmt.Errorf("read db_object: %w", err)
+		return DesiredStateDocs{}, fmt.Errorf("read db_object: %w", statErr)
+	}
+	if !info.IsDir() {
+		return DesiredStateDocs{}, fmt.Errorf("db_object is not a directory: %s", root)
 	}
 	tables := map[string]*DocumentedTable{}
+	var identityErr error
 	if err := scanSQLFiles(filepath.Join(root, "tables"), func(path, sql string) {
 		name := objectNameFromPath(path)
 		if name == "" {
+			identityErr = fmt.Errorf("table filename must identify schema.object: %s", path)
 			return
 		}
 		t := &DocumentedTable{Name: name}
-		parseTableDefinition(sql, t)
+		declared := parseTableDefinition(sql, t)
+		if !strings.Contains(declared, ".") && declared != "" {
+			declared = "dbo." + declared
+		}
+		if !strings.EqualFold(declared, name) {
+			identityErr = fmt.Errorf("table source identity mismatch in %s: filename=%s CREATE TABLE=%q; correct source identity before reporting", path, name, declared)
+			return
+		}
 		tables[name] = t
 	}); err != nil {
 		return DesiredStateDocs{}, err
+	}
+	if identityErr != nil {
+		return DesiredStateDocs{}, identityErr
 	}
 	if err := scanSQLFiles(filepath.Join(root, "indexes"), func(_ string, sql string) {
 		parseIndexes(sql, tables)
@@ -121,6 +139,9 @@ func BuildDesiredStateDocs(repoRoot string) (DesiredStateDocs, error) {
 		return DesiredStateDocs{}, err
 	}
 	if err := scanModules(filepath.Join(root, "procedures"), "procedure", tables, &modules); err != nil {
+		return DesiredStateDocs{}, err
+	}
+	if err := scanModules(filepath.Join(root, "functions"), "function", tables, &modules); err != nil {
 		return DesiredStateDocs{}, err
 	}
 	relationships, dependencies, dynamicModules := analyzeModuleRelationships(modules, tables, views)
@@ -157,7 +178,11 @@ func scanSQLFiles(dir string, consume func(string, string)) error {
 		if readErr != nil {
 			return readErr
 		}
-		consume(path, string(data))
+		decoded, _, decodeErr := sqlfmt.NormalizeSQLToUTF8(data)
+		if decodeErr != nil {
+			return fmt.Errorf("read SQL %s: %w", path, decodeErr)
+		}
+		consume(path, string(decoded))
 	}
 	return nil
 }
@@ -165,30 +190,48 @@ func scanSQLFiles(dir string, consume func(string, string)) error {
 type moduleSource struct{ Name, Kind, SQL string }
 
 func scanModules(dir, kind string, tables map[string]*DocumentedTable, modules *[]moduleSource) error {
-	return scanSQLFiles(dir, func(path, sql string) {
+	catalog := newProcedureCatalog(tables, nil, nil, nil)
+	var identityErr error
+	err := scanSQLFiles(dir, func(path, sql string) {
 		module := objectNameFromPath(path)
+		declared := sqlparse.ModuleDeclarationName(sql, kind)
+		if module == "" || !strings.EqualFold(module, declared) {
+			identityErr = fmt.Errorf("%s source identity mismatch in %s: filename=%q declaration=%q; correct source identity before reporting", kind, path, module, declared)
+			return
+		}
 		*modules = append(*modules, moduleSource{Name: module, Kind: kind, SQL: sql})
-		for _, ref := range sqlparse.ExtractObjectReferences(sql) {
-			if ref.Kind != sqlparse.ObjectReferenceData {
+		seen := map[string]bool{}
+		for _, ref := range sqlparse.ExtractSQLAccesses(sql) {
+			if ref.NonPersisted || ref.Ambiguous || ref.CTECaseAmbiguous || ref.Function {
 				continue
 			}
-			if table, ok := lookupDocumentedTable(tables, ref.Name); ok {
+			name, status := catalog.resolveParts(ref.Name, ref.NameParts, "data")
+			if status != ResolutionStatic || seen[name] {
+				continue
+			}
+			if table, ok := lookupDocumentedTable(tables, name); ok {
 				table.Consumers = append(table.Consumers, ModuleConsumer{Name: module, Kind: kind})
+				seen[name] = true
 			}
 		}
 	})
+	if err != nil {
+		return err
+	}
+	return identityErr
 }
 
 func lookupDocumentedTable(tables map[string]*DocumentedTable, name string) (*DocumentedTable, bool) {
-	if table, ok := tables[name]; ok {
-		return table, true
-	}
+	var match *DocumentedTable
 	for candidate, table := range tables {
 		if strings.EqualFold(candidate, name) {
-			return table, true
+			if match != nil {
+				return nil, false
+			}
+			match = table
 		}
 	}
-	return nil, false
+	return match, match != nil
 }
 
 func objectNamesInDirectory(dir string) map[string]struct{} {
@@ -213,85 +256,18 @@ func objectNameFromPath(path string) string {
 	return base
 }
 
-func parseTableDefinition(sql string, table *DocumentedTable) {
-	upper := strings.ToUpper(sql)
-	create := strings.Index(upper, "CREATE TABLE")
-	if create < 0 {
-		return
+func parseTableDefinition(sql string, table *DocumentedTable) string {
+	metadata := sqlparse.ReadTableMetadata(sql)
+	for _, c := range metadata.Columns {
+		table.Columns = append(table.Columns, DocumentedColumn{Name: c.Name, DataType: c.DataType, Nullable: c.Nullable, Identity: c.Identity})
 	}
-	open := strings.Index(sql[create:], "(")
-	if open < 0 {
-		return
+	for _, k := range metadata.Keys {
+		table.Keys = append(table.Keys, DocumentedKey{Name: k.Name, Columns: k.Columns, Evidence: k.Evidence, Filtered: k.Filtered})
 	}
-	open += create
-	close, ok := sqlparse.FindMatchingParen(sql, open)
-	if !ok {
-		return
+	for _, fk := range metadata.ForeignKeys {
+		table.ForeignKeys = append(table.ForeignKeys, DocumentedForeignKey{Columns: fk.Columns, TargetTable: fk.Target, TargetColumns: fk.TargetColumns, ConstraintName: fk.Name})
 	}
-	for _, item := range sqlparse.SplitTopLevelComma(sql[open+1 : close]) {
-		clean := strings.TrimSpace(sqlparse.StripSQLStringsAndComments(item))
-		itemUpper := strings.ToUpper(clean)
-		var column DocumentedColumn
-		if !strings.HasPrefix(itemUpper, "CONSTRAINT") && !strings.HasPrefix(itemUpper, "PRIMARY") && !strings.HasPrefix(itemUpper, "UNIQUE") && !strings.HasPrefix(itemUpper, "FOREIGN") && !strings.HasPrefix(itemUpper, "CHECK") {
-			column = parseDocumentedColumn(clean)
-			if column.Name != "" {
-				table.Columns = append(table.Columns, column)
-			}
-		}
-		if containsSQLWord(itemUpper, "FOREIGN") && containsSQLWord(itemUpper, "KEY") {
-			table.ForeignKeys = append(table.ForeignKeys, parseForeignKey(clean)...)
-			continue
-		}
-		if containsSQLWord(itemUpper, "PRIMARY") && containsSQLWord(itemUpper, "KEY") {
-			columns := keyColumns(clean)
-			if column.Name != "" {
-				columns = []string{column.Name}
-			}
-			table.Keys = append(table.Keys, DocumentedKey{Columns: columns, Evidence: "PRIMARY_KEY", Name: constraintName(clean)})
-			continue
-		}
-		if containsSQLWord(itemUpper, "UNIQUE") && (column.Name != "" || strings.HasPrefix(itemUpper, "CONSTRAINT") || strings.HasPrefix(itemUpper, "UNIQUE")) {
-			columns := keyColumns(clean)
-			if column.Name != "" {
-				columns = []string{column.Name}
-			}
-			table.Keys = append(table.Keys, DocumentedKey{Columns: columns, Evidence: "UNIQUE_CONSTRAINT", Name: constraintName(clean)})
-			continue
-		}
-	}
-}
-
-func parseDocumentedColumn(item string) DocumentedColumn {
-	name, consumed := readIdentifier(item)
-	if name == "" {
-		return DocumentedColumn{}
-	}
-	rest := strings.TrimSpace(item[consumed:])
-	typeName := firstIdentifier(rest)
-	upper := strings.ToUpper(rest)
-	return DocumentedColumn{Name: name, DataType: strings.ToUpper(typeName), Nullable: !containsSQLWords(upper, "NOT", "NULL"), Identity: hasIdentityDeclaration(upper)}
-}
-
-// hasIdentityDeclaration accepts only the SQL IDENTITY keyword followed by its
-// seed/increment parentheses. Identifiers such as M_IDENTITY are columns, not
-// identity declarations.
-func hasIdentityDeclaration(upper string) bool {
-	for offset := 0; ; {
-		pos := strings.Index(upper[offset:], "IDENTITY")
-		if pos < 0 {
-			return false
-		}
-		pos += offset
-		beforeOK := pos == 0 || !isIdentifierByte(upper[pos-1])
-		after := pos + len("IDENTITY")
-		for after < len(upper) && (upper[after] == ' ' || upper[after] == '\t' || upper[after] == '\r' || upper[after] == '\n') {
-			after++
-		}
-		if beforeOK && after < len(upper) && upper[after] == '(' {
-			return true
-		}
-		offset = pos + len("IDENTITY")
-	}
+	return metadata.Name
 }
 
 func isIdentifierByte(ch byte) bool {
@@ -299,47 +275,19 @@ func isIdentifierByte(ch byte) bool {
 }
 
 func parseIndexes(sql string, tables map[string]*DocumentedTable) {
-	clean := sqlparse.StripSQLStringsAndComments(sql)
-	upper := strings.ToUpper(clean)
-	pos := 0
-	for {
-		next := strings.Index(upper[pos:], "CREATE ")
-		if next < 0 {
-			return
-		}
-		start := pos + next
-		indexPos := strings.Index(upper[start:], "INDEX")
-		onPos := strings.Index(upper[start:], " ON ")
-		if indexPos < 0 || onPos < 0 || indexPos > onPos {
-			pos = start + len("CREATE ")
+	for _, index := range sqlparse.ReadIndexMetadata(sql) {
+		table, ok := lookupDocumentedTable(tables, index.Table)
+		if !ok {
 			continue
 		}
-		indexPos += start
-		onPos += start
-		indexName := firstIdentifier(clean[indexPos+len("INDEX"):])
-		target := strings.TrimSpace(clean[onPos+len(" ON "):])
-		tableName := qualifiedIdentifier(target)
-		open := strings.Index(target, "(")
-		if table, ok := lookupDocumentedTable(tables, tableName); ok && open >= 0 {
-			if close, matched := sqlparse.FindMatchingParen(target, open); matched {
-				columns := identifiersInList(target[open+1 : close])
-				unique := containsSQLWord(upper[start:indexPos], "UNIQUE")
-				statementTail := strings.ToUpper(target[close+1:])
-				if semi := strings.Index(statementTail, ";"); semi >= 0 {
-					statementTail = statementTail[:semi]
-				}
-				filtered := containsSQLWord(statementTail, "WHERE")
-				table.Indexes = append(table.Indexes, DocumentedIndex{Name: indexName, Columns: columns, Unique: unique, Filtered: filtered})
-				if unique {
-					evidence := "UNIQUE_INDEX"
-					if filtered {
-						evidence = "FILTERED_UNIQUE_INDEX"
-					}
-					table.Keys = append(table.Keys, DocumentedKey{Columns: columns, Evidence: evidence, Name: indexName, Filtered: filtered})
-				}
+		table.Indexes = append(table.Indexes, DocumentedIndex{Name: index.Name, Columns: index.Columns, Unique: index.Unique, Filtered: index.Filtered})
+		if index.Unique {
+			evidence := "UNIQUE_INDEX"
+			if index.Filtered {
+				evidence = "FILTERED_UNIQUE_INDEX"
 			}
+			table.Keys = append(table.Keys, DocumentedKey{Name: index.Name, Columns: index.Columns, Evidence: evidence, Filtered: index.Filtered})
 		}
-		pos = onPos + len(" ON ")
 	}
 }
 
@@ -360,110 +308,17 @@ func containsSQLWord(upper, word string) bool {
 	}
 }
 
-func containsSQLWords(upper string, words ...string) bool {
-	pos := 0
-	for _, word := range words {
-		rel := strings.Index(upper[pos:], word)
-		if rel < 0 {
-			return false
-		}
-		pos += rel + len(word)
-	}
-	return true
-}
-
-func parseForeignKey(item string) []DocumentedForeignKey {
-	upper := strings.ToUpper(item)
-	fk := strings.Index(upper, "FOREIGN KEY")
-	ref := strings.Index(upper, "REFERENCES")
-	if fk < 0 || ref < 0 {
-		return nil
-	}
-	local := parenListAfter(item, fk+len("FOREIGN KEY"))
-	targetPart := strings.TrimSpace(item[ref+len("REFERENCES"):])
-	target := qualifiedIdentifier(targetPart)
-	open := strings.Index(targetPart, "(")
-	var targetColumns []string
-	if open >= 0 {
-		if close, ok := sqlparse.FindMatchingParen(targetPart, open); ok {
-			targetColumns = identifiersInList(targetPart[open+1 : close])
-		}
-	}
-	if target == "" {
-		return nil
-	}
-	return []DocumentedForeignKey{{Columns: identifiersInList(local), TargetTable: target, TargetColumns: targetColumns, ConstraintName: constraintName(item)}}
-}
-
-func keyColumns(item string) []string {
-	upper := strings.ToUpper(item)
-	pos := strings.Index(upper, "KEY")
-	if pos < 0 {
-		pos = strings.Index(upper, "UNIQUE") + len("UNIQUE")
-	} else {
-		pos += len("KEY")
-	}
-	return identifiersInList(parenListAfter(item, pos))
-}
-
-func parenListAfter(s string, start int) string {
-	open := strings.Index(s[start:], "(")
-	if open < 0 {
-		return ""
-	}
-	open += start
-	close, ok := sqlparse.FindMatchingParen(s, open)
-	if !ok {
-		return ""
-	}
-	return s[open+1 : close]
-}
-
-func constraintName(s string) string {
-	upper := strings.ToUpper(strings.TrimSpace(s))
-	if !strings.HasPrefix(upper, "CONSTRAINT") {
-		return ""
-	}
-	return firstIdentifier(strings.TrimSpace(s[len("CONSTRAINT"):]))
-}
-
-func qualifiedIdentifier(s string) string {
-	first, consumed := readIdentifier(s)
-	if first == "" {
-		return ""
-	}
-	rest := strings.TrimSpace(s[consumed:])
-	if !strings.HasPrefix(rest, ".") {
-		return "dbo." + first
-	}
-	second, _ := readIdentifier(strings.TrimSpace(rest[1:]))
-	if second == "" {
-		return ""
-	}
-	return first + "." + second
-}
-
 func firstIdentifier(s string) string {
 	name, _ := readIdentifier(s)
 	return name
 }
 
 func readIdentifier(s string) (string, int) {
-	s = strings.TrimSpace(s)
-	if s == "" {
+	tokens := sqlparse.SQLTokens(s)
+	if len(tokens) == 0 || !tokens[0].Identifier {
 		return "", 0
 	}
-	if s[0] == '[' {
-		if end := strings.Index(s, "]"); end > 0 {
-			return strings.ReplaceAll(s[1:end], "]]", "]"), end + 1
-		}
-		return "", 0
-	}
-	end := 0
-	for end < len(s) && ((s[end] >= 'a' && s[end] <= 'z') || (s[end] >= 'A' && s[end] <= 'Z') || (s[end] >= '0' && s[end] <= '9') || s[end] == '_' || s[end] == '#') {
-		end++
-	}
-	return s[:end], end
+	return tokens[0].Text, tokens[0].End
 }
 
 func identifiersInList(s string) []string {

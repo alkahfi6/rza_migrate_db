@@ -1,0 +1,11 @@
+{
+  "table_count": 13,
+  "module_count": 3,
+  "multiline_indexes": 4,
+  "outer_join": "dbo.ORI_Order_TT.OrderId = dbo.TRSProcessBuyBackLog_TH.OrderId",
+  "join_type": "LEFT",
+  "function_consumer": "dbo.fnReksaGoodFund",
+  "function_table": "dbo.ReksaProduct_TM",
+  "unknown_column": "dbo.TRSParamIssuer_TH.IssuerCode",
+  "unknown_resolution": "COLUMN_NOT_FOUND"
+}

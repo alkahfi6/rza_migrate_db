@@ -1764,7 +1764,7 @@ Pairing up/down bergantung pada version yang sama persis.
 
 26) Migration History Reconstruction Report
 
-`rza_migrate_report` hanya boleh membaca `migrations/` dan source desired-state `db_object/`; tool dilarang mengakses database, mengeksekusi SQL, atau membuat/mengubah/menghapus file di dalam `migrations/` maupun `db_object/`. Dokumentasi relasi antardata-object hanya boleh memakai FK yang dideklarasikan atau static equality predicate dari explicit `JOIN ... ON` maupun legacy `FROM A, B WHERE ...` pada view/procedure yang memetakan tepat satu resolved `alias.column` pada setiap sisi. Evidence observed wajib dibedakan dari FK dan tidak boleh mengklaim cardinality atau referential integrity. Nama kolom sama, operator non-equality, ekspresi ambigu, temporary/table variable, alias lintas query scope, dan dynamic SQL tidak boleh ditebak sebagai relasi. Dependency module-ke-object wajib dilaporkan terpisah sebagai lineage, termasuk daftar module tanpa resolved static reference untuk audit coverage.
+`rza_migrate_report` hanya boleh membaca `migrations/` dan source desired-state `db_object/`; tool dilarang mengakses database, mengeksekusi SQL, atau membuat/mengubah/menghapus file di dalam `migrations/` maupun `db_object/`. Dokumentasi relasi antardata-object hanya boleh memakai FK yang dideklarasikan atau static equality predicate dari explicit `JOIN ... ON` maupun legacy `FROM A, B WHERE ...` pada view/procedure/function yang memetakan tepat satu resolved `alias.column` pada setiap sisi. Evidence observed wajib dibedakan dari FK dan tidak boleh mengklaim cardinality atau referential integrity. Nama kolom sama, operator non-equality, ekspresi ambigu, temporary/table variable, alias lintas query scope, dan dynamic SQL tidak boleh ditebak sebagai relasi. Dependency module-ke-object wajib dilaporkan terpisah sebagai lineage, termasuk daftar module tanpa resolved static reference untuk audit coverage.
 
 Pengenalan object procedure wajib berbasis token/source position dan statement scope, bukan physical line. Whitespace atau line break antara keyword dan object tidak boleh mengubah hasil. CTE unqualified hanya berstatus `NOT_PERSISTED` di statement yang mendeklarasikannya dan tidak boleh menutupi object schema-qualified pada statement berikutnya. Alias DML hanya boleh di-resolve dari source dalam statement yang sama. `SELECT INTO`, assignment `SELECT`, subquery/`EXISTS`, dan `INSERT ... SELECT` bukan direct client result set.
 
@@ -1799,3 +1799,10 @@ State rekonstruksi wajib berlanjut melintasi semua version object, bukan hanya m
 ## Report layout V2
 
 Report output safety: layout V2 menggunakan satu documentation root, artifact konkret, preflight seluruh target, dan ownership SHA-256 untuk stale cleanup. File manual atau edited current output tidak boleh ditimpa; jangan recursive-delete folder dokumentasi. Report tetap read-only untuk db_object/migrations dan tidak menjadi safe-fixer rule. Lihat [report layout](docs/report_output_layout.md).
+
+
+## Audit object precision (2026-10-12)
+
+Report object precision: quoted identifiers/literals wajib memakai shared lexer; alias dibatasi query scope dan ambiguity tidak ditebak. Function termasuk module lineage dengan Resolution. Decode Unicode hanya di memory; filename/declaration mismatch dan encoding invalid memblokir report. UPDATE tanpa WHERE tetap mempunyai assignment evidence. COLUMN_NOT_FOUND mempertahankan source expression untuk review; INSERT target ambigu tidak menghasilkan exact mapping. Dynamic evidence hanya berasal dari actual EXEC dan literal lengkap.
+
+Detail bukti: docs/review_report_object_precision_20261012.md.

@@ -127,6 +127,9 @@ func ExtractSQLAccesses(sql string) []SQLAccess {
 				nameAt++
 			}
 		case "MERGE":
+			if sourceJoinHint(tokens, i) {
+				continue
+			}
 			op = "MERGE"
 			if nameAt < len(tokens) && !tokens[nameAt].quoted && tokens[nameAt].upper == "INTO" {
 				nameAt++
@@ -451,7 +454,7 @@ func sourceStatementBounds(tokens []sourceToken, at, sqlLen int) (int, int) {
 }
 
 func sourceStatementStarter(tokens []sourceToken, pos int) bool {
-	if tokens[pos].quoted || (pos > 0 && tokens[pos-1].text == ".") || sourceMergeAction(tokens, pos) {
+	if tokens[pos].quoted || (pos > 0 && tokens[pos-1].text == ".") || sourceMergeAction(tokens, pos) || sourceJoinHint(tokens, pos) {
 		return false
 	}
 	switch tokens[pos].upper {
@@ -460,6 +463,10 @@ func sourceStatementStarter(tokens []sourceToken, pos int) bool {
 	default:
 		return false
 	}
+}
+
+func sourceJoinHint(tokens []sourceToken, pos int) bool {
+	return pos+1 < len(tokens) && !tokens[pos].quoted && tokens[pos].upper == "MERGE" && !tokens[pos+1].quoted && tokens[pos+1].upper == "JOIN"
 }
 
 func sourceStatementContinuation(tokens []sourceToken, pos, current int) bool {

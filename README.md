@@ -339,3 +339,17 @@ powershell -ExecutionPolicy Bypass -File scripts/validate_parallel_repeatability
 ```powershell
 powershell -ExecutionPolicy Bypass -File scripts/benchmark_parallel_read.ps1
 ```
+
+## Audit pembacaan object report (12 Oktober 2026)
+
+Report kini membaca consumer/lineage dari view, procedure **dan function**, dengan
+kolom `Resolution` pada `module_lineage.md`. JOIN mengikuti query/statement scope,
+CTE, quoted identifiers, canonical object/column dan outer/hinted JOIN. DDL reader
+menggunakan shared tokens untuk multiline index, key/FK dan type declaration.
+UPDATE tanpa WHERE tetap mempunyai write mapping; target column yang tidak ada
+pada table snapshot memakai `COLUMN_NOT_FOUND`. Target INSERT berqualifier tidak
+boleh berubah menjadi kolom palsu. Dynamic SQL hanya menjadi resolved evidence
+bila execution dan complete literal terbukti. Encoding Unicode dibaca di memory;
+source identity mismatch/encoding tak dikenal gagal tanpa mengubah SQL.
+Bukti corpus, temuan source, fixture, dan batas kemampuan ada pada
+[audit object report](docs/review_report_object_precision_20261012.md).

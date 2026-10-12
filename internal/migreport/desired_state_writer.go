@@ -972,12 +972,12 @@ func summarizeSelfRelationships(relations []ObservedRelationship) []selfRelation
 
 func renderModuleLineage(docs DesiredStateDocs) string {
 	var b strings.Builder
-	b.WriteString("# Lineage Module\n\nReferensi langsung dan statis dari view/procedure ke data object. Referensi dapat menunjuk object persisted, external, atau temporary; gunakan procedure profile untuk status resolution yang lebih rinci. Lineage dependency ini bukan klaim hubungan antartable.\n\n| Modul | Jenis | Object yang direferensikan |\n| --- | --- | --- |\n")
+	b.WriteString("# Lineage Module\n\nReferensi langsung dan statis dari view/procedure/function ke data object. Resolution membedakan object catalog yang terbukti, external, temporary/CTE, nama yang tidak ditemukan, dan kandidat ambigu. Lineage dependency ini bukan klaim hubungan antartable.\n\n| Modul | Jenis | Object yang direferensikan | Resolution |\n| --- | --- | --- | --- |\n")
 	for _, d := range docs.ModuleDependencies {
-		b.WriteString(fmt.Sprintf("| `%s` | `%s` | `%s` |\n", md(d.Module), strings.ToUpper(d.Kind), md(d.Object)))
+		b.WriteString(fmt.Sprintf("| `%s` | `%s` | `%s` | `%s` |\n", md(d.Module), strings.ToUpper(d.Kind), md(d.Object), md(d.Resolution)))
 	}
 	if len(docs.ModuleDependencies) == 0 {
-		b.WriteString("| — | — | — |\n")
+		b.WriteString("| — | — | — | — |\n")
 	}
 	b.WriteString(fmt.Sprintf("\n- Module yang diperiksa: **%d**\n- Module dengan minimal satu referensi data object statis: **%d**\n\n", len(docs.Modules), modulesWithDependencies(docs)))
 	b.WriteString("\n## Dynamic SQL yang harus diperiksa manual\n\n")

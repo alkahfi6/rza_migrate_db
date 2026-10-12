@@ -17,6 +17,7 @@ const (
 	ResolutionUnresolved     = "UNRESOLVED_DYNAMIC"
 	ResolutionNotPersisted   = "NOT_PERSISTED"
 	ResolutionNotFound       = "NOT_FOUND"
+	ResolutionColumnNotFound = "COLUMN_NOT_FOUND"
 	ResolutionAmbiguous      = "AMBIGUOUS"
 	ResolutionSystem         = "SYSTEM_OBJECT"
 	procedureDiagramMaxNodes = 20
@@ -81,13 +82,11 @@ type ProcedureDynamicSQL struct {
 
 type procedureCatalog struct {
 	byKind map[string]map[string][]string
+	tables map[string]*DocumentedTable
 }
 
 var (
-	execPattern         = regexp.MustCompile(`(?i)\bEXEC(?:UTE)?\s+(?:@[A-Za-z_][A-Za-z0-9_]*\s*=\s*)?((?:\[[^\]]+\]|[@#A-Za-z_][A-Za-z0-9_$#]*)(?:\s*\.\s*(?:\[[^\]]+\]|[A-Za-z_][A-Za-z0-9_$#]*)){0,3})(.*)$`)
-	returnPattern       = regexp.MustCompile(`(?i)\bRETURN\s+(-?[0-9]+)\b`)
-	directExecLiteral   = regexp.MustCompile(`(?is)\bEXEC(?:UTE)?\s*\(\s*N?'((?:''|[^'])*)'\s*\)`)
-	directSPExecLiteral = regexp.MustCompile(`(?is)\b(?:dbo\.)?sp_executesql\s+N?'((?:''|[^'])*)'`)
+	returnPattern = regexp.MustCompile(`(?i)\bRETURN\s+(-?[0-9]+)\b`)
 )
 
 func buildProcedureProfiles(modules []moduleSource, tables map[string]*DocumentedTable, views, functions, procedures map[string]struct{}) []ProcedureProfile {
@@ -107,7 +106,7 @@ func buildProcedureProfiles(modules []moduleSource, tables map[string]*Documente
 }
 
 func newProcedureCatalog(tables map[string]*DocumentedTable, views, functions, procedures map[string]struct{}) procedureCatalog {
-	c := procedureCatalog{byKind: map[string]map[string][]string{"table": {}, "view": {}, "function": {}, "procedure": {}}}
+	c := procedureCatalog{tables: tables, byKind: map[string]map[string][]string{"table": {}, "view": {}, "function": {}, "procedure": {}}}
 	for name := range tables {
 		c.add("table", name)
 	}
@@ -134,6 +133,7 @@ func analyzeProcedure(module moduleSource, catalog procedureCatalog) ProcedurePr
 	originalLines, cleanLines := strings.Split(module.SQL, "\n"), strings.Split(clean, "\n")
 	p.Accesses = extractProcedureAccesses(module.SQL, originalLines, cleanLines, catalog)
 	p.Mappings = extractProcedureWriteMappings(module.SQL, p.Accesses, catalog)
+	validateWriteMappingColumns(p.Mappings, catalog)
 	p.Calls = extractProcedureCalls(module.SQL, originalLines, cleanLines, catalog)
 	p.DynamicSQL = extractProcedureDynamicSQL(module.SQL, originalLines, catalog)
 	p.ControlSteps = extractProcedureControlSteps(originalLines, cleanLines)
@@ -146,115 +146,92 @@ func analyzeProcedure(module moduleSource, catalog procedureCatalog) ProcedurePr
 	p.HasTryCatch = strings.Contains(upper, "BEGIN TRY") && strings.Contains(upper, "BEGIN CATCH")
 	p.HasDirectResult = sqlparse.HasClientResultSet(module.SQL)
 	p.ExtractionNotices = procedureExtractionNotices(p)
+	for _, access := range p.Accesses {
+		if access.Operation != "INSERT" || access.Resolution != ResolutionStatic {
+			continue
+		}
+		if _, valid := insertTargetColumns(module.SQL, access); !valid {
+			p.ExtractionNotices = append(p.ExtractionNotices, fmt.Sprintf("INSERT baris %d: daftar target column memakai qualifier/expression atau delimiter yang tidak didukung; exact mapping tidak diterbitkan. Periksa source SQL.", access.Line))
+		}
+	}
 	return p
 }
 
 func parseProcedureParameters(sql string) []ProcedureParameter {
-	clean := StripComments(sql)
-	upper := strings.ToUpper(clean)
-	proc := strings.Index(upper, "PROCEDURE")
-	if proc < 0 {
-		return nil
-	}
-	start := proc + len("PROCEDURE")
-	for start < len(clean) && clean[start] != '@' {
-		if strings.HasPrefix(strings.ToUpper(clean[start:]), "AS") {
-			return nil
+	tokens := sqlparse.SQLTokens(sql)
+	header := -1
+	for i, t := range tokens {
+		if !t.Quoted && (t.Upper == "PROCEDURE" || t.Upper == "PROC") {
+			header = i
+			break
 		}
-		start++
 	}
-	if start >= len(clean) {
+	if header < 0 {
 		return nil
 	}
-	as := findProcedureBodyAS(clean, start)
-	if as < 0 {
+	start, end := -1, -1
+	for i := header + 1; i < len(tokens); i++ {
+		t := tokens[i]
+		if t.Depth != 0 || t.Quoted {
+			continue
+		}
+		if t.Upper == "WITH" {
+			end = t.Start
+			break
+		}
+		if t.Upper == "AS" {
+			end = t.Start
+			break
+		}
+		if start < 0 && strings.HasPrefix(t.Text, "@") {
+			start = t.Start
+		}
+	}
+	if start < 0 || end <= start {
 		return nil
 	}
-	raw := clean[start:as]
-	parts := sqlparse.SplitTopLevelComma(raw)
-	out := make([]ProcedureParameter, 0, len(parts))
-	for _, part := range parts {
+	var out []ProcedureParameter
+	for _, part := range sqlparse.SplitTopLevelComma(sql[start:end]) {
 		part = strings.TrimSpace(part)
-		if !strings.HasPrefix(part, "@") {
+		ts := sqlparse.SQLTokens(part)
+		if len(ts) < 2 || !strings.HasPrefix(ts[0].Text, "@") {
 			continue
 		}
-		nameEnd := strings.IndexAny(part, " \t\r\n")
-		if nameEnd < 0 {
-			continue
-		}
-		name, rest := part[:nameEnd], strings.TrimSpace(part[nameEnd:])
 		direction := "INPUT"
-		if regexp.MustCompile(`(?i)\bOUT(?:PUT)?\b`).MatchString(rest) {
-			direction = "INPUT/OUTPUT"
+		typeEnd, defaultStart, defaultEnd := len(part), -1, len(part)
+		for _, t := range ts[1:] {
+			if t.Depth != 0 || t.Quoted {
+				continue
+			}
+			if t.Text == "=" {
+				typeEnd = t.Start
+				defaultStart = t.End
+			}
+			if t.Upper == "OUT" || t.Upper == "OUTPUT" {
+				direction = "INPUT/OUTPUT"
+				if defaultStart < 0 {
+					typeEnd = t.Start
+				} else {
+					defaultEnd = t.Start
+				}
+			}
+			if t.Upper == "READONLY" && defaultStart < 0 {
+				typeEnd = t.Start
+			}
 		}
-		defaultValue := ""
-		if eq := topLevelEqual(rest); eq >= 0 {
-			defaultValue = strings.TrimSpace(regexp.MustCompile(`(?i)\bOUT(?:PUT)?\b`).ReplaceAllString(rest[eq+1:], ""))
-			rest = strings.TrimSpace(rest[:eq])
+		def := ""
+		if defaultStart >= 0 {
+			def = strings.TrimSpace(part[defaultStart:defaultEnd])
 		}
-		rest = strings.TrimSpace(regexp.MustCompile(`(?i)\bOUT(?:PUT)?\b|\bREADONLY\b`).ReplaceAllString(rest, ""))
-		out = append(out, ProcedureParameter{Name: name, SQLType: strings.Join(strings.Fields(rest), " "), Direction: direction, Default: defaultValue})
+		out = append(out, ProcedureParameter{Name: ts[0].Text, SQLType: compactSQL(part[ts[0].End:typeEnd]), Direction: direction, Default: def})
 	}
 	return out
 }
 
-func findProcedureBodyAS(sql string, start int) int {
-	inString, inBracket := false, false
-	for i := start; i+1 < len(sql); i++ {
-		switch sql[i] {
-		case '\'':
-			if inString && i+1 < len(sql) && sql[i+1] == '\'' {
-				i++
-				continue
-			}
-			if !inBracket {
-				inString = !inString
-			}
-		case '[':
-			if !inString {
-				inBracket = true
-			}
-		case ']':
-			if !inString {
-				inBracket = false
-			}
-		default:
-			if inString || inBracket || !strings.EqualFold(sql[i:i+2], "AS") {
-				continue
-			}
-			before := i == 0 || !isIdentifierByte(sql[i-1])
-			after := i+2 >= len(sql) || !isIdentifierByte(sql[i+2])
-			if before && after {
-				return i
-			}
-		}
-	}
-	return -1
-}
-
 func topLevelEqual(s string) int {
-	depth := 0
-	inString := false
-	for i := 0; i < len(s); i++ {
-		switch s[i] {
-		case '\'':
-			if inString && i+1 < len(s) && s[i+1] == '\'' {
-				i++
-				continue
-			}
-			inString = !inString
-		case '(':
-			if !inString {
-				depth++
-			}
-		case ')':
-			if !inString && depth > 0 {
-				depth--
-			}
-		case '=':
-			if !inString && depth == 0 {
-				return i
-			}
+	for _, token := range sqlparse.SQLTokens(s) {
+		if token.Depth == 0 && !token.Quoted && token.Text == "=" {
+			return token.Start
 		}
 	}
 	return -1
@@ -533,52 +510,150 @@ func extractRoutineDependencies(sql string, catalog procedureCatalog) ([]Procedu
 }
 
 func extractProcedureDynamicSQL(sql string, lines []string, catalog procedureCatalog) []ProcedureDynamicSQL {
-	clean := StripComments(sql)
+	tokens := sqlparse.SQLTokens(sql)
+	calls := map[int]sqlparse.SQLCall{}
+	for _, call := range sqlparse.ExtractSQLCalls(sql) {
+		calls[call.Offset] = call
+	}
 	var out []ProcedureDynamicSQL
-	for _, re := range []*regexp.Regexp{directExecLiteral, directSPExecLiteral} {
-		for _, match := range re.FindAllStringSubmatchIndex(clean, -1) {
-			literal := strings.ReplaceAll(clean[match[2]:match[3]], "''", "'")
-			objects, resolution := resolveDynamicLiteral(literal, catalog)
-			line := 1 + strings.Count(clean[:match[0]], "\n")
-			out = append(out, ProcedureDynamicSQL{Line: fmt.Sprintf("%d", line), Expression: compactSQL(literal), RuntimeSource: "SQL literal", Resolution: resolution, ResolvedObjects: objects})
-		}
-	}
-	cleanNoStrings := sqlparse.StripSQLStringsAndComments(sql)
-	for i, line := range strings.Split(cleanNoStrings, "\n") {
-		if !isDynamicExecutionLine(line) {
+	for i, t := range tokens {
+		if t.Quoted || (t.Upper != "EXEC" && t.Upper != "EXECUTE") || i+1 >= len(tokens) {
 			continue
 		}
-		original := strings.TrimSpace(lineAt(lines, i))
-		if original == "" || dynamicLineCovered(out, i+1) {
-			continue
+		next := tokens[i+1]
+		expression := ""
+		literalAllowed := false
+		if call, ok := calls[t.Start]; ok {
+			if len(call.NameParts) == 0 || !strings.EqualFold(call.NameParts[len(call.NameParts)-1], "sp_executesql") {
+				continue
+			}
+			expression = sql[call.TargetEnd:call.StatementEnd]
+			literalAllowed = true
+			// sp_executesql's first argument is the complete SQL expression; parameter
+			// definitions/values after the first top-level comma are not part of it.
+			parts := sqlparse.SplitTopLevelComma(expression)
+			if len(parts) > 0 {
+				expression = parts[0]
+			}
+			ts := sqlparse.SQLTokens(expression)
+			if len(ts) >= 2 && strings.HasPrefix(ts[0].Text, "@") && ts[1].Text == "=" {
+				expression = expression[ts[1].End:]
+			}
+		} else {
+			if !next.Quoted && strings.HasPrefix(next.Text, "@") && i+2 < len(tokens) && tokens[i+2].Text == "=" {
+				if i+3 >= len(tokens) || !strings.HasPrefix(tokens[i+3].Text, "@") {
+					continue
+				}
+				next = tokens[i+3]
+			}
+			if next.Text == "(" {
+				close, ok := sqlparse.FindMatchingParen(sql, next.Start)
+				if !ok {
+					expression = sql[next.End:]
+				} else {
+					expression = sql[next.End:close]
+				}
+				literalAllowed = ok
+			} else if strings.HasPrefix(next.Text, "'") || next.Upper == "N" {
+				stop := len(sql)
+				for _, tail := range tokens[i+1:] {
+					if tail.Depth == t.Depth && tail.Text == ";" {
+						stop = tail.Start
+						break
+					}
+				}
+				expression = sql[next.Start:stop]
+				literalAllowed = true
+			} else if !next.Quoted && strings.HasPrefix(next.Text, "@") {
+				expression = next.Text
+			} else {
+				continue
+			}
 		}
-		expression, runtimeSource := dynamicRuntimeEvidence(lines, i, original)
-		out = append(out, ProcedureDynamicSQL{Line: fmt.Sprintf("%d", i+1), Expression: expression, RuntimeSource: runtimeSource, Resolution: ResolutionUnresolved})
+		line := sourceLineNumber(sql, t.Start)
+		item := ProcedureDynamicSQL{Line: fmt.Sprintf("%d", line), Expression: compactSQL(strings.TrimSpace(expression)), Resolution: ResolutionUnresolved}
+		if literal, ok := completeDynamicLiteral(expression); ok && literalAllowed {
+			item.Expression = compactSQL(literal)
+			item.RuntimeSource = "SQL literal"
+			item.ResolvedObjects, item.Resolution = resolveDynamicLiteral(literal, catalog)
+		} else {
+			_, item.RuntimeSource = dynamicRuntimeEvidence(lines, line-1, item.Expression)
+		}
+		out = append(out, item)
 	}
-	sort.Slice(out, func(i, j int) bool { return dynamicLineNumber(out[i].Line) < dynamicLineNumber(out[j].Line) })
 	return out
 }
 
-func resolveDynamicLiteral(sql string, catalog procedureCatalog) ([]string, string) {
-	refs := sqlparse.ExtractObjectReferences(sql)
-	if len(refs) == 0 {
-		return nil, ResolutionUnresolved
+func completeDynamicLiteral(expression string) (string, bool) {
+	tokens := sqlparse.SQLTokens(expression)
+	if len(tokens) > 0 && tokens[len(tokens)-1].Text == ";" {
+		tokens = tokens[:len(tokens)-1]
 	}
-	objects := make([]string, 0, len(refs))
+	if len(tokens) == 2 && !tokens[0].Quoted && tokens[0].Upper == "N" {
+		tokens = tokens[1:]
+	}
+	if len(tokens) != 1 || !strings.HasPrefix(tokens[0].Text, "'") || !strings.HasSuffix(tokens[0].Text, "'") || len(tokens[0].Text) < 2 {
+		return "", false
+	}
+	raw := tokens[0].Text
+	closed := false
+	for i := 1; i < len(raw); i++ {
+		if raw[i] != '\'' {
+			continue
+		}
+		if i+1 < len(raw) && raw[i+1] == '\'' {
+			i++
+			continue
+		}
+		closed = i == len(raw)-1
+		break
+	}
+	if !closed {
+		return "", false
+	}
+	return strings.ReplaceAll(raw[1:len(raw)-1], "''", "'"), true
+}
+
+func resolveDynamicLiteral(sql string, catalog procedureCatalog) ([]string, string) {
+	objects := []string{}
 	resolution := ResolutionDynamic
-	for _, ref := range refs {
-		kind := "data"
-		if ref.Kind == sqlparse.ObjectReferenceProcedure {
-			kind = "procedure"
-		}
-		if ref.Kind == sqlparse.ObjectReferenceFunction {
-			kind = "function"
-		}
-		object, status := catalog.resolve(ref.Name, kind)
+	add := func(raw string, parts []string, kind string) {
+		object, status := catalog.resolveParts(raw, parts, kind)
 		objects = append(objects, object)
 		if status != ResolutionStatic {
 			resolution = status
 		}
+	}
+	for _, ref := range sqlparse.ExtractSQLAccesses(sql) {
+		if ref.NonPersisted {
+			continue
+		}
+		if ref.Ambiguous || ref.CTECaseAmbiguous {
+			objects = append(objects, ref.Name)
+			resolution = ResolutionAmbiguous
+			continue
+		}
+		kind := "data"
+		if ref.Function {
+			kind = "function"
+		}
+		add(ref.Name, ref.NameParts, kind)
+	}
+	for _, call := range sqlparse.ExtractSQLCalls(sql) {
+		add(call.Name, call.NameParts, "procedure")
+	}
+	// Scalar function calls are not SQLAccess data targets.
+	for _, ref := range sqlparse.ExtractObjectReferences(sql) {
+		if ref.Kind == sqlparse.ObjectReferenceFunction {
+			object, status := catalog.resolve(ref.Name, "function")
+			objects = append(objects, object)
+			if status != ResolutionStatic {
+				resolution = status
+			}
+		}
+	}
+	if len(objects) == 0 {
+		return nil, ResolutionUnresolved
 	}
 	return uniqueStrings(objects), resolution
 }
@@ -611,8 +686,8 @@ func (c procedureCatalog) resolveParts(raw string, parts []string, expected stri
 		if len(parts) == 1 {
 			for _, names := range c.byKind[kind] {
 				for _, name := range names {
-					nameParts := strings.Split(name, ".")
-					if strings.EqualFold(nameParts[len(nameParts)-1], raw) {
+					separator := strings.Index(name, ".")
+					if separator >= 0 && strings.EqualFold(name[separator+1:], raw) {
 						matches = append(matches, name)
 					}
 				}
@@ -661,22 +736,28 @@ func extractProcedureWriteMappings(sql string, accesses []ProcedureDataAccess, c
 			continue
 		}
 		whereStart, whereEnd := sqlparse.FindTopLevelKeyword(chunk[setEnd:], "WHERE")
-		if whereStart < 0 {
-			continue
+		assignmentEnd := len(chunk)
+		filter := ""
+		if whereStart >= 0 {
+			assignmentEnd = setEnd + whereStart
+			filter = firstSQLClause(strings.TrimSpace(chunk[setEnd+whereEnd:]))
 		}
-		assignmentEnd := setEnd + whereStart
 		if fromStart, _ := sqlparse.FindTopLevelKeyword(chunk[setEnd:assignmentEnd], "FROM"); fromStart >= 0 {
 			assignmentEnd = setEnd + fromStart
 		}
+		for _, keyword := range []string{"OUTPUT", "OPTION"} {
+			if pos, _ := sqlparse.FindTopLevelKeyword(chunk[setEnd:assignmentEnd], keyword); pos >= 0 {
+				assignmentEnd = setEnd + pos
+			}
+		}
 		assignments := chunk[setEnd:assignmentEnd]
-		filter := firstSQLClause(strings.TrimSpace(chunk[setEnd+whereEnd:]))
 		for _, assignment := range sqlparse.SplitTopLevelComma(assignments) {
 			eq := topLevelEqual(assignment)
 			if eq < 0 {
 				continue
 			}
 			column := normalizeColumnToken(strings.TrimSpace(assignment[:eq]))
-			expression := compactSQL(strings.TrimSpace(assignment[eq+1:]))
+			expression := compactSQL(strings.TrimSuffix(strings.TrimSpace(assignment[eq+1:]), ";"))
 			if column == "" || expression == "" {
 				continue
 			}
@@ -704,8 +785,8 @@ func extractInsertMappings(sql string, access ProcedureDataAccess) []ProcedureWr
 	if !ok {
 		return nil
 	}
-	columns := identifiersInList(chunk[open+1 : close])
-	if len(columns) == 0 {
+	columns, valid := insertTargetColumns(sql, access)
+	if !valid || len(columns) == 0 {
 		return nil
 	}
 	tail := chunk[close+1:]
@@ -757,6 +838,31 @@ func extractInsertMappings(sql string, access ProcedureDataAccess) []ProcedureWr
 	return out
 }
 
+func insertTargetColumns(sql string, access ProcedureDataAccess) ([]string, bool) {
+	start, end := access.targetEnd, access.statementEnd
+	if start < 0 || end > len(sql) || start >= end {
+		return nil, false
+	}
+	tail := sql[start:end]
+	tokens := sqlparse.SQLTokens(tail)
+	if len(tokens) == 0 || tokens[0].Text != "(" {
+		return nil, true
+	} // No explicit column list: keep syntax-only access.
+	close, ok := sqlparse.FindMatchingParen(tail, tokens[0].Start)
+	if !ok {
+		return nil, false
+	}
+	var columns []string
+	for _, part := range sqlparse.SplitTopLevelComma(tail[tokens[0].End:close]) {
+		items := sqlparse.SQLTokens(part)
+		if len(items) != 1 || !items[0].Identifier {
+			return nil, false
+		}
+		columns = append(columns, items[0].Text)
+	}
+	return columns, len(columns) > 0
+}
+
 func firstSQLClause(s string) string {
 	lines := strings.Split(s, "\n")
 	var kept []string
@@ -778,11 +884,45 @@ func firstSQLClause(s string) string {
 }
 
 func normalizeColumnToken(s string) string {
-	s = strings.TrimSpace(strings.TrimLeft(s, ","))
-	if dot := strings.LastIndex(s, "."); dot >= 0 {
-		s = s[dot+1:]
+	tokens := sqlparse.SQLTokens(s)
+	if len(tokens) == 0 {
+		return ""
 	}
-	return strings.Trim(strings.TrimSpace(s), "[]")
+	for i, t := range tokens {
+		if i%2 == 0 {
+			if !t.Identifier || strings.HasPrefix(t.Text, "@") {
+				return ""
+			}
+		} else if t.Text != "." {
+			return ""
+		}
+	}
+	if len(tokens)%2 != 1 {
+		return ""
+	}
+	return tokens[len(tokens)-1].Text
+}
+
+func validateWriteMappingColumns(mappings []ProcedureWriteMapping, catalog procedureCatalog) {
+	for i := range mappings {
+		table, ok := lookupDocumentedTable(catalog.tables, mappings[i].Object)
+		if !ok || len(table.Columns) == 0 {
+			continue
+		} // Views and unavailable metadata remain syntax-only.
+		matches := []string{}
+		for _, c := range table.Columns {
+			if strings.EqualFold(c.Name, mappings[i].Column) {
+				matches = append(matches, c.Name)
+			}
+		}
+		if len(matches) == 1 {
+			mappings[i].Column = matches[0]
+		} else if len(matches) == 0 {
+			mappings[i].Resolution = ResolutionColumnNotFound
+		} else {
+			mappings[i].Resolution = ResolutionAmbiguous
+		}
+	}
 }
 
 func normalizeObjectToken(s string) string {
@@ -820,6 +960,12 @@ func procedureExtractionNotices(p ProcedureProfile) []string {
 	for _, a := range p.Accesses {
 		if a.Resolution != ResolutionStatic && a.Resolution != ResolutionNotPersisted {
 			out = append(out, "Ada static reference yang belum ter-resolve ke db_object; review sebelum ekstraksi.")
+			break
+		}
+	}
+	for _, m := range p.Mappings {
+		if m.Resolution == ResolutionColumnNotFound || m.Resolution == ResolutionAmbiguous {
+			out = append(out, "Ada target column mapping yang tidak ditemukan atau ambigu pada snapshot table; expression dipertahankan sebagai evidence, bukan mapping terverifikasi.")
 			break
 		}
 	}
@@ -873,27 +1019,6 @@ func uniqueSortedMatches(re *regexp.Regexp, text string) []string {
 		}
 	}
 	return uniqueStrings(out)
-}
-
-func dynamicLineCovered(items []ProcedureDynamicSQL, line int) bool {
-	for _, item := range items {
-		if item.Line == fmt.Sprint(line) {
-			return true
-		}
-	}
-	return false
-}
-
-func isDynamicExecutionLine(line string) bool {
-	upper := strings.ToUpper(line)
-	if strings.Contains(upper, "SP_EXECUTESQL") || regexp.MustCompile(`(?i)\bEXEC(?:UTE)?\s*\(`).MatchString(line) {
-		return true
-	}
-	match := regexp.MustCompile(`(?i)\bEXEC(?:UTE)?\s+(@[A-Za-z_][A-Za-z0-9_]*)(.*)$`).FindStringSubmatch(line)
-	if len(match) == 0 {
-		return false
-	}
-	return !strings.HasPrefix(strings.TrimSpace(match[2]), "=")
 }
 
 func dynamicLineNumber(value string) int {

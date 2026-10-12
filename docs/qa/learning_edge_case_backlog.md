@@ -93,3 +93,10 @@ Residual scope: scanner is not full T-SQL AST; statement/control guard reconstru
 ## Report layout V2
 
 Resolved report layout edge cases: split default roots, custom -docs leaking audit to default out, reserved manual filenames, edited generated profiles, root overlap, nested symlink writes, and recursive stale deletion. Covered by layout/CLI tests. Residual: unverified legacy or edited stale output intentionally preserved; changed output root retains old artifacts; exceptional post-preflight filesystem failure is not a whole-bundle atomic transaction.
+
+
+## Audit object precision (2026-10-12)
+
+Resolved: scope leak/OUTER hint, quoted keyword and datatype parsing, multiline indexes, missing function consumers, UPDATE without WHERE, false/partial dynamic literals, parameter keyword literals, Unicode and declaration identity. Residual: full AST, CTE projection, correlated references, runtime targets, external/view columns and MERGE branch mapping. Snapshot menemukan 4 missing-column evidences dan 2 invalid INSERT target lists; tetap source findings untuk manual review, tanpa perubahan business SQL.
+
+Detail bukti: ../review_report_object_precision_20261012.md.

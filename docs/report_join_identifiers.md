@@ -24,3 +24,10 @@ Documentation updated: README, rules, spec, FSD, plan, walkthrough, capability m
 ## Report layout V2
 
 Listing location in layout V2: docs/database/identifiers/table_unique_ids.md. Root docs/database/README.md links to it; explicit -docs resolves the same grouped relative path. Evidence and conservative JOIN semantics remain unchanged. See [output layout](report_output_layout.md).
+
+
+## Audit object precision (2026-10-12)
+
+Observed identifier evidence sekarang mencakup view/procedure/function dengan query scope, quoted aliases dan OUTER/hint yang presisi. Ambiguous endpoint tidak ditebak. COLUMN_NOT_FOUND pada procedure write mapping adalah review evidence, bukan uniqueness/identity proof; suspected identifier tidak menjadi enforced key.
+
+Detail bukti: review_report_object_precision_20261012.md.

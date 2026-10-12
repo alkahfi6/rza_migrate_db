@@ -304,3 +304,10 @@ Ordering dan dataset report deterministik untuk source yang sama. Kolom `run_at`
 ## Report layout V2
 
 Report layout V2 workflow: jalankan rza_migrate_report, buka docs/database/README.md, lalu identifiers/relationships/procedures atau migrations/README.md. Default report tidak menulis out/. -docs memindahkan seluruh root; -out opsional memindahkan audit dengan datasets child. File manual tetap aman; checksum collision memblokir sebelum write. Extractor → checker apply/CI → generator → runner tetap seperti sebelumnya, dengan released report binary yang dibangun ulang. Lihat [layout walkthrough](report_output_layout.md).
+
+
+## Audit object precision (2026-10-12)
+
+Extractor tetap menghasilkan canonical source. Report decode source/history di memory, memeriksa declared identity, membangun DDL catalog dan scoped references, lalu mempublikasikan evidence/resolution termasuk function dan missing columns. Interactive checker/-check serta generator tidak memperoleh safe correction atau schema action baru. Shared MERGE JOIN lexer berlaku pada dependency consumers; pipeline flags dan history immutability tetap sama. Complete release membawa perilaku yang sama ke Windows/Linux.
+
+Detail bukti: review_report_object_precision_20261012.md.

@@ -7,8 +7,11 @@ import (
 	"rza_migrate_db/internal/sqlparse"
 )
 
-type relationshipToken struct{ Text, Upper string }
-type relationshipEndpoint struct{ Object, Alias, Column string }
+type relationshipToken = sqlparse.SQLToken
+type relationshipEndpoint struct {
+	Object, Alias, Column string
+	External              bool
+}
 type relationshipAggregate struct {
 	ObservedRelationship
 	joinTypes map[string]struct{}
@@ -23,12 +26,22 @@ func analyzeModuleRelationships(modules []moduleSource, tables map[string]*Docum
 		if moduleUsesDynamicSQL(module.SQL) {
 			dynamic = append(dynamic, module.Name)
 		}
-		for _, ref := range sqlparse.ExtractObjectReferences(module.SQL) {
-			if ref.Kind != sqlparse.ObjectReferenceData {
+		catalog := newProcedureCatalog(tables, views, nil, nil)
+		for _, ref := range sqlparse.ExtractSQLAccesses(module.SQL) {
+			if ref.Function {
 				continue
 			}
-			key := strings.ToLower(module.Name + "|" + module.Kind + "|" + ref.Name)
-			dependencySet[key] = ModuleDependency{Module: module.Name, Kind: module.Kind, Object: ref.Name}
+			object, status := catalog.resolveParts(ref.Name, ref.NameParts, "data")
+			if ref.NonPersisted {
+				object, status = ref.Name, ResolutionNotPersisted
+			}
+			if ref.Ambiguous || ref.CTECaseAmbiguous {
+				object, status = ref.Name, ResolutionAmbiguous
+			}
+			key := strings.ToLower(module.Name + "|" + module.Kind + "|" + object)
+			if _, exists := dependencySet[key]; !exists {
+				dependencySet[key] = ModuleDependency{Module: module.Name, Kind: module.Kind, Object: object, Resolution: status}
+			}
 		}
 		for _, observed := range extractObservedJoins(module, tables, views) {
 			key := relationshipKey(observed)
@@ -62,99 +75,131 @@ func analyzeModuleRelationships(modules []moduleSource, tables map[string]*Docum
 }
 
 func extractObservedJoins(module moduleSource, tables map[string]*DocumentedTable, views map[string]struct{}) []ObservedRelationship {
-	tokens := relationshipTokens(sqlparse.StripSQLStringsAndComments(module.SQL))
-	aliases := map[string]string{}
+	tokens := relationshipTokens(module.SQL)
+	accesses := sqlparse.ExtractSQLAccesses(module.SQL)
+	catalog := newProcedureCatalog(tables, views, nil, nil)
+	byOffset := map[int]sqlparse.SQLAccess{}
+	for _, access := range accesses {
+		if access.Operation == "READ" {
+			byOffset[access.Offset] = access
+		}
+	}
 	var out []ObservedRelationship
-	for i := 0; i < len(tokens); i++ {
-		if tokens[i].Text == ";" {
-			aliases = map[string]string{}
+	for from, token := range tokens {
+		if token.Quoted || token.Upper != "FROM" {
 			continue
 		}
-		keyword := tokens[i].Upper
-		if keyword != "FROM" && keyword != "JOIN" {
-			continue
-		}
-		// A FROM starts a new query scope. Keeping aliases from an earlier
-		// statement/query block is more dangerous than conservatively missing a
-		// correlated-subquery relationship because SQL files commonly omit ';'.
-		if keyword == "FROM" {
-			aliases = map[string]string{}
-		}
-		object, next, ok := relationshipObject(tokens, i+1)
+		seed, ok := byOffset[token.Start]
 		if !ok {
 			continue
-		}
-		alias, after := relationshipAlias(tokens, next, object)
-		aliases[strings.ToLower(alias)] = object
-		if keyword == "FROM" {
-			// Support the legacy implicit-join form: FROM A a, B b WHERE ...
-			cursor := after
-			for cursor < len(tokens) && tokens[cursor].Text == "," {
-				commaObject, commaNext, commaOK := relationshipObject(tokens, cursor+1)
-				if !commaOK {
+		} // Cursor and non-query FROM are not join scopes.
+		end := len(tokens)
+		for j := from + 1; j < len(tokens); j++ {
+			t := tokens[j]
+			if t.Depth < token.Depth || t.Start >= seed.StatementEnd {
+				end = j
+				break
+			}
+			if t.Depth == token.Depth && !t.Quoted {
+				if t.Upper == "MERGE" && j+1 < len(tokens) && !tokens[j+1].Quoted && tokens[j+1].Upper == "JOIN" {
+					continue
+				}
+				switch t.Upper {
+				case "SELECT", "FROM", "UNION", "EXCEPT", "INTERSECT", "INSERT", "UPDATE", "DELETE", "MERGE", "EXEC", "EXECUTE", "RETURN", "GO", ";":
+					end = j
+				}
+				if end == j {
 					break
 				}
-				commaAlias, commaAfter := relationshipAlias(tokens, commaNext, commaObject)
-				aliases[strings.ToLower(commaAlias)] = commaObject
-				cursor = commaAfter
-			}
-			i = after - 1
-			continue
-		}
-		joinType := "INNER"
-		if i > 0 {
-			switch tokens[i-1].Upper {
-			case "LEFT", "RIGHT", "FULL", "CROSS", "INNER":
-				joinType = tokens[i-1].Upper
 			}
 		}
-		on := after
-		for on < len(tokens) && tokens[on].Upper != "ON" && !relationshipBoundary(tokens[on].Upper) {
-			on++
+		aliases := map[string]string{}
+		duplicate := map[string]bool{}
+		commaJoin := false
+		for _, access := range accesses {
+			if access.Operation != "READ" || access.QueryDepth != token.Depth || access.Offset < token.Start || (end < len(tokens) && access.Offset >= tokens[end].Start) {
+				continue
+			}
+			alias := access.Alias
+			if alias == "" && len(access.NameParts) > 0 {
+				alias = access.NameParts[len(access.NameParts)-1]
+			}
+			key := strings.ToLower(alias)
+			object, status := catalog.resolveParts(access.Name, access.NameParts, "data")
+			if access.NonPersisted || access.Ambiguous || access.CTECaseAmbiguous || access.Function || (status != ResolutionStatic && status != ResolutionExternal) {
+				object = ""
+			}
+			if _, exists := aliases[key]; exists {
+				duplicate[key] = true
+				object = ""
+			}
+			if duplicate[key] {
+				object = ""
+			}
+			aliases[key] = object
+			if access.Alias == "" && len(access.NameParts) > 1 {
+				aliases[strings.ToLower(access.Name)] = object
+			}
 		}
-		if on >= len(tokens) || tokens[on].Upper != "ON" {
-			i = after - 1
-			continue
-		}
-		end := on + 1
-		for end < len(tokens) && !relationshipBoundary(tokens[end].Upper) && tokens[end].Text != ";" {
-			end++
-		}
-		out = append(out, observedRelationsInRange(tokens, on+1, end, aliases, tables, views, joinType, module.Name)...)
-		i = end - 1
-	}
-	// A second pass captures legacy comma joins. Alias collection above remains
-	// scoped conservatively by each FROM, and WHERE predicates are bounded.
-	aliases = map[string]string{}
-	for i := 0; i < len(tokens); i++ {
-		if tokens[i].Upper == "FROM" {
-			aliases = map[string]string{}
-			cursor := i + 1
-			for {
-				object, next, ok := relationshipObject(tokens, cursor)
-				if !ok {
-					break
+		for j := from + 1; j < end; j++ {
+			t := tokens[j]
+			if t.Depth != token.Depth || t.Quoted {
+				continue
+			}
+			if t.Text == "," {
+				if _, ok := byOffset[t.Start]; ok {
+					commaJoin = true
 				}
-				alias, after := relationshipAlias(tokens, next, object)
-				aliases[strings.ToLower(alias)] = object
-				cursor = after
-				if cursor >= len(tokens) || tokens[cursor].Text != "," {
-					break
-				}
-				cursor++
+				continue
 			}
+			if t.Upper == "WHERE" {
+				if commaJoin {
+					stop := relationshipPredicateEnd(tokens, j+1, end, token.Depth)
+					out = append(out, observedRelationsInRange(tokens, j+1, stop, aliases, tables, views, "IMPLICIT", module.Name)...)
+				}
+				continue
+			}
+			if t.Upper != "JOIN" {
+				continue
+			}
+			joinType := "INNER"
+			prev := j - 1
+			if prev >= from && !tokens[prev].Quoted {
+				switch tokens[prev].Upper {
+				case "HASH", "LOOP", "MERGE", "REMOTE":
+					prev--
+				}
+			}
+			if prev >= from && !tokens[prev].Quoted && tokens[prev].Upper == "OUTER" {
+				prev--
+			}
+			if prev >= from && !tokens[prev].Quoted {
+				switch tokens[prev].Upper {
+				case "LEFT", "RIGHT", "FULL", "CROSS", "INNER":
+					joinType = tokens[prev].Upper
+				}
+			}
+			on := j + 1
+			for on < end && !(tokens[on].Depth == token.Depth && !tokens[on].Quoted && (tokens[on].Upper == "ON" || relationshipBoundary(tokens[on].Upper))) {
+				on++
+			}
+			if on >= end || tokens[on].Upper != "ON" || tokens[on].Quoted {
+				continue
+			}
+			stop := relationshipPredicateEnd(tokens, on+1, end, token.Depth)
+			out = append(out, observedRelationsInRange(tokens, on+1, stop, aliases, tables, views, joinType, module.Name)...)
 		}
-		if tokens[i].Upper != "WHERE" || len(aliases) < 2 {
-			continue
-		}
-		end := i + 1
-		for end < len(tokens) && !relationshipBoundary(tokens[end].Upper) && tokens[end].Text != ";" {
-			end++
-		}
-		out = append(out, observedRelationsInRange(tokens, i+1, end, aliases, tables, views, "IMPLICIT", module.Name)...)
-		i = end - 1
 	}
 	return out
+}
+
+func relationshipPredicateEnd(tokens []relationshipToken, start, end, depth int) int {
+	for i := start; i < end; i++ {
+		if tokens[i].Depth == depth && !tokens[i].Quoted && relationshipBoundary(tokens[i].Upper) {
+			return i
+		}
+	}
+	return end
 }
 
 func observedRelationsInRange(tokens []relationshipToken, start, end int, aliases map[string]string, tables map[string]*DocumentedTable, views map[string]struct{}, joinType, module string) []ObservedRelationship {
@@ -170,7 +215,9 @@ func observedRelationsInRange(tokens []relationshipToken, start, end int, aliase
 		if !leftOK || !rightOK || strings.EqualFold(left.Alias, right.Alias) {
 			continue
 		}
-		if !knownRelationshipEndpoint(left, tables, views) || !knownRelationshipEndpoint(right, tables, views) {
+		left, leftOK = canonicalRelationshipEndpoint(left, tables, views)
+		right, rightOK = canonicalRelationshipEndpoint(right, tables, views)
+		if !leftOK || !rightOK {
 			continue
 		}
 		out = append(out, canonicalObservedRelationship(left, right, joinType, module))
@@ -178,110 +225,11 @@ func observedRelationsInRange(tokens []relationshipToken, start, end int, aliase
 	return out
 }
 
-func relationshipTokens(sql string) []relationshipToken {
-	var out []relationshipToken
-	for i := 0; i < len(sql); {
-		if sql[i] == ' ' || sql[i] == '\t' || sql[i] == '\r' || sql[i] == '\n' {
-			i++
-			continue
-		}
-		if sql[i] == '[' {
-			start := i
-			i++
-			for i < len(sql) {
-				if sql[i] == ']' {
-					i++
-					break
-				}
-				i++
-			}
-			value := strings.TrimSuffix(strings.TrimPrefix(sql[start:i], "["), "]")
-			out = append(out, relationshipToken{Text: value, Upper: strings.ToUpper(value)})
-			continue
-		}
-		if isRelationshipWord(sql[i]) {
-			start := i
-			for i < len(sql) && isRelationshipWord(sql[i]) {
-				i++
-			}
-			value := sql[start:i]
-			out = append(out, relationshipToken{Text: value, Upper: strings.ToUpper(value)})
-			continue
-		}
-		out = append(out, relationshipToken{Text: string(sql[i]), Upper: string(sql[i])})
-		i++
-	}
-	return out
-}
-
-func isRelationshipWord(ch byte) bool {
-	return (ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z') || (ch >= '0' && ch <= '9') || ch == '_' || ch == '#' || ch == '@' || ch == '$'
-}
-
-func relationshipObject(tokens []relationshipToken, start int) (string, int, bool) {
-	if start >= len(tokens) || tokens[start].Text == "(" || strings.HasPrefix(tokens[start].Text, "#") || strings.HasPrefix(tokens[start].Text, "@") {
-		return "", start, false
-	}
-	parts := []string{tokens[start].Text}
-	next := start + 1
-	for next+1 < len(tokens) && tokens[next].Text == "." && len(parts) < 3 {
-		parts = append(parts, tokens[next+1].Text)
-		next += 2
-	}
-	if len(parts) == 1 {
-		return "dbo." + parts[0], next, true
-	}
-	if len(parts) == 2 {
-		return parts[0] + "." + parts[1], next, true
-	}
-	return parts[0] + "." + parts[1] + "." + parts[2], next, true
-}
-
-func relationshipAlias(tokens []relationshipToken, start int, object string) (string, int) {
-	i := start
-	if i < len(tokens) && tokens[i].Upper == "WITH" && i+1 < len(tokens) && tokens[i+1].Text == "(" {
-		i = skipRelationshipParen(tokens, i+1)
-	}
-	if i < len(tokens) && tokens[i].Upper == "AS" {
-		i++
-	}
-	if i < len(tokens) && relationshipAliasAllowed(tokens[i]) {
-		return tokens[i].Text, i + 1
-	}
-	parts := strings.Split(object, ".")
-	return parts[len(parts)-1], i
-}
-
-func relationshipAliasAllowed(token relationshipToken) bool {
-	if token.Text == "," || token.Text == ";" || token.Text == "(" || token.Text == ")" {
-		return false
-	}
-	switch token.Upper {
-	case "ON", "JOIN", "LEFT", "RIGHT", "FULL", "INNER", "CROSS", "WHERE", "GROUP", "ORDER", "HAVING", "UNION", "WITH":
-		return false
-	}
-	return true
-}
-
-func skipRelationshipParen(tokens []relationshipToken, open int) int {
-	depth := 0
-	for i := open; i < len(tokens); i++ {
-		if tokens[i].Text == "(" {
-			depth++
-		}
-		if tokens[i].Text == ")" {
-			depth--
-			if depth == 0 {
-				return i + 1
-			}
-		}
-	}
-	return len(tokens)
-}
+func relationshipTokens(sql string) []relationshipToken { return sqlparse.SQLTokens(sql) }
 
 func relationshipBoundary(upper string) bool {
 	switch upper {
-	case "JOIN", "WHERE", "GROUP", "ORDER", "HAVING", "UNION", "EXCEPT", "INTERSECT", "RETURN", "OPTION":
+	case "JOIN", "LEFT", "RIGHT", "FULL", "INNER", "CROSS", "OUTER", "WHERE", "GROUP", "ORDER", "HAVING", "UNION", "EXCEPT", "INTERSECT", "RETURN", "OPTION", "FOR":
 		return true
 	}
 	return false
@@ -301,7 +249,7 @@ func relationshipEquality(tokens []relationshipToken, eq int) bool {
 
 func relationshipExpressionStart(tokens []relationshipToken, lower, eq int) int {
 	for i := eq - 1; i >= lower; i-- {
-		if tokens[i].Upper == "AND" || tokens[i].Upper == "OR" || tokens[i].Upper == "ON" || tokens[i].Text == "," {
+		if !tokens[i].Quoted && (tokens[i].Upper == "AND" || tokens[i].Upper == "OR" || tokens[i].Upper == "ON") {
 			return i + 1
 		}
 	}
@@ -310,7 +258,7 @@ func relationshipExpressionStart(tokens []relationshipToken, lower, eq int) int 
 
 func relationshipExpressionEnd(tokens []relationshipToken, start, upper int) int {
 	for i := start; i < upper; i++ {
-		if tokens[i].Upper == "AND" || tokens[i].Upper == "OR" || tokens[i].Text == "," {
+		if !tokens[i].Quoted && (tokens[i].Upper == "AND" || tokens[i].Upper == "OR") {
 			return i
 		}
 	}
@@ -324,49 +272,71 @@ func relationshipExpressionEnd(tokens []relationshipToken, start, upper int) int
 func endpointInExpression(tokens []relationshipToken, start, end int, aliases map[string]string) (relationshipEndpoint, bool) {
 	var found relationshipEndpoint
 	hasFound := false
-	for i := start; i+2 < end; i++ {
-		if tokens[i+1].Text != "." {
+	for _, token := range tokens[start:end] {
+		if !token.Quoted && (token.Upper == "SELECT" || token.Upper == "EXISTS") {
+			return found, false
+		}
+	}
+	for i := start; i < end; i++ {
+		if !tokens[i].Identifier {
 			continue
 		}
-		object, ok := aliases[strings.ToLower(tokens[i].Text)]
-		if !ok {
+		parts := []string{tokens[i].Text}
+		next := i + 1
+		for next+1 < end && tokens[next].Text == "." && tokens[next+1].Identifier {
+			parts = append(parts, tokens[next+1].Text)
+			next += 2
+		}
+		if len(parts) < 2 {
 			continue
 		}
-		candidate := relationshipEndpoint{Object: object, Alias: tokens[i].Text, Column: tokens[i+2].Text}
-		if !hasFound {
-			found = candidate
-			hasFound = true
+		if next < end && tokens[next].Text == "(" {
+			i = next - 1
 			continue
+		} // qualified scalar wrapper
+		alias := strings.Join(parts[:len(parts)-1], ".")
+		object, ok := aliases[strings.ToLower(alias)]
+		if !ok || object == "" {
+			return found, false
 		}
-		if !strings.EqualFold(found.Object, candidate.Object) || !strings.EqualFold(found.Alias, candidate.Alias) || !strings.EqualFold(found.Column, candidate.Column) {
-			return relationshipEndpoint{}, false
+		candidate := relationshipEndpoint{Object: object, Alias: alias, Column: parts[len(parts)-1]}
+		if hasFound && (!strings.EqualFold(found.Object, candidate.Object) || !strings.EqualFold(found.Alias, candidate.Alias) || !strings.EqualFold(found.Column, candidate.Column)) {
+			return found, false
 		}
+		found = candidate
+		hasFound = true
+		i = next - 1
 	}
 	return found, hasFound
 }
 
-func knownRelationshipObject(object string, tables map[string]*DocumentedTable, views map[string]struct{}) bool {
-	if _, ok := lookupDocumentedTable(tables, object); ok {
-		return true
-	}
-	for view := range views {
-		if strings.EqualFold(view, object) {
-			return true
-		}
-	}
-	return strings.Count(object, ".") == 2
-}
-
-func knownRelationshipEndpoint(endpoint relationshipEndpoint, tables map[string]*DocumentedTable, views map[string]struct{}) bool {
+func canonicalRelationshipEndpoint(endpoint relationshipEndpoint, tables map[string]*DocumentedTable, views map[string]struct{}) (relationshipEndpoint, bool) {
 	if table, ok := lookupDocumentedTable(tables, endpoint.Object); ok {
+		endpoint.Object = table.Name
+		var match string
 		for _, column := range table.Columns {
 			if strings.EqualFold(column.Name, endpoint.Column) {
-				return true
+				if match != "" {
+					return endpoint, false
+				}
+				match = column.Name
 			}
 		}
-		return false
+		if match == "" {
+			return endpoint, false
+		}
+		endpoint.Column = match
+		return endpoint, true
 	}
-	return knownRelationshipObject(endpoint.Object, tables, views)
+	matches := 0
+	for view := range views {
+		if strings.EqualFold(view, endpoint.Object) {
+			endpoint.Object = view
+			matches++
+		}
+	}
+	endpoint.External = matches == 0 && strings.Count(endpoint.Object, ".") >= 2
+	return endpoint, matches == 1 || endpoint.External
 }
 
 func canonicalObservedRelationship(left, right relationshipEndpoint, joinType, module string) ObservedRelationship {
@@ -374,7 +344,7 @@ func canonicalObservedRelationship(left, right relationshipEndpoint, joinType, m
 		left, right = right, left
 	}
 	confidence := "MEDIUM"
-	if strings.Count(left.Object, ".") == 2 || strings.Count(right.Object, ".") == 2 {
+	if left.External || right.External {
 		confidence = "LOW"
 	}
 	return ObservedRelationship{LeftObject: left.Object, LeftColumns: []string{left.Column}, RightObject: right.Object, RightColumns: []string{right.Column}, Evidence: "OBSERVED_JOIN", JoinTypes: []string{joinType}, Modules: []string{module}, Occurrences: 0, Confidence: confidence}
@@ -405,24 +375,25 @@ func uniqueRelationshipStrings(values []string) []string {
 	return out
 }
 func moduleUsesDynamicSQL(sql string) bool {
-	clean := sqlparse.StripSQLStringsAndComments(sql)
-	upper := strings.ToUpper(clean)
-	if containsSQLWord(upper, "SP_EXECUTESQL") {
-		return true
-	}
-	tokens := relationshipTokens(clean)
-	for i := 0; i+1 < len(tokens); i++ {
-		if tokens[i].Upper != "EXEC" && tokens[i].Upper != "EXECUTE" {
-			continue
-		}
-		next := tokens[i+1].Text
-		if next == "(" {
+	for _, call := range sqlparse.ExtractSQLCalls(sql) {
+		if len(call.NameParts) > 0 && strings.EqualFold(call.NameParts[len(call.NameParts)-1], "sp_executesql") {
 			return true
 		}
-		if strings.HasPrefix(next, "@") {
-			// EXEC @return_code = dbo.StaticProcedure is a normal static call,
-			// not execution of a procedure/SQL expression stored in @return_code.
+	}
+	tokens := relationshipTokens(sql)
+	for i := 0; i+1 < len(tokens); i++ {
+		if tokens[i].Quoted || (tokens[i].Upper != "EXEC" && tokens[i].Upper != "EXECUTE") {
+			continue
+		}
+		next := tokens[i+1]
+		if next.Text == "(" || strings.HasPrefix(next.Text, "'") || (next.Upper == "N" && i+2 < len(tokens) && strings.HasPrefix(tokens[i+2].Text, "'")) {
+			return true
+		}
+		if strings.HasPrefix(next.Text, "@") && !next.Quoted {
 			if i+2 < len(tokens) && tokens[i+2].Text == "=" {
+				if i+3 < len(tokens) && strings.HasPrefix(tokens[i+3].Text, "@") && !tokens[i+3].Quoted {
+					return true
+				}
 				continue
 			}
 			return true

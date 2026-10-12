@@ -144,3 +144,10 @@ Catatan: capability harus mengikuti implementasi scanner aktual. Saat ini scanne
 ## Report layout V2
 
 Report layout V2: supported setelah targeted/full suite dan release gates; single root, grouped data/documents, hash manifest, escaped navigation, preflight no-write manual collision, dan checksum-only stale cleanup. Legacy output yang tidak terbukti equivalent dipertahankan, bukan guessed deletion. Source/history contract lintas tool tetap unchanged.
+
+
+## Audit object precision (2026-10-12)
+
+Supported observational report: multiline token DDL, inline/ALTER FK, full datatype, scoped OUTER/hinted JOIN, quoted identifier, function lineage, UPDATE tanpa WHERE, COLUMN_NOT_FOUND review, Unicode memory-only decode dan declared identity validation. Dynamic literal supported hanya jika actual EXEC dan literal lengkap; runtime-dependent target, ambiguous alias/schema, CTE/derived projection dan MERGE branch column mapping tetap manual/unresolved. Migration support classification tidak berubah.
+
+Detail bukti: ../review_report_object_precision_20261012.md.

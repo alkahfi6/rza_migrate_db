@@ -93,3 +93,10 @@ Stop release jika salah satu terjadi:
 ## Report layout V2
 
 Report packaging gate: after changing layout publisher/tests, rebuild all Windows/Linux artifacts. Verify report default index/manifest and custom-root navigation from released binary, exact file checksums, embedded source identity, and unchanged Linux MR checker command. Checkout must preserve tools/** bytes. See [layout release contract](../report_output_layout.md).
+
+
+## Audit object precision (2026-10-12)
+
+Audit report object precision memakai complete six-binary Windows/Linux rebuild, embedded identity, source digest/checksums, released report smoke dan exact GitLab checker flags. Report fixture/corpus membuktikan no-write source/history. Tidak ada perubahan packaging, license contract atau pipeline flags.
+
+Detail bukti: ../review_report_object_precision_20261012.md.
