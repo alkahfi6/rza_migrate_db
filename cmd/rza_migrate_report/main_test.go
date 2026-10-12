@@ -38,13 +38,13 @@ func TestCLIBasicRuns(t *testing.T) {
 	}
 
 	// Verify report_summary.csv was generated in outDir
-	if _, err := os.Stat(filepath.Join(outDir, "report_summary.csv")); err != nil {
+	if _, err := os.Stat(filepath.Join(outDir, "datasets/report_summary.csv")); err != nil {
 		t.Fatalf("expected report_summary.csv to exist: %v", err)
 	}
 
 	// Verify desired-state docs were generated in docs/database, NOT in outDir
 	defaultDocsDir := filepath.Join(tmp, "docs", "database")
-	if _, err := os.Stat(filepath.Join(defaultDocsDir, "table_unique_ids.md")); err != nil {
+	if _, err := os.Stat(filepath.Join(defaultDocsDir, "identifiers/table_unique_ids.md")); err != nil {
 		t.Fatalf("expected table_unique_ids.md to exist in docs/database: %v", err)
 	}
 	for _, rel := range []string{filepath.Join("procedures", "README.md"), filepath.Join("procedures", "procedure_impact_catalog.md")} {
@@ -52,7 +52,7 @@ func TestCLIBasicRuns(t *testing.T) {
 			t.Fatalf("expected procedure document %s: %v", rel, err)
 		}
 	}
-	if _, err := os.Stat(filepath.Join(outDir, "table_unique_ids.md")); !os.IsNotExist(err) {
+	if _, err := os.Stat(filepath.Join(outDir, "identifiers/table_unique_ids.md")); !os.IsNotExist(err) {
 		t.Fatalf("table_unique_ids.md must not exist in out/: %v", err)
 	}
 
@@ -68,7 +68,7 @@ func TestCLIBasicRuns(t *testing.T) {
 	if exitCode != 0 {
 		t.Fatalf("expected run with -docs exit code 0, got %d", exitCode)
 	}
-	if _, err := os.Stat(filepath.Join(customDocsDir, "table_unique_ids.md")); err != nil {
+	if _, err := os.Stat(filepath.Join(customDocsDir, "identifiers/table_unique_ids.md")); err != nil {
 		t.Fatalf("expected table_unique_ids.md to exist in custom_docs: %v", err)
 	}
 }
@@ -102,12 +102,12 @@ func TestCLIDiscoversRepoFromSubfolder(t *testing.T) {
 		t.Fatalf("expected run exit code 0, got %d", exitCode)
 	}
 
-	defaultOutDir := filepath.Join(tmp, "out", "report")
-	if _, err := os.Stat(filepath.Join(defaultOutDir, "report_summary.csv")); err != nil {
+	defaultOutDir := filepath.Join(tmp, "docs", "database", "migrations")
+	if _, err := os.Stat(filepath.Join(defaultOutDir, "datasets/report_summary.csv")); err != nil {
 		t.Fatalf("expected report_summary.csv in default out dir: %v", err)
 	}
 	defaultDocsDir := filepath.Join(tmp, "docs", "database")
-	if _, err := os.Stat(filepath.Join(defaultDocsDir, "table_unique_ids.md")); err != nil {
+	if _, err := os.Stat(filepath.Join(defaultDocsDir, "identifiers/table_unique_ids.md")); err != nil {
 		t.Fatalf("expected table_unique_ids.md in default docs dir: %v", err)
 	}
 }

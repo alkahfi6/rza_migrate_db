@@ -11,44 +11,44 @@ import (
 	"time"
 )
 
-// WriteReports writes all CSV and JSON reports to outputDir (default out/report).
+// WriteReports writes migration datasets and JSON into the audit directory.
 func WriteReports(outputDir string, res *RunResult) error {
-	if err := os.MkdirAll(outputDir, 0755); err != nil {
+	if err := os.MkdirAll(filepath.Join(outputDir, "datasets"), 0755); err != nil {
 		return fmt.Errorf("failed to create output directory %s: %w", outputDir, err)
 	}
 
 	// 1. report_summary.csv
-	if err := writeReportSummary(filepath.Join(outputDir, "report_summary.csv"), res.Summary); err != nil {
+	if err := writeReportSummary(filepath.Join(outputDir, "datasets", "report_summary.csv"), res.Summary); err != nil {
 		return err
 	}
 
 	// 2. migration_summary.csv
-	if err := writeMigrationSummary(filepath.Join(outputDir, "migration_summary.csv"), res.Migrations); err != nil {
+	if err := writeMigrationSummary(filepath.Join(outputDir, "datasets", "migration_summary.csv"), res.Migrations); err != nil {
 		return err
 	}
 
 	// 3. object_history.csv
-	if err := writeObjectHistory(filepath.Join(outputDir, "object_history.csv"), res.ObjectHistory); err != nil {
+	if err := writeObjectHistory(filepath.Join(outputDir, "datasets", "object_history.csv"), res.ObjectHistory); err != nil {
 		return err
 	}
 
 	// 4. table_changes.csv
-	if err := writeTableChanges(filepath.Join(outputDir, "table_changes.csv"), res.TableChanges); err != nil {
+	if err := writeTableChanges(filepath.Join(outputDir, "datasets", "table_changes.csv"), res.TableChanges); err != nil {
 		return err
 	}
 
 	// 5. index_changes.csv
-	if err := writeIndexChanges(filepath.Join(outputDir, "index_changes.csv"), res.IndexChanges); err != nil {
+	if err := writeIndexChanges(filepath.Join(outputDir, "datasets", "index_changes.csv"), res.IndexChanges); err != nil {
 		return err
 	}
 
 	// 6. programmable_changes.csv
-	if err := writeProgChanges(filepath.Join(outputDir, "programmable_changes.csv"), res.ProgChanges); err != nil {
+	if err := writeProgChanges(filepath.Join(outputDir, "datasets", "programmable_changes.csv"), res.ProgChanges); err != nil {
 		return err
 	}
 
 	// 7. type_changes.csv
-	if err := writeTypeChanges(filepath.Join(outputDir, "type_changes.csv"), res.TypeChanges); err != nil {
+	if err := writeTypeChanges(filepath.Join(outputDir, "datasets", "type_changes.csv"), res.TypeChanges); err != nil {
 		return err
 	}
 
@@ -396,16 +396,7 @@ func PrintConsoleSummary(res *RunResult, outputDir, docsDir string) {
 	fmt.Printf("[scan] files=%d analyzed_pairs=%d excluded_pairs=%d\n", res.Summary.TotalFiles, res.Summary.TotalPairs, res.Summary.ExcludedPairs)
 	fmt.Printf("[objects] total=%d operations=%d\n", res.Summary.TotalObjects, res.Summary.TotalOperations)
 
-	reportFiles := []string{
-		"report_summary.csv",
-		"migration_summary.csv",
-		"object_history.csv",
-		"table_changes.csv",
-		"index_changes.csv",
-		"programmable_changes.csv",
-		"type_changes.csv",
-		"report.json",
-	}
+	reportFiles := auditArtifactFiles()
 	cwd, _ := os.Getwd()
 	for _, rf := range reportFiles {
 		full := filepath.Join(outputDir, rf)

@@ -60,3 +60,7 @@ Hasil review implementasi pada refinement M1-M5:
 
 Residual risk aktif saat ini:
 - backend formatter ANTLR masih fallback ke lite selama backend ANTLR belum diaktifkan penuh.
+
+## Report layout V2
+
+Report layout V2 control → internal/migreport/layout.go + report.go + CLI flags; evidence → layout_test.go, CLI discovery/custom-root tests, QA-31 golden/layout integration; no-write → collision and symlink preflight plus source/history hash regression; stale cleanup → previous manifest path whitelist + SHA-256. Capability is report-only; extractor/checker/generator behavior unchanged, complete binary release parity required.

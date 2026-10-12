@@ -40,14 +40,17 @@ func Run(opts Options) (int, error) {
 	}
 	repoRoot = filepath.Clean(repoRoot)
 
-	outDir := resolveReportDirectory(repoRoot, opts.OutputDir, "out", "report")
+	docsDir := resolveReportDirectory(repoRoot, opts.DocsDir, "docs", "database")
+	outDir := filepath.Join(docsDir, "migrations")
+	if strings.TrimSpace(opts.OutputDir) != "" {
+		outDir = resolveReportDirectory(repoRoot, opts.OutputDir)
+	}
 	if err := validateDirectoryOutsideProtected(repoRoot, outDir, "report output"); err != nil {
 		fmt.Fprintf(os.Stderr, "[error] invalid report output directory: %v\n", err)
 		WaitForEnter(opts.PauseOnExit)
 		return 1, err
 	}
 
-	docsDir := resolveReportDirectory(repoRoot, opts.DocsDir, "docs", "database")
 	if err := validateDirectoryOutsideProtected(repoRoot, docsDir, "documentation output"); err != nil {
 		fmt.Fprintf(os.Stderr, "[error] invalid documentation output directory: %v\n", err)
 		WaitForEnter(opts.PauseOnExit)
@@ -82,18 +85,30 @@ func Run(opts Options) (int, error) {
 		return 1, docsErr
 	}
 	result.DesiredStateDocs = desiredStateDocs
-	result.JSONReport.Reports = append(result.JSONReport.Reports, desiredStateReportFiles...)
 	result.JSONReport.OutputDirectory = outDir
 	result.JSONReport.DocumentationDirectory = docsDir
-	result.JSONReport.Artifacts = reportArtifacts(result.DesiredStateDocs)
-
-	if writeErr := WriteDesiredStateDocs(docsDir, result.DesiredStateDocs); writeErr != nil {
-		fmt.Fprintf(os.Stderr, "[error] failed writing desired-state documentation: %v\n", writeErr)
-		WaitForEnter(opts.PauseOnExit)
-		return 1, writeErr
+	index, indexErr := filepath.Rel(outDir, filepath.Join(docsDir, "README.md"))
+	if indexErr != nil {
+		index = filepath.Join(docsDir, "README.md")
 	}
-	if writeErr := WriteReports(outDir, result); writeErr != nil {
-		fmt.Fprintf(os.Stderr, "[error] failed writing reports: %v\n", writeErr)
+	result.JSONReport.DocumentationIndex = filepath.ToSlash(index)
+	result.JSONReport.Artifacts = reportArtifacts(result.DesiredStateDocs)
+	result.JSONReport.Reports = nil
+	for _, artifact := range result.JSONReport.Artifacts {
+		root := docsDir
+		if artifact.Root == "output_directory" {
+			root = outDir
+		}
+		path := filepath.Join(root, filepath.FromSlash(artifact.Path))
+		relative, err := filepath.Rel(docsDir, path)
+		if err != nil {
+			relative = path
+		}
+		result.JSONReport.Reports = append(result.JSONReport.Reports, filepath.ToSlash(relative))
+	}
+
+	if writeErr := publishReportBundle(repoRoot, docsDir, outDir, result); writeErr != nil {
+		fmt.Fprintf(os.Stderr, "[error] failed publishing report documentation: %v\n", writeErr)
 		WaitForEnter(opts.PauseOnExit)
 		return 1, writeErr
 	}
@@ -120,10 +135,7 @@ func resolveReportDirectory(repoRoot, configured string, defaultParts ...string)
 }
 
 func reportArtifacts(docs DesiredStateDocs) []ReportArtifact {
-	reportFiles := []string{
-		"report_summary.csv", "migration_summary.csv", "object_history.csv", "table_changes.csv",
-		"index_changes.csv", "programmable_changes.csv", "type_changes.csv", "report.json",
-	}
+	reportFiles := auditArtifactFiles()
 	artifacts := make([]ReportArtifact, 0, len(reportFiles)+len(docs.ProcedureProfiles)+7)
 	for _, path := range reportFiles {
 		artifacts = append(artifacts, ReportArtifact{Kind: "audit", Root: "output_directory", Path: path})

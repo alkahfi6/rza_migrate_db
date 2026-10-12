@@ -1,0 +1,28 @@
+{
+  "schema": "RZA_MIGRATION_REPORT_V1",
+  "generated_at": "2026-09-10T13:20:05+07:00",
+  "repository": ".",
+  "source": "migrations-and-db_object",
+  "database_access": false,
+  "sql_execution": false,
+  "files_scanned": 6,
+  "migration_pairs": 3,
+  "objects": 3,
+  "operations": 72,
+  "reports": [
+    "report_summary.csv",
+    "migration_summary.csv",
+    "object_history.csv",
+    "table_changes.csv",
+    "index_changes.csv",
+    "programmable_changes.csv",
+    "type_changes.csv",
+    "table_unique_ids.md",
+    "relational_erd.md",
+    "relationship_catalog.md",
+    "module_lineage.md",
+    "table_relationship_tree.md"
+  ],
+  "warnings": [],
+  "errors": []
+}

@@ -13,6 +13,10 @@ import (
 func TestSuspectedJoinIdentifiersQA31GoldenReadOnlyAndIdempotent(t *testing.T) {
 	fixture := filepath.Join("..", "..", "fixtures", "qa_rules", "QA-31-desired-state-documentation")
 	var expected struct {
+		Reports []string `json:"reports"`
+		Layout  struct {
+			Schema string `json:"schema"`
+		} `json:"report_layout"`
 		Candidates struct {
 			Rows      []string `json:"required_rows"`
 			Evidence  []string `json:"required_evidence"`
@@ -61,7 +65,19 @@ func TestSuspectedJoinIdentifiersQA31GoldenReadOnlyAndIdempotent(t *testing.T) {
 		if code, err := migreport.Run(migreport.Options{RepoRoot: root, OutputDir: "audit", DocsDir: "documentation"}); err != nil || code != 0 {
 			t.Fatalf("report code=%d err=%v", code, err)
 		}
-		text := readDesiredFixture(t, filepath.Join(root, "documentation", "table_unique_ids.md"))
+		for _, relative := range expected.Reports {
+			if _, err := os.Stat(filepath.Join(root, "documentation", filepath.FromSlash(relative))); err != nil {
+				t.Fatalf("missing golden layout file %s: %v", relative, err)
+			}
+		}
+		var manifest struct {
+			Schema string `json:"schema"`
+		}
+		data, err := os.ReadFile(filepath.Join(root, "documentation", "manifest.json"))
+		if err != nil || json.Unmarshal(data, &manifest) != nil || manifest.Schema != expected.Layout.Schema {
+			t.Fatalf("golden layout schema mismatch: schema=%q err=%v", manifest.Schema, err)
+		}
+		text := readDesiredFixture(t, filepath.Join(root, "documentation", "identifiers/table_unique_ids.md"))
 		start := strings.Index(text, "## Suspected JOIN identifiers")
 		if start < 0 {
 			t.Fatal("candidate section missing")

@@ -1,0 +1,4 @@
+migration_id,category,schema_name,object_name,object_version,operation_count,operation_kinds,up_file,down_file,up_exists,down_exists,round_trip_status,status
+000000,core,dbo,mig__audit_init,0,70,CREATE_TABLE|ADD_COLUMN|ADD_CONSTRAINT|ADD_INDEX,migrations/000000__core__mig__audit_init.up.sql,migrations/000000__core__mig__audit_init.down.sql,YES,YES,PASS,OK
+10000000000000001,procedures,dbo,usp_mig_log_event,1,1,CREATE,migrations/10000000000000001_procedures_dbo.usp_mig_log_event_v1.up.sql,migrations/10000000000000001_procedures_dbo.usp_mig_log_event_v1.down.sql,YES,YES,PASS,OK
+10000000000000002,procedures,dbo,usp_mig_try_get_lock,1,1,CREATE,migrations/10000000000000002_procedures_dbo.usp_mig_try_get_lock_v1.up.sql,migrations/10000000000000002_procedures_dbo.usp_mig_try_get_lock_v1.down.sql,YES,YES,PASS,OK

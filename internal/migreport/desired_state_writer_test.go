@@ -219,7 +219,7 @@ func TestRelationshipCatalogSplitsDenseSinglePairWithoutLosingMappings(t *testin
 	}
 }
 
-func TestDesiredStateWriterRemovesObsoleteSplitDiagramDirectory(t *testing.T) {
+func TestDesiredStateWriterPreservesUnownedSplitDiagramDirectory(t *testing.T) {
 	out := t.TempDir()
 	stale := filepath.Join(out, relationshipDiagramDirectory)
 	if err := os.MkdirAll(stale, 0755); err != nil {
@@ -231,8 +231,8 @@ func TestDesiredStateWriterRemovesObsoleteSplitDiagramDirectory(t *testing.T) {
 	if err := writeDesiredStateDocs(out, DesiredStateDocs{}); err != nil {
 		t.Fatal(err)
 	}
-	if _, err := os.Stat(stale); !os.IsNotExist(err) {
-		t.Fatalf("obsolete generated diagram directory must be removed, stat error: %v", err)
+	if _, err := os.Stat(filepath.Join(stale, "old.md")); err != nil {
+		t.Fatalf("unowned legacy directory must be preserved, stat error: %v", err)
 	}
 }
 

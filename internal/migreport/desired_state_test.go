@@ -58,12 +58,12 @@ SELECT child.Id FROM dbo.Hierarchy child JOIN dbo.Hierarchy parent ON child.Pare
 		t.Fatalf("report failed: code=%d err=%v", code, err)
 	}
 	docsDir := filepath.Join(tmp, "docs", "database")
-	keys := readDesiredFixture(t, filepath.Join(docsDir, "table_unique_ids.md"))
+	keys := readDesiredFixture(t, filepath.Join(docsDir, "identifiers/table_unique_ids.md"))
 	if !strings.Contains(keys, "IDENTITY") || !strings.Contains(keys, "PRIMARY_KEY") || !strings.Contains(keys, "UNIQUE_CONSTRAINT") || !strings.Contains(keys, "UNIQUE_INDEX") {
 		t.Fatalf("missing unique-id evidence: %s", keys)
 	}
-	relationships := readDesiredFixture(t, filepath.Join(docsDir, "relationship_catalog.md"))
-	lineage := readDesiredFixture(t, filepath.Join(docsDir, "module_lineage.md"))
+	relationships := readDesiredFixture(t, filepath.Join(docsDir, "relationships/relationship_catalog.md"))
+	lineage := readDesiredFixture(t, filepath.Join(docsDir, "relationships/module_lineage.md"))
 	for _, expected := range []string{"DECLARED_FK", "OBSERVED_JOIN", "dbo.Child.(ParentId)", "dbo.Parent.(Id)"} {
 		if !strings.Contains(relationships, expected) {
 			t.Fatalf("missing %q in relationship document: %s", expected, relationships)
@@ -106,7 +106,7 @@ SELECT child.Id FROM dbo.Hierarchy child JOIN dbo.Hierarchy parent ON child.Pare
 	if strings.Contains(keys, "dbo.GuidValue` | `CorrelationGuid` | `UNIQUE_CONSTRAINT`") {
 		t.Fatalf("UNIQUEIDENTIFIER data type must not become UNIQUE constraint evidence: %s", keys)
 	}
-	for _, name := range []string{"relational_erd.md", "relationship_catalog.md", "module_lineage.md"} {
+	for _, name := range []string{"relationships/relational_erd.md", "relationships/relationship_catalog.md", "relationships/module_lineage.md"} {
 		if _, err := os.Stat(filepath.Join(docsDir, name)); err != nil {
 			t.Fatalf("missing report %s in docs: %v", name, err)
 		}
@@ -129,7 +129,7 @@ SELECT child.Id FROM dbo.Hierarchy child JOIN dbo.Hierarchy parent ON child.Pare
 	if !strings.Contains(dynamicProfile, "UNRESOLVED_DYNAMIC") || !strings.Contains(dynamicProfile, "db_object` digunakan untuk memvalidasi kandidat") {
 		t.Fatalf("dynamic SQL profile must stay conservative: %s", dynamicProfile)
 	}
-	erd := readDesiredFixture(t, filepath.Join(docsDir, "relational_erd.md"))
+	erd := readDesiredFixture(t, filepath.Join(docsDir, "relationships/relational_erd.md"))
 	if !strings.Contains(erd, "Relationship Group") || !strings.Contains(erd, "### Self-join review") || strings.Contains(erd, "peran A") || strings.Contains(erd, "peran B") {
 		t.Fatalf("ERD must explain groups and separate self-joins from overview diagrams: %s", erd)
 	}

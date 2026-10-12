@@ -1,0 +1,1 @@
+migration_id,schema_name,table_name,index_name,object_version,operation_no,operation_kind,index_type,old_columns,new_columns,old_include_columns,new_include_columns,old_filter,new_filter,old_unique,new_unique,old_clustered,new_clustered,up_file,down_file,reversible,confidence,notes

@@ -248,6 +248,7 @@ type JSONReport struct {
 	Operations             int              `json:"operations"`
 	OutputDirectory        string           `json:"output_directory"`
 	DocumentationDirectory string           `json:"documentation_directory"`
+	DocumentationIndex     string           `json:"documentation_index"`
 	Reports                []string         `json:"reports"`
 	Artifacts              []ReportArtifact `json:"artifacts"`
 	Warnings               []string         `json:"warnings"`
@@ -256,9 +257,10 @@ type JSONReport struct {
 
 // ReportArtifact identifies one concrete generated file and its output root.
 type ReportArtifact struct {
-	Kind string `json:"kind"`
-	Root string `json:"root"`
-	Path string `json:"path"`
+	Kind   string `json:"kind"`
+	Root   string `json:"root"`
+	Path   string `json:"path"`
+	SHA256 string `json:"sha256,omitempty"`
 }
 
 // RunResult collects all output datasets before writing.

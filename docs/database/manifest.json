@@ -1,0 +1,121 @@
+{
+  "schema": "RZA_DATABASE_DOCUMENTATION_V2",
+  "generated_at": "2026-10-12T09:10:25+07:00",
+  "repository": "C:\\Users\\USER\\Documents\\Kantor\\rza_migrate_db",
+  "sources": [
+    "db_object/",
+    "migrations/"
+  ],
+  "roots": {
+    "documentation_directory": "C:\\Users\\USER\\Documents\\Kantor\\rza_migrate_db\\docs\\database",
+    "output_directory": "C:\\Users\\USER\\Documents\\Kantor\\rza_migrate_db\\docs\\database\\migrations"
+  },
+  "root_paths": {
+    "documentation_directory": ".",
+    "output_directory": "migrations"
+  },
+  "artifacts": [
+    {
+      "kind": "audit",
+      "root": "output_directory",
+      "path": "README.md",
+      "sha256": "6e8ddf596f6fd62344dc128d8a0a495d9d339cc9aa17a08b9cde58ac9976d129"
+    },
+    {
+      "kind": "audit",
+      "root": "output_directory",
+      "path": "datasets/report_summary.csv",
+      "sha256": "dfb59b95eafebbfaf8eb004540412de89f1021d71b7589353117b10fd68956c4"
+    },
+    {
+      "kind": "audit",
+      "root": "output_directory",
+      "path": "datasets/migration_summary.csv",
+      "sha256": "9090155b6b379ec46aa66a0b69c40b084831d3488c43083fef6742dddc19f5d6"
+    },
+    {
+      "kind": "audit",
+      "root": "output_directory",
+      "path": "datasets/object_history.csv",
+      "sha256": "9811b52e462eb43bf00fe6d83d09a33427e019c7a9e9c7a9e2fdb8656649890d"
+    },
+    {
+      "kind": "audit",
+      "root": "output_directory",
+      "path": "datasets/table_changes.csv",
+      "sha256": "afff0daf2ff90b09aa1c7515d01cacb3afdb18ebf829442c3f2bac3edd8f7374"
+    },
+    {
+      "kind": "audit",
+      "root": "output_directory",
+      "path": "datasets/index_changes.csv",
+      "sha256": "a2b2545c75730962f120283d7cc52970322257e737d49fe4e9fd02f2e645b403"
+    },
+    {
+      "kind": "audit",
+      "root": "output_directory",
+      "path": "datasets/programmable_changes.csv",
+      "sha256": "3528c94e49a660d2ddb64030b3736cdc41ff658974ac30dc64f5337b83d5fc7f"
+    },
+    {
+      "kind": "audit",
+      "root": "output_directory",
+      "path": "datasets/type_changes.csv",
+      "sha256": "f30f5e138522621b737aa18c3ecdf5b3ec22f05c4c1c5b3b9e25d00fe125fab7"
+    },
+    {
+      "kind": "audit",
+      "root": "output_directory",
+      "path": "report.json",
+      "sha256": "23f8ec582565f7792ca37b5944c64974784dc30d20a07a3cc75efaad59533dd9"
+    },
+    {
+      "kind": "documentation",
+      "root": "documentation_directory",
+      "path": "README.md",
+      "sha256": "65c3f0d245bcea3e7ee5488743d4f5a7f37dc9e45be78cbf37fa01146cfc7789"
+    },
+    {
+      "kind": "documentation",
+      "root": "documentation_directory",
+      "path": "manifest.json"
+    },
+    {
+      "kind": "documentation",
+      "root": "documentation_directory",
+      "path": "identifiers/table_unique_ids.md",
+      "sha256": "004621b069129a399f5d443bd62f91eb8b302d6f2879fa29a84d7dfa5bedc7f2"
+    },
+    {
+      "kind": "documentation",
+      "root": "documentation_directory",
+      "path": "relationships/relational_erd.md",
+      "sha256": "8c47eddfb503390b96487cbbd456b819ff697be91a4cb6e63c20fdc27e9f0928"
+    },
+    {
+      "kind": "documentation",
+      "root": "documentation_directory",
+      "path": "relationships/relationship_catalog.md",
+      "sha256": "d064ebedddd2271ef3d142bad78f38234d6fb6c0102f144329bb0f793dea7e4b"
+    },
+    {
+      "kind": "documentation",
+      "root": "documentation_directory",
+      "path": "relationships/module_lineage.md",
+      "sha256": "5babd0a5434942802779552bc886f792817381eca974e232691241eed96e1d23"
+    },
+    {
+      "kind": "documentation",
+      "root": "documentation_directory",
+      "path": "procedures/README.md",
+      "sha256": "c1bd3b956a77bf8395b5c2ad5649f152d7d6ffd77d9704c63dd87e6bde4d7ae7"
+    },
+    {
+      "kind": "documentation",
+      "root": "documentation_directory",
+      "path": "procedures/procedure_impact_catalog.md",
+      "sha256": "65268d32987578973f8c3eceed775ae3f732a1db08f730e27d6689e3e3af788b"
+    }
+  ],
+  "hash_policy": "SHA-256 of exact file bytes; manifest.json excludes its own hash"
+}

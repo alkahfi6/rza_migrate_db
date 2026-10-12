@@ -53,20 +53,20 @@ Engine suite ini dibuat untuk memastikan perubahan database SQL Server berjalan:
 - Zero DB connection, zero SQL execution, dan tidak membaca katalog sistem database atau `dbo.mig_event`.
 - Tidak membaca `db_object/` dan tidak mengubah file migration apa pun (read-only).
 - Mendukung auto-discovery repository root (exec dir -> cwd -> parent dirs).
-- Menghasilkan 7 laporan CSV RFC 4180 (UTF-8 tanpa BOM) dan 1 JSON metadata di `out/report/`, serta dokumentasi desired-state di `docs/database/`:
-  - `out/report/report_summary.csv`
-  - `out/report/migration_summary.csv`
-  - `out/report/object_history.csv`
-  - `out/report/table_changes.csv`
-  - `out/report/index_changes.csv`
-  - `out/report/programmable_changes.csv`
-  - `out/report/type_changes.csv`
-  - `out/report/report.json`
-  - `docs/database/table_unique_ids.md`
-  - `docs/database/relational_erd.md`
-  - `docs/database/relationship_catalog.md`
-  - `docs/database/module_lineage.md`
-  - `docs/database/table_relationship_tree.md`
+- Menghasilkan 7 laporan CSV RFC 4180 (UTF-8 tanpa BOM) dan 1 JSON metadata di `docs/database/migrations/`, serta dokumentasi desired-state di `docs/database/`:
+  - `docs/database/migrations/datasets/report_summary.csv`
+  - `docs/database/migrations/datasets/migration_summary.csv`
+  - `docs/database/migrations/datasets/object_history.csv`
+  - `docs/database/migrations/datasets/table_changes.csv`
+  - `docs/database/migrations/datasets/index_changes.csv`
+  - `docs/database/migrations/datasets/programmable_changes.csv`
+  - `docs/database/migrations/datasets/type_changes.csv`
+  - `docs/database/migrations/report.json`
+  - `docs/database/identifiers/table_unique_ids.md`
+  - `docs/database/relationships/relational_erd.md`
+  - `docs/database/relationships/relationship_catalog.md`
+  - `docs/database/relationships/module_lineage.md`
+  - `docs/database/README.md` dan `docs/database/manifest.json`
   - `docs/database/procedures/README.md`
   - `docs/database/procedures/procedure_impact_catalog.md`
   - `docs/database/procedures/profiles/dbo.<Procedure>.md`
@@ -188,7 +188,7 @@ sama setelah release artifact dibangun ulang.
    - Satu `CREATE TABLE` beserta child column/constraint dipancarkan tepat sekali; cursor scanner melewati header dan seluruh body walaupun migration didahului wrapper audit/precheck. Identifier column terdelimitasi `[]`/`""` tetap satu nama walaupun memuat spasi.
    - Reducer mengikuti source offset, bukan grouping jenis statement, sehingga perubahan berantai di migration yang sama memakai state before/after yang tepat.
    - Reducer berjalan sepanjang semua version object. `DROP TABLE`/create ulang mereset state table dan index, lalu version berikutnya menggunakan incarnation terbaru; skenario v1→v7 menguji deletion, reintroduction, dan perubahan campuran sesudahnya.
-6. Tulis seluruh 7 file CSV (RFC 4180, UTF-8 tanpa BOM) dan `report.json` ke folder `out/report/` (atau `-out`), serta root Markdown, procedure index/catalog, dan generated procedure profiles ke folder `docs/database/` (atau `-docs`). Summary CSV/JSON menyimpan explicit exclusion count; link profile di-escape sebagai URL path sehingga karakter khusus tetap membuka file yang benar. Lineage menghapus dependency identik case-insensitive, dan `EXEC @return_code = Procedure` tidak diklasifikasikan sebagai dynamic SQL.
+6. Tulis seluruh 7 file CSV (RFC 4180, UTF-8 tanpa BOM) dan `report.json` ke folder `docs/database/migrations/` (atau `-out`), serta root Markdown, procedure index/catalog, dan generated procedure profiles ke folder `docs/database/` (atau `-docs`). Summary CSV/JSON menyimpan explicit exclusion count; link profile di-escape sebagai URL path sehingga karakter khusus tetap membuka file yang benar. Lineage menghapus dependency identik case-insensitive, dan `EXEC @return_code = Procedure` tidak diklasifikasikan sebagai dynamic SQL.
    Output path yang sama dengan/berada di bawah `migrations/` atau `db_object/` ditolak sebelum write.
 7. Cetak banner ringkasan ke console, dan tunggu tombol Enter jika dijalankan interaktif/double-click.
 
@@ -237,7 +237,7 @@ Saat `fail.count > 0`, isi setiap `fail.items[]` juga ditampilkan pada console d
 - count create/update/delete/unchanged
 - warning modul yang di-skip (jika ada)
 
-### `out/report/*` (`rza_migrate_report` audit reports)
+### `docs/database/migrations/*` (`rza_migrate_report` audit reports)
 - `report_summary.csv`: ringkasan global status run, jumlah file, analyzed pair, excluded pair, objek, versi, operasi, warning, error, dan status.
 - `migration_summary.csv`: ringkasan tiap pasangan migration, jumlah operasi, jenis operasi, dan status round-trip.
 - `object_history.csv`: riwayat tiap objek dan versi (`INITIAL`, `UPDATED`, `DELETED`, `REINTRODUCED`).
@@ -248,15 +248,15 @@ Saat `fail.count > 0`, isi setiap `fail.items[]` juga ditampilkan pada console d
 - `report.json`: ringkasan metadata proses, menegaskan `database_access: false` dan `sql_execution: false`.
 
 ### `docs/database/*` (`rza_migrate_report` desired-state docs)
-- `table_unique_ids.md`: inventory uniqueness enforcement, filtered uniqueness, `IDENTITY`, dan ID review signals. JOIN/non-unique index/nama tidak dianggap bukti uniqueness.
+- `identifiers/table_unique_ids.md`: inventory uniqueness enforcement, filtered uniqueness, `IDENTITY`, dan ID review signals. JOIN/non-unique index/nama tidak dianggap bukti uniqueness.
 - Section `Suspected JOIN identifiers` menampilkan kolom tanpa index/IDENTITY, termasuk generic name seperti Code dan reference column pada table dengan PK lain. Evidence memuat canonical mapping dari observed equality JOIN, source view/procedure, usage, index/key, IDENTITY, serta composite-key context. FK-only tidak dihitung sebagai observed JOIN. Fitur ini hanya output report: extractor tetap catalog-based, checker apply/`-check` tidak menambah correction/migration, generator tetap memakai delta schema, pipeline tetap read-only; report tersedia lewat full release binaries.
-- `relational_erd.md`: seluruh Mermaid dalam satu file, disusun per Relationship Group dan connected Relational Map. Setiap map dibentuk adaptif dengan maksimum 20 object, 24 relationship lines, 35 exact mappings, dan 9.000 karakter Mermaid. Node menunjukkan type serta key/index context bagi kolom relationship; solid line untuk pure declared FK, dashed undirected line untuk observed JOIN, dan setiap label mempertahankan exact column mapping.
-- `relationship_catalog.md`: exact object-column mapping, evidence, jenis JOIN, occurrence, source module, dan confidence.
-- `module_lineage.md`: static dependency view/procedure ke data object dan dynamic-SQL manual-review list; bukan klaim relasi antartable.
+- `relationships/relational_erd.md`: seluruh Mermaid dalam satu file, disusun per Relationship Group dan connected Relational Map. Setiap map dibentuk adaptif dengan maksimum 20 object, 24 relationship lines, 35 exact mappings, dan 9.000 karakter Mermaid. Node menunjukkan type serta key/index context bagi kolom relationship; solid line untuk pure declared FK, dashed undirected line untuk observed JOIN, dan setiap label mempertahankan exact column mapping.
+- `relationships/relationship_catalog.md`: exact object-column mapping, evidence, jenis JOIN, occurrence, source module, dan confidence.
+- `relationships/module_lineage.md`: static dependency view/procedure ke data object dan dynamic-SQL manual-review list; bukan klaim relasi antartable.
 - `procedures/README.md`: entry point dan index seluruh procedure.
 - `procedures/procedure_impact_catalog.md`: ringkasan direct reads/writes, calls, functions, views, dynamic SQL, dan unresolved references.
 - `procedures/profiles/dbo.<Procedure>.md`: profile source-backed untuk contract, branch-aware local execution flow, local object map, exact writes, key context, guarded direct calls, recursive procedure map/write impact, serta dynamic SQL. Semua object divalidasi ke `db_object`; runtime target tidak ditebak.
-- `table_relationship_tree.md`: compatibility pointer ke tiga report relasi di atas.
+- `README.md` dan `manifest.json`: navigasi utama dan inventory hash; legacy tree pointer tidak lagi dibuat.
 
 Observed JOIN scanner membuka alias scope pada setiap `FROM`, membaca explicit `JOIN ... ON` dan legacy comma-join `WHERE`, hanya menerima equality dengan satu resolved `alias.column` per sisi, dan menolak operator non-equality, ekspresi ambigu, temp/table variable, atau dynamic SQL. Module tanpa resolved static reference dicantumkan untuk audit coverage. Karena capability ini report-only, extractor, checker apply/`-check`, generator, dan GitLab checker tidak mengubah source maupun migration; binary report tersedia setelah full release build.
 
@@ -300,3 +300,7 @@ Ordering dan dataset report deterministik untuk source yang sama. Kolom `run_at`
   - `rza_migrate_report.exe`
   - `rza_migrate_rest.exe`
 - Jika file di-rename, aplikasi akan fail saat start.
+
+## Report layout V2
+
+Report layout V2 workflow: jalankan rza_migrate_report, buka docs/database/README.md, lalu identifiers/relationships/procedures atau migrations/README.md. Default report tidak menulis out/. -docs memindahkan seluruh root; -out opsional memindahkan audit dengan datasets child. File manual tetap aman; checksum collision memblokir sebelum write. Extractor → checker apply/CI → generator → runner tetap seperti sebelumnya, dengan released report binary yang dibangun ulang. Lihat [layout walkthrough](report_output_layout.md).

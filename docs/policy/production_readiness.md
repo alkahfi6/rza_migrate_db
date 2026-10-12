@@ -89,3 +89,7 @@ Stop release jika salah satu terjadi:
 - hasil dataset `rza_migrate_report` Windows dan Linux berbeda pada source migration yang sama
 - failure checker tidak mencetak detail rule/file/message/suggestion yang tersedia ke job log
 - patch source memberi hasil berbeda hanya karena casing filename pada Windows vs Linux
+
+## Report layout V2
+
+Report packaging gate: after changing layout publisher/tests, rebuild all Windows/Linux artifacts. Verify report default index/manifest and custom-root navigation from released binary, exact file checksums, embedded source identity, and unchanged Linux MR checker command. Checkout must preserve tools/** bytes. See [layout release contract](../report_output_layout.md).

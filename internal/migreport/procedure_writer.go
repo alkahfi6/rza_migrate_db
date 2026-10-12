@@ -19,30 +19,16 @@ func writeProcedureDocs(docsDir string, docs DesiredStateDocs) error {
 	if err := os.MkdirAll(profilesDir, 0755); err != nil {
 		return fmt.Errorf("create procedure documentation directory: %w", err)
 	}
-	if err := os.WriteFile(filepath.Join(root, "README.md"), []byte(renderProcedureIndex(docs)), 0644); err != nil {
+	if err := writeGeneratedMarkdown(filepath.Join(root, "README.md"), renderProcedureIndex(docs)+"\n[Database documentation](../README.md)\n"); err != nil {
 		return err
 	}
-	if err := os.WriteFile(filepath.Join(root, "procedure_impact_catalog.md"), []byte(renderProcedureCatalog(docs)), 0644); err != nil {
+	if err := writeGeneratedMarkdown(filepath.Join(root, "procedure_impact_catalog.md"), renderProcedureCatalog(docs)+"\n[Database documentation](../README.md)\n"); err != nil {
 		return err
 	}
-	expected := map[string]bool{}
 	for i := range docs.ProcedureProfiles {
 		name := docs.ProcedureProfiles[i].Name + ".md"
-		expected[strings.ToLower(name)] = true
-		if err := os.WriteFile(filepath.Join(profilesDir, name), []byte(renderProcedureProfile(docs, &docs.ProcedureProfiles[i])), 0644); err != nil {
+		if err := writeGeneratedMarkdown(filepath.Join(profilesDir, name), renderProcedureProfile(docs, &docs.ProcedureProfiles[i])+"\n[Database documentation](../../README.md)\n"); err != nil {
 			return err
-		}
-	}
-	entries, err := os.ReadDir(profilesDir)
-	if err != nil {
-		return err
-	}
-	for _, entry := range entries {
-		if entry.IsDir() || !strings.EqualFold(filepath.Ext(entry.Name()), ".md") || expected[strings.ToLower(entry.Name())] {
-			continue
-		}
-		if err := os.Remove(filepath.Join(profilesDir, entry.Name())); err != nil {
-			return fmt.Errorf("remove stale generated procedure profile %s: %w", entry.Name(), err)
 		}
 	}
 	return nil

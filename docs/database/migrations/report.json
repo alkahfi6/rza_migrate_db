@@ -1,0 +1,124 @@
+{
+  "schema": "RZA_MIGRATION_REPORT_V1",
+  "generated_at": "2026-10-12T09:10:25+07:00",
+  "repository": "C:\\Users\\USER\\Documents\\Kantor\\rza_migrate_db",
+  "source": "migrations-and-db_object",
+  "database_access": false,
+  "sql_execution": false,
+  "files_scanned": 6,
+  "migration_pairs": 2,
+  "excluded_migration_pairs": 1,
+  "objects": 2,
+  "operations": 2,
+  "output_directory": "C:\\Users\\USER\\Documents\\Kantor\\rza_migrate_db\\docs\\database\\migrations",
+  "documentation_directory": "C:\\Users\\USER\\Documents\\Kantor\\rza_migrate_db\\docs\\database",
+  "documentation_index": "../README.md",
+  "reports": [
+    "migrations/README.md",
+    "migrations/datasets/report_summary.csv",
+    "migrations/datasets/migration_summary.csv",
+    "migrations/datasets/object_history.csv",
+    "migrations/datasets/table_changes.csv",
+    "migrations/datasets/index_changes.csv",
+    "migrations/datasets/programmable_changes.csv",
+    "migrations/datasets/type_changes.csv",
+    "migrations/report.json",
+    "README.md",
+    "manifest.json",
+    "identifiers/table_unique_ids.md",
+    "relationships/relational_erd.md",
+    "relationships/relationship_catalog.md",
+    "relationships/module_lineage.md",
+    "procedures/README.md",
+    "procedures/procedure_impact_catalog.md"
+  ],
+  "artifacts": [
+    {
+      "kind": "audit",
+      "root": "output_directory",
+      "path": "README.md"
+    },
+    {
+      "kind": "audit",
+      "root": "output_directory",
+      "path": "datasets/report_summary.csv"
+    },
+    {
+      "kind": "audit",
+      "root": "output_directory",
+      "path": "datasets/migration_summary.csv"
+    },
+    {
+      "kind": "audit",
+      "root": "output_directory",
+      "path": "datasets/object_history.csv"
+    },
+    {
+      "kind": "audit",
+      "root": "output_directory",
+      "path": "datasets/table_changes.csv"
+    },
+    {
+      "kind": "audit",
+      "root": "output_directory",
+      "path": "datasets/index_changes.csv"
+    },
+    {
+      "kind": "audit",
+      "root": "output_directory",
+      "path": "datasets/programmable_changes.csv"
+    },
+    {
+      "kind": "audit",
+      "root": "output_directory",
+      "path": "datasets/type_changes.csv"
+    },
+    {
+      "kind": "audit",
+      "root": "output_directory",
+      "path": "report.json"
+    },
+    {
+      "kind": "documentation",
+      "root": "documentation_directory",
+      "path": "README.md"
+    },
+    {
+      "kind": "documentation",
+      "root": "documentation_directory",
+      "path": "manifest.json"
+    },
+    {
+      "kind": "documentation",
+      "root": "documentation_directory",
+      "path": "identifiers/table_unique_ids.md"
+    },
+    {
+      "kind": "documentation",
+      "root": "documentation_directory",
+      "path": "relationships/relational_erd.md"
+    },
+    {
+      "kind": "documentation",
+      "root": "documentation_directory",
+      "path": "relationships/relationship_catalog.md"
+    },
+    {
+      "kind": "documentation",
+      "root": "documentation_directory",
+      "path": "relationships/module_lineage.md"
+    },
+    {
+      "kind": "documentation",
+      "root": "documentation_directory",
+      "path": "procedures/README.md"
+    },
+    {
+      "kind": "documentation",
+      "root": "documentation_directory",
+      "path": "procedures/procedure_impact_catalog.md"
+    }
+  ],
+  "warnings": [],
+  "errors": []
+}

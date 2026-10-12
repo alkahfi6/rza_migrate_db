@@ -1,0 +1,1 @@
+migration_id,schema_name,table_name,object_version,operation_no,operation_kind,target_name,old_value,new_value,dependency_name,up_file,down_file,reversible,confidence,notes

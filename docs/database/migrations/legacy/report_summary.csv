@@ -1,0 +1,2 @@
+run_at,repository,migrations_dir,total_files,total_pairs,unpaired_files,total_objects,total_versions,total_operations,tables,indexes,procedures,views,functions,types,warnings,errors,status
+2026-09-10T13:20:05+07:00,.,migrations,6,3,0,3,3,72,2,6,2,0,0,0,0,0,OK

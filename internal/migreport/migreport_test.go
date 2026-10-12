@@ -132,9 +132,9 @@ func TestEmptyMigrationsFolder(t *testing.T) {
 	// Verify all 7 CSV files exist and have headers; desired-state Markdown is
 	// covered separately because this repository intentionally has no db_object.
 	for _, csvFile := range []string{
-		"report_summary.csv", "migration_summary.csv", "object_history.csv",
-		"table_changes.csv", "index_changes.csv", "programmable_changes.csv",
-		"type_changes.csv",
+		"datasets/report_summary.csv", "datasets/migration_summary.csv", "datasets/object_history.csv",
+		"datasets/table_changes.csv", "datasets/index_changes.csv", "datasets/programmable_changes.csv",
+		"datasets/type_changes.csv",
 	} {
 		p := filepath.Join(outDir, csvFile)
 		info, err := os.Stat(p)
@@ -179,7 +179,7 @@ func TestMigrationPairingScenarios(t *testing.T) {
 	}
 
 	// Read migration_summary.csv
-	f, err := os.Open(filepath.Join(outDir, "migration_summary.csv"))
+	f, err := os.Open(filepath.Join(outDir, "datasets/migration_summary.csv"))
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -298,7 +298,7 @@ EXEC sp_rename 'dbo.Customer.CustomerCode', 'Code', 'COLUMN';
 	}
 
 	// Verify table_changes.csv
-	tcData, err := os.ReadFile(filepath.Join(outDir, "table_changes.csv"))
+	tcData, err := os.ReadFile(filepath.Join(outDir, "datasets/table_changes.csv"))
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -324,7 +324,7 @@ EXEC sp_rename 'dbo.Customer.CustomerCode', 'Code', 'COLUMN';
 	}
 
 	// Verify index_changes.csv
-	idxData, err := os.ReadFile(filepath.Join(outDir, "index_changes.csv"))
+	idxData, err := os.ReadFile(filepath.Join(outDir, "datasets/index_changes.csv"))
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -337,7 +337,7 @@ EXEC sp_rename 'dbo.Customer.CustomerCode', 'Code', 'COLUMN';
 	}
 
 	// Verify object_history.csv contains Customer v1, v2, v3
-	ohData, err := os.ReadFile(filepath.Join(outDir, "object_history.csv"))
+	ohData, err := os.ReadFile(filepath.Join(outDir, "datasets/object_history.csv"))
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -385,7 +385,7 @@ func TestProgrammableAndTypeChanges(t *testing.T) {
 	}
 
 	// Check programmable_changes.csv
-	pcData, err := os.ReadFile(filepath.Join(outDir, "programmable_changes.csv"))
+	pcData, err := os.ReadFile(filepath.Join(outDir, "datasets/programmable_changes.csv"))
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -395,7 +395,7 @@ func TestProgrammableAndTypeChanges(t *testing.T) {
 	}
 
 	// Check type_changes.csv
-	tyData, err := os.ReadFile(filepath.Join(outDir, "type_changes.csv"))
+	tyData, err := os.ReadFile(filepath.Join(outDir, "datasets/type_changes.csv"))
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -452,7 +452,7 @@ func TestAmbiguousSQLProducesLowConfidence(t *testing.T) {
 		PauseOnExit: false,
 	})
 
-	tcData, err := os.ReadFile(filepath.Join(outDir, "table_changes.csv"))
+	tcData, err := os.ReadFile(filepath.Join(outDir, "datasets/table_changes.csv"))
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -483,13 +483,13 @@ func TestDeterministicOutput(t *testing.T) {
 	_, _ = migreport.Run(migreport.Options{RepoRoot: tmp, OutputDir: outDir2, PauseOnExit: false})
 
 	for _, name := range []string{
-		"report_summary.csv", "migration_summary.csv", "object_history.csv",
-		"table_changes.csv", "index_changes.csv", "programmable_changes.csv",
-		"type_changes.csv",
+		"datasets/report_summary.csv", "datasets/migration_summary.csv", "datasets/object_history.csv",
+		"datasets/table_changes.csv", "datasets/index_changes.csv", "datasets/programmable_changes.csv",
+		"datasets/type_changes.csv",
 	} {
 		r1 := readCSV(t, filepath.Join(outDir1, name))
 		r2 := readCSV(t, filepath.Join(outDir2, name))
-		if name == "report_summary.csv" {
+		if name == "datasets/report_summary.csv" {
 			r1[1][0] = ""
 			r2[1][0] = ""
 		}
@@ -513,6 +513,8 @@ func TestDeterministicOutput(t *testing.T) {
 	}
 	json1.GeneratedAt = ""
 	json2.GeneratedAt = ""
+	// Inventory paths legitimately differ when the explicit audit root differs.
+	json1.Reports, json2.Reports = nil, nil
 	json1.OutputDirectory = ""
 	json2.OutputDirectory = ""
 	if !reflect.DeepEqual(json1, json2) {
@@ -538,7 +540,7 @@ ALTER TABLE dbo.Complex ADD Notes VARCHAR(MAX) CONSTRAINT CK_Quotes CHECK (Notes
 	outDir := filepath.Join(tmp, "out", "report")
 	_, _ = migreport.Run(migreport.Options{RepoRoot: tmp, OutputDir: outDir, PauseOnExit: false})
 
-	p := filepath.Join(outDir, "table_changes.csv")
+	p := filepath.Join(outDir, "datasets/table_changes.csv")
 	bytesData, err := os.ReadFile(p)
 	if err != nil {
 		t.Fatal(err)
@@ -794,13 +796,13 @@ ALTER TABLE dbo.Account ADD ColA INT, ColB VARCHAR(50);
 	if err != nil || code != 0 {
 		t.Fatalf("run failed: code=%d err=%v", code, err)
 	}
-	summaryRows := readCSV(t, filepath.Join(outDir, "report_summary.csv"))
+	summaryRows := readCSV(t, filepath.Join(outDir, "datasets/report_summary.csv"))
 	if summaryRows[0][5] != "excluded_pairs" || summaryRows[1][4] != "4" || summaryRows[1][5] != "1" {
 		t.Fatalf("summary must distinguish analyzed and excluded core pairs: %v", summaryRows)
 	}
 
 	// Verify the initial core migration is excluded from report analysis.
-	tcData, err := os.ReadFile(filepath.Join(outDir, "table_changes.csv"))
+	tcData, err := os.ReadFile(filepath.Join(outDir, "datasets/table_changes.csv"))
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -814,14 +816,14 @@ ALTER TABLE dbo.Account ADD ColA INT, ColB VARCHAR(50);
 	if !strings.Contains(tcStr, "ADD_CONSTRAINT") {
 		t.Fatalf("expected ADD_CONSTRAINT operations in table_changes.csv, got:\n%s", tcStr)
 	}
-	for _, row := range readCSV(t, filepath.Join(outDir, "migration_summary.csv"))[1:] {
+	for _, row := range readCSV(t, filepath.Join(outDir, "datasets/migration_summary.csv"))[1:] {
 		if row[0] == "000000" {
 			t.Fatalf("initial core migration must be excluded from migration_summary.csv: %v", row)
 		}
 	}
 
 	// Verify object_history.csv status progression for Account
-	ohData, err := os.ReadFile(filepath.Join(outDir, "object_history.csv"))
+	ohData, err := os.ReadFile(filepath.Join(outDir, "datasets/object_history.csv"))
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -891,11 +893,11 @@ func TestDownOnlyProgrammableDoesNotCreatePhantomOperation(t *testing.T) {
 	if err != nil || code != 0 {
 		t.Fatalf("run failed: code=%d err=%v", code, err)
 	}
-	records := readCSV(t, filepath.Join(outDir, "migration_summary.csv"))
+	records := readCSV(t, filepath.Join(outDir, "datasets/migration_summary.csv"))
 	if got := records[1][5]; got != "0" {
 		t.Fatalf("down-only programmable reported %s operations, want 0: %v", got, records[1])
 	}
-	progRecords := readCSV(t, filepath.Join(outDir, "programmable_changes.csv"))
+	progRecords := readCSV(t, filepath.Join(outDir, "datasets/programmable_changes.csv"))
 	if len(progRecords) != 1 {
 		t.Fatalf("expected header-only programmable report, got %v", progRecords)
 	}
@@ -920,11 +922,11 @@ func TestEmptyDownFailsRoundTripAndRaisesWarning(t *testing.T) {
 	if err != nil || code != 0 {
 		t.Fatalf("warning run failed: code=%d err=%v", code, err)
 	}
-	records := readCSV(t, filepath.Join(outDir, "migration_summary.csv"))
+	records := readCSV(t, filepath.Join(outDir, "datasets/migration_summary.csv"))
 	if records[1][11] != migreport.RoundTripFail || records[1][12] != migreport.StatusWarning {
 		t.Fatalf("empty down must be FAIL/WARNING, got %v", records[1])
 	}
-	summary := readCSV(t, filepath.Join(outDir, "report_summary.csv"))
+	summary := readCSV(t, filepath.Join(outDir, "datasets/report_summary.csv"))
 	if summary[1][16] != "1" || summary[1][18] != migreport.StatusWarning {
 		t.Fatalf("overall report must expose the round-trip warning, got %v", summary[1])
 	}
@@ -949,7 +951,7 @@ func TestMissingColumnInverseFailsRoundTrip(t *testing.T) {
 	if code, err := migreport.Run(migreport.Options{RepoRoot: tmp, OutputDir: outDir}); err != nil || code != 0 {
 		t.Fatalf("warning run failed: code=%d err=%v", code, err)
 	}
-	records := readCSV(t, filepath.Join(outDir, "migration_summary.csv"))
+	records := readCSV(t, filepath.Join(outDir, "datasets/migration_summary.csv"))
 	if records[1][11] != migreport.RoundTripFail || records[1][12] != migreport.StatusWarning {
 		t.Fatalf("unrelated down must not satisfy column inverse: %v", records[1])
 	}
@@ -977,7 +979,7 @@ func TestAlterColumnReportsOnlyActualSemanticDelta(t *testing.T) {
 	if code, err := migreport.Run(migreport.Options{RepoRoot: tmp, OutputDir: outDir}); err != nil || code != 0 {
 		t.Fatalf("run failed: code=%d err=%v", code, err)
 	}
-	records := readCSV(t, filepath.Join(outDir, "table_changes.csv"))
+	records := readCSV(t, filepath.Join(outDir, "datasets/table_changes.csv"))
 	var v2Kinds []string
 	for _, row := range records[1:] {
 		if row[0] == "20260909010101005" {
@@ -1011,7 +1013,7 @@ func TestConstraintRenameWithIdenticalDefinitionIsSuppressed(t *testing.T) {
 	if code, err := migreport.Run(migreport.Options{RepoRoot: tmp, OutputDir: outDir}); err != nil || code != 0 {
 		t.Fatalf("run failed: code=%d err=%v", code, err)
 	}
-	records := readCSV(t, filepath.Join(outDir, "table_changes.csv"))
+	records := readCSV(t, filepath.Join(outDir, "datasets/table_changes.csv"))
 	for _, row := range records[1:] {
 		if row[0] == "20260909010101007" {
 			t.Fatalf("metadata-only constraint rename must not be semantic: %v", row)
@@ -1043,7 +1045,7 @@ func TestProgrammableDeleteAndReintroductionLifecycle(t *testing.T) {
 	if code, err := migreport.Run(migreport.Options{RepoRoot: tmp, OutputDir: outDir}); err != nil || code != 0 {
 		t.Fatalf("run failed: code=%d err=%v", code, err)
 	}
-	records := readCSV(t, filepath.Join(outDir, "object_history.csv"))
+	records := readCSV(t, filepath.Join(outDir, "datasets/object_history.csv"))
 	var statuses []string
 	for _, row := range records[1:] {
 		if row[2] == "vw_Customer" {
@@ -1120,7 +1122,7 @@ ALTER TABLE dbo.Ledger ADD LegacyA INT NULL, LegacyB NVARCHAR(30) NULL;`)
 		t.Fatalf("run failed: code=%d err=%v", code, err)
 	}
 
-	tableRows := readCSV(t, filepath.Join(outDir, "table_changes.csv"))
+	tableRows := readCSV(t, filepath.Join(outDir, "datasets/table_changes.csv"))
 	var v2Rows [][]string
 	for _, row := range tableRows[1:] {
 		if row[0] == "20260909020202002" {
@@ -1163,7 +1165,7 @@ ALTER TABLE dbo.Ledger ADD LegacyA INT NULL, LegacyB NVARCHAR(30) NULL;`)
 		t.Fatalf("foreign-key dependency was not reconstructed: %v", fk)
 	}
 
-	indexRows := readCSV(t, filepath.Join(outDir, "index_changes.csv"))
+	indexRows := readCSV(t, filepath.Join(outDir, "datasets/index_changes.csv"))
 	var v2Indexes [][]string
 	for _, row := range indexRows[1:] {
 		if row[0] == "20260909020202002" {
@@ -1179,7 +1181,7 @@ ALTER TABLE dbo.Ledger ADD LegacyA INT NULL, LegacyB NVARCHAR(30) NULL;`)
 		t.Fatalf("index before/after attributes were not reconstructed: %v", idx)
 	}
 
-	migrations := readCSV(t, filepath.Join(outDir, "migration_summary.csv"))
+	migrations := readCSV(t, filepath.Join(outDir, "datasets/migration_summary.csv"))
 	for _, row := range migrations[1:] {
 		if row[0] == "20260909020202002" {
 			if row[5] != "15" || row[11] != migreport.RoundTripPass || row[12] != migreport.StatusOk {
@@ -1230,7 +1232,7 @@ ALTER TABLE dbo.SequenceCase DROP COLUMN B;`)
 	if code, err := migreport.Run(migreport.Options{RepoRoot: tmp, OutputDir: outDir}); err != nil || code != 0 {
 		t.Fatalf("run failed: code=%d err=%v", code, err)
 	}
-	rows := readCSV(t, filepath.Join(outDir, "table_changes.csv"))
+	rows := readCSV(t, filepath.Join(outDir, "datasets/table_changes.csv"))
 	var v2 [][]string
 	for _, row := range rows[1:] {
 		if row[0] == "20260909030303002" {
@@ -1257,7 +1259,7 @@ ALTER TABLE dbo.SequenceCase DROP COLUMN B;`)
 	}
 	assertChangeValues(t, mapRowsByKindTarget(v2), migreport.OpAlterColumnType, "C", "INT", "BIGINT")
 	assertChangeValues(t, mapRowsByKindTarget(v2), migreport.OpDropColumn, "A", "INT", "")
-	for _, row := range readCSV(t, filepath.Join(outDir, "migration_summary.csv"))[1:] {
+	for _, row := range readCSV(t, filepath.Join(outDir, "datasets/migration_summary.csv"))[1:] {
 		if row[0] == "20260909030303002" && (row[11] != migreport.RoundTripPass || row[12] != migreport.StatusOk) {
 			t.Fatalf("order-sensitive reversible migration did not pass: %v", row)
 		}
@@ -1281,7 +1283,7 @@ func TestMultiOperationRoundTripFailsWhenOnlyOneInverseExists(t *testing.T) {
 	if code, err := migreport.Run(migreport.Options{RepoRoot: tmp, OutputDir: outDir}); err != nil || code != 0 {
 		t.Fatalf("warning run failed: code=%d err=%v", code, err)
 	}
-	row := readCSV(t, filepath.Join(outDir, "migration_summary.csv"))[1]
+	row := readCSV(t, filepath.Join(outDir, "datasets/migration_summary.csv"))[1]
 	if row[5] != "2" || row[11] != migreport.RoundTripFail || row[12] != migreport.StatusWarning {
 		t.Fatalf("partial inverse must fail the complete migration: %v", row)
 	}
@@ -1498,7 +1500,7 @@ ALTER TABLE dbo.LongHistory ALTER COLUMN Code NVARCHAR(80) NOT NULL;`)
 		t.Fatalf("v1-v7 report failed: code=%d err=%v", code, err)
 	}
 
-	historyRows := readCSV(t, filepath.Join(outDir, "object_history.csv"))
+	historyRows := readCSV(t, filepath.Join(outDir, "datasets/object_history.csv"))
 	var versions, previous, statuses []string
 	for _, row := range historyRows[1:] {
 		if row[2] == "LongHistory" {
@@ -1518,7 +1520,7 @@ ALTER TABLE dbo.LongHistory ALTER COLUMN Code NVARCHAR(80) NOT NULL;`)
 	}
 
 	var v7Rows [][]string
-	for _, row := range readCSV(t, filepath.Join(outDir, "table_changes.csv"))[1:] {
+	for _, row := range readCSV(t, filepath.Join(outDir, "datasets/table_changes.csv"))[1:] {
 		if row[0] == "20260909050505007" {
 			v7Rows = append(v7Rows, row)
 		}
@@ -1539,7 +1541,7 @@ ALTER TABLE dbo.LongHistory ALTER COLUMN Code NVARCHAR(80) NOT NULL;`)
 	}
 
 	var v7Indexes [][]string
-	for _, row := range readCSV(t, filepath.Join(outDir, "index_changes.csv"))[1:] {
+	for _, row := range readCSV(t, filepath.Join(outDir, "datasets/index_changes.csv"))[1:] {
 		if row[0] == "20260909050505007" {
 			v7Indexes = append(v7Indexes, row)
 		}
@@ -1549,7 +1551,7 @@ ALTER TABLE dbo.LongHistory ALTER COLUMN Code NVARCHAR(80) NOT NULL;`)
 		t.Fatalf("v7 index did not use v6 state: %v", v7Indexes)
 	}
 
-	for _, row := range readCSV(t, filepath.Join(outDir, "migration_summary.csv"))[1:] {
+	for _, row := range readCSV(t, filepath.Join(outDir, "datasets/migration_summary.csv"))[1:] {
 		if row[0] == "20260909050505007" {
 			if row[5] != "8" || row[11] != migreport.RoundTripPass || row[12] != migreport.StatusOk {
 				t.Fatalf("v7 summary mismatch: %v", row)
@@ -1585,7 +1587,7 @@ func TestReintroducedTableDoesNotLeakPreDropState(t *testing.T) {
 	if code, err := migreport.Run(migreport.Options{RepoRoot: tmp, OutputDir: outDir}); err != nil || code != 0 {
 		t.Fatalf("manual-review run failed: code=%d err=%v", code, err)
 	}
-	for _, row := range readCSV(t, filepath.Join(outDir, "table_changes.csv"))[1:] {
+	for _, row := range readCSV(t, filepath.Join(outDir, "datasets/table_changes.csv"))[1:] {
 		if row[0] == "20260909060606004" && row[5] == migreport.OpAlterColumnType {
 			if row[7] != "" || row[13] != migreport.ConfidenceLow || row[14] != migreport.NoteManualReviewRequired {
 				t.Fatalf("pre-drop column state leaked into reintroduced table: %v", row)

@@ -132,7 +132,7 @@ Catatan: capability harus mengikuti implementasi scanner aktual. Saat ini scanne
 | Unnamed or Renamed Constraints with Identical Definition | supported | semantic constraint equality | Perubahan nama constraint dengan definisi identik tidak dianggap sebagai perubahan semantik. |
 | Ambiguous / Complex SQL Constructs | supported with LOW confidence | `MANUAL_REVIEW_REQUIRED` | SQL yang tidak dapat dipetakan secara pasti oleh AST diberi confidence `LOW` dan catatan review manual. |
 | Auto-Discovery Repository Root | supported | interactive/CLI usability | Deteksi cerdas: argumen `-repo`, direktori binary, current working dir, atau parent dirs. |
-| RFC 4180 CSV, JSON, & Markdown outputs | supported | strict output contract | 7 CSV ber-header valid (UTF-8 tanpa BOM) dan 1 JSON history report di `out/report/`, ditambah lima root Markdown, procedure index/catalog, dan generated profiles di `docs/database/`. |
+| RFC 4180 CSV, JSON, & Markdown outputs | supported | strict output contract | 7 CSV ber-header valid (UTF-8 tanpa BOM) dan 1 JSON history report di `docs/database/migrations/`, ditambah root README/manifest, empat grouped Markdown, procedure index/catalog, dan generated profiles di `docs/database/`. |
 | Shared Strict Filename Contract | supported | cross-tool linearity | Memakai `internal/history`; filename invalid dilaporkan sebagai warning, bukan diterima sebagai migration canonical. |
 | Semantic Up/Down Reconciliation | supported | inverse-operation validation | Down kosong/inverse tidak cocok = `FAIL` + warning; ambiguous unsupported = `NOT_TESTED`. |
 | Dense Mixed `ALTER TABLE` | supported | ordered state reduction | Multi-column, multi-constraint, mixed add, composite FK/UQ, multiple drop, add→rename→alter, dan drop→re-add diproses per item sesuai urutan source. |
@@ -140,3 +140,7 @@ Catatan: capability harus mengikuti implementasi scanner aktual. Saat ini scanne
 | Protected Report Output Path | supported | migration immutability | `-out` dan `-docs` yang sama dengan atau berada di bawah `migrations/` atau `db_object/` ditolak sebelum write. |
 | Programmable/Type Delete-Reintroduce Lifecycle | supported | reconstructed object state | Drop mengosongkan state; create berikutnya dilabeli `REINTRODUCED`. |
 | Table History v1→v7 + Delete/Reintroduce | supported | longitudinal reconstructed state | State kolom/constraint/index dilacak lintas version dan di-reset pada drop/create; before-value pasca-reintroduksi berasal dari incarnation terbaru. |
+
+## Report layout V2
+
+Report layout V2: supported setelah targeted/full suite dan release gates; single root, grouped data/documents, hash manifest, escaped navigation, preflight no-write manual collision, dan checksum-only stale cleanup. Legacy output yang tidak terbukti equivalent dipertahankan, bukan guessed deletion. Source/history contract lintas tool tetap unchanged.

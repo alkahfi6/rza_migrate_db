@@ -592,7 +592,7 @@ Command minimum:
 
 Perintah:
 
-- `rza_migrate_report`: rekonstruksi histori perubahan berbasis `migrations/`, serta dokumentasi desired-state read-only dari `db_object/`; zero DB connection, zero SQL execution, zero write/modify ke source. Menghasilkan 7 CSV (RFC 4180, UTF-8 tanpa BOM) dan `report.json` di `out/report/`, serta lima root Markdown, procedure index/catalog, dan generated procedure profiles di `docs/database/`.
+- `rza_migrate_report`: rekonstruksi histori perubahan berbasis `migrations/`, serta dokumentasi desired-state read-only dari `db_object/`; zero DB connection, zero SQL execution, zero write/modify ke source. Menghasilkan 7 CSV (RFC 4180, UTF-8 tanpa BOM) dan `report.json` di `docs/database/migrations/`, serta root README/manifest, empat grouped Markdown, procedure index/catalog, dan generated procedure profiles di `docs/database/`.
 - `rza_migrate_check`: workflow developer `fmt db_object -> verify authoring -> out/output.json`; tidak pernah menjalankan generator dan wajib mempertahankan byte seluruh file `migrations/`.
 - `rza_migrate_check` tanpa argumen: mencari repo dari working directory/folder executable dan pause saat exit untuk penggunaan double-click.
 - `rza_migrate_check` dengan argumen: non-interaktif secara default; menerima `-repo`, `-check`, `-profile authoring|full`, `-migration-validation off|integrity|full`, `-perf-notes`, `-fail-fast`, `-parallel-read`, `-parallel-workers`, dan `-pause-on-exit`.
@@ -730,21 +730,21 @@ Alat pelaporan offline untuk merekonstruksi histori perubahan objek database dar
 - **Immutability Protection**: Tidak pernah membuat, mengubah, menghapus, atau me-rename berkas migrasi sumber.
 - **Core Bootstrap Exclusion**: Pair canonical `000000__core__mig__audit_init` dipindai sebagai infrastruktur tetapi tidak membentuk histori/operasi schema aplikasi di audit report. Output summary memuat analyzed pair count dan excluded pair count secara terpisah pada CSV, JSON, dan console.
 - **Output Standard**:
-  - Audit laporan rekonsiliasi (`out/report/` atau `-out`):
-    - `out/report/report_summary.csv`
-    - `out/report/migration_summary.csv`
-    - `out/report/object_history.csv`
-    - `out/report/table_changes.csv`
-    - `out/report/index_changes.csv`
-    - `out/report/programmable_changes.csv`
-    - `out/report/type_changes.csv`
-    - `out/report/report.json`
+  - Audit laporan rekonsiliasi (`docs/database/migrations/` atau `-out`):
+    - `docs/database/migrations/datasets/report_summary.csv`
+    - `docs/database/migrations/datasets/migration_summary.csv`
+    - `docs/database/migrations/datasets/object_history.csv`
+    - `docs/database/migrations/datasets/table_changes.csv`
+    - `docs/database/migrations/datasets/index_changes.csv`
+    - `docs/database/migrations/datasets/programmable_changes.csv`
+    - `docs/database/migrations/datasets/type_changes.csv`
+    - `docs/database/migrations/report.json`
   - Dokumentasi desired-state (`docs/database/` atau `-docs`):
-    - `docs/database/table_unique_ids.md` untuk enforcement uniqueness, conditional unique index, `IDENTITY`, dan ID review signals. `IDENTITY`, JOIN, nama ID-like, dan non-unique index tidak boleh dinyatakan sebagai bukti uniqueness.
-    - `docs/database/relational_erd.md` untuk seluruh Mermaid graph dalam satu file, disusun sebagai Relationship Group → connected Relational Map. Setiap map dibentuk adaptif dengan batas maksimum 20 object, 24 relationship lines, 35 exact mappings, dan 9.000 karakter Mermaid, tanpa artificial Hub/parent. Node memuat type object serta key/index context untuk kolom relationship; edge memuat exact column mapping dan tidak mengklaim arah/cardinality yang tidak dibuktikan source.
-    - `docs/database/relationship_catalog.md` untuk evidence, exact column mapping, join type, occurrence, source module, dan confidence.
-    - `docs/database/module_lineage.md` untuk static view/procedure-to-object dependency dan dynamic-SQL manual-review list.
-    - `docs/database/table_relationship_tree.md` hanya compatibility pointer ke report relasi baru.
+    - `docs/database/identifiers/table_unique_ids.md` untuk enforcement uniqueness, conditional unique index, `IDENTITY`, dan ID review signals. `IDENTITY`, JOIN, nama ID-like, dan non-unique index tidak boleh dinyatakan sebagai bukti uniqueness.
+    - `docs/database/relationships/relational_erd.md` untuk seluruh Mermaid graph dalam satu file, disusun sebagai Relationship Group → connected Relational Map. Setiap map dibentuk adaptif dengan batas maksimum 20 object, 24 relationship lines, 35 exact mappings, dan 9.000 karakter Mermaid, tanpa artificial Hub/parent. Node memuat type object serta key/index context untuk kolom relationship; edge memuat exact column mapping dan tidak mengklaim arah/cardinality yang tidak dibuktikan source.
+    - `docs/database/relationships/relationship_catalog.md` untuk evidence, exact column mapping, join type, occurrence, source module, dan confidence.
+    - `docs/database/relationships/module_lineage.md` untuk static view/procedure-to-object dependency dan dynamic-SQL manual-review list.
+    - `docs/database/README.md` menjadi halaman masuk; `manifest.json` memuat semua artifact konkret dan SHA-256. Legacy `table_relationship_tree.md` tidak lagi dibuat; navigasi memakai index dan relationships/.
     - `docs/database/procedures/README.md`, `procedure_impact_catalog.md`, dan `profiles/dbo.<Procedure>.md` untuk procedure contract, branch-aware local execution flow, local object map, direct/recursive dependency map, exact write mapping, key/index context, execution/error signal, serta dynamic-SQL review.
 - Observed relationship hanya valid untuk static explicit `JOIN ... ON` atau legacy comma-join `WHERE` equality dengan tepat satu resolved `alias.column` pada masing-masing sisi. Same-name columns, inequality, ambiguous/multi-column expression, temp/table variable, stale alias scope, dan dynamic SQL wajib di-skip konservatif. Module tanpa resolved static dependency wajib tetap terlihat pada coverage-review list.
 - Desired-state Markdown memakai narasi Bahasa Indonesia yang natural dan istilah/header database English yang lazim. Guidance per classification ditulis satu kali pada reference section, bukan sebagai kolom template per row. Stable codes tidak diterjemahkan dan multi-value tidak memakai raw HTML. Relationship Group adalah connected component, bukan urutan/prioritas. Semua diagram berada pada satu ERD document; setiap connected Relational Map dibentuk adaptif dengan batas maksimum 20 object, 24 lines, 35 mappings, dan 9.000 karakter Mermaid tanpa artificial Hub/parent. Node memuat type serta key/index context untuk kolom relationship. Setiap non-self object pair wajib tampil, dengan setiap exact column mapping tepat sekali pada edge; `[FK]`/`[JOIN]` digunakan hanya untuk mixed-evidence pair, sedangkan occurrence/usage hanya menjadi audit detail di catalog. Dense pair yang melampaui mapping/text budget dipecah menjadi numbered `Mapping batch`. Exact column mapping, termasuk self-join, muncul tepat sekali di catalog bernomor Group/Map sama, maksimal 35 row per tabel. Self-join dipisahkan ke review section khusus. Capability ini report-only: extractor, checker apply/`-check`, migration generator, pipeline, dan migration history tidak berubah.
@@ -766,3 +766,7 @@ Alat pelaporan offline untuk merekonstruksi histori perubahan objek database dar
 - Reducer mempertahankan state sepanjang seluruh rantai version. Saat table di-drop atau di-create kembali, cache kolom/constraint/index di-reset sehingga before-value versi berikutnya berasal dari incarnation terbaru. Acceptance test wajib mencakup v1→v7 dengan `DELETED`/`REINTRODUCED`, perubahan campuran di v7, serta kasus negatif yang tidak boleh memakai state pra-drop.
 - Perubahan komentar atau whitespace semata tidak dianggap sebagai perubahan semantik objek.
 - SQL yang ambigu menghasilkan baris operasi dengan `confidence = LOW` dan `notes = MANUAL_REVIEW_REQUIRED`.
+
+## Report layout V2
+
+Report layout V2 acceptance: default docs/database berisi README/manifest, identifiers, relationships, procedures, dan migrations/datasets. -docs mengendalikan root; default audit mengikuti root/migrations; explicit -out tetap didukung dengan datasets child. Root index/backlinks, concrete hash manifest, no out default, repeatable rerun, manual collision preflight/no-write, ownership-only stale cleanup, nested symlink/overlap rejection wajib teruji. CSV/history semantics tidak berubah; extractor/checker apply/CI/generator tidak mendapat schema action. Lihat [layout contract](docs/report_output_layout.md).

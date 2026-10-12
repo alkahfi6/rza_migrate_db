@@ -89,3 +89,7 @@ Residual scope: scanner is not full T-SQL AST; statement/control guard reconstru
 - UPDATE/DELETE alias di-resolve hanya dari source alias pada statement yang sama. Temporary table dan table-variable identity dipertahankan sebagai `NOT_PERSISTED`.
 - Client result detection membedakan direct SELECT dari assignment, `SELECT INTO`, subquery/`EXISTS`, dan `INSERT ... SELECT`.
 - Relative `-out`/`-docs` sekarang repository-root based. `report.json` menyimpan resolved roots dan concrete artifact manifest, termasuk generated procedure profiles, sementara wildcard hanya bertahan pada compatibility field.
+
+## Report layout V2
+
+Resolved report layout edge cases: split default roots, custom -docs leaking audit to default out, reserved manual filenames, edited generated profiles, root overlap, nested symlink writes, and recursive stale deletion. Covered by layout/CLI tests. Residual: unverified legacy or edited stale output intentionally preserved; changed output root retains old artifacts; exceptional post-preflight filesystem failure is not a whole-bundle atomic transaction.

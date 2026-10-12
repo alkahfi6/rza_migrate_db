@@ -20,3 +20,7 @@ Boundary: hanya renderer/report inventory yang berubah. Extractor tetap metadata
 Proof: `identifier_join_review_test.go` mencakup unindexed/generic columns on keyed table, FK-only, filtered/composite key, self-join, dan summary consistency. `identifier_join_integration_test.go` mengeksekusi QA-31 golden, mempertahankan authored SQL/history hash, dan membuktikan identical second report. Final gates tetap full Go tests/hardening, complete build/checksum/source identity, GitLab Linux checker, serta Windows/Linux report parity.
 
 Documentation updated: README, rules, spec, FSD, plan, walkthrough, capability matrix, traceability, QA gate, edge-case backlog, generated QA coverage, QA-31 README/input/golden, dan dokumen ini. Reviewed unchanged: engine docs guide, production readiness, GitLab checker/MR template, parallel-safe design, desired-state lifecycle, guarded migrations, bootstrap four repos, constraint naming, monitoring/REST/rebaseline/legacy wrapper policies. Semua boundary/check/release/data-safety contract tersebut tetap karena fitur ini report-only.
+
+## Report layout V2
+
+Listing location in layout V2: docs/database/identifiers/table_unique_ids.md. Root docs/database/README.md links to it; explicit -docs resolves the same grouped relative path. Evidence and conservative JOIN semantics remain unchanged. See [output layout](report_output_layout.md).

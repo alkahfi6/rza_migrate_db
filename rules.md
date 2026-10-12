@@ -1795,3 +1795,7 @@ State rekonstruksi wajib berlanjut melintasi semua version object, bukan hanya m
 
 
 
+
+## Report layout V2
+
+Report output safety: layout V2 menggunakan satu documentation root, artifact konkret, preflight seluruh target, dan ownership SHA-256 untuk stale cleanup. File manual atau edited current output tidak boleh ditimpa; jangan recursive-delete folder dokumentasi. Report tetap read-only untuk db_object/migrations dan tidak menjadi safe-fixer rule. Lihat [report layout](docs/report_output_layout.md).

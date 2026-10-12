@@ -9,7 +9,7 @@ import (
 	"strings"
 )
 
-var desiredStateReportFiles = []string{"table_unique_ids.md", "relational_erd.md", "relationship_catalog.md", "module_lineage.md", "table_relationship_tree.md", "procedures/README.md", "procedures/procedure_impact_catalog.md", "procedures/profiles/*.md"}
+var desiredStateReportFiles = []string{"README.md", "manifest.json", "identifiers/table_unique_ids.md", "relationships/relational_erd.md", "relationships/relationship_catalog.md", "relationships/module_lineage.md", "procedures/README.md", "procedures/procedure_impact_catalog.md", "procedures/profiles/*.md"}
 
 func desiredStateArtifactFiles(docs DesiredStateDocs) []string {
 	files := append([]string(nil), desiredStateReportFiles[:len(desiredStateReportFiles)-1]...)
@@ -29,32 +29,29 @@ const (
 	relationshipCatalogMaxTableRows = 35
 )
 
-// WriteDesiredStateDocs writes all desired-state Markdown documents to docsDir (default docs/database).
+// WriteDesiredStateDocs writes grouped Markdown documents; Run publishes the indexes and manifest.
 func WriteDesiredStateDocs(docsDir string, docs DesiredStateDocs) error {
 	if err := os.MkdirAll(docsDir, 0755); err != nil {
 		return fmt.Errorf("failed to create docs directory %s: %w", docsDir, err)
 	}
-	outputs := map[string]string{
-		"table_unique_ids.md": renderUniqueIDs(docs), "relational_erd.md": renderRelationalERD(docs),
-		"relationship_catalog.md": renderRelationshipCatalog(docs), "module_lineage.md": renderModuleLineage(docs),
-		"table_relationship_tree.md": renderRelationshipCompatibilityNotice(),
-	}
-	for _, name := range desiredStateReportFiles {
-		if strings.Contains(name, "/") {
-			continue
-		}
-		if err := os.WriteFile(filepath.Join(docsDir, name), []byte(outputs[name]), 0644); err != nil {
+	for name, body := range desiredStateMarkdown(docs) {
+		if err := writeGeneratedMarkdown(filepath.Join(docsDir, name), body+"\n[Database documentation](../README.md)\n"); err != nil {
 			return err
 		}
 	}
 	if err := writeProcedureDocs(docsDir, docs); err != nil {
 		return err
 	}
-	dir := filepath.Join(docsDir, relationshipDiagramDirectory)
-	if err := os.RemoveAll(dir); err != nil {
-		return fmt.Errorf("remove stale relationship diagram directory: %w", err)
-	}
 	return nil
+}
+
+func desiredStateMarkdown(docs DesiredStateDocs) map[string]string {
+	return map[string]string{
+		"identifiers/table_unique_ids.md":       renderUniqueIDs(docs),
+		"relationships/relational_erd.md":       renderRelationalERD(docs),
+		"relationships/relationship_catalog.md": renderRelationshipCatalog(docs),
+		"relationships/module_lineage.md":       renderModuleLineage(docs),
+	}
 }
 
 func writeDesiredStateDocs(docsDir string, docs DesiredStateDocs) error {

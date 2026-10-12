@@ -1,5 +1,14 @@
 {
-  "reports": ["table_unique_ids.md", "relational_erd.md", "relationship_catalog.md", "module_lineage.md", "table_relationship_tree.md"],
+  "reports": [
+    "README.md",
+    "manifest.json",
+    "identifiers/table_unique_ids.md",
+    "relationships/relational_erd.md",
+    "relationships/relationship_catalog.md",
+    "relationships/module_lineage.md",
+    "procedures/README.md",
+    "procedures/procedure_impact_catalog.md"
+  ],
   "relationship_policy": "declared FK and exact static JOIN equality evidence; module dependencies reported separately",
   "markdown_language": "id-ID",
   "mermaid_max_objects_per_block": 20,
@@ -22,7 +31,10 @@
       "Source modules: dbo.vJoinCandidates",
       "Index/key: tidak ditemukan. IDENTITY: tidak."
     ],
-    "forbidden_rows": ["| `dbo.JoinReference` | `NotJoinedId` |", "| `dbo.JoinReference` | `Id` |"]
+    "forbidden_rows": [
+      "| `dbo.JoinReference` | `NotJoinedId` |",
+      "| `dbo.JoinReference` | `Id` |"
+    ]
   },
   "procedure_scan": {
     "name": "dbo.uspPrecision",
@@ -37,8 +49,21 @@
       "READ|dbo.Child|RESOLVED_STATIC",
       "READ|dbo.Parent|RESOLVED_STATIC"
     ],
-    "calls": ["dbo.uspChild", "dbo.uspChild"],
-    "mapping_expressions": ["1"],
+    "calls": [
+      "dbo.uspChild",
+      "dbo.uspChild"
+    ],
+    "mapping_expressions": [
+      "1"
+    ],
     "has_client_result": true
+  },
+  "report_layout": {
+    "schema": "RZA_DATABASE_DOCUMENTATION_V2",
+    "default_root": "docs/database",
+    "audit_directory": "migrations",
+    "datasets_directory": "migrations/datasets",
+    "manual_file_policy": "preserve; block current output collisions before writes",
+    "obsolete_profile_policy": "remove only prior manifest path with matching SHA-256"
   }
 }

@@ -31,8 +31,8 @@ func run(args []string) int {
 
 	fs := flag.NewFlagSet("rza_migrate_report", flag.ContinueOnError)
 	repo := fs.String("repo", "", "repository root containing migrations/ directory")
-	outDir := fs.String("out", "", "output directory for report files (default out/report)")
-	docsDir := fs.String("docs", "", "output directory for markdown documentation files (default docs/database)")
+	outDir := fs.String("out", "", "migration audit directory override (default <docs>/migrations; CSV files in datasets/)")
+	docsDir := fs.String("docs", "", "root directory for database documentation (default docs/database)")
 	pauseOnExit := fs.String("pause-on-exit", "", "pause before process exit (auto true on interactive double-click): true|false")
 	fs.SetOutput(os.Stderr)
 

@@ -696,7 +696,7 @@ Update 2026-09-10: report menghasilkan lima desired-state Markdown documents. `t
 
 Usability update 2026-09-10: seluruh Mermaid berada dalam satu `relational_erd.md`, disusun sebagai Relationship Group → connected Relational Map. Map dibentuk adaptif dengan hard limit 20 object, 24 actual relationship lines, 35 exact mappings, dan 9.000 karakter Mermaid. Artificial Hub/parent dihapus; node menampilkan object type serta key/index context bagi relationship columns, sedangkan edge mempertahankan exact mappings tanpa statistik usage. `[FK]`/`[JOIN]` hanya dipakai untuk mixed-evidence pair. Dense pair memakai bounded numbered `Mapping batch`; object index dan shared-object table menjaga navigasi saat object muncul pada beberapa map. Catalog mempertahankan semua exact mappings dengan Group/Map yang sama; self-join masuk review section.
 
-Documentation routing update 2026-09-10: output dokumentasi desired-state dialihkan dari `out/report/` ke `docs/database/` (dapat dikonfigurasi via flag `-docs`) agar terdokumentasi rapi di version control repository, sedangkan audit report tabular (7 CSV dan `report.json`) tetap tersimpan di `out/report/` (dikonfigurasi via `-out`). Guard diperluas untuk memastikan `-out` dan `-docs` tidak berada di dalam `migrations/` maupun `db_object/`.
+Documentation routing update 2026-09-10: output dokumentasi desired-state dialihkan dari `docs/database/migrations/` ke `docs/database/` (dapat dikonfigurasi via flag `-docs`) agar terdokumentasi rapi di version control repository, sedangkan audit report tabular (7 CSV dan `report.json`) tetap tersimpan di `docs/database/migrations/` (dikonfigurasi via `-out`). Guard diperluas untuk memastikan `-out` dan `-docs` tidak berada di dalam `migrations/` maupun `db_object/`.
 
 Procedure impact update 2026-09-11: report menghasilkan `procedures/README.md`, global impact catalog, dan satu profile per procedure. Profile mempertahankan full source sequence, top-down branch-aware local execution flow dengan transaction/condition/error pattern dan Mermaid-rendered line breaks, local object map, source-preserved IF/ELSE guards, direct serta cycle-safe recursive calls, complete split recursive diagrams, exact INSERT/UPDATE mapping, key/index context, functions/views, transaction/error/result signals, dan dynamic SQL evidence. Semua persisted object resolution divalidasi terhadap `db_object`; ambiguous/runtime-dependent target tidak ditebak. Real-object validation menggunakan 1.058 procedure pada snapshot `all_object/bond/bond-sqltrsretail`.
 
@@ -721,7 +721,7 @@ Status: completed.
 - Absolute read-only boundaries: zero DB connections, zero SQL execution, zero access to
   `dbo.mig_event` or system catalog tables, and zero mutation/creation/deletion in `migrations/`.
 - Independent command isolated in `cmd/rza_migrate_report/` and shared logic in `internal/migreport/`.
-- Emits 7 RFC 4180 CSV reports and 1 metadata JSON report to `out/report/`:
+- Emits 7 RFC 4180 CSV reports and 1 metadata JSON report to `docs/database/migrations/`:
   `report_summary.csv`, `migration_summary.csv`, `object_history.csv`, `table_changes.csv`,
   `index_changes.csv`, `programmable_changes.csv`, `type_changes.csv`, `report.json`.
 - Automatic repository discovery (exec dir -> cwd -> parents containing `migrations/`),
@@ -744,3 +744,9 @@ Hardening update (2026-09-09):
 - 2026-09-24 bracketed built-in hardening: base type extractor seperti `[DECIMAL]` dinormalisasi lintas typed model, risk classifier, diff, dan runtime guard. Regression kasus `(25,2) -> (25,6)` membuktikan guarded migration dibuat, perubahan delimiter saja no-op, serta alias schema-qualified tetap konservatif.
 - 2026-09-11 report audit hardening: summary memisahkan analyzed/excluded migration pair; generated profile links meng-escape karakter `#`; dependency lineage di-deduplicate case-insensitive; dan `EXEC @return_code = Procedure` tidak lagi menjadi false-positive dynamic SQL. Unit/CLI tests dan snapshot Bond SQLTRSRetail menjadi bukti penerimaan.
 - longitudinal state hardening menambah bukti v1→v7 dengan drop di v5, reintroduksi di v6, perubahan campuran di v7, serta reset state table/index agar incarnation pra-drop tidak bocor.
+
+## Report layout V2
+
+Report layout V2: grouped publication, navigation, conservative ownership cleanup, QA-31 coverage dan CLI/integration proof. Release gate: full Go suite, hardening/fixture gates, full build_all.bat, source/checksum identity, dan smoke Linux MR/report. Tidak ada perubahan authoring/diff planning. Lihat [delivery contract](docs/report_output_layout.md).
+
+Report layout V2 delivery complete (2026-10-12): full tests/hardening, complete release build 20261012.020616, Windows/Linux shared-checkout report regeneration, manifest/link/hash validation, and Linux MR smoke passed. Learning examples are the existing missing-directory skip; no new parser/schema/migration residual scope. Details in docs/report_output_layout.md.

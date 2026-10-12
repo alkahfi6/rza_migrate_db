@@ -282,7 +282,7 @@ Lokasi fixture acuan:
 
 - Skenario valid scan: jalankan `rza_migrate_report` pada repository dengan folder `migrations/`.
 - Ekspektasi valid scan:
-  - 8 report terbuat di `out/report/` (7 CSV dan `report.json`) serta desired-state docs terbuat di `docs/database/`: lima root Markdown, `procedures/README.md`, `procedures/procedure_impact_catalog.md`, dan satu profile untuk setiap source procedure; tidak ada folder relational diagram tambahan.
+  - 8 report terbuat di `docs/database/migrations/` (7 CSV dan `report.json`) serta desired-state docs terbuat di `docs/database/`: root README/manifest, empat grouped Markdown, `procedures/README.md`, `procedures/procedure_impact_catalog.md`, dan satu profile untuk setiap source procedure; tidak ada folder relational diagram tambahan.
   - CSV valid RFC 4180 dan UTF-8 tanpa BOM.
   - JSON metadata memuat `"database_access": false` dan `"sql_execution": false`.
   - Pair bootstrap `000000__core__mig__audit_init`, jika ada, tidak muncul pada `migration_summary.csv`, `object_history.csv`, atau semantic change CSV; `excluded_pairs`/`excluded_migration_pairs` bernilai sesuai dan analyzed pair count tetap dapat direkonsiliasi dengan jumlah file fisik.
@@ -317,7 +317,7 @@ Lokasi fixture acuan:
 - Ekspektasi: `relationship_catalog.md` membedakan `DECLARED_FK` dan `OBSERVED_JOIN`, memuat exact column pair/source/frequency/confidence; `relational_erd.md` memuat semua diagram, menggambar tepat satu line per non-self object pair, dan menampilkan type serta key/index context bagi kolom relationship; `module_lineage.md` memisahkan dependency module.
 - Ekspektasi usability: narasi Indonesia natural dengan conventional English database terms; guidance classification tidak diulang sebagai template per row; stable codes tetap; tidak ada raw `<br>`; setiap Relational Map connected dan tidak melampaui 20 object, 24 actual relationship lines, 35 exact mappings, atau 9.000 karakter Mermaid; tidak ada artificial Hub/parent; setiap exact mapping dipertahankan dan tidak diganti usage, sedangkan dense pair memakai bounded numbered Mapping batch; object index dan shared-object table menyediakan navigasi; setiap catalog table maksimal 35 row; numbering Group/Map konsisten; self-join hanya ada pada review section.
 - Negatif wajib: nama kolom sama tanpa predicate, bagian `=` dari `>=`/`<=`/`!=`, ekspresi dengan lebih dari satu resolved column per sisi, temp/table variable, stale alias lintas query, dan dynamic SQL tidak diberi relationship.
-- No-write: hash/daftar `migrations/` dan `db_object/` sebelum/sesudah run sama; seluruh audit report ditulis di `out/report/` dan seluruh dokumen desired-state ditulis di `docs/database/` di luar `migrations/` dan `db_object/`.
+- No-write: hash/daftar `migrations/` dan `db_object/` sebelum/sesudah run sama; seluruh audit report ditulis di `docs/database/migrations/` dan seluruh dokumen desired-state ditulis di `docs/database/` di luar `migrations/` dan `db_object/`.
 - Jalankan dari repository root dan folder lain dengan relative `-out`/`-docs`; resolved target harus tetap berada di bawah repository root. `report.json.output_directory`, `documentation_directory`, dan setiap `artifacts[]` harus menunjuk file konkret yang ada; wildcard hanya diizinkan pada compatibility `reports[]`.
 
 ### Procedure profile acceptance
@@ -329,7 +329,7 @@ Lokasi fixture acuan:
 ## 4. Artefak Bukti QA
 
 - Salinan `out/output.json` untuk skenario pass/fail.
-- Salinan `out/report/` dan `docs/database/` untuk skenario migration history report.
+- Salinan `docs/database/migrations/` dan `docs/database/` untuk skenario migration history report.
 - Daftar command dan exit code.
 - Daftar file migration baru yang dihasilkan.
 - Catatan deviasi dan issue follow-up (jika ada).
@@ -341,3 +341,9 @@ Lulus jika:
 1. Seluruh QA-01 s.d. QA-31 pass.
 2. Tidak ada bypass fail-hard.
 3. Tidak ada output non-deterministic pada fixture identik.
+
+## Report layout V2
+
+Layout V2 scenarios: run default tanpa out/; -docs saja memindahkan audit juga; explicit -out + -docs memiliki valid backlink; nested file/directory symlink dan root overlap gagal sebelum publication; existing manual collision tidak mengubah file; stale generated profile dihapus hanya jika hash owned cocok; edited stale/manual notes dipertahankan; equivalent legacy flat docs/CSV dipindahkan dengan conservative cleanup. Jalankan TestUnifiedDocumentationLayoutManifestAndLinks, TestReportCleanupPreservesManualFilesAndModifiedStaleProfiles, TestManualCollisionAndEditedCurrentOutputBlockBeforeWriting, TestLegacyLayoutRemovesOnlyEquivalentGeneratedFiles, TestOutputOverlapAndNestedSymlinkFailWithoutSourceWrites, TestPreviousManifestCannotDeleteAnUnlistedManualPath; QA-31 listing juga membuktikan layout fixture.
+
+Layout relocation: TestDocumentationOwnershipSurvivesRepositoryClone membuktikan cloned output menerima genuine source delta tanpa menyentuh checkout lama; TestOutputFileSymlinkAndAliasedRootsCannotEscapePreflight membuktikan file symlink/root alias tidak menghasilkan partial output.

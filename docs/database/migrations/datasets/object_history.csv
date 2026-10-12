@@ -1,0 +1,3 @@
+category,schema_name,object_name,object_version,first_migration_id,last_migration_id,previous_version,change_count,first_up_file,last_up_file,history_status
+procedures,dbo,usp_mig_log_event,1,10000000000000001,10000000000000001,,1,migrations/10000000000000001_procedures_dbo.usp_mig_log_event_v1.up.sql,migrations/10000000000000001_procedures_dbo.usp_mig_log_event_v1.up.sql,INITIAL
+procedures,dbo,usp_mig_try_get_lock,1,10000000000000002,10000000000000002,,1,migrations/10000000000000002_procedures_dbo.usp_mig_try_get_lock_v1.up.sql,migrations/10000000000000002_procedures_dbo.usp_mig_try_get_lock_v1.up.sql,INITIAL

@@ -145,3 +145,7 @@ Task coding dianggap siap dikerjakan jika:
 - Mode `warn` tidak didukung lagi.
 - Pipeline/CI wajib strict-only (`RZA_LEGACY_AUDIT_MODE=fail`) sesuai `docs/policy/legacy_wrapper_cutover.md`.
 - Prioritas resolusi mode: flag CLI > env var > default `fail`.
+
+## Report layout V2
+
+Report layout reading reference: [Database report output layout](report_output_layout.md) owns grouped output roots, path compatibility, manifest ownership/cleanup, and report-only cross-tool boundaries. It does not alter source-of-truth/history semantics.
