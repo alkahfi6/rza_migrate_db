@@ -1,0 +1,583 @@
+swagger: "2.0"
+info:
+  title: Migration REST API
+  version: "1.0.0"
+  description: |
+    REST API untuk menjalankan migration SQL Server menggunakan golang-migrate.
+    Response membawa header korelasi: `trace-id`, `request-id`, dan `nik` (jika dikirim pada request).
+basePath: /
+consumes:
+  - application/json
+produces:
+  - application/json
+tags:
+  - name: Health
+  - name: Migration
+securityDefinitions:
+  ApiKeyAuth:
+    type: apiKey
+    name: X-API-Key
+    in: header
+    description: API key hanya dibutuhkan jika `security.enable_api_key=true`.
+paths:
+  /healthz:
+    get:
+      tags: [Health]
+      summary: Service health check
+      operationId: healthz
+      responses:
+        "200":
+          description: Service healthy
+          headers:
+            trace-id:
+              type: string
+              description: Correlation trace id
+            request-id:
+              type: string
+              description: Correlation request id
+            nik:
+              type: string
+              description: NIK pelaku (echo jika dikirim di request)
+          schema:
+            $ref: "#/definitions/HealthResponse"
+  /swagger.yaml:
+    get:
+      tags: [Health]
+      summary: Swagger 2 specification (YAML)
+      operationId: getSwaggerSpec
+      produces:
+        - application/yaml
+      responses:
+        "200":
+          description: Swagger 2 YAML
+          schema:
+            type: string
+  /openapi.yaml:
+    get:
+      tags: [Health]
+      summary: Legacy alias for Swagger 2 specification (YAML)
+      operationId: getSwaggerSpecLegacyAlias
+      deprecated: true
+      produces:
+        - application/yaml
+      responses:
+        "200":
+          description: Swagger 2 YAML
+          schema:
+            type: string
+  /swagger:
+    get:
+      tags: [Health]
+      summary: Swagger UI page
+      operationId: getSwaggerUI
+      produces:
+        - text/html
+      responses:
+        "200":
+          description: Swagger UI HTML
+          schema:
+            type: string
+  /api/v1/migrations/version:
+    get:
+      tags: [Migration]
+      summary: Get current migration version
+      operationId: getCurrentVersion
+      security:
+        - ApiKeyAuth: []
+      responses:
+        "200":
+          description: Current version state
+          headers:
+            trace-id:
+              type: string
+              description: Correlation trace id
+            request-id:
+              type: string
+              description: Correlation request id
+            nik:
+              type: string
+              description: NIK pelaku (echo jika dikirim di request)
+          schema:
+            $ref: "#/definitions/VersionResponse"
+        "401":
+          $ref: "#/responses/Unauthorized"
+        "409":
+          $ref: "#/responses/Conflict"
+        "500":
+          $ref: "#/responses/InternalError"
+  /api/v1/migrations/pending:
+    get:
+      tags: [Migration]
+      summary: List pending up migration files
+      operationId: listPendingMigrations
+      security:
+        - ApiKeyAuth: []
+      responses:
+        "200":
+          description: Pending migration snapshot
+          headers:
+            trace-id:
+              type: string
+              description: Correlation trace id
+            request-id:
+              type: string
+              description: Correlation request id
+            nik:
+              type: string
+              description: NIK pelaku (echo jika dikirim di request)
+          schema:
+            $ref: "#/definitions/PendingResponse"
+        "401":
+          $ref: "#/responses/Unauthorized"
+        "409":
+          $ref: "#/responses/Conflict"
+        "500":
+          $ref: "#/responses/InternalError"
+  /api/v1/migrations/up:
+    post:
+      tags: [Migration]
+      summary: Run migration up
+      operationId: runUp
+      description: |
+        Jalankan semua pending migration (`{}` atau body kosong), atau jalankan `n` step dengan body `{ "steps": n }`.
+        `steps` untuk up boleh `0` atau lebih.
+      security:
+        - ApiKeyAuth: []
+      parameters:
+        - $ref: "#/parameters/OptionalStepsBody"
+      responses:
+        "200":
+          description: Up execution result
+          headers:
+            trace-id:
+              type: string
+              description: Correlation trace id
+            request-id:
+              type: string
+              description: Correlation request id
+            nik:
+              type: string
+              description: NIK pelaku (echo jika dikirim di request)
+          schema:
+            $ref: "#/definitions/OperationResponse"
+        "400":
+          $ref: "#/responses/InvalidInput"
+        "401":
+          $ref: "#/responses/Unauthorized"
+        "409":
+          $ref: "#/responses/Conflict"
+        "500":
+          $ref: "#/responses/InternalError"
+  /api/v1/migrations/down:
+    post:
+      tags: [Migration]
+      summary: Run migration down by step
+      operationId: runDown
+      description: |
+        Wajib body `{ "steps": n }` dengan `n > 0`.
+        Endpoint ini bisa dinonaktifkan via config `migration.allow_down=false` (akan return 403).
+      security:
+        - ApiKeyAuth: []
+      parameters:
+        - $ref: "#/parameters/RequiredStepsBody"
+      responses:
+        "200":
+          description: Down execution result
+          headers:
+            trace-id:
+              type: string
+              description: Correlation trace id
+            request-id:
+              type: string
+              description: Correlation request id
+            nik:
+              type: string
+              description: NIK pelaku (echo jika dikirim di request)
+          schema:
+            $ref: "#/definitions/OperationResponse"
+        "400":
+          $ref: "#/responses/InvalidInput"
+        "401":
+          $ref: "#/responses/Unauthorized"
+        "403":
+          $ref: "#/responses/Forbidden"
+        "409":
+          $ref: "#/responses/Conflict"
+        "500":
+          $ref: "#/responses/InternalError"
+  /api/v1/migrations/run-file:
+    post:
+      tags: [Migration]
+      summary: Run a specific migration filename
+      operationId: runSpecificFile
+      description: |
+        Menjalankan 1 step migration sesuai filename di `migrations/`.
+        Endpoint bisa dinonaktifkan via config `migration.allow_run_specific_file=false` (akan return 403).
+      security:
+        - ApiKeyAuth: []
+      parameters:
+        - $ref: "#/parameters/RunFileBody"
+      responses:
+        "200":
+          description: Run-file execution result
+          headers:
+            trace-id:
+              type: string
+              description: Correlation trace id
+            request-id:
+              type: string
+              description: Correlation request id
+            nik:
+              type: string
+              description: NIK pelaku (echo jika dikirim di request)
+          schema:
+            $ref: "#/definitions/OperationResponse"
+        "400":
+          $ref: "#/responses/InvalidInput"
+        "401":
+          $ref: "#/responses/Unauthorized"
+        "403":
+          $ref: "#/responses/Forbidden"
+        "409":
+          $ref: "#/responses/Conflict"
+        "500":
+          $ref: "#/responses/InternalError"
+  /api/v1/migrations/ack-manual:
+    post:
+      tags: [Migration]
+      summary: Acknowledge one UP migration as manually executed
+      operationId: acknowledgeManual
+      description: |
+        Recovery endpoint untuk melanjutkan chain migration setelah script dijalankan manual.
+        Endpoint ini hanya aktif jika `migration.allow_ack_manual=true`.
+        Guard ketat:
+        - hanya menerima file `.up.sql`
+        - jika state dirty: versi file harus sama dengan dirty version saat ini
+        - jika state clean: versi file harus next version dari current state
+      security:
+        - ApiKeyAuth: []
+      parameters:
+        - $ref: "#/parameters/AcknowledgeManualBody"
+      responses:
+        "200":
+          description: Ack-manual execution result
+          headers:
+            trace-id:
+              type: string
+              description: Correlation trace id
+            request-id:
+              type: string
+              description: Correlation request id
+            nik:
+              type: string
+              description: NIK pelaku (echo jika dikirim di request)
+          schema:
+            $ref: "#/definitions/OperationResponse"
+        "400":
+          $ref: "#/responses/InvalidInput"
+        "401":
+          $ref: "#/responses/Unauthorized"
+        "403":
+          $ref: "#/responses/Forbidden"
+        "409":
+          $ref: "#/responses/Conflict"
+        "500":
+          $ref: "#/responses/InternalError"
+parameters:
+  OptionalStepsBody:
+    in: body
+    name: body
+    required: false
+    schema:
+      $ref: "#/definitions/OptionalStepsRequest"
+  RequiredStepsBody:
+    in: body
+    name: body
+    required: true
+    schema:
+      $ref: "#/definitions/RequiredStepsRequest"
+  RunFileBody:
+    in: body
+    name: body
+    required: true
+    schema:
+      $ref: "#/definitions/RunFileRequest"
+  AcknowledgeManualBody:
+    in: body
+    name: body
+    required: true
+    schema:
+      $ref: "#/definitions/AcknowledgeManualRequest"
+responses:
+  InvalidInput:
+    description: Bad request / invalid input
+    headers:
+      trace-id:
+        type: string
+        description: Correlation trace id
+      request-id:
+        type: string
+        description: Correlation request id
+      nik:
+        type: string
+        description: NIK pelaku (echo jika dikirim di request)
+    schema:
+      $ref: "#/definitions/ErrorResponse"
+  Unauthorized:
+    description: API key invalid / unauthorized
+    headers:
+      trace-id:
+        type: string
+        description: Correlation trace id
+      request-id:
+        type: string
+        description: Correlation request id
+      nik:
+        type: string
+        description: NIK pelaku (echo jika dikirim di request)
+    schema:
+      $ref: "#/definitions/ErrorResponse"
+  Forbidden:
+    description: Action disabled by config/policy
+    headers:
+      trace-id:
+        type: string
+        description: Correlation trace id
+      request-id:
+        type: string
+        description: Correlation request id
+      nik:
+        type: string
+        description: NIK pelaku (echo jika dikirim di request)
+    schema:
+      $ref: "#/definitions/ErrorResponse"
+  Conflict:
+    description: Migration state conflict (dirty/lock/order mismatch)
+    headers:
+      trace-id:
+        type: string
+        description: Correlation trace id
+      request-id:
+        type: string
+        description: Correlation request id
+      nik:
+        type: string
+        description: NIK pelaku (echo jika dikirim di request)
+    schema:
+      $ref: "#/definitions/ErrorResponse"
+  InternalError:
+    description: Internal server error
+    headers:
+      trace-id:
+        type: string
+        description: Correlation trace id
+      request-id:
+        type: string
+        description: Correlation request id
+      nik:
+        type: string
+        description: NIK pelaku (echo jika dikirim di request)
+    schema:
+      $ref: "#/definitions/ErrorResponse"
+definitions:
+  ApiError:
+    type: object
+    required:
+      - code
+      - message
+    properties:
+      code:
+        type: string
+        example: invalid_input
+      message:
+        type: string
+        example: steps must be > 0
+  VersionPayload:
+    type: object
+    required:
+      - dirty
+    properties:
+      version:
+        type: string
+        x-nullable: true
+        example: "20260302010101001"
+      dirty:
+        type: boolean
+        example: false
+  OperationPayload:
+    type: object
+    required:
+      - operation
+      - no_change
+      - before
+      - after
+    properties:
+      operation:
+        type: string
+        example: up
+      file_name:
+        type: string
+        example: 20260302010101001_tables_dbo.TableA_v1.up.sql
+      no_change:
+        type: boolean
+        example: false
+      before:
+        $ref: "#/definitions/VersionPayload"
+      after:
+        $ref: "#/definitions/VersionPayload"
+  HealthResponse:
+    type: object
+    required:
+      - status
+      - timestamp
+      - data
+    properties:
+      status:
+        type: string
+        example: ok
+      timestamp:
+        type: string
+        format: date-time
+      data:
+        type: object
+        additionalProperties:
+          type: string
+  VersionResponse:
+    type: object
+    required:
+      - status
+      - timestamp
+      - data
+    properties:
+      status:
+        type: string
+        example: ok
+      timestamp:
+        type: string
+        format: date-time
+      data:
+        $ref: "#/definitions/VersionPayload"
+  PendingItem:
+    type: object
+    required:
+      - file_name
+      - version
+      - category
+      - vk
+      - is_core
+    properties:
+      file_name:
+        type: string
+        example: 20260302010101001_tables_dbo.TableA_v1.up.sql
+      version:
+        type: string
+        example: "20260302010101001"
+      category:
+        type: string
+        example: tables
+      object:
+        type: string
+        example: dbo.TableA
+      vk:
+        type: integer
+        example: 1
+      is_core:
+        type: boolean
+        example: false
+  PendingPayload:
+    type: object
+    required:
+      - current
+      - total_pending
+      - files
+    properties:
+      current:
+        $ref: "#/definitions/VersionPayload"
+      total_pending:
+        type: integer
+        example: 3
+      files:
+        type: array
+        items:
+          $ref: "#/definitions/PendingItem"
+  PendingResponse:
+    type: object
+    required:
+      - status
+      - timestamp
+      - data
+    properties:
+      status:
+        type: string
+        example: ok
+      timestamp:
+        type: string
+        format: date-time
+      data:
+        $ref: "#/definitions/PendingPayload"
+  OperationResponse:
+    type: object
+    required:
+      - status
+      - timestamp
+      - data
+    properties:
+      status:
+        type: string
+        example: ok
+      timestamp:
+        type: string
+        format: date-time
+      data:
+        $ref: "#/definitions/OperationPayload"
+  ErrorResponse:
+    type: object
+    required:
+      - status
+      - timestamp
+      - error
+    properties:
+      status:
+        type: string
+        example: fail
+      timestamp:
+        type: string
+        format: date-time
+      error:
+        $ref: "#/definitions/ApiError"
+  OptionalStepsRequest:
+    type: object
+    properties:
+      steps:
+        type: integer
+        minimum: 0
+        example: 2
+  RequiredStepsRequest:
+    type: object
+    required:
+      - steps
+    properties:
+      steps:
+        type: integer
+        minimum: 1
+        example: 1
+  RunFileRequest:
+    type: object
+    required:
+      - file
+    properties:
+      file:
+        type: string
+        example: 20260302010101001_tables_dbo.TableA_v1.up.sql
+  AcknowledgeManualRequest:
+    type: object
+    required:
+      - file
+      - reason
+    properties:
+      file:
+        type: string
+        example: 20260302010101001_tables_dbo.TableA_v1.up.sql
+      reason:
+        type: string
+        example: Executed manually via SSMS under change ticket CHG-2026-0001

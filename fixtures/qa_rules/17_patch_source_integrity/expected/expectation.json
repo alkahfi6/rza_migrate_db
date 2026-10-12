@@ -1,0 +1,12 @@
+{
+    "qa_id":  "QA-17",
+    "command":  "verify",
+    "expected_exit_code":  1,
+    "expected_fail_rules":  [
+                                "PATCH_SOURCE_MISSING"
+                            ],
+    "expected_warn_reasons":  [
+
+                              ],
+    "summary":  "Patch source must not disappear if migration exists."
+}

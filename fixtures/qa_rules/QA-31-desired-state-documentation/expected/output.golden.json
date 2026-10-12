@@ -1,0 +1,44 @@
+{
+  "reports": ["table_unique_ids.md", "relational_erd.md", "relationship_catalog.md", "module_lineage.md", "table_relationship_tree.md"],
+  "relationship_policy": "declared FK and exact static JOIN equality evidence; module dependencies reported separately",
+  "markdown_language": "id-ID",
+  "mermaid_max_objects_per_block": 20,
+  "mermaid_max_relationship_lines_per_block": 24,
+  "mermaid_max_exact_mappings_per_block": 35,
+  "mermaid_max_characters_per_block": 9000,
+  "catalog_max_relationships_per_part": 35,
+  "technical_headers": "conventional English database terms",
+  "classification_guidance": "reference section only",
+  "raw_html_line_breaks": false,
+  "suspected_join_identifiers": {
+    "required_rows": [
+      "| `dbo.Child` | `ParentId` | `OBSERVED_JOIN_ID_SIGNAL` | `NOT_ENFORCED` |",
+      "| `dbo.JoinReference` | `ParentId` | `OBSERVED_JOIN_ID_SIGNAL` | `NOT_ENFORCED` |",
+      "| `dbo.JoinReference` | `BusinessCode` | `OBSERVED_JOIN_COLUMN_SIGNAL` | `NOT_ENFORCED` |"
+    ],
+    "required_evidence": [
+      "dbo.JoinReference.ParentId = dbo.Parent.Id",
+      "dbo.JoinReference.BusinessCode = dbo.Parent.Code",
+      "Source modules: dbo.vJoinCandidates",
+      "Index/key: tidak ditemukan. IDENTITY: tidak."
+    ],
+    "forbidden_rows": ["| `dbo.JoinReference` | `NotJoinedId` |", "| `dbo.JoinReference` | `Id` |"]
+  },
+  "procedure_scan": {
+    "name": "dbo.uspPrecision",
+    "accesses": [
+      "READ|dbo.Parent|RESOLVED_STATIC",
+      "INSERT|#work|NOT_PERSISTED",
+      "READ|ParentRows|NOT_PERSISTED",
+      "UPDATE|dbo.Child|RESOLVED_STATIC",
+      "READ|dbo.Child|RESOLVED_STATIC",
+      "MERGE|dbo.Child|RESOLVED_STATIC",
+      "READ|dbo.Parent|RESOLVED_STATIC",
+      "READ|dbo.Child|RESOLVED_STATIC",
+      "READ|dbo.Parent|RESOLVED_STATIC"
+    ],
+    "calls": ["dbo.uspChild", "dbo.uspChild"],
+    "mapping_expressions": ["1"],
+    "has_client_result": true
+  }
+}

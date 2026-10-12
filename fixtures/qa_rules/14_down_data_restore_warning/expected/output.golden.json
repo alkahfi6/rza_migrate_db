@@ -1,0 +1,36 @@
+{
+    "fail":  {
+                 "count":  0,
+                 "items":  [
+
+                           ]
+             },
+    "pass":  {
+                 "count":  1,
+                 "items":  [
+                               {
+                                   "rule":  "EXPECTED_WARN_REASON",
+                                   "severity":  2,
+                                   "file":  "input/fixture.sql",
+                                   "message":  "Expected warn reason: DATA_RESTORE_NOT_GUARANTEED",
+                                   "reason":  "DATA_RESTORE_NOT_GUARANTEED",
+                                   "action":  "warn"
+                               }
+                           ]
+             },
+    "new_migrations":  {
+                           "naming":  {
+                                          "pattern":  "YYYYMMDDHHMMSS\u003cseq\u003e_\u003ccategory\u003e_\u003cobject\u003e_v\u003ck\u003e.(up|down).sql",
+                                          "line_endings":  "LF"
+                                      },
+                           "files":  [
+
+                                     ]
+                       },
+    "notes":  {
+                  "qa_id":  "QA-14",
+                  "command":  "gen",
+                  "expected_exit_code":  0,
+                  "summary":  "Destructive down path must carry data restore warning."
+              }
+}

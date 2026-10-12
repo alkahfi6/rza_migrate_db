@@ -1,0 +1,12 @@
+{
+    "qa_id":  "QA-20",
+    "command":  "fmt|verify|gen",
+    "expected_exit_code":  0,
+    "expected_fail_rules":  [
+
+                            ],
+    "expected_warn_reasons":  [
+
+                              ],
+    "summary":  "Exit code 0/1 matrix must match fail.count."
+}

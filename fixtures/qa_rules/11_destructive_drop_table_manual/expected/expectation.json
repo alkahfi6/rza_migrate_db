@@ -1,0 +1,12 @@
+{
+    "qa_id":  "QA-11",
+    "command":  "gen",
+    "expected_exit_code":  0,
+    "expected_fail_rules":  [
+
+                            ],
+    "expected_warn_reasons":  [
+                                  "DESTRUCTIVE_CHANGE"
+                              ],
+    "summary":  "DROP TABLE is generated with strict empty-data and dependency guards."
+}

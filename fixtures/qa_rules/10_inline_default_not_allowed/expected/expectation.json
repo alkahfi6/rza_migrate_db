@@ -1,0 +1,12 @@
+{
+    "qa_id":  "QA-10",
+    "command":  "verify",
+    "expected_exit_code":  1,
+    "expected_fail_rules":  [
+                                "INLINE_DEFAULT_NOT_ALLOWED"
+                            ],
+    "expected_warn_reasons":  [
+
+                              ],
+    "summary":  "Inline default in table snapshot is forbidden."
+}

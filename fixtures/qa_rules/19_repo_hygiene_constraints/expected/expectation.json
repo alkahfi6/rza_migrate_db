@@ -1,0 +1,12 @@
+{
+    "qa_id":  "QA-19",
+    "command":  "verify",
+    "expected_exit_code":  0,
+    "expected_fail_rules":  [
+
+                            ],
+    "expected_warn_reasons":  [
+
+                              ],
+    "summary":  "Repository helper files are optional; present valid files remain accepted."
+}

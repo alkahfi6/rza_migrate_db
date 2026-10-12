@@ -1,0 +1,36 @@
+{
+    "fail":  {
+                 "count":  1,
+                 "items":  [
+                               {
+                                   "rule":  "INLINE_DEFAULT_NOT_ALLOWED",
+                                   "severity":  3,
+                                   "file":  "input/fixture.sql",
+                                   "message":  "Expected fail rule triggered: INLINE_DEFAULT_NOT_ALLOWED",
+                                   "reason":  "INLINE_DEFAULT_NOT_ALLOWED",
+                                   "action":  "FAIL"
+                               }
+                           ]
+             },
+    "pass":  {
+                 "count":  0,
+                 "items":  [
+
+                           ]
+             },
+    "new_migrations":  {
+                           "naming":  {
+                                          "pattern":  "YYYYMMDDHHMMSS\u003cseq\u003e_\u003ccategory\u003e_\u003cobject\u003e_v\u003ck\u003e.(up|down).sql",
+                                          "line_endings":  "LF"
+                                      },
+                           "files":  [
+
+                                     ]
+                       },
+    "notes":  {
+                  "qa_id":  "QA-10",
+                  "command":  "verify",
+                  "expected_exit_code":  1,
+                  "summary":  "Inline default in table snapshot is forbidden."
+              }
+}

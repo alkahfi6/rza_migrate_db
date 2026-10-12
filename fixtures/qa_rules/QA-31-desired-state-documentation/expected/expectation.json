@@ -1,0 +1,5 @@
+{
+  "scenario": "desired-state documentation",
+  "required_evidence": ["IDENTITY", "PRIMARY_KEY", "UNIQUE_CONSTRAINT", "UNIQUE_INDEX", "DECLARED_FK", "OBSERVED_JOIN", "EXACT_COLUMN_MAPPING_ON_EDGE", "CONNECTED_RELATIONAL_MAP", "NODE_KEY_CONTEXT", "MODULE_LINEAGE", "SOURCE_POSITIONED_ACCESS", "STATEMENT_SCOPED_CTE", "CONCRETE_ARTIFACT_MANIFEST"],
+  "forbidden_inference": "same column names, non-equality operators, ambiguous expressions, temporary objects, stale aliases, and dynamic SQL"
+}

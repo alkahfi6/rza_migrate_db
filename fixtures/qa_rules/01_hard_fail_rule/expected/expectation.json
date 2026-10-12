@@ -1,0 +1,12 @@
+{
+    "qa_id":  "QA-01",
+    "command":  "verify",
+    "expected_exit_code":  1,
+    "expected_fail_rules":  [
+                                "FORBIDDEN_SQL_TOKEN"
+                            ],
+    "expected_warn_reasons":  [
+
+                              ],
+    "summary":  "Severity 3 must force exit 1 and no emit."
+}

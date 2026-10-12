@@ -1,0 +1,12 @@
+{
+    "qa_id":  "QA-26",
+    "command":  "gen",
+    "expected_exit_code":  0,
+    "expected_fail_rules":  [
+
+                            ],
+    "expected_warn_reasons":  [
+
+                              ],
+    "summary":  "Alter column emit must include deterministic precheck mapping for nullability/length/type conversion risks."
+}

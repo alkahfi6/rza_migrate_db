@@ -1,0 +1,1 @@
+CREATE INDEX IX_TableA__status ON dbo.TableA(status);

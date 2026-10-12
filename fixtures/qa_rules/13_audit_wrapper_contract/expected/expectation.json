@@ -1,0 +1,12 @@
+{
+    "qa_id":  "QA-13",
+    "command":  "verify",
+    "expected_exit_code":  0,
+    "expected_fail_rules":  [
+
+                            ],
+    "expected_warn_reasons":  [
+
+                              ],
+    "summary":  "Wrapper and audit metadata must be present."
+}

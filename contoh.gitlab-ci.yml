@@ -1,0 +1,51 @@
+variables:
+  GOLANG_VERSION: "1.26"
+  PROJECT_NAME: wealth
+  SERVICE_NAME: db-reksa-sqlreksa2
+  SERVICE_ROLE_NAME: api
+  HORIZONTAL_NAME: h-treasury
+  DSO_GROUP: dso021
+  ALLOWED_BUILD: /(sit|uat|tags)/g
+  ENV_MAP: |-
+    sit=sit
+    uat=uat
+    tags=prod
+
+include:
+  - project: ocbc/devops/pipeline
+    ref: main
+    file: /main.yaml
+  - project: ocbc/devops/pipeline
+    ref: main
+    file: /templates/golang.yaml
+
+docker-release-dev:
+  extends: .img-release
+  only:
+    - sit
+    - uat
+docker-release-dc1:
+  extends: .img-release-dc1
+  only:
+    - tags
+docker-release-dc2:
+  extends: .img-release-dc2
+  only:
+    - tags
+helm-deploy-dev:
+  extends: .helm-deploy
+  only:
+    - sit
+    - uat
+helm-deploy-dc1:
+  extends: .helm-deploy-dc1
+  variables:
+    HELM_VALUES: .helm-chart/values-prod-dc1.yaml
+  only:
+    - tags
+helm-deploy-dc2:
+  extends: .helm-deploy-dc2
+  variables:
+    HELM_VALUES: .helm-chart/values-prod-dc2.yaml
+  only:
+    - tags

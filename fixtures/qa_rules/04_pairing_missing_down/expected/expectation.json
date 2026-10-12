@@ -1,0 +1,12 @@
+{
+    "qa_id":  "QA-04",
+    "command":  "verify",
+    "expected_exit_code":  1,
+    "expected_fail_rules":  [
+                                "MISSING_MIGRATION_PAIR"
+                            ],
+    "expected_warn_reasons":  [
+
+                              ],
+    "summary":  "Each up migration must have down pair."
+}

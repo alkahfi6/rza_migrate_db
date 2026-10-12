@@ -1,0 +1,12 @@
+{
+    "qa_id":  "QA-23",
+    "command":  "verify",
+    "expected_exit_code":  1,
+    "expected_fail_rules":  [
+                                "WRAPPER_RUN_KEY_INVALID"
+                            ],
+    "expected_warn_reasons":  [
+
+                              ],
+    "summary":  "Generated-style wrapper (DECLARE @file + @file_name=@file) must initialize @run_key with NEWID()."
+}

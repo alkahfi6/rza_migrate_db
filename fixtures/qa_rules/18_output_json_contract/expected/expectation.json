@@ -1,0 +1,12 @@
+{
+    "qa_id":  "QA-18",
+    "command":  "verify",
+    "expected_exit_code":  0,
+    "expected_fail_rules":  [
+
+                            ],
+    "expected_warn_reasons":  [
+
+                              ],
+    "summary":  "Output report must include fail/pass/new_migrations/notes roots."
+}

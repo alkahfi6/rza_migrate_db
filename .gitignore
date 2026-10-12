@@ -1,0 +1,26 @@
+# Generated reports and local execution output.
+out/
+*.output.json
+*.log
+
+# Local credentials and environment configuration.
+mssql_credential.nfm
+.env
+.env.*
+!.env.example
+
+# Temporary copies of application/database repositories and manual test data.
+/App-DB/
+/all_object/
+/real-case-pipeline-repo/
+/test/
+/.tmp/
+/.tmp_*
+tmp_check*/
+
+# Local archives and captured diagnostics.
+/*.zip
+/error-migrate-db.txt
+/getobject.txt
+
+# Keep tests/, fixtures/, and the complete tools/ release in version control.

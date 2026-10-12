@@ -1,0 +1,14 @@
+{
+    "fmt":  {
+                "fail_exit":  1,
+                "pass_exit":  0
+            },
+    "verify":  {
+                   "fail_exit":  1,
+                   "pass_exit":  0
+               },
+    "gen":  {
+                "fail_exit":  1,
+                "pass_exit":  0
+            }
+}

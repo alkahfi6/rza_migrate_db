@@ -1,0 +1,4 @@
+CREATE TABLE dbo.TableB (
+  id INT NOT NULL,
+  CONSTRAINT PK_TableB PRIMARY KEY (id)
+);

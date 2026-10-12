@@ -1,0 +1,6 @@
+<ts>000_tables_dbo.TableA_v1.up.sql
+<ts>001_indexes_dbo.TableA_v1.up.sql
+<ts>002_views_dbo.ViewA_v1.up.sql
+<ts>003_functions_dbo.FuncA_v1.up.sql
+<ts>004_procedures_dbo.ProcA_v1.up.sql
+<ts>005_patch_fix_status_v1.up.sql

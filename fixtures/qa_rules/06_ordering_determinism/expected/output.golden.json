@@ -1,0 +1,41 @@
+{
+    "fail":  {
+                 "count":  0,
+                 "items":  [
+
+                           ]
+             },
+    "pass":  {
+                 "count":  1,
+                 "items":  [
+                               {
+                                   "rule":  "SCENARIO_BASELINE",
+                                   "severity":  0,
+                                   "file":  "input",
+                                   "message":  "Scenario baseline pass for QA-06",
+                                   "reason":  "CREATED",
+                                   "action":  "ok"
+                               }
+                           ]
+             },
+    "new_migrations":  {
+                           "naming":  {
+                                          "pattern":  "YYYYMMDDHHMMSS\u003cseq\u003e_\u003ccategory\u003e_\u003cobject\u003e_v\u003ck\u003e.(up|down).sql",
+                                          "line_endings":  "LF"
+                                      },
+                           "files":  [
+                                         "\u003cts\u003e000_tables_dbo.TableA_v1.up.sql",
+                                         "\u003cts\u003e001_indexes_dbo.TableA_v1.up.sql",
+                                         "\u003cts\u003e002_views_dbo.ViewA_v1.up.sql",
+                                         "\u003cts\u003e003_functions_dbo.FuncA_v1.up.sql",
+                                         "\u003cts\u003e004_procedures_dbo.ProcA_v1.up.sql",
+                                         "\u003cts\u003e005_patch_fix_status_v1.up.sql"
+                                     ]
+                       },
+    "notes":  {
+                  "qa_id":  "QA-06",
+                  "command":  "gen",
+                  "expected_exit_code":  0,
+                  "summary":  "Emit order must follow category sequence."
+              }
+}

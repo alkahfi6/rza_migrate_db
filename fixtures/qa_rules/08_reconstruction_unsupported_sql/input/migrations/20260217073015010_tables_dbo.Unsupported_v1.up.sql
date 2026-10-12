@@ -1,0 +1,4 @@
+CREATE TABLE dbo.Unsupported (
+  id INT NOT NULL,
+  payload VARBINARY(MAX) FILESTREAM NULL
+);

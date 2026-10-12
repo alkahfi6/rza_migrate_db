@@ -1,0 +1,36 @@
+{
+    "fail":  {
+                 "count":  1,
+                 "items":  [
+                               {
+                                   "rule":  "WRAPPER_RUN_KEY_INVALID",
+                                   "severity":  3,
+                                   "file":  "input/fixture.sql",
+                                   "message":  "Expected fail rule triggered: WRAPPER_RUN_KEY_INVALID",
+                                   "reason":  "SQL_ERROR",
+                                   "action":  "FAIL"
+                               }
+                           ]
+             },
+    "pass":  {
+                 "count":  0,
+                 "items":  [
+
+                           ]
+             },
+    "new_migrations":  {
+                           "naming":  {
+                                          "pattern":  "YYYYMMDDHHMMSS\u003cseq\u003e_\u003ccategory\u003e_\u003cobject\u003e_v\u003ck\u003e.(up|down).sql",
+                                          "line_endings":  "LF"
+                                      },
+                           "files":  [
+
+                                     ]
+                       },
+    "notes":  {
+                  "qa_id":  "QA-23",
+                  "command":  "verify",
+                  "expected_exit_code":  1,
+                  "summary":  "Generated-style wrapper (DECLARE @file + @file_name=@file) must initialize @run_key with NEWID()."
+              }
+}

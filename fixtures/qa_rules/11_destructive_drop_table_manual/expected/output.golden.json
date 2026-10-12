@@ -1,0 +1,36 @@
+{
+    "fail":  {
+                 "count":  0,
+                 "items":  [
+
+                           ]
+             },
+    "pass":  {
+                 "count":  1,
+                 "items":  [
+                               {
+                                   "rule":  "EXPECTED_WARN_REASON",
+                                   "severity":  2,
+                                   "file":  "input/fixture.sql",
+                                   "message":  "Expected warn reason: DESTRUCTIVE_CHANGE",
+                                   "reason":  "DESTRUCTIVE_CHANGE",
+                                   "action":  "warn"
+                               }
+                           ]
+             },
+    "new_migrations":  {
+                           "naming":  {
+                                          "pattern":  "YYYYMMDDHHMMSS\u003cseq\u003e_\u003ccategory\u003e_\u003cobject\u003e_v\u003ck\u003e.(up|down).sql",
+                                          "line_endings":  "LF"
+                                      },
+                           "files":  [
+
+                                     ]
+                       },
+    "notes":  {
+                  "qa_id":  "QA-11",
+                  "command":  "gen",
+                  "expected_exit_code":  0,
+                  "summary":  "DROP TABLE is generated with strict empty-data and dependency guards."
+              }
+}

@@ -1,0 +1,12 @@
+{
+    "qa_id":  "QA-14",
+    "command":  "gen",
+    "expected_exit_code":  0,
+    "expected_fail_rules":  [
+
+                            ],
+    "expected_warn_reasons":  [
+                                  "DATA_RESTORE_NOT_GUARANTEED"
+                              ],
+    "summary":  "Destructive down path must carry data restore warning."
+}

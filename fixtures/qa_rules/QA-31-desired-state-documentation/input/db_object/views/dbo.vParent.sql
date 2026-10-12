@@ -1,0 +1,1 @@
+CREATE OR ALTER VIEW dbo.vParent AS SELECT Id FROM dbo.Parent;

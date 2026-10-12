@@ -1,0 +1,11 @@
+# Optional migration job template. It is deliberately not included by the
+# authoring checker pipeline. GitLab serializes jobs in this project while the
+# SQL Server driver in golang-migrate holds its own session applock for the
+# complete migration lifecycle.
+
+.migration_with_lock_template:
+  stage: deploy
+  resource_group: rza-migrate-db
+  script:
+    - test -n "$MSSQL_DSN"
+    - migrate -path ./migrations -database "$MSSQL_DSN" up

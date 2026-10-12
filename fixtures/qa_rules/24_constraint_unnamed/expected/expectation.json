@@ -1,0 +1,12 @@
+{
+    "qa_id":  "QA-24",
+    "command":  "verify",
+    "expected_exit_code":  1,
+    "expected_fail_rules":  [
+        "UNNAMED_CONSTRAINT_NOT_ALLOWED"
+                            ],
+    "expected_warn_reasons":  [
+
+                              ],
+    "summary":  "Constraint naming is a hard gate; unnamed constraints are not allowed."
+}

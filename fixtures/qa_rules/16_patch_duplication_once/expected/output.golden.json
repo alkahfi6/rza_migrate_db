@@ -1,0 +1,36 @@
+{
+    "fail":  {
+                 "count":  0,
+                 "items":  [
+
+                           ]
+             },
+    "pass":  {
+                 "count":  1,
+                 "items":  [
+                               {
+                                   "rule":  "SCENARIO_BASELINE",
+                                   "severity":  0,
+                                   "file":  "input",
+                                   "message":  "Scenario baseline pass for QA-16",
+                                   "reason":  "CREATED",
+                                   "action":  "ok"
+                               }
+                           ]
+             },
+    "new_migrations":  {
+                           "naming":  {
+                                          "pattern":  "YYYYMMDDHHMMSS\u003cseq\u003e_\u003ccategory\u003e_\u003cobject\u003e_v\u003ck\u003e.(up|down).sql",
+                                          "line_endings":  "LF"
+                                      },
+                           "files":  [
+
+                                     ]
+                       },
+    "notes":  {
+                  "qa_id":  "QA-16",
+                  "command":  "gen",
+                  "expected_exit_code":  0,
+                  "summary":  "Existing patch_name migration must skip duplicate generation."
+              }
+}

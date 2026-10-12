@@ -1,0 +1,7 @@
+# Database Relationship Catalog
+
+Report ini menyimpan audit detail untuk `relational_erd.md`. Gunakan nomor `Relationship Group` dan `Connection Set` yang sama untuk mencocokkan diagram dengan exact column mapping, join type, confidence, dan source module.
+
+Relationship hanya berasal dari foreign key di `db_object/tables` atau equality JOIN yang terlihat pada `db_object/views` dan `db_object/procedures`. Kesamaan nama kolom saja tidak dianggap sebagai relasi. `OBSERVED_JOIN` membuktikan pemakaian bersama dalam SQL, tetapi tidak membuktikan referential integrity, uniqueness, atau cardinality.
+
+Tidak ditemukan relationship yang dapat dibuktikan dari source.

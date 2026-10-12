@@ -1,0 +1,36 @@
+{
+    "fail":  {
+                 "count":  1,
+                 "items":  [
+                               {
+                                   "rule":  "INVALID_VERSION_FORMAT",
+                                   "severity":  3,
+                                   "file":  "input/fixture.sql",
+                                   "message":  "Expected fail rule triggered: INVALID_VERSION_FORMAT",
+                                   "reason":  "SQL_ERROR",
+                                   "action":  "FAIL"
+                               }
+                           ]
+             },
+    "pass":  {
+                 "count":  0,
+                 "items":  [
+
+                           ]
+             },
+    "new_migrations":  {
+                           "naming":  {
+                                          "pattern":  "YYYYMMDDHHMMSS\u003cseq\u003e_\u003ccategory\u003e_\u003cobject\u003e_v\u003ck\u003e.(up|down).sql",
+                                          "line_endings":  "LF"
+                                      },
+                           "files":  [
+
+                                     ]
+                       },
+    "notes":  {
+                  "qa_id":  "QA-05",
+                  "command":  "verify",
+                  "expected_exit_code":  1,
+                  "summary":  "Version must be 17 digits."
+              }
+}

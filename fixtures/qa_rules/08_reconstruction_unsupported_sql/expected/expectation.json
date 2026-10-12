@@ -1,0 +1,12 @@
+{
+    "qa_id":  "QA-08",
+    "command":  "gen",
+    "expected_exit_code":  1,
+    "expected_fail_rules":  [
+                                "UNSUPPORTED_SQL_SUBSET"
+                            ],
+    "expected_warn_reasons":  [
+
+                              ],
+    "summary":  "Unsupported SQL in history must fail reconstruction."
+}

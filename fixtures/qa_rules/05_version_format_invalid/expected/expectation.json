@@ -1,0 +1,12 @@
+{
+    "qa_id":  "QA-05",
+    "command":  "verify",
+    "expected_exit_code":  1,
+    "expected_fail_rules":  [
+                                "INVALID_VERSION_FORMAT"
+                            ],
+    "expected_warn_reasons":  [
+
+                              ],
+    "summary":  "Version must be 17 digits."
+}

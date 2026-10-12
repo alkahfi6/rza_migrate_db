@@ -1,0 +1,6 @@
+CREATE TABLE dbo.Child (
+  Id INT NOT NULL,
+  ParentId INT NOT NULL,
+  CONSTRAINT PK_Child PRIMARY KEY (Id),
+  CONSTRAINT FK_Child_Parent FOREIGN KEY (ParentId) REFERENCES dbo.Parent (Id)
+);

@@ -1,0 +1,12 @@
+{
+    "qa_id":  "QA-09",
+    "command":  "verify",
+    "expected_exit_code":  1,
+    "expected_fail_rules":  [
+                                "FILE_OBJECT_MISMATCH"
+                            ],
+    "expected_warn_reasons":  [
+
+                              ],
+    "summary":  "Filename and SQL object name must match."
+}

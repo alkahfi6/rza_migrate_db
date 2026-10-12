@@ -1,0 +1,12 @@
+{
+    "qa_id":  "QA-15",
+    "command":  "gen",
+    "expected_exit_code":  0,
+    "expected_fail_rules":  [
+
+                            ],
+    "expected_warn_reasons":  [
+
+                              ],
+    "summary":  "Patch folder name must canonicalize to patch_name token."
+}

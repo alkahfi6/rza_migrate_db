@@ -1,0 +1,43 @@
+{
+    "schema":  "RZA_RELEASE_V1",
+    "version":  "20261012.005536",
+    "build_time":  "2026-10-12T00:55:36Z",
+    "source_sha256":  "b7ea52d485c1f652d9d1fb3a9d9f7a956ecada1fdf63f74c7ed0378eb1c8ef0e",
+    "artifacts":  [
+                      {
+                          "path":  "tools/rza_migrate_db.exe",
+                          "sha256":  "d6f476da97a36bde6cb4292389623c541c0c0dcb0b2c75918e2f5a40e865398c",
+                          "size":  5897728
+                      },
+                      {
+                          "path":  "tools/rza_migrate_check.exe",
+                          "sha256":  "e136737791eb30432758cf367f6b4062bfa5e7558db368daec5f50fb5338b6fc",
+                          "size":  17775104
+                      },
+                      {
+                          "path":  "tools/rza_migrate_report.exe",
+                          "sha256":  "464dc01b21b803b3adcb24a81211f35fe90d81d64e6c7a76eec162e3b5193f10",
+                          "size":  3654144
+                      },
+                      {
+                          "path":  "tools/linux-amd64/rza_migrate_db",
+                          "sha256":  "e08464136a5db2099181614fb09d9150d997751f43f275a52637c88a41e68752",
+                          "size":  5628066
+                      },
+                      {
+                          "path":  "tools/linux-amd64/rza_migrate_check",
+                          "sha256":  "5857f67e23ef5acee5e11ced8c5f2a29af27cc61854ae6c89e8860d866cb9769",
+                          "size":  17199266
+                      },
+                      {
+                          "path":  "tools/linux-amd64/rza_migrate_report",
+                          "sha256":  "1a33ff335ef0ce6ac43a075edc4ff3e87c9ca7a9e7746c75f5b6c554ef0fa789",
+                          "size":  3494050
+                      },
+                      {
+                          "path":  "tools/license.key",
+                          "sha256":  "4e182653d9d3fdcd1223fef223fa009a314709113b83e58a7503a0e46d2fee95",
+                          "size":  169
+                      }
+                  ]
+}

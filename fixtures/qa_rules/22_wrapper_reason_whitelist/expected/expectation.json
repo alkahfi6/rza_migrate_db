@@ -1,0 +1,12 @@
+{
+    "qa_id":  "QA-22",
+    "command":  "verify",
+    "expected_exit_code":  1,
+    "expected_fail_rules":  [
+                                "WRAPPER_AUDIT_REASON_INVALID"
+                            ],
+    "expected_warn_reasons":  [
+
+                              ],
+    "summary":  "Generated-style wrapper (DECLARE @file + @file_name=@file) reason must be in whitelist."
+}
