@@ -50,6 +50,7 @@ try {
     foreach($file in $files) {
         $rel = [IO.Path]::GetRelativePath($root, $file.FullName).Replace('\','/')
         $data = [UatAuditAst]::Parse($file.FullName, $rel)
+        $data['sha256'] = (Get-FileHash -LiteralPath $file.FullName -Algorithm SHA256).Hash.ToLowerInvariant()
         $writer.WriteLine([System.Text.Json.JsonSerializer]::Serialize($data, $data.GetType(), [System.Text.Json.JsonSerializerOptions]::new()))
     }
     Write-Output ('Parsed {0} source files' -f $files.Count)

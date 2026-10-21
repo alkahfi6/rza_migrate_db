@@ -1,0 +1,63 @@
+{
+  "sources": {
+    "retail/functions": 96,
+    "retail/indexes": 485,
+    "retail/procedures": 1063,
+    "retail/tables": 676,
+    "retail/views": 150,
+    "sql_replicate/indexes": 119,
+    "sql_replicate/procedures": 2,
+    "sql_replicate/tables": 165
+  },
+  "parser": "Microsoft.SqlServer.TransactSql.ScriptDom 180.140.0; TSql170Parser; QUOTED_IDENTIFIER=True",
+  "parse_errors": [
+    {
+      "database": "retail",
+      "file": "procedures/dbo.TRSPopulateHapusTransaksiSuratBerharga.sql",
+      "errors": [
+        {
+          "line": 190,
+          "number": 46010,
+          "message": "Incorrect syntax near ','."
+        },
+        {
+          "line": 251,
+          "number": 46001,
+          "message": "An internal parser error occurred."
+        }
+      ]
+    }
+  ],
+  "predicate_binding": {
+    "TYPED": 20443,
+    "UNRESOLVED_OR_COMPLEX": 1422
+  },
+  "conversion_categories": {
+    "NUMERIC_FAMILY": 3184,
+    "OPERAND_TEXT_TO_DATE": 157,
+    "OPERAND_TO_UNICODE": 107,
+    "COLUMN_TEXT_TO_NUMERIC": 491,
+    "TEXT_FAMILY_ONLY": 1587,
+    "COLUMN_TO_UNICODE": 90,
+    "OTHER_TYPE_DIFFERENCE": 46,
+    "OPERAND_TEXT_TO_NUMERIC": 175,
+    "COLUMN_TEXT_TO_DATE": 24
+  },
+  "conversion_procedures": 592,
+  "patterns": {
+    "WHILE": 154,
+    "SCALAR_UDF_CALL": 754,
+    "OR_PREDICATE": 1969,
+    "SELECT_STAR": 497,
+    "FUNCTION_ON_COLUMN_IN_PREDICATE": 2487,
+    "CURSOR": 41,
+    "DYNAMIC_SQL": 75,
+    "LEADING_WILDCARD": 142,
+    "DISTINCT": 171,
+    "UNION_DEDUP": 764
+  },
+  "indexes": 1050,
+  "table_columns": 12675,
+  "cfmast_predicates": 171,
+  "cfmast_modules": 33
+}

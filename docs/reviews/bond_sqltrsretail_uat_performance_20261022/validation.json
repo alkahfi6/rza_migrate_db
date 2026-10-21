@@ -1,0 +1,262 @@
+{
+  "success": true,
+  "date": "2026-10-22",
+  "head_at_validation": "23b10bb63474eedf2d490c653068bf2a2ac9b0ae",
+  "scriptdom_dll_sha256": "5eb811e69fb56459db7acf3d32c3a59a0a725703be6d9ed9458f8f237e697c55",
+  "checks": [
+    {
+      "id": "protected_sql_unchanged",
+      "pass": true,
+      "detail": {
+        "files": 7856,
+        "migration_files": 5100,
+        "boundary": "No source/migration mutation since protected baseline capture"
+      }
+    },
+    {
+      "id": "all_input_hashes_match",
+      "pass": true,
+      "detail": {
+        "sources": 2756
+      }
+    },
+    {
+      "id": "conversion_evidence_snippets_exist",
+      "pass": true,
+      "detail": {
+        "rows": 5861,
+        "note": "Every compact predicate matches exact case-preserved source text"
+      }
+    },
+    {
+      "id": "oracle_dbo.TRSRPTMasterNasabahPerubahanObligasi2_45",
+      "pass": true,
+      "detail": {
+        "file": "procedures/dbo.TRSRPTMasterNasabahPerubahanObligasi2.sql",
+        "line": 45,
+        "expected": [
+          "COLUMN_TEXT_TO_NUMERIC",
+          "CHAR(19)",
+          "BIGINT",
+          "left"
+        ]
+      }
+    },
+    {
+      "id": "oracle_dbo.TRSUpdateDataMasterNasabah_121",
+      "pass": true,
+      "detail": {
+        "file": "procedures/dbo.TRSUpdateDataMasterNasabah.sql",
+        "line": 121,
+        "expected": [
+          "COLUMN_TEXT_TO_NUMERIC",
+          "BIGINT",
+          "CHAR(19)",
+          "right"
+        ]
+      }
+    },
+    {
+      "id": "oracle_dbo.TRSSyncMasterRiskProfileData_24",
+      "pass": true,
+      "detail": {
+        "file": "procedures/dbo.TRSSyncMasterRiskProfileData.sql",
+        "line": 24,
+        "expected": [
+          "COLUMN_TEXT_TO_NUMERIC",
+          "BIGINT",
+          "VARCHAR(19)",
+          "right"
+        ]
+      }
+    },
+    {
+      "id": "oracle_dbo.PTOSProsesDataJobNasabah_94",
+      "pass": true,
+      "detail": {
+        "file": "procedures/dbo.PTOSProsesDataJobNasabah.sql",
+        "line": 94,
+        "expected": [
+          "COLUMN_TO_UNICODE",
+          "NVARCHAR(255)",
+          "CHAR(40)",
+          "right"
+        ]
+      }
+    },
+    {
+      "id": "oracle_dbo.Rvmp_TRSPTOSProcessUpload_108",
+      "pass": true,
+      "detail": {
+        "file": "procedures/dbo.Rvmp_TRSPTOSProcessUpload.sql",
+        "line": 108,
+        "expected": [
+          "COLUMN_TEXT_TO_NUMERIC",
+          "CHAR(7)",
+          "INT",
+          "left"
+        ]
+      }
+    },
+    {
+      "id": "oracle_dbo.TRSHasilRevenueBondJurnalGL_134",
+      "pass": true,
+      "detail": {
+        "file": "procedures/dbo.TRSHasilRevenueBondJurnalGL.sql",
+        "line": 134,
+        "expected": [
+          "COLUMN_TEXT_TO_DATE",
+          "VARCHAR(8)",
+          "DATETIME",
+          "left"
+        ]
+      }
+    },
+    {
+      "id": "oracle_dbo.ORISBNIPopulateEarlyRedemption_33",
+      "pass": true,
+      "detail": {
+        "file": "procedures/dbo.ORISBNIPopulateEarlyRedemption.sql",
+        "line": 33,
+        "expected": [
+          "COLUMN_TEXT_TO_NUMERIC",
+          "VARCHAR(100)",
+          "INT",
+          "left"
+        ]
+      }
+    },
+    {
+      "id": "case_not_misreported_as_filter",
+      "pass": true,
+      "detail": "CFIEX7 CASE conversions have separate context"
+    },
+    {
+      "id": "cfmast_padded_text_not_numeric_risk",
+      "pass": true,
+      "detail": "CFCIF is CHAR(19), not CFCIF# BIGINT"
+    },
+    {
+      "id": "all_retail_procedures_in_summary",
+      "pass": true,
+      "detail": "One coverage row per procedure, including parse failure"
+    },
+    {
+      "id": "clustered_and_constraints_included",
+      "pass": true,
+      "detail": "PK index counted separately from index files"
+    },
+    {
+      "id": "securityno_workload_reconciles",
+      "pass": true,
+      "detail": "148 source procedures, not execution frequency"
+    },
+    {
+      "id": "synthetic_fixture_parse",
+      "pass": true,
+      "detail": "Parsed 5 source files"
+    },
+    {
+      "id": "synthetic_numeric_column_direction",
+      "pass": true,
+      "detail": "View lineage + parameter precedence"
+    },
+    {
+      "id": "synthetic_parameter_direction",
+      "pass": true,
+      "detail": "No column conversion for BIGINT column vs VARCHAR parameter"
+    },
+    {
+      "id": "synthetic_shadowed_alias",
+      "pass": true,
+      "detail": "Nested alias resolves AuditOther.CIFNumber BIGINT, not outer CHAR table"
+    },
+    {
+      "id": "synthetic_cte_lineage",
+      "pass": true,
+      "detail": "CTE alias output id inherits BIGINT"
+    },
+    {
+      "id": "synthetic_unicode_direction",
+      "pass": true,
+      "detail": "CHAR key vs NVARCHAR temporary key"
+    },
+    {
+      "id": "synthetic_case_context",
+      "pass": true,
+      "detail": "CASE is not a WHERE/JOIN access predicate"
+    },
+    {
+      "id": "synthetic_select_into_lineage",
+      "pass": true,
+      "detail": "SELECT INTO inherits CHAR, keeps temp identity"
+    },
+    {
+      "id": "synthetic_in_numeric",
+      "pass": true,
+      "detail": "IN list grouped by operand type"
+    },
+    {
+      "id": "synthetic_index_order",
+      "pass": true,
+      "detail": "Second index key does not count as leading-key search"
+    },
+    {
+      "id": "synthetic_dynamic_not_bound",
+      "pass": true,
+      "detail": "SQL strings are dynamic boundaries, not static SQL comparisons"
+    },
+    {
+      "id": "synthetic_utf16_crlf_spans",
+      "pass": true,
+      "detail": "CRLF and non-BMP text before AST spans"
+    },
+    {
+      "id": "proposed_sql_syntax",
+      "pass": true,
+      "detail": {
+        "create_statements": 18,
+        "parsed_files": 20,
+        "runtime": "NOT_RUN"
+      }
+    },
+    {
+      "id": "render_idempotent",
+      "pass": true,
+      "detail": [
+        "index_candidates.csv",
+        "index_candidates.md",
+        "index_workload.csv",
+        "recommended_indexes.sql",
+        "procedure_summary.csv",
+        "procedure_listing.md"
+      ]
+    },
+    {
+      "id": "protected_sql_still_unchanged",
+      "pass": true,
+      "detail": "After synthetic tests and report rerender"
+    }
+  ],
+  "limitations": {
+    "SQL_Server_runtime": "NOT_RUN",
+    "actual_execution_plans": "NOT_AVAILABLE",
+    "engine_go_tests_build": "NOT_RUN_NOT_APPLICABLE_REPORT_ONLY",
+    "audit_independent_agent_evaluation": "NOT_RUN"
+  },
+  "artifact_sha256": {
+    "index_candidates.csv": "b16fdc060a410f11635cf1e7f9a29147d4a3536729a9da9bb8574cccbf097046",
+    "index_candidates.md": "6adccf19df8c2ae6aad9c9e0e8ad60b9cbc733357fc428b843e99fecb24f7dba",
+    "index_workload.csv": "8fa9d9cd55eae4f7d86a3ab02effeeedc81738857c16638db662b45fc32a61cd",
+    "recommended_indexes.sql": "5108b713330b943ea5cc1ff4a810c2b86eeb887bd415455ba57e6412291619f6",
+    "procedure_summary.csv": "0cdfbced6f1f199bd757ea48d1bf7bf462b7fb7855daa54801b0f681c5b6eb62",
+    "procedure_listing.md": "71a42433c23b1a845b34a2bdb7affd685178a4027d97bd9a1372e39b8a982055",
+    "REPORT.md": "286013ea65b5b750f5f1e0efbc7d7536aeb8613662ee0abd1efc63f838d0ca9e",
+    "analyze.py": "6f063ea54b9b755a34cf7a843715a18b4210cade3ccfbdf1b094000a790d70bb",
+    "extract_ast.ps1": "d63a234e799d9c11c6a8ae752e9e375b5f3d2a80373a0e105a22b16a1a2ec959",
+    "package_report.py": "eb829802c278413ce9920d4e4e5c8349db8b6eb86ed175b278882b8e31c13713",
+    "validate_audit.py": "8b3efbc2f9c639c70eed7db203fb220a99ce2cf45af7e27e9f9fc2b46a6a999c",
+    "recommendations.json": "a22170275f11647780bb4ac42d6b27b26e363542134a3316c1250c269cff78f2",
+    "source_manifest.csv": "1fd0c8155d3a1c0e720623e3265eede130baa8721c6edebbc28f1ad767812078"
+  }
+}

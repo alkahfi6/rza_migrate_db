@@ -1,0 +1,172 @@
+﻿file,line,predicate,column,type,column_source,other_type,index
+procedures/dbo.OMTrxSecPreBook.sql,412,CFCIF = @cCIFNo,CFCIF,CHAR(19),tables/dbo.CFMAST.sql:6,varchar(30),idx_cfmast_cfcif
+procedures/dbo.ProTRSReportCOD067.sql,10,"CFCIF=RIGHT('0000000000000000000'+@pvcCIF,19)",CFCIF,CHAR(19),tables/dbo.CFMAST.sql:6,varchar(19),idx_cfmast_cfcif
+procedures/dbo.PTOSPopulateConsentNasabahPTOS.sql,85,inf.CIFNo = tm.CFCIF,CFCIF,CHAR(19),tables/dbo.CFMAST.sql:6,VARCHAR(19),idx_cfmast_cfcif
+procedures/dbo.PTOSProsesDataJobNasabah.sql,94,tmp.[Nomor KTP] = v.CFSSNO,CFSSNO,CHAR(40),tables/dbo.CFMAST.sql:43,NVARCHAR(255),idx_cfmast_cfssno
+procedures/dbo.PTOSProsesDataJobNasabah.sql,97,"convert(varchar, tmp.[Tanggal Lahir], 112) = CONVERT(VARCHAR(8),dbo.fnJulianToDatetime(CFBIRD),112)",CFBIRD,CHAR(7),tables/dbo.CFMAST.sql:46,COMPLEX/UNRESOLVED,
+procedures/dbo.PTOSProsesDataJobNasabah.sql,94,"v.CFSSCD IN ('KTP', 'KTPS')",CFSSCD,CHAR(4),tables/dbo.CFMAST.sql:44,varchar,
+procedures/dbo.Rvmp_TRSPTOSProcessUpload.sql,108,dt.CFBIRD = tmpCus.TglLahirJul,CFBIRD,CHAR(7),tables/dbo.CFMAST.sql:46,INT,
+procedures/dbo.Rvmp_TRSPTOSProcessUpload.sql,109,dt.CFSSNO = tmpCus.NoIdentitas,CFSSNO,CHAR(40),tables/dbo.CFMAST.sql:43,VARCHAR(40),idx_cfmast_cfssno
+procedures/dbo.Rvmp_TRSPTOSProcessUpload.sql,109,"dt.CFSSCD IN ('KTP', 'KTPS')",CFSSCD,CHAR(4),tables/dbo.CFMAST.sql:44,varchar,
+procedures/dbo.trs_getExpiredKTPNasabah.sql,20,"ISNULL(CFIEX7, '0') = '0'",CFIEX7,CHAR(7),tables/dbo.CFMAST.sql:72,COMPLEX/UNRESOLVED,
+procedures/dbo.trs_getExpiredKTPNasabah.sql,25,CFCIF = @CIFNo,CFCIF,CHAR(19),tables/dbo.CFMAST.sql:6,VARCHAR(19),idx_cfmast_cfcif
+procedures/dbo.trs_getExpiredKTPNasabah.sql,26,CFSSCD = @CFIIDS,CFSSCD,CHAR(4),tables/dbo.CFMAST.sql:44,CHAR(4),
+procedures/dbo.trs_ListTreasuryCustomer_TM_Original.sql,236,tctm.CIFNo = cfm.CFCIF,CFCIF,CHAR(19),tables/dbo.CFMAST.sql:6,VARCHAR(19),idx_cfmast_cfcif
+procedures/dbo.trs_ListTreasuryCustomer_TM_Original.sql,402,tctm.CIFNo = cfm.CFCIF,CFCIF,CHAR(19),tables/dbo.CFMAST.sql:6,VARCHAR(19),idx_cfmast_cfcif
+procedures/dbo.TRSDataNasabahRetailIndividu.sql,264,cfmast.CFSSCD = 'KTP',CFSSCD,CHAR(4),tables/dbo.CFMAST.sql:44,varchar,
+procedures/dbo.TRSDataNasabahRetailIndividu.sql,264,cfmast.CFSSCD = 'KTPS',CFSSCD,CHAR(4),tables/dbo.CFMAST.sql:44,varchar,
+procedures/dbo.TRSDataNasabahRetailIndividu.sql,271,cfmast.CFSSCD = 'KTP',CFSSCD,CHAR(4),tables/dbo.CFMAST.sql:44,varchar,
+procedures/dbo.TRSDataNasabahRetailIndividu.sql,271,cfmast.CFSSCD = 'KTPS',CFSSCD,CHAR(4),tables/dbo.CFMAST.sql:44,varchar,
+procedures/dbo.TRSDataNasabahRetailIndividu.sql,271,"ISNULL(cfmast.CFSSNO, '') <> ''",CFSSNO,CHAR(40),tables/dbo.CFMAST.sql:43,COMPLEX/UNRESOLVED,idx_cfmast_cfssno
+procedures/dbo.TRSDataNasabahRetailIndividu.sql,279,cfmast.CFSSCD = 'PP',CFSSCD,CHAR(4),tables/dbo.CFMAST.sql:44,varchar,
+procedures/dbo.TRSDataNasabahRetailIndividu.sql,286,cfmast.CFSSCD = 'PP',CFSSCD,CHAR(4),tables/dbo.CFMAST.sql:44,varchar,
+procedures/dbo.TRSDataNasabahRetailIndividu.sql,286,"ISNULL(cfmast.CFSSNO,'') <> ''",CFSSNO,CHAR(40),tables/dbo.CFMAST.sql:43,COMPLEX/UNRESOLVED,idx_cfmast_cfssno
+procedures/dbo.TRSDataNasabahRetailIndividu.sql,295,cfmast.CFUIC2 = 'B',CFUIC2,CHAR(1),tables/dbo.CFMAST.sql:63,varchar,
+procedures/dbo.TRSDataNasabahRetailIndividu.sql,296,cfmast.CFUIC2 = 'A',CFUIC2,CHAR(1),tables/dbo.CFMAST.sql:63,varchar,
+procedures/dbo.TRSDataNasabahRetailIndividu.sql,297,cfmast.CFUIC2 = 'C',CFUIC2,CHAR(1),tables/dbo.CFMAST.sql:63,varchar,
+procedures/dbo.TRSDataNasabahRetailIndividu.sql,304,mnc._CIFNo = cfmast.CFCIF,CFCIF,CHAR(19),tables/dbo.CFMAST.sql:6,VARCHAR(19),idx_cfmast_cfcif
+procedures/dbo.TRSDataNasabahRetailIndividu.sql,391,mnc._CIFNo = cfmast.CFCIF,CFCIF,CHAR(19),tables/dbo.CFMAST.sql:6,VARCHAR(19),idx_cfmast_cfcif
+procedures/dbo.TRSDataNasabahRetailIndividuOrchid.sql,231,cfmast.CFSSCD = 'KTP',CFSSCD,CHAR(4),tables/dbo.CFMAST.sql:44,varchar,
+procedures/dbo.TRSDataNasabahRetailIndividuOrchid.sql,231,cfmast.CFSSCD = 'KTPS',CFSSCD,CHAR(4),tables/dbo.CFMAST.sql:44,varchar,
+procedures/dbo.TRSDataNasabahRetailIndividuOrchid.sql,238,cfmast.CFSSCD = 'PP',CFSSCD,CHAR(4),tables/dbo.CFMAST.sql:44,varchar,
+procedures/dbo.TRSDataNasabahRetailIndividuOrchid.sql,244,cfmast.CFSSCD = 'PP',CFSSCD,CHAR(4),tables/dbo.CFMAST.sql:44,varchar,
+procedures/dbo.TRSDataNasabahRetailIndividuOrchid.sql,244,"ISNULL(cfmast.CFSSNO,'') <> ''",CFSSNO,CHAR(40),tables/dbo.CFMAST.sql:43,COMPLEX/UNRESOLVED,idx_cfmast_cfssno
+procedures/dbo.TRSDataNasabahRetailIndividuOrchid.sql,252,cfmast.CFSEX = 'M',CFSEX,CHAR(1),tables/dbo.CFMAST.sql:48,varchar,
+procedures/dbo.TRSDataNasabahRetailIndividuOrchid.sql,253,cfmast.CFSEX = 'F',CFSEX,CHAR(1),tables/dbo.CFMAST.sql:48,varchar,
+procedures/dbo.TRSDataNasabahRetailIndividuOrchid.sql,258,cfmast.CFUIC2 = 'B',CFUIC2,CHAR(1),tables/dbo.CFMAST.sql:63,varchar,
+procedures/dbo.TRSDataNasabahRetailIndividuOrchid.sql,259,cfmast.CFUIC2 = 'A',CFUIC2,CHAR(1),tables/dbo.CFMAST.sql:63,varchar,
+procedures/dbo.TRSDataNasabahRetailIndividuOrchid.sql,260,cfmast.CFUIC2 = 'C',CFUIC2,CHAR(1),tables/dbo.CFMAST.sql:63,varchar,
+procedures/dbo.TRSDataNasabahRetailIndividuOrchid.sql,267,mnc._CIFNo = cfmast.CFCIF,CFCIF,CHAR(19),tables/dbo.CFMAST.sql:6,VARCHAR(19),idx_cfmast_cfcif
+procedures/dbo.TRSDataNasabahRetailIndividuOrchid.sql,282,cfmast.CFCLAS = ti.CFCLAS,CFCLAS,CHAR(1),tables/dbo.CFMAST.sql:49,VARCHAR(1),
+procedures/dbo.TRSDataNasabahRetailIndividuOrchid.sql,280,mnc._CIFNo = cfmast.CFCIF,CFCIF,CHAR(19),tables/dbo.CFMAST.sql:6,VARCHAR(19),idx_cfmast_cfcif
+procedures/dbo.TRSDataNasabahRetailInstitusi.sql,237,cfmast.CFCLAS = ti.CFCLAS,CFCLAS,CHAR(1),tables/dbo.CFMAST.sql:49,VARCHAR(1),
+procedures/dbo.TRSDataNasabahRetailInstitusi.sql,235,mnc._CIFNo = cfmast.CFCIF,CFCIF,CHAR(19),tables/dbo.CFMAST.sql:6,VARCHAR(19),idx_cfmast_cfcif
+procedures/dbo.TRSDataNasabahRetailInstitusi.sql,327,mnc._CIFNo = cfmast.CFCIF,CFCIF,CHAR(19),tables/dbo.CFMAST.sql:6,VARCHAR(19),idx_cfmast_cfcif
+procedures/dbo.TRSDataNasabahRetailInstitusi.sql,333,mnc._CIFNo = cfmast.CFCIF,CFCIF,CHAR(19),tables/dbo.CFMAST.sql:6,VARCHAR(19),idx_cfmast_cfcif
+procedures/dbo.TRSDataNasabahRetailInstitusi.sql,333,mnc.NPWP = cfmast.CFSSNO,CFSSNO,CHAR(40),tables/dbo.CFMAST.sql:43,VARCHAR(90),idx_cfmast_cfssno
+procedures/dbo.TRSDataNasabahRetailInstitusi.sql,333,CFSSCD = 'NPWP',CFSSCD,CHAR(4),tables/dbo.CFMAST.sql:44,varchar,
+procedures/dbo.TRSDataNasabahRetailInstitusi.sql,334,"ISNULL (cfmast.CFISD6, 0) <> 0",CFISD6,CHAR(8),tables/dbo.CFMAST.sql:92,COMPLEX/UNRESOLVED,
+procedures/dbo.TRSDataNasabahRetailInstitusi.sql,341,mnc._CIFNo = cfmast.CFCIF,CFCIF,CHAR(19),tables/dbo.CFMAST.sql:6,VARCHAR(19),idx_cfmast_cfcif
+procedures/dbo.TRSDataNasabahRetailInstitusi.sql,341,CFSSCD = 'SKD',CFSSCD,CHAR(4),tables/dbo.CFMAST.sql:44,varchar,
+procedures/dbo.TRSDataNasabahRetailInstitusi.sql,347,mnc._CIFNo = cfmast.CFCIF,CFCIF,CHAR(19),tables/dbo.CFMAST.sql:6,VARCHAR(19),idx_cfmast_cfcif
+procedures/dbo.TRSDataNasabahRetailInstitusi.sql,347,CFSSCD = 'APP',CFSSCD,CHAR(4),tables/dbo.CFMAST.sql:44,varchar,
+procedures/dbo.TRSDataNasabahRetailInstitusi.sql,353,mnc._CIFNo = cfmast.CFCIF,CFCIF,CHAR(19),tables/dbo.CFMAST.sql:6,VARCHAR(19),idx_cfmast_cfcif
+procedures/dbo.TRSDataNasabahRetailInstitusi.sql,353,CFSSCD = 'SIUP',CFSSCD,CHAR(4),tables/dbo.CFMAST.sql:44,varchar,
+procedures/dbo.TRSDataNasabahRetailInstitusiOrchid.sql,213,mnc._CIFNo = cfmast.CFCIF,CFCIF,CHAR(19),tables/dbo.CFMAST.sql:6,VARCHAR(19),idx_cfmast_cfcif
+procedures/dbo.TRSDataNasabahRetailInstitusiOrchid.sql,228,cfmast.CFCLAS = ti.CFCLAS,CFCLAS,CHAR(1),tables/dbo.CFMAST.sql:49,VARCHAR(1),
+procedures/dbo.TRSDataNasabahRetailInstitusiOrchid.sql,226,mnc._CIFNo = cfmast.CFCIF,CFCIF,CHAR(19),tables/dbo.CFMAST.sql:6,VARCHAR(19),idx_cfmast_cfcif
+procedures/dbo.TRSGetJenisNasabahCIF.sql,6,"cf.CFCIF = right(replicate('0',19)+ @pcCIF, 19)",CFCIF,CHAR(19),tables/dbo.CFMAST.sql:6,varchar(19),idx_cfmast_cfcif
+procedures/dbo.TRSJobSyncKITAS.sql,16,"ltrim(rtrim(isnull(tc.[KITASNo], ''))) <> ltrim(rtrim(isnull(cf.[CFSSNO], '')))",CFSSNO,CHAR(40),tables/dbo.CFMAST.sql:43,COMPLEX/UNRESOLVED,idx_cfmast_cfssno
+procedures/dbo.TRSJobSyncKITAS.sql,17,"convert(varchar(8), tc.[KITASExpDate], 112) <> ltrim(rtrim(cf.[CFIEX6]))",CFIEX6,CHAR(8),tables/dbo.CFMAST.sql:71,COMPLEX/UNRESOLVED,
+procedures/dbo.TRSJobSyncKITAS.sql,25,tc.[CIFNo] = cf.[CFCIF],CFCIF,CHAR(19),tables/dbo.CFMAST.sql:6,VARCHAR(19),idx_cfmast_cfcif
+procedures/dbo.TRSJobSyncKITAS.sql,26,cf.[CFCITZ] <> '000',CFCITZ,CHAR(3),tables/dbo.CFMAST.sql:34,varchar,
+procedures/dbo.TRSJobSyncKITAS.sql,26,[CFSSCD] = 'KITS',CFSSCD,CHAR(4),tables/dbo.CFMAST.sql:44,varchar,
+procedures/dbo.TRSJobSyncKITAS.sql,47,tc.[CIFNo] = cf.[CFCIF],CFCIF,CHAR(19),tables/dbo.CFMAST.sql:6,VARCHAR(19),idx_cfmast_cfcif
+procedures/dbo.TRSJobSyncKITAS.sql,48,cf.[CFCITZ] <> '000',CFCITZ,CHAR(3),tables/dbo.CFMAST.sql:34,varchar,
+procedures/dbo.TRSOBLExpiredKitasRPT.sql,48,CM.CFSSCD = 'KITS',CFSSCD,CHAR(4),tables/dbo.CFMAST.sql:44,varchar,
+procedures/dbo.TRSOBLExpiredKitasRPT.sql,49,"COALESCE(CM.CFSSNO,'') <> ''",CFSSNO,CHAR(40),tables/dbo.CFMAST.sql:43,COMPLEX/UNRESOLVED,idx_cfmast_cfssno
+procedures/dbo.TRSPopulateMasterNasabahForMurex.sql,36,CFCIF = @cCIFNo,CFCIF,CHAR(19),tables/dbo.CFMAST.sql:6,VARCHAR(19),idx_cfmast_cfcif
+procedures/dbo.TRSPopulatePTOSUpload.sql,260,dt.CFBIRD = tmpCus.TglLahirJul,CFBIRD,CHAR(7),tables/dbo.CFMAST.sql:46,varchar(8),
+procedures/dbo.TRSPopulatePTOSUpload.sql,261,dt.CFSSNO = tmpCus.NoIdentitas,CFSSNO,CHAR(40),tables/dbo.CFMAST.sql:43,varchar(40),idx_cfmast_cfssno
+procedures/dbo.TRSPopulatePTOSUpload.sql,261,"dt.CFSSCD IN ('KTP', 'KTPS')",CFSSCD,CHAR(4),tables/dbo.CFMAST.sql:44,varchar,
+procedures/dbo.TRSPopulateRiskProfileNasabah.sql,18,CFCIF = @pcCIF,CFCIF,CHAR(19),tables/dbo.CFMAST.sql:6,varchar(19),idx_cfmast_cfcif
+procedures/dbo.TRSPopulateWarganegaraNasabah.sql,6,jh.JHCCOC = cf.CFCITZ,CFCITZ,CHAR(3),tables/dbo.CFMAST.sql:34,VARCHAR(3),
+procedures/dbo.TRSPopulateWarganegaraNasabah.sql,7,"right(replicate('0',19)+ cf.CFCIF#, 19) = right(replicate('0',19)+ @pcCIF, 19)",CFCIF#,BIGINT,tables/dbo.CFMAST.sql:7,COMPLEX/UNRESOLVED,idx_cfmast_cfcif#
+procedures/dbo.TRSREPOReportBiayaMaterai.sql,308,tmp.CIFNo = cfm.CFCIF,CFCIF,CHAR(19),tables/dbo.CFMAST.sql:6,VARCHAR(19),idx_cfmast_cfcif
+procedures/dbo.TRSREPOReportBiayaMaterai.sql,326,tmp.CIFNo = cfm.CFCIF,CFCIF,CHAR(19),tables/dbo.CFMAST.sql:6,VARCHAR(19),idx_cfmast_cfcif
+procedures/dbo.TRSReportTemplateSID.sql,141,cf.CFCLAS = ti.CFCLAS,CFCLAS,CHAR(1),tables/dbo.CFMAST.sql:49,VARCHAR(1),
+procedures/dbo.TRSReportTemplateSID.sql,139,tmp.CIFNo = cf.CFCIF,CFCIF,CHAR(19),tables/dbo.CFMAST.sql:6,VARCHAR(19),idx_cfmast_cfcif
+procedures/dbo.TRSReportTrxCorporateBOND.sql,178,cfmast.CFCLAS = 'A',CFCLAS,CHAR(1),tables/dbo.CFMAST.sql:49,varchar,
+procedures/dbo.TRSReportTrxCorporateBOND.sql,180,cfmast.CFCLAS <> 'A',CFCLAS,CHAR(1),tables/dbo.CFMAST.sql:49,varchar,
+procedures/dbo.TRSReportTrxCorporateBOND.sql,186,cfmast.CFSSCD = 'PP',CFSSCD,CHAR(4),tables/dbo.CFMAST.sql:44,varchar,
+procedures/dbo.TRSReportTrxCorporateBOND.sql,186,"ISNULL(cfmast.CFSSNO,'') <> ''",CFSSNO,CHAR(40),tables/dbo.CFMAST.sql:43,COMPLEX/UNRESOLVED,idx_cfmast_cfssno
+procedures/dbo.TRSReportTrxCorporateBOND.sql,193,cfmast.CFSSCD = 'KTP',CFSSCD,CHAR(4),tables/dbo.CFMAST.sql:44,varchar,
+procedures/dbo.TRSReportTrxCorporateBOND.sql,193,cfmast.CFSSCD = 'KTPS',CFSSCD,CHAR(4),tables/dbo.CFMAST.sql:44,varchar,
+procedures/dbo.TRSReportTrxCorporateBOND.sql,193,"ISNULL(cfmast.CFSSNO,'') <> ''",CFSSNO,CHAR(40),tables/dbo.CFMAST.sql:43,COMPLEX/UNRESOLVED,idx_cfmast_cfssno
+procedures/dbo.TRSReportTrxCorporateBOND.sql,202,cfmast.CFCIF = tr.CIFNo,CFCIF,CHAR(19),tables/dbo.CFMAST.sql:6,varchar(20),idx_cfmast_cfcif
+procedures/dbo.TRSRetailCalculateFee2.sql,184,tmp.[No CIF] = cf.CFCIF,CFCIF,CHAR(19),tables/dbo.CFMAST.sql:6,VARCHAR(19),idx_cfmast_cfcif
+procedures/dbo.TRSRetailSyncDataCore.sql,343,"ISNULL(LTRIM(RTRIM(UPPER(cf.CFNA1A))), '') <> ''",CFNA1A,CHAR(40),tables/dbo.CFMAST.sql:29,COMPLEX/UNRESOLVED,
+procedures/dbo.TRSRetailSyncDataCore.sql,351,LEN(cf.CFBIRD) = 7,CFBIRD,CHAR(7),tables/dbo.CFMAST.sql:46,COMPLEX/UNRESOLVED,
+procedures/dbo.TRSRetailSyncDataCore.sql,351,"ISDATE( LEFT(cf.CFBIRD,4) + '0101' ) = 1",CFBIRD,CHAR(7),tables/dbo.CFMAST.sql:46,COMPLEX/UNRESOLVED,
+procedures/dbo.TRSRetailSyncDataCore.sql,364,cf.CFSSCD = 'SIM',CFSSCD,CHAR(4),tables/dbo.CFMAST.sql:44,varchar,
+procedures/dbo.TRSRetailSyncDataCore.sql,373,"t.Nama <> ( CASE WHEN ISNULL(LTRIM(RTRIM(UPPER(cf.CFNA1A))), '') <> '' THEN LTRIM(RTRIM(UPPER(cf.CFNA1))) + ' ' + LTRIM(RTRIM(UPPER(cf.CFNA1A))) ELSE LTRIM(RTRIM(UPPER(cf.CFNA1))) END )",CFNA1A,CHAR(40),tables/dbo.CFMAST.sql:29,COMPLEX/UNRESOLVED,
+procedures/dbo.TRSRetailSyncDataCore.sql,373,"t.Nama <> ( CASE WHEN ISNULL(LTRIM(RTRIM(UPPER(cf.CFNA1A))), '') <> '' THEN LTRIM(RTRIM(UPPER(cf.CFNA1))) + ' ' + LTRIM(RTRIM(UPPER(cf.CFNA1A))) ELSE LTRIM(RTRIM(UPPER(cf.CFNA1))) END )",CFNA1,CHAR(40),tables/dbo.CFMAST.sql:28,COMPLEX/UNRESOLVED,
+procedures/dbo.TRSRetailSyncDataCore.sql,373,"t.Nama <> ( CASE WHEN ISNULL(LTRIM(RTRIM(UPPER(cf.CFNA1A))), '') <> '' THEN LTRIM(RTRIM(UPPER(cf.CFNA1))) + ' ' + LTRIM(RTRIM(UPPER(cf.CFNA1A))) ELSE LTRIM(RTRIM(UPPER(cf.CFNA1))) END )",CFNA1A,CHAR(40),tables/dbo.CFMAST.sql:29,COMPLEX/UNRESOLVED,
+procedures/dbo.TRSRetailSyncDataCore.sql,373,"t.Nama <> ( CASE WHEN ISNULL(LTRIM(RTRIM(UPPER(cf.CFNA1A))), '') <> '' THEN LTRIM(RTRIM(UPPER(cf.CFNA1))) + ' ' + LTRIM(RTRIM(UPPER(cf.CFNA1A))) ELSE LTRIM(RTRIM(UPPER(cf.CFNA1))) END )",CFNA1,CHAR(40),tables/dbo.CFMAST.sql:28,COMPLEX/UNRESOLVED,
+procedures/dbo.TRSRetailSyncDataCore.sql,375,"ISNULL(LTRIM(RTRIM(UPPER(cf.CFNA1A))), '') <> ''",CFNA1A,CHAR(40),tables/dbo.CFMAST.sql:29,COMPLEX/UNRESOLVED,
+procedures/dbo.TRSRetailSyncDataCore.sql,380,t.BranchCode <> cf.CFBRNN,CFBRNN,CHAR(5),tables/dbo.CFMAST.sql:5,VARCHAR(5),
+procedures/dbo.TRSRetailSyncDataCore.sql,381,t.TempatLahir <> cf.CFYBIP,CFYBIP,CHAR(30),tables/dbo.CFMAST.sql:75,VARCHAR(50),
+procedures/dbo.TRSRetailSyncDataCore.sql,382,cf.CFSEX <> 'M',CFSEX,CHAR(1),tables/dbo.CFMAST.sql:48,varchar,
+procedures/dbo.TRSRetailSyncDataCore.sql,383,cf.CFSEX <> 'F',CFSEX,CHAR(1),tables/dbo.CFMAST.sql:48,varchar,
+procedures/dbo.TRSRetailSyncDataCore.sql,386,cf.CFSSCD <> 'SIM',CFSSCD,CHAR(4),tables/dbo.CFMAST.sql:44,varchar,
+procedures/dbo.TRSRetailSyncDataCore.sql,387,"ISNULL(t.Citizenship,'') <> ISNULL(cf.CFCITZ,'')",CFCITZ,CHAR(3),tables/dbo.CFMAST.sql:34,COMPLEX/UNRESOLVED,
+procedures/dbo.TRSRetailSyncDataCore.sql,388,t.NoIdentitas <> cf.CFSSNO,CFSSNO,CHAR(40),tables/dbo.CFMAST.sql:43,VARCHAR(40),idx_cfmast_cfssno
+procedures/dbo.TRSRetailSyncDataCore.sql,393,LEN(cf.CFBIRD) = 7,CFBIRD,CHAR(7),tables/dbo.CFMAST.sql:46,COMPLEX/UNRESOLVED,
+procedures/dbo.TRSRetailSyncDataCore.sql,393,"ISDATE( LEFT(cf.CFBIRD,4) + '0101' ) = 1",CFBIRD,CHAR(7),tables/dbo.CFMAST.sql:46,COMPLEX/UNRESOLVED,
+procedures/dbo.TRSRetailSyncDataCore.sql,396,"t.TanggalLahir <> DATEADD(DAY, (CAST(cf.CFBIRD AS INT) % 1000)-1 , LEFT(cf.CFBIRD,4)+'0101')",CFBIRD,CHAR(7),tables/dbo.CFMAST.sql:46,COMPLEX/UNRESOLVED,
+procedures/dbo.TRSRetailSyncDataCore.sql,396,"t.TanggalLahir <> DATEADD(DAY, (CAST(cf.CFBIRD AS INT) % 1000)-1 , LEFT(cf.CFBIRD,4)+'0101')",CFBIRD,CHAR(7),tables/dbo.CFMAST.sql:46,COMPLEX/UNRESOLVED,
+procedures/dbo.TRSRetailSyncDataCore.sql,404,t.CIFNo = cf.CFCIF,CFCIF,CHAR(19),tables/dbo.CFMAST.sql:6,VARCHAR(19),idx_cfmast_cfcif
+procedures/dbo.TRSRetailSyncDataCore.sql,384,"cf.CFSEX IN ('M', 'F')",CFSEX,CHAR(1),tables/dbo.CFMAST.sql:48,varchar,
+procedures/dbo.TRSRetailSyncDataCoreWorkingHours.sql,241,"ISNULL(LTRIM(RTRIM(cf.CFNA1A)), '') <> ''",CFNA1A,CHAR(40),tables/dbo.CFMAST.sql:29,COMPLEX/UNRESOLVED,
+procedures/dbo.TRSRetailSyncDataCoreWorkingHours.sql,249,LEN(cf.CFBIRD) = 7,CFBIRD,CHAR(7),tables/dbo.CFMAST.sql:46,COMPLEX/UNRESOLVED,
+procedures/dbo.TRSRetailSyncDataCoreWorkingHours.sql,249,"ISDATE( LEFT(cf.CFBIRD,4) + '0101' ) = 1",CFBIRD,CHAR(7),tables/dbo.CFMAST.sql:46,COMPLEX/UNRESOLVED,
+procedures/dbo.TRSRetailSyncDataCoreWorkingHours.sql,262,cf.CFSSCD = 'SIM',CFSSCD,CHAR(4),tables/dbo.CFMAST.sql:44,varchar,
+procedures/dbo.TRSRetailSyncDataCoreWorkingHours.sql,271,"t.Nama <> ( CASE WHEN ISNULL(LTRIM(RTRIM(cf.CFNA1A)), '') <> '' THEN LTRIM(RTRIM(cf.CFNA1)) + ' ' + LTRIM(RTRIM(cf.CFNA1A)) ELSE LTRIM(RTRIM(cf.CFNA1)) END )",CFNA1A,CHAR(40),tables/dbo.CFMAST.sql:29,COMPLEX/UNRESOLVED,
+procedures/dbo.TRSRetailSyncDataCoreWorkingHours.sql,271,"t.Nama <> ( CASE WHEN ISNULL(LTRIM(RTRIM(cf.CFNA1A)), '') <> '' THEN LTRIM(RTRIM(cf.CFNA1)) + ' ' + LTRIM(RTRIM(cf.CFNA1A)) ELSE LTRIM(RTRIM(cf.CFNA1)) END )",CFNA1,CHAR(40),tables/dbo.CFMAST.sql:28,COMPLEX/UNRESOLVED,
+procedures/dbo.TRSRetailSyncDataCoreWorkingHours.sql,271,"t.Nama <> ( CASE WHEN ISNULL(LTRIM(RTRIM(cf.CFNA1A)), '') <> '' THEN LTRIM(RTRIM(cf.CFNA1)) + ' ' + LTRIM(RTRIM(cf.CFNA1A)) ELSE LTRIM(RTRIM(cf.CFNA1)) END )",CFNA1A,CHAR(40),tables/dbo.CFMAST.sql:29,COMPLEX/UNRESOLVED,
+procedures/dbo.TRSRetailSyncDataCoreWorkingHours.sql,271,"t.Nama <> ( CASE WHEN ISNULL(LTRIM(RTRIM(cf.CFNA1A)), '') <> '' THEN LTRIM(RTRIM(cf.CFNA1)) + ' ' + LTRIM(RTRIM(cf.CFNA1A)) ELSE LTRIM(RTRIM(cf.CFNA1)) END )",CFNA1,CHAR(40),tables/dbo.CFMAST.sql:28,COMPLEX/UNRESOLVED,
+procedures/dbo.TRSRetailSyncDataCoreWorkingHours.sql,273,"ISNULL(LTRIM(RTRIM(cf.CFNA1A)), '') <> ''",CFNA1A,CHAR(40),tables/dbo.CFMAST.sql:29,COMPLEX/UNRESOLVED,
+procedures/dbo.TRSRetailSyncDataCoreWorkingHours.sql,278,t.BranchCode <> cf.CFBRNN,CFBRNN,CHAR(5),tables/dbo.CFMAST.sql:5,VARCHAR(5),
+procedures/dbo.TRSRetailSyncDataCoreWorkingHours.sql,279,t.TempatLahir <> cf.CFYBIP,CFYBIP,CHAR(30),tables/dbo.CFMAST.sql:75,VARCHAR(50),
+procedures/dbo.TRSRetailSyncDataCoreWorkingHours.sql,280,cf.CFSEX <> 'M',CFSEX,CHAR(1),tables/dbo.CFMAST.sql:48,varchar,
+procedures/dbo.TRSRetailSyncDataCoreWorkingHours.sql,281,cf.CFSEX <> 'F',CFSEX,CHAR(1),tables/dbo.CFMAST.sql:48,varchar,
+procedures/dbo.TRSRetailSyncDataCoreWorkingHours.sql,284,cf.CFSSCD <> 'SIM',CFSSCD,CHAR(4),tables/dbo.CFMAST.sql:44,varchar,
+procedures/dbo.TRSRetailSyncDataCoreWorkingHours.sql,285,"ISNULL(t.Citizenship,'') <> ISNULL(cf.CFCITZ,'')",CFCITZ,CHAR(3),tables/dbo.CFMAST.sql:34,COMPLEX/UNRESOLVED,
+procedures/dbo.TRSRetailSyncDataCoreWorkingHours.sql,286,t.NoIdentitas <> cf.CFSSNO,CFSSNO,CHAR(40),tables/dbo.CFMAST.sql:43,VARCHAR(40),idx_cfmast_cfssno
+procedures/dbo.TRSRetailSyncDataCoreWorkingHours.sql,291,LEN(cf.CFBIRD) = 7,CFBIRD,CHAR(7),tables/dbo.CFMAST.sql:46,COMPLEX/UNRESOLVED,
+procedures/dbo.TRSRetailSyncDataCoreWorkingHours.sql,291,"ISDATE( LEFT(cf.CFBIRD,4) + '0101' ) = 1",CFBIRD,CHAR(7),tables/dbo.CFMAST.sql:46,COMPLEX/UNRESOLVED,
+procedures/dbo.TRSRetailSyncDataCoreWorkingHours.sql,294,"t.TanggalLahir <> DATEADD(DAY, (CAST(cf.CFBIRD AS INT) % 1000)-1 , LEFT(cf.CFBIRD,4)+'0101')",CFBIRD,CHAR(7),tables/dbo.CFMAST.sql:46,COMPLEX/UNRESOLVED,
+procedures/dbo.TRSRetailSyncDataCoreWorkingHours.sql,294,"t.TanggalLahir <> DATEADD(DAY, (CAST(cf.CFBIRD AS INT) % 1000)-1 , LEFT(cf.CFBIRD,4)+'0101')",CFBIRD,CHAR(7),tables/dbo.CFMAST.sql:46,COMPLEX/UNRESOLVED,
+procedures/dbo.TRSRetailSyncDataCoreWorkingHours.sql,302,t.CIFNo = cf.CFCIF,CFCIF,CHAR(19),tables/dbo.CFMAST.sql:6,VARCHAR(19),idx_cfmast_cfcif
+procedures/dbo.TRSRetailSyncDataCoreWorkingHours.sql,282,"cf.CFSEX IN ('M', 'F')",CFSEX,CHAR(1),tables/dbo.CFMAST.sql:48,varchar,
+procedures/dbo.TRSRptCustomerPortfolio.sql,88,CFMAST.CFCIF = tctm.CIFNo,CFCIF,CHAR(19),tables/dbo.CFMAST.sql:6,VARCHAR(19),idx_cfmast_cfcif
+procedures/dbo.TRSRPTMasterNasabahObligasi.sql,443,v.CFCITZ = jc.JHCCOC,CFCITZ,CHAR(3),tables/dbo.CFMAST.sql:34,VARCHAR(3),
+procedures/dbo.TRSRPTMasterNasabahObligasi.sql,441,rs.CIF = v.CFCIF,CFCIF,CHAR(19),tables/dbo.CFMAST.sql:6,VARCHAR(19),idx_cfmast_cfcif
+procedures/dbo.TRSRPTMasterNasabahPerubahanObligasi2.sql,45,c.CFCIF=a.CIFNumber,CFCIF,CHAR(19),tables/dbo.CFMAST.sql:6,BIGINT,idx_cfmast_cfcif
+procedures/dbo.TRSRPTMasterNasabahPerubahanObligasi2.sql,57,c.CFCIF=a.CIFNumber,CFCIF,CHAR(19),tables/dbo.CFMAST.sql:6,BIGINT,idx_cfmast_cfcif
+procedures/dbo.TRSRPTMasterNasabahPerubahanObligasi2.sql,69,c.CFCIF=a.CIFNumber,CFCIF,CHAR(19),tables/dbo.CFMAST.sql:6,BIGINT,idx_cfmast_cfcif
+procedures/dbo.TRSRPTMasterNasabahPerubahanObligasi2.sql,81,"right('0000000000000000000'+convert(varchar(19), a.CIFNumber), 19) = c.CFCIF",CFCIF,CHAR(19),tables/dbo.CFMAST.sql:6,varchar(19),idx_cfmast_cfcif
+procedures/dbo.TRSRPTMasterNasabahPerubahanObligasi2.sql,93,"right('0000000000000000000'+convert(varchar(19), a.CIFNumber), 19) = c.CFCIF",CFCIF,CHAR(19),tables/dbo.CFMAST.sql:6,varchar(19),idx_cfmast_cfcif
+procedures/dbo.TRSRPTMasterNasabahPerubahanObligasi2.sql,105,"right('0000000000000000000'+convert(varchar(19), a.CIFNumber), 19) = c.CFCIF",CFCIF,CHAR(19),tables/dbo.CFMAST.sql:6,varchar(19),idx_cfmast_cfcif
+procedures/dbo.TRSRPTMasterNasabahPerubahanObligasi2.sql,117,"right('0000000000000000000'+convert(varchar(19), a.CIFNumber), 19) = c.CFCIF",CFCIF,CHAR(19),tables/dbo.CFMAST.sql:6,varchar(19),idx_cfmast_cfcif
+procedures/dbo.TRSRPTMasterNasabahPerubahanObligasi2.sql,129,"right('0000000000000000000'+convert(varchar(19), a.CIFNumber), 19) = c.CFCIF",CFCIF,CHAR(19),tables/dbo.CFMAST.sql:6,varchar(19),idx_cfmast_cfcif
+procedures/dbo.TRSRPTMasterNasabahPerubahanObligasi2.sql,141,"right('0000000000000000000'+convert(varchar(19), a.CIFNumber), 19) = c.CFCIF",CFCIF,CHAR(19),tables/dbo.CFMAST.sql:6,varchar(19),idx_cfmast_cfcif
+procedures/dbo.TRSRPTMasterNasabahPerubahanObligasi2.sql,153,"right('0000000000000000000'+convert(varchar(19), a.CIFNumber), 19) = c.CFCIF",CFCIF,CHAR(19),tables/dbo.CFMAST.sql:6,varchar(19),idx_cfmast_cfcif
+procedures/dbo.TRSRPTMasterNasabahPerubahanObligasi2.sql,165,"right('0000000000000000000'+convert(varchar(19), a.CIFNumber), 19) = c.CFCIF",CFCIF,CHAR(19),tables/dbo.CFMAST.sql:6,varchar(19),idx_cfmast_cfcif
+procedures/dbo.TRSRPTMasterNasabahPerubahanObligasi2.sql,177,"right('0000000000000000000'+convert(varchar(19), a.CIFNumber), 19) = c.CFCIF",CFCIF,CHAR(19),tables/dbo.CFMAST.sql:6,varchar(19),idx_cfmast_cfcif
+procedures/dbo.TRSRPTMasterNasabahPerubahanObligasi2.sql,189,"right('0000000000000000000'+convert(varchar(19), a.CIFNumber), 19) = c.CFCIF",CFCIF,CHAR(19),tables/dbo.CFMAST.sql:6,varchar(19),idx_cfmast_cfcif
+procedures/dbo.TRSRPTMasterNasabahPerubahanObligasi2.sql,201,"right('0000000000000000000'+convert(varchar(19), a.CIFNumber), 19) = c.CFCIF",CFCIF,CHAR(19),tables/dbo.CFMAST.sql:6,varchar(19),idx_cfmast_cfcif
+procedures/dbo.TRSRPTMasterNasabahPerubahanObligasi2.sql,213,"right('0000000000000000000'+convert(varchar(19), a.CIFNumber), 19) = c.CFCIF",CFCIF,CHAR(19),tables/dbo.CFMAST.sql:6,varchar(19),idx_cfmast_cfcif
+procedures/dbo.TRSRPTMasterNasabahPerubahanObligasi2.sql,225,"right('0000000000000000000'+convert(varchar(19), a.CIFNumber), 19) = c.CFCIF",CFCIF,CHAR(19),tables/dbo.CFMAST.sql:6,varchar(19),idx_cfmast_cfcif
+procedures/dbo.TRSRPTMasterNasabahPerubahanObligasi2.sql,237,"right('0000000000000000000'+convert(varchar(19), a.CIFNumber), 19) = c.CFCIF",CFCIF,CHAR(19),tables/dbo.CFMAST.sql:6,varchar(19),idx_cfmast_cfcif
+procedures/dbo.TRSRptMonitoringDocAcc.sql,186,"right('0000000000000000000' + tr.[NoCIF], 19) = cf.[CFCIF]",CFCIF,CHAR(19),tables/dbo.CFMAST.sql:6,varchar(19),idx_cfmast_cfcif
+procedures/dbo.TRSRptMonitoringDocAcc.sql,187,"isnull(cf.[CFUIC8], '') <> ''",CFUIC8,CHAR(1),tables/dbo.CFMAST.sql:69,COMPLEX/UNRESOLVED,
+procedures/dbo.TRSSyncMasterIdAndFunc.sql,10,mast.CFSSCD = 'SIM',CFSSCD,CHAR(4),tables/dbo.CFMAST.sql:44,varchar,
+procedures/dbo.TRSSyncMasterIdAndFunc.sql,11,mast.CFSSCD = 'PP',CFSSCD,CHAR(4),tables/dbo.CFMAST.sql:44,varchar,
+procedures/dbo.TRSSyncMasterIdAndFunc.sql,16,"isnull(mast.CFIEX7,0) != 0",CFIEX7,CHAR(7),tables/dbo.CFMAST.sql:72,COMPLEX/UNRESOLVED,
+procedures/dbo.TRSSyncMasterIdAndFunc.sql,22,tmp.CIFNo = mast.CFCIF,CFCIF,CHAR(19),tables/dbo.CFMAST.sql:6,VARCHAR(19),idx_cfmast_cfcif
+procedures/dbo.TRSSyncMasterIdAndFunc.sql,23,"isnull(tmp.JenisIdentitas,'') <> CASE WHEN mast.CFSSCD like 'KTP%' THEN '1' WHEN mast.CFSSCD = 'SIM' THEN '2' WHEN mast.CFSSCD = 'PP' THEN '4' ELSE '3' END",CFSSCD,CHAR(4),tables/dbo.CFMAST.sql:44,COMPLEX/UNRESOLVED,
+procedures/dbo.TRSSyncMasterIdAndFunc.sql,23,"isnull(tmp.JenisIdentitas,'') <> CASE WHEN mast.CFSSCD like 'KTP%' THEN '1' WHEN mast.CFSSCD = 'SIM' THEN '2' WHEN mast.CFSSCD = 'PP' THEN '4' ELSE '3' END",CFSSCD,CHAR(4),tables/dbo.CFMAST.sql:44,COMPLEX/UNRESOLVED,
+procedures/dbo.TRSSyncMasterIdAndFunc.sql,23,"isnull(tmp.JenisIdentitas,'') <> CASE WHEN mast.CFSSCD like 'KTP%' THEN '1' WHEN mast.CFSSCD = 'SIM' THEN '2' WHEN mast.CFSSCD = 'PP' THEN '4' ELSE '3' END",CFSSCD,CHAR(4),tables/dbo.CFMAST.sql:44,COMPLEX/UNRESOLVED,
+procedures/dbo.TRSSyncMasterIdAndFunc.sql,26,mast.CFSSCD = 'SIM',CFSSCD,CHAR(4),tables/dbo.CFMAST.sql:44,varchar,
+procedures/dbo.TRSSyncMasterIdAndFunc.sql,27,mast.CFSSCD = 'PP',CFSSCD,CHAR(4),tables/dbo.CFMAST.sql:44,varchar,
+procedures/dbo.TRSSyncMasterIdAndFunc.sql,30,"isnull(tmp.IdentitasExpiredDate,'19450817') <> CASE WHEN isnull(mast.CFIEX7,0) != 0 THEN dbo.fnJulianToDatetime(CFIEX7) ELSE dateadd(year,100,getdate()) END",CFIEX7,CHAR(7),tables/dbo.CFMAST.sql:72,COMPLEX/UNRESOLVED,
+procedures/dbo.TRSSyncMasterIdAndFunc.sql,30,"isnull(tmp.IdentitasExpiredDate,'19450817') <> CASE WHEN isnull(mast.CFIEX7,0) != 0 THEN dbo.fnJulianToDatetime(CFIEX7) ELSE dateadd(year,100,getdate()) END",CFIEX7,CHAR(7),tables/dbo.CFMAST.sql:72,COMPLEX/UNRESOLVED,
+procedures/dbo.TRSSyncMasterIdAndFunc.sql,32,"isnull(mast.CFIEX7,0) != 0",CFIEX7,CHAR(7),tables/dbo.CFMAST.sql:72,COMPLEX/UNRESOLVED,
+procedures/dbo.TRSSyncMasterRiskProfileData.sql,24,CFMAST.CFCIF# = so.CIFNumber,CFCIF#,BIGINT,tables/dbo.CFMAST.sql:7,VARCHAR(19),idx_cfmast_cfcif#
+procedures/dbo.TRSSyncMasterRiskProfileData.sql,23,CFMAST.CFUIC8 = CFPAR3.CP3UCD,CFUIC8,CHAR(1),tables/dbo.CFMAST.sql:69,VARCHAR(1),
+procedures/dbo.TRSSyncMasterRiskProfileData.sql,21,tc.CIFNo = CFMAST.CFCIF,CFCIF,CHAR(19),tables/dbo.CFMAST.sql:6,VARCHAR(19),idx_cfmast_cfcif
+procedures/dbo.TRSUpdateDataMasterNasabah.sql,121,t.CFCIF = c.CFCIF,CFCIF,CHAR(19),tables/dbo.CFMAST.sql:6,BIGINT,idx_cfmast_cfcif
+procedures/dbo.TRSValidateSecAccNo.sql,30,"CFCIF = right('0000000000000000000' + convert(varchar,@nCIFNo), 19)",CFCIF,CHAR(19),tables/dbo.CFMAST.sql:6,varchar,idx_cfmast_cfcif
+procedures/dbo.TRSValidateSecAccNo.sql,30,"isnull(CFUIC8, '') <> ''",CFUIC8,CHAR(1),tables/dbo.CFMAST.sql:69,COMPLEX/UNRESOLVED,
+views/dbo.CFMAST_v.sql,11,LEN(LTRIM(RTRIM(CFBIR6))) > 5,CFBIR6,CHAR(8),tables/dbo.CFMAST.sql:47,COMPLEX/UNRESOLVED,
