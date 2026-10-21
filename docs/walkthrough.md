@@ -1,5 +1,10 @@
 # Walkthrough Engine Suite
 
+Untuk memahami source di balik langkah operasional, baca [call tree](architecture/call_tree.md),
+[package catalog](architecture/package_catalog.md), dan [engine reference](engine_reference.md).
+[Tutorial offline](tutorials/offline_authoring.md) menyediakan contoh bootstrap -> check -> draft -> seal -> report
+pada folder latihan terpisah. [Agent onboarding](engineering/agent_onboarding.md) menjelaskan impact analysis dan validation sebelum mengubah engine.
+
 Dokumen ini menjelaskan cara kerja aktual lima executable pada repo ini:
 - `rza_get_object_db` (extractor source-of-truth)
 - `rza_migrate_check` (checker developer tanpa generation)

@@ -1,5 +1,12 @@
 # RZA DB Engine Suite
 
+Mulai memahami project dari [Engine Docs Guide](docs/engine_docs_guide.md).
+Panduan tersebut menghubungkan [arsitektur](docs/architecture/overview.md),
+[spesifikasi tiap engine](docs/engine_reference.md), [call tree](docs/architecture/call_tree.md),
+[penjelasan setiap paket](docs/architecture/package_catalog.md), dan
+[panduan agent/developer](docs/engineering/agent_onboarding.md).
+Untuk mencoba alur tanpa database, ikuti [tutorial authoring offline](docs/tutorials/offline_authoring.md).
+
 Untuk publikasi repository private, lihat [cakupan file GitHub](docs/github_repository.md).
 Folder percobaan lokal dan kredensial dikecualikan; regression test, fixture QA,
 serta release Windows/Linux tetap disertakan.
@@ -88,7 +95,7 @@ Untuk membangun binary Linux statis yang dipakai gate GitLab, jalankan dari Wind
 scripts\build_migrate_check_linux.bat
 ```
 
-Script menghasilkan `tools/linux-amd64/rza_migrate_check` dan manifest `rza_migrate_check.sha256`. Job `rza_migrate_check_gate` memverifikasi checksum binary, menjalankan profile authoring yang sama dalam mode read-only pada MR, `sit`, `uat`, dan tag, lalu menyimpan `out/output.json` sebagai artifact. Jika validasi gagal, semua item fail dicetak lengkap ke job log (`rule`, severity, file, object, lokasi migration, reason, message, dan suggestion jika tersedia), sehingga diagnosis tidak bergantung pada akses download artifact. Job tidak mengunduh package tambahan dan tidak terhubung ke MSSQL.
+Script tersebut adalah compatibility wrapper ke `build_all.bat`: ia membangun paket lengkap tiga Windows/tiga Linux binary, license, checksum, dan identity; bukan checker-only build. Job `rza_migrate_check_gate` memverifikasi complete release checksum, embedded build identity, dan source digest sebelum menjalankan checker authoring/integrity dalam mode read-only pada MR, `sit`, `uat`, dan tag, lalu menyimpan `out/output.json` sebagai artifact. Jika validasi gagal, semua item fail dicetak lengkap ke job log (`rule`, severity, file, object, lokasi migration, reason, message, dan suggestion jika tersedia), sehingga diagnosis tidak bergantung pada akses download artifact. Job tidak mengunduh package tambahan dan tidak terhubung ke MSSQL.
 
 Untuk membangun paket lengkap Windows + Linux sekaligus dan membuat lisensi baru:
 

@@ -7,6 +7,11 @@ Object-recognition refinement (2026-10-01): scanner shared wajib mempertahankan 
 
 Dokumen ini adalah baseline requirement pengembangan engine. Dokumen ini bersifat normatif dan menjadi acuan implementasi, review, dan acceptance.
 
+Untuk lookup per aplikasi, lihat [engine reference](docs/engine_reference.md): input/output,
+mode, efek samping, CLI/config, dan failure boundary. [Architecture overview](docs/architecture/overview.md)
+menjelaskan desired/history/runtime state; [call tree](docs/architecture/call_tree.md)
+menautkan requirement ke flow source. Panduan tambahan ini tidak mengubah requirement atau status capability.
+
 ## 1. Target Sistem
 
 - DB target: Microsoft SQL Server.

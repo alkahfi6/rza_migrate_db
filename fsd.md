@@ -8,6 +8,12 @@ Refinement object scan (2026-10-01): `internal/sqlparse/access.go` menjadi lexic
 
 Dokumen ini menjabarkan bagaimana requirement di `spec.md` dan `rules.md` diimplementasikan dalam engine.
 
+Peta implementasi saat ini tersedia pada [architecture overview](docs/architecture/overview.md),
+[call tree](docs/architecture/call_tree.md), dan [package catalog](docs/architecture/package_catalog.md).
+Katalog tersebut membedakan helper metadata/comparator/allocator di `history`, `diff`, `emit`
+dari reconstruction, semantic planning, rendering, dan publication yang masih berada di `engine`.
+Gunakan peta ini untuk navigasi source; kontrak desain rinci tetap ada di FSD ini.
+
 ## 1. Tujuan Desain
 
 - Menentukan arsitektur, kontrak modul, dan alur data yang deterministic.
@@ -16,9 +22,10 @@ Dokumen ini menjabarkan bagaimana requirement di `spec.md` dan `rules.md` diimpl
 
 ## 2. Arsitektur Modul
 
-Struktur code target:
+Titik masuk dan paket utama (inventaris lengkap ada di package catalog):
 
 - `cmd/rza_migrate_db/main.go`
+- `cmd/rza_migrate_check/main.go`
 - `cmd/rza_get_object_db/main.go`
 - `cmd/rza_migrate_rest/main.go`
 - `cmd/rza_migrate_report/main.go`
@@ -27,9 +34,11 @@ Struktur code target:
 - `internal/migrest`
 - `internal/migreport`
 - `internal/config`
+- `internal/engine`
 - `internal/fsx`
 - `internal/sqlfmt`
 - `internal/sqlparse`
+- `internal/sqlfix`
 - `internal/history`
 - `internal/diff`
 - `internal/emit`
@@ -37,6 +46,7 @@ Struktur code target:
 - `internal/output`
 - `internal/getobject`
 - `internal/tsqlast`
+- `internal/management`
 
 ## 2.1 Status Modularisasi Package (2026-02-20)
 
@@ -61,10 +71,10 @@ Kontrak tanggung jawab:
 - `config`: hard-locked app config (`app_config.go`) dan enum whitelist.
 - `fsx`: file discovery, stable sorting, path validation.
 - `sqlfmt`: format canonical db_object dan patch body normalization.
-- `sqlparse`: parser structured filename dan SQL subset MVP (tanpa regex parser utama).
-- `history`: read migration history, build reconstructed state.
-- `diff`: desired-vs-state semantic diff dan policy mapping.
-- `emit`: generate pair up/down sesuai template wrapper.
+- `sqlparse`: scanner/parser SQL subset dan shared access/reference helpers (tanpa regex parser utama); parser filename migration dimiliki `history`.
+- `history`: metadata filename, object key, dan version selection; replay SQL/history reconstruction diorkestrasi `engine`.
+- `diff`: drift comparator dan ordering; semantic plan serta risk/policy mapping tetap di `engine`.
+- `emit`: filename pair dan version allocation; wrapper rendering, staging verify, dan publication tetap di `engine`.
 - `verify`: orchestrator rule checks pada source dan migration output.
 - `output`: builder `out/output.json` dan exit decision.
 - `getobject`: export object DB (table/index/module) ke source-of-truth + summary run.

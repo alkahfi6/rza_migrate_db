@@ -5,6 +5,24 @@ Dokumen ini adalah peta dokumen utama untuk pengembangan engine suite:
 - `rza_migrate_check` (checker developer: safe-fix + verify tanpa generation, serta complete console diagnostics)
 - `rza_migrate_db` (formatter/verifier/generator migration)
 - `rza_migrate_rest` (REST executor migration SQL Server)
+- `rza_migrate_report` (report histori dan dokumentasi desired state, offline)
+
+Utilitas tambahan `rza_migrate_test` dan `rza_mssql_test` mengakses SQL Server nyata untuk pengujian; keduanya bukan bagian tutorial authoring offline.
+
+## Mulai Berdasarkan Kebutuhan
+
+| Kebutuhan | Dokumen |
+| --- | --- |
+| Memahami tujuan, state, dan hubungan engine | [Architecture overview](architecture/overview.md) |
+| Mengetahui input/output, flag, side effect, dan batas tiap aplikasi | [Engine reference](engine_reference.md) |
+| Menelusuri entrypoint sampai parser/planner/publisher/executor | [Call tree](architecture/call_tree.md) |
+| Menentukan peran setiap paket dan lokasi source | [Package catalog](architecture/package_catalog.md) |
+| Mencoba workflow dari awal tanpa database | [Tutorial offline](tutorials/offline_authoring.md) |
+| Menyiapkan perubahan dan handover ke agent berikutnya | [Agent onboarding](engineering/agent_onboarding.md) |
+| Menjaga docs dan memeriksa praktik dokumentasi | [Documentation maintenance](documentation_maintenance.md) |
+| Melihat evidence dan batas validasi pembaruan panduan | [Documentation review](qa/documentation_review_20261022.md) |
+
+Dokumen navigasi ini menjelaskan implementasi yang sudah ada, bukan menambah support SQL atau mengubah hard locks. Normative conflict tetap mengikuti hierarki di bawah; source links membantu membuktikan flow aktual.
 
 ## 1. Hierarki Kebenaran Dokumen
 
@@ -26,8 +44,8 @@ Urutan prioritas jika ada konflik:
 | `spec.md` | Requirement baseline engine | Desain & review requirement |
 | `fsd.md` | Desain teknis implementasi modul/flow | Implementasi kode |
 | `plan.md` | Roadmap fase kerja + gate delivery | Eksekusi project |
-| `docs/walkthrough.md` | Gambaran operasional aktual empat executable + flow end-to-end | Onboarding, handover, troubleshooting |
-| `docs/traceability/rules_traceability_matrix.md` | Mapping rules 1-25 ke artefak teknis | Review coverage |
+| `docs/walkthrough.md` | Gambaran operasional aktual lima aplikasi utama + runner utilitas | Onboarding, handover, troubleshooting |
+| `docs/traceability/rules_traceability_matrix.md` | Mapping section rules, termasuk report rule, ke artefak teknis | Review coverage |
 | `docs/qa/qa_gate_engine_rules.md` | Checklist QA skenario rules | Validasi sebelum release |
 | `docs/qa/sql_server_capability_matrix.md` | Matrix fitur SQL Server supported/fail/manual/skip | Scope parser/generator dan triage unsupported SQL |
 | `docs/policy/production_readiness.md` | Checklist observability, packaging, CI split, benchmark, dan runner ops | Release readiness |
@@ -38,7 +56,7 @@ Urutan prioritas jika ada konflik:
 
 | File | Fungsi |
 | --- | --- |
-| `fixtures/qa_rules/` | Fixture QA-01 s.d. QA-26 |
+| `fixtures/qa_rules/` | Fixture QA-01 s.d. QA-26 serta QA-31 desired-state documentation; nomor mengikuti scenario yang tersedia |
 | `examples/rules_2x_learning/` | Data learning pass/fail + lifecycle `fmt/gen/verify` untuk rules prioritas |
 | `docs/qa/learning_edge_case_backlog.md` | Backlog edge-case learning yang sudah/akan ditambahkan ke examples matrix |
 | `scripts/verify_rules_2x_learning.ps1` | Validasi massal step-based (`fmt/gen/verify`) vs matrix, termasuk assert `fail.rule`, `pass.reason`, dan migration generated |
@@ -76,7 +94,7 @@ Urutan prioritas jika ada konflik:
 3. Konfirmasi requirement di `spec.md`.
 4. Ambil desain implementasi dari `fsd.md`.
 5. Cek fase dan gate di `plan.md`.
-6. Baca `docs/walkthrough.md` untuk flow operasional aktual (`rza_get_object_db` -> `rza_migrate_db` -> `rza_migrate_rest` opsional).
+6. Baca `docs/walkthrough.md` untuk flow extractor -> checker -> generator -> pipeline/executor, serta report offline. Gunakan call tree dan katalog paket untuk menelusuri fungsi/source terkait.
 7. Pastikan coverage ada di `docs/traceability/rules_traceability_matrix.md`.
 8. Tentukan skenario validasi dari `docs/qa/qa_gate_engine_rules.md`.
 

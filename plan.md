@@ -1,5 +1,13 @@
 # Development Plan - rza_migrate_db Engine Suite
 
+2026-10-22 documentation delivery: tersedia [arsitektur](docs/architecture/overview.md),
+[call tree](docs/architecture/call_tree.md), [katalog paket](docs/architecture/package_catalog.md),
+[referensi engine](docs/engine_reference.md), [panduan agent](docs/engineering/agent_onboarding.md),
+dan [tutorial offline](docs/tutorials/offline_authoring.md) yang telah dijalankan.
+[Maintenance guide](docs/documentation_maintenance.md) menjelaskan praktik dan aturan pemeliharaan;
+[review record](docs/qa/documentation_review_20261022.md) mencatat baseline, validation, dan batasnya.
+Scope hanya dokumentasi implementasi yang sudah ada; tidak menaikkan status dukungan SQL atau readiness engine.
+
 2026-10-12 delivery scope: add report-only suspected JOIN identifiers with mapping/module/index/identity evidence, including unindexed/non-ID-named columns on keyed tables. Source parser, schema actions, auto-corrections, migration history, and cross-tool responsibilities stay unchanged. Acceptance: focused positive/negative tests, executable QA-31 golden, report no-write/rerun, full hardening/build and Windows/Linux parity. No data-level uniqueness certification is introduced.
 
 
@@ -13,7 +21,7 @@ Dokumen ini adalah rencana eksekusi implementasi engine berdasarkan `rules.md`, 
 - Menutup seluruh gap aturan yang pernah belum termapping.
 - Menjadikan implementasi deterministic, verifiable, dan fail-hard sesuai kontrak.
 - Menyiapkan urutan pengerjaan yang bisa langsung dipakai tim engineering.
-- Menjaga sinkronisasi tiga executable (`rza_get_object_db` -> `rza_migrate_db` -> `rza_migrate_rest`) sebagai alur operasional standar.
+- Menjaga sinkronisasi lima aplikasi utama: extractor -> checker -> generator -> pipeline/REST executor, dengan report offline sebagai pembaca desired/history; utilitas live test mempunyai boundary tersendiri.
 
 ## 2. Hasil Compare Ulang terhadap `rules.md`
 
