@@ -1,0 +1,3 @@
+# Preserve audit evidence bytes: validation.json records SHA-256 of exact files.
+# Override repository-wide EOL normalization only inside this report directory.
+* -text

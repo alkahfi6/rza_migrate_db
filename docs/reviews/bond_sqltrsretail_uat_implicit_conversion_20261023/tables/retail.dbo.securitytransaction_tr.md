@@ -1,0 +1,51 @@
+# Retail UAT.dbo.SecurityTransaction_TR — review konversi implisit
+
+[Kembali ke rangkuman](../TABLE_COLUMN_SUMMARY.md) · [Panduan pola](../PATTERN_GUIDE.md)
+
+**Cakupan procedure UAT:** 25 lokasi source, 10 procedure, 1 kolom. **A:** 0 lokasi pada 0 procedure. **B:** 3 lokasi. Jumlah context memasukkan pasangan/destination; tidak semuanya conversion kolom indexed.
+
+Semua lokasi untuk tabel ini dicantumkan di bawah tanpa pemilihan contoh saja. Untuk filter/olah data gunakan column_occurrences.csv; site_id menghubungkan dua operand dari satu kejadian ke conversion_sites.csv. Metadata/index berasal dari snapshot, bukan live catalog.
+
+<a id="kolom-trxtypeid"></a>
+## TrxTypeID
+
+**Tipe dasar:** `SMALLINT`. [Deklarasi kolom](../../../../bond-sqltrsretail-uat/db_object/tables/dbo.SecurityTransaction_TR.sql#L2). **Existing leading index:** SecurityTransaction_TR_NC1.
+
+**Frekuensi source:** 25 lokasi / 10 SP. **A:** 0 lokasi / 0 SP. **Peran:** CONVERTED_COLUMN, COUNTERPART_COLUMN_NOT_CONVERTED, SOURCE_TO_DESTINATION.
+
+**Pola dan arah review:**
+
+- **P01 — Kolom teks bertemu numerik:** Samakan domain key; parameter mengikuti tipe kolom tujuan. Untuk dua kolom beda storage, validasi dan materialisasikan representasi canonical sekali. Jangan CAST kolom indexed sebagai perbaikan otomatis.
+- **P07 — CASE matching dan tipe hasil CASE/COALESCE/UNION:** Pada simple CASE, samakan input dengan setiap WHEN; ini terpisah dari tipe hasil THEN/ELSE. Samakan branch/output secara sengaja; cek error, rounding, duplikasi UNION, dan output contract.
+- **P08 — Assignment/INSERT/UPDATE mengikuti tipe tujuan:** Konversi menuju tipe destination, bukan selalu highest precedence. Selaraskan staging; uji truncation, Unicode loss, overflow, rounding, tanggal, dan error handling. Bukan bukti access predicate kehilangan seek.
+- **P11 — Perbedaan keluarga numerik:** BIT/TINYINT/SMALLINT/INT atau money/decimal dapat berbeda tipe secara rutin. Jangan otomatis menaikkan severity; cek precision/scale dan actual plan bila relevan.
+
+### Daftar procedure dan bagian query
+
+| Site | Tier / peran | Procedure : baris | Context / pola | Operand kolom : tipe | Pasangan : tipe | Operand yang dikonversi → tipe hasil | Query atau mapping assignment |
+|---|---|---|---|---|---|---|---|
+| IC-010055 | B_EXPRESSION_OR_BOUNDARY / SOURCE_TO_DESTINATION | [dbo.TRSRptKonfirmasiBOND:272](../../../../bond-sqltrsretail-uat/db_object/procedures/dbo.TRSRptKonfirmasiBOND.sql#L272) | WRITE_ASSIGNMENT / P08 / INSERT_SELECT | `TrxTypeID` : `SMALLINT` | `#tmp_data.TrxType` : `int` | `TrxTypeID` → `int` | `#tmp_data.TrxType <- TrxTypeID` |
+| IC-010110 | B_EXPRESSION_OR_BOUNDARY / SOURCE_TO_DESTINATION | [dbo.TRSRptKonfirmasiBONDNew:164](../../../../bond-sqltrsretail-uat/db_object/procedures/dbo.TRSRptKonfirmasiBONDNew.sql#L164) | WRITE_ASSIGNMENT / P08 / INSERT_SELECT | `TrxTypeID` : `SMALLINT` | `#tmp_data.TrxType` : `int` | `TrxTypeID` → `int` | `#tmp_data.TrxType <- TrxTypeID` |
+| IC-010172 | B_EXPRESSION_OR_BOUNDARY / SOURCE_TO_DESTINATION | [dbo.TRSRptKonfirmasiSRBI:95](../../../../bond-sqltrsretail-uat/db_object/procedures/dbo.TRSRptKonfirmasiSRBI.sql#L95) | WRITE_ASSIGNMENT / P08 / INSERT_SELECT | `TrxTypeID` : `SMALLINT` | `#tmp_data.TrxType` : `int` | `TrxTypeID` → `int` | `#tmp_data.TrxType <- TrxTypeID` |
+| IC-006052 | C_FAMILY_OR_ROUTINE / CONVERTED_COLUMN | [dbo.TRSPopulateSettlementBIS4:316](../../../../bond-sqltrsretail-uat/db_object/procedures/dbo.TRSPopulateSettlementBIS4.sql#L316) | JOIN_ON / P11 / COMPARISON | `tr.TrxTypeID` : `SMALLINT` | `tt.TrxType` : `int` | `tr.TrxTypeID` → `INT` | `tr.TrxTypeID = tt.TrxType` |
+| IC-006081 | C_FAMILY_OR_ROUTINE / CONVERTED_COLUMN | [dbo.TRSPopulateSettlementBIS4:483](../../../../bond-sqltrsretail-uat/db_object/procedures/dbo.TRSPopulateSettlementBIS4.sql#L483) | JOIN_ON / P11 / COMPARISON | `tr.TrxTypeID` : `SMALLINT` | `tt.TrxType` : `int` | `tr.TrxTypeID` → `INT` | `tr.TrxTypeID = tt.TrxType` |
+| IC-006125 | C_FAMILY_OR_ROUTINE / CONVERTED_COLUMN | [dbo.TRSPopulateSettlementBIS4:1007](../../../../bond-sqltrsretail-uat/db_object/procedures/dbo.TRSPopulateSettlementBIS4.sql#L1007) | JOIN_ON / P11 / COMPARISON | `tr.TrxTypeID` : `SMALLINT` | `tt.TrxType` : `int` | `tr.TrxTypeID` → `INT` | `tr.TrxTypeID = tt.TrxType` |
+| IC-006150 | C_FAMILY_OR_ROUTINE / CONVERTED_COLUMN | [dbo.TRSPopulateSettlementBIS4:1128](../../../../bond-sqltrsretail-uat/db_object/procedures/dbo.TRSPopulateSettlementBIS4.sql#L1128) | JOIN_ON / P11 / COMPARISON | `tr.TrxTypeID` : `SMALLINT` | `tt.TrxType` : `int` | `tr.TrxTypeID` → `INT` | `tr.TrxTypeID = tt.TrxType` |
+| IC-008954 | C_FAMILY_OR_ROUTINE / CONVERTED_COLUMN | [dbo.TRSRetailCalculateFee2:368](../../../../bond-sqltrsretail-uat/db_object/procedures/dbo.TRSRetailCalculateFee2.sql#L368) | JOIN_ON / P11 / COMPARISON | `tr.TrxTypeID` : `SMALLINT` | `tmp.TrxType` : `INT` | `tr.TrxTypeID` → `INT` | `tmp.TrxType = tr.TrxTypeID` |
+| IC-009997 | C_FAMILY_OR_ROUTINE / CONVERTED_COLUMN | [dbo.TRSRptFeeBranch:110](../../../../bond-sqltrsretail-uat/db_object/procedures/dbo.TRSRptFeeBranch.sql#L110) | WHERE / P11 / IN_VALUE_TYPE | `sr.TrxTypeID` : `SMALLINT` | `5` : `int` | `sr.TrxTypeID` → `INT` | `sr.TrxTypeID not in (5,6)` |
+| IC-010056 | C_FAMILY_OR_ROUTINE / CONVERTED_COLUMN | [dbo.TRSRptKonfirmasiBOND:354](../../../../bond-sqltrsretail-uat/db_object/procedures/dbo.TRSRptKonfirmasiBOND.sql#L354) | CASE_TEST / P07 / SIMPLE_CASE_MATCH | `TrxTypeID` : `SMALLINT` | `3` : `int` | `TrxTypeID` → `INT` | `when 3 then 'Beli/Nasabah Jual'` |
+| IC-010057 | C_FAMILY_OR_ROUTINE / CONVERTED_COLUMN | [dbo.TRSRptKonfirmasiBOND:355](../../../../bond-sqltrsretail-uat/db_object/procedures/dbo.TRSRptKonfirmasiBOND.sql#L355) | CASE_TEST / P07 / SIMPLE_CASE_MATCH | `TrxTypeID` : `SMALLINT` | `4` : `int` | `TrxTypeID` → `INT` | `when 4 then 'Jual/Nasabah Beli'` |
+| IC-010090 | C_FAMILY_OR_ROUTINE / CONVERTED_COLUMN | [dbo.TRSRptKonfirmasiBOND:441](../../../../bond-sqltrsretail-uat/db_object/procedures/dbo.TRSRptKonfirmasiBOND.sql#L441) | CASE_TEST / P07 / SIMPLE_CASE_MATCH | `TrxTypeID` : `SMALLINT` | `3` : `int` | `TrxTypeID` → `INT` | `when 3 then 'Buy/Customer Sell'` |
+| IC-010091 | C_FAMILY_OR_ROUTINE / CONVERTED_COLUMN | [dbo.TRSRptKonfirmasiBOND:442](../../../../bond-sqltrsretail-uat/db_object/procedures/dbo.TRSRptKonfirmasiBOND.sql#L442) | CASE_TEST / P07 / SIMPLE_CASE_MATCH | `TrxTypeID` : `SMALLINT` | `4` : `int` | `TrxTypeID` → `INT` | `when 4 then 'Sell/Customer Buy'` |
+| IC-010111 | C_FAMILY_OR_ROUTINE / CONVERTED_COLUMN | [dbo.TRSRptKonfirmasiBONDNew:237](../../../../bond-sqltrsretail-uat/db_object/procedures/dbo.TRSRptKonfirmasiBONDNew.sql#L237) | CASE_TEST / P07 / SIMPLE_CASE_MATCH | `TrxTypeID` : `SMALLINT` | `3` : `int` | `TrxTypeID` → `INT` | `WHEN 3 THEN 'Beli/Nasabah Jual'` |
+| IC-010112 | C_FAMILY_OR_ROUTINE / CONVERTED_COLUMN | [dbo.TRSRptKonfirmasiBONDNew:238](../../../../bond-sqltrsretail-uat/db_object/procedures/dbo.TRSRptKonfirmasiBONDNew.sql#L238) | CASE_TEST / P07 / SIMPLE_CASE_MATCH | `TrxTypeID` : `SMALLINT` | `4` : `int` | `TrxTypeID` → `INT` | `WHEN 4 THEN 'Jual/Nasabah Beli'` |
+| IC-010146 | C_FAMILY_OR_ROUTINE / CONVERTED_COLUMN | [dbo.TRSRptKonfirmasiBONDNew:316](../../../../bond-sqltrsretail-uat/db_object/procedures/dbo.TRSRptKonfirmasiBONDNew.sql#L316) | CASE_TEST / P07 / SIMPLE_CASE_MATCH | `TrxTypeID` : `SMALLINT` | `3` : `int` | `TrxTypeID` → `INT` | `WHEN 3 THEN 'Buy/Customer Sell'` |
+| IC-010147 | C_FAMILY_OR_ROUTINE / CONVERTED_COLUMN | [dbo.TRSRptKonfirmasiBONDNew:317](../../../../bond-sqltrsretail-uat/db_object/procedures/dbo.TRSRptKonfirmasiBONDNew.sql#L317) | CASE_TEST / P07 / SIMPLE_CASE_MATCH | `TrxTypeID` : `SMALLINT` | `4` : `int` | `TrxTypeID` → `INT` | `WHEN 4 THEN 'Sell/Customer Buy'` |
+| IC-010173 | C_FAMILY_OR_ROUTINE / CONVERTED_COLUMN | [dbo.TRSRptKonfirmasiSRBI:168](../../../../bond-sqltrsretail-uat/db_object/procedures/dbo.TRSRptKonfirmasiSRBI.sql#L168) | CASE_TEST / P07 / SIMPLE_CASE_MATCH | `TrxTypeID` : `SMALLINT` | `3` : `int` | `TrxTypeID` → `INT` | `when 3 then 'Beli/Nasabah Jual'` |
+| IC-010174 | C_FAMILY_OR_ROUTINE / CONVERTED_COLUMN | [dbo.TRSRptKonfirmasiSRBI:169](../../../../bond-sqltrsretail-uat/db_object/procedures/dbo.TRSRptKonfirmasiSRBI.sql#L169) | CASE_TEST / P07 / SIMPLE_CASE_MATCH | `TrxTypeID` : `SMALLINT` | `4` : `int` | `TrxTypeID` → `INT` | `when 4 then 'Jual/Nasabah Beli'` |
+| IC-010207 | C_FAMILY_OR_ROUTINE / CONVERTED_COLUMN | [dbo.TRSRptKonfirmasiSRBI:245](../../../../bond-sqltrsretail-uat/db_object/procedures/dbo.TRSRptKonfirmasiSRBI.sql#L245) | CASE_TEST / P07 / SIMPLE_CASE_MATCH | `TrxTypeID` : `SMALLINT` | `3` : `int` | `TrxTypeID` → `INT` | `when 3 then 'Buy/Customer Sell'` |
+| IC-010208 | C_FAMILY_OR_ROUTINE / CONVERTED_COLUMN | [dbo.TRSRptKonfirmasiSRBI:246](../../../../bond-sqltrsretail-uat/db_object/procedures/dbo.TRSRptKonfirmasiSRBI.sql#L246) | CASE_TEST / P07 / SIMPLE_CASE_MATCH | `TrxTypeID` : `SMALLINT` | `4` : `int` | `TrxTypeID` → `INT` | `when 4 then 'Sell/Customer Buy'` |
+| IC-012962 | C_FAMILY_OR_ROUTINE / CONVERTED_COLUMN | [dbo.trs_DeleteSecurityTransaction_TR:27](../../../../bond-sqltrsretail-uat/db_object/procedures/dbo.trs_DeleteSecurityTransaction_TR.sql#L27) | WHERE / P11 / COMPARISON | `TrxTypeID` : `SMALLINT` | `@TrxType` : `int` | `TrxTypeID` → `INT` | `TrxTypeID=@TrxType` |
+| IC-013567 | C_FAMILY_OR_ROUTINE / CONVERTED_COLUMN | [dbo.trs_ListTypeTransaction:9](../../../../bond-sqltrsretail-uat/db_object/procedures/dbo.trs_ListTypeTransaction.sql#L9) | WHERE / P11 / IN_VALUE_TYPE | `TrxTypeID` : `SMALLINT` | `3` : `int` | `TrxTypeID` → `INT` | `TrxTypeID in (3,4)` |
+| IC-013568 | C_FAMILY_OR_ROUTINE / CONVERTED_COLUMN | [dbo.trs_ListTypeTransaction2nd:10](../../../../bond-sqltrsretail-uat/db_object/procedures/dbo.trs_ListTypeTransaction2nd.sql#L10) | WHERE / P11 / IN_VALUE_TYPE | `TrxTypeID` : `SMALLINT` | `9` : `int` | `TrxTypeID` → `INT` | `TrxTypeID in (9,10)` |
+| IC-000173 | PARTNER_OR_DESTINATION / COUNTERPART_COLUMN_NOT_CONVERTED | [dbo.CustodyReportMaintainAcquisition:170](../../../../bond-sqltrsretail-uat/db_object/procedures/dbo.CustodyReportMaintainAcquisition.sql#L170) | JOIN_ON / P01 / COMPARISON | `tr.TrxTypeID` : `SMALLINT` | `st.TrxType` : `VARCHAR(20)` | `st.TrxType` → `SMALLINT` | `tr.TrxTypeID = st.TrxType` |

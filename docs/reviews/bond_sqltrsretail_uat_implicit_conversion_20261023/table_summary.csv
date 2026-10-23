@@ -1,0 +1,842 @@
+﻿table,display_table,schema_columns,conversion_context_columns,all_context_sites,all_context_procedures,a_sites,a_procedures,b_sites,c_sites,partner_destination_sites,status,detail_file
+sql_replicate.dbo.ps_ndm_employees,SQL_REPLICATE.dbo.PS_NDM_EMPLOYEES,22,5,129,26,59,20,43,10,17,HAS_STATIC_CONVERSION_CONTEXT,tables/sql_replicate.dbo.ps_ndm_employees.md
+sql_replicate.dbo.pplmapmasterworkflow_tm,SQL_REPLICATE.dbo.PPLMAPMasterWorkflow_TM,51,2,45,21,40,18,3,0,2,HAS_STATIC_CONVERSION_CONTEXT,tables/sql_replicate.dbo.pplmapmasterworkflow_tm.md
+sql_replicate.dbo.misofficeinformationeodfull,SQL_REPLICATE.dbo.MISOfficeInformationEODFull,45,3,74,21,44,12,2,2,45,HAS_STATIC_CONVERSION_CONTEXT,tables/sql_replicate.dbo.misofficeinformationeodfull.md
+retail.dbo.securitymaster_tm,Retail UAT.dbo.SecurityMaster_TM,107,61,788,176,25,11,107,355,306,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.securitymaster_tm.md
+retail.dbo.ori_online_tr,Retail UAT.dbo.ORI_Online_TR,26,8,69,24,18,10,29,12,10,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.ori_online_tr.md
+retail.dbo.repomastertransaction_tt,Retail UAT.dbo.REPOMasterTransaction_TT,56,23,98,21,14,8,23,0,61,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.repomastertransaction_tt.md
+retail.dbo.trsparameter_tr,Retail UAT.dbo.TRSParameter_TR,3,2,26,23,8,8,17,0,1,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trsparameter_tr.md
+sql_replicate.dbo.cfpar3,SQL_REPLICATE.dbo.CFPAR3,5,2,13,8,10,7,0,0,3,HAS_STATIC_CONVERSION_CONTEXT,tables/sql_replicate.dbo.cfpar3.md
+retail.dbo.securitycoupondate_tr,Retail UAT.dbo.SecurityCouponDate_TR,5,3,32,12,9,7,3,13,7,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.securitycoupondate_tr.md
+retail.dbo.ptoscustomer_tm,Retail UAT.dbo.PTOSCustomer_TM,28,18,64,13,22,5,0,3,39,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.ptoscustomer_tm.md
+retail.dbo.treasurycustomer_tm,Retail UAT.dbo.TreasuryCustomer_TM,82,34,245,83,7,5,43,85,110,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.treasurycustomer_tm.md
+sql_replicate.dbo.procifriskprofile_tm,SQL_REPLICATE.dbo.ProCIFRiskProfile_TM,4,3,14,6,6,5,2,0,6,HAS_STATIC_CONVERSION_CONTEXT,tables/sql_replicate.dbo.procifriskprofile_tm.md
+retail.dbo.securitysysparameter_tr,Retail UAT.dbo.SecuritySysParameter_TR,4,1,14,4,14,4,0,0,0,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.securitysysparameter_tr.md
+retail.dbo.trspostingglbond_th,Retail UAT.dbo.TRSPostingGLBond_TH,18,1,14,4,14,4,0,0,0,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trspostingglbond_th.md
+retail.dbo.bondsdetailtransaksibuybackperdana_tr,Retail UAT.dbo.BONDSDetailTransaksiBuyBackPerdana_TR,46,19,74,12,7,4,16,15,39,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.bondsdetailtransaksibuybackperdana_tr.md
+sql_replicate.dbo.ddmast,SQL_REPLICATE.dbo.DDMAST,20,9,185,52,6,4,36,57,86,HAS_STATIC_CONVERSION_CONTEXT,tables/sql_replicate.dbo.ddmast.md
+sql_replicate.dbo.cfmast,SQL_REPLICATE.dbo.CFMAST,96,21,216,32,6,4,50,144,16,HAS_STATIC_CONVERSION_CONTEXT,tables/sql_replicate.dbo.cfmast.md
+retail.dbo.orisbninvestorreksb_tr,Retail UAT.dbo.ORISBNInvestorRekSB_TR,16,3,37,10,6,4,10,0,21,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.orisbninvestorreksb_tr.md
+retail.dbo.securitytransaction_tt,Retail UAT.dbo.SecurityTransaction_TT,100,59,1694,147,5,4,159,754,781,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.securitytransaction_tt.md
+retail.dbo.ptostransaksi_tr,Retail UAT.dbo.PTOSTransaksi_TR,30,21,197,14,16,3,4,39,138,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.ptostransaksi_tr.md
+retail.dbo.trscustaccnumber_tr,Retail UAT.dbo.TRSCustAccNumber_TR,9,5,17,8,6,3,0,0,11,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trscustaccnumber_tr.md
+sql_replicate.dbo.cfaddr,SQL_REPLICATE.dbo.CFADDR,34,17,184,16,3,3,63,114,4,HAS_STATIC_CONVERSION_CONTEXT,tables/sql_replicate.dbo.cfaddr.md
+retail.dbo.trsbankcustody_tm,Retail UAT.dbo.TRSBankCustody_TM,34,2,7,4,3,3,4,0,0,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trsbankcustody_tm.md
+retail.dbo.gwp_process_data_tt,Retail UAT.dbo.gwp_process_data_tt,9,2,6,3,3,3,0,3,0,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.gwp_process_data_tt.md
+retail.dbo.sbnmappingsubreg_tr,Retail UAT.dbo.SBNMappingSubReg_TR,5,2,13,3,3,3,1,7,2,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.sbnmappingsubreg_tr.md
+retail.dbo.ptosoutstanding_tr,Retail UAT.dbo.PTOSOutstanding_TR,21,14,156,16,21,2,10,51,74,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.ptosoutstanding_tr.md
+retail.dbo.trssettlementbis4_temp,Retail UAT.dbo.TRSSettlementBIS4_temp,33,19,47,3,8,2,0,0,39,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trssettlementbis4_temp.md
+retail.dbo.trsforoneapprovaltemp_tm,Retail UAT.dbo.TRSForONEApprovalTemp_TM,18,2,10,2,8,2,0,0,2,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trsforoneapprovaltemp_tm.md
+retail.dbo.trshasilrevenue_tm,Retail UAT.dbo.TRSHasilRevenue_TM,39,16,73,6,6,2,7,19,41,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trshasilrevenue_tm.md
+retail.dbo.trsrektaxamnesty_tr,Retail UAT.dbo.TRSRekTaxAmnesty_TR,6,1,5,2,5,2,0,0,0,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trsrektaxamnesty_tr.md
+retail.dbo.trsemailonenotifparameter_tr,Retail UAT.dbo.TRSEmailOneNotifParameter_TR,7,1,14,5,4,2,10,0,0,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trsemailonenotifparameter_tr.md
+retail.dbo.ptosoutstanding_error,Retail UAT.dbo.PTOSOutstanding_Error,14,9,49,2,4,2,0,0,45,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.ptosoutstanding_error.md
+retail.dbo.trsgeneralparam_tr,Retail UAT.dbo.TRSGeneralParam_TR,4,2,15,8,2,2,1,0,12,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trsgeneralparam_tr.md
+retail.dbo.mappingoccupation_tm,Retail UAT.dbo.MappingOccupation_TM,5,3,12,5,2,2,4,1,5,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.mappingoccupation_tm.md
+retail.dbo.trsprocessoverbooking_tr,Retail UAT.dbo.TRSProcessOverBooking_TR,33,3,15,5,2,2,2,0,11,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trsprocessoverbooking_tr.md
+retail.dbo.trsparamaterreport_tr,Retail UAT.dbo.TRSParamaterReport_TR,5,1,2,2,2,2,0,0,0,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trsparamaterreport_tr.md
+retail.dbo.trsmappingmurexbis4,Retail UAT.dbo.TRSMappingMurexBIS4,10,1,8,1,8,1,0,0,0,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trsmappingmurexbis4.md
+retail.dbo.trsreksyariah_tr,Retail UAT.dbo.TRSRekSyariah_TR,5,2,11,3,4,1,0,0,7,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trsreksyariah_tr.md
+retail.dbo.treasurycustomerlog_th,Retail UAT.dbo.TreasuryCustomerLog_TH,87,13,29,13,2,1,0,2,25,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.treasurycustomerlog_th.md
+retail.dbo.earlyredemption_tt,Retail UAT.dbo.EarlyRedemption_TT,27,11,36,12,2,1,5,13,16,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.earlyredemption_tt.md
+retail.dbo.securitytransferaset_tm,Retail UAT.dbo.SecurityTransferAset_TM,30,9,56,8,2,1,22,6,26,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.securitytransferaset_tm.md
+retail.dbo.report_permission,Retail UAT.dbo.Report_Permission,11,2,19,6,2,1,8,4,5,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.report_permission.md
+retail.dbo.trsbatchtransaction_tm,Retail UAT.dbo.TRSBatchTransaction_TM,37,6,13,5,2,1,1,1,9,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trsbatchtransaction_tm.md
+retail.dbo.trssettlementbis4,Retail UAT.dbo.TRSSettlementBIS4,36,13,52,4,2,1,39,8,3,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trssettlementbis4.md
+retail.dbo.bkmappingsec_tm,Retail UAT.dbo.BKMappingSec_TM,8,1,2,1,2,1,0,0,0,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.bkmappingsec_tm.md
+retail.dbo.trsmatchingcoupon_tt,Retail UAT.dbo.TRSMatchingCoupon_TT,40,9,44,9,1,1,2,28,13,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trsmatchingcoupon_tt.md
+retail.dbo.securitytrxlelang_tt,Retail UAT.dbo.SecurityTrxLelang_TT,54,7,19,8,1,1,8,5,5,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.securitytrxlelang_tt.md
+retail.dbo.trssettlementkuponlog_th,Retail UAT.dbo.TRSSettlementKuponLog_TH,18,9,36,8,1,1,2,23,10,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trssettlementkuponlog_th.md
+retail.dbo.repoparamtenor_tr,Retail UAT.dbo.REPOParamTenor_TR,12,3,19,6,1,1,1,4,13,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.repoparamtenor_tr.md
+retail.dbo.trsctp_tm,Retail UAT.dbo.TRSCTP_TM,8,3,19,5,1,1,0,3,15,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trsctp_tm.md
+retail.dbo.ptosmappingproductcode_tm,Retail UAT.dbo.PTOSMappingProductCode_TM,7,2,2,2,1,1,0,0,1,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.ptosmappingproductcode_tm.md
+retail.dbo.tmp_ptos_customer_upload,Retail UAT.dbo.tmp_ptos_customer_upload,28,7,23,2,1,1,1,9,12,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.tmp_ptos_customer_upload.md
+retail.dbo.trspendingrevenue_tt,Retail UAT.dbo.TRSPendingRevenue_TT,12,3,10,2,1,1,1,4,4,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trspendingrevenue_tt.md
+retail.dbo.trs_getaccount_tmp,Retail UAT.dbo.trs_getaccount_tmp,8,3,3,1,1,1,0,0,2,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trs_getaccount_tmp.md
+retail.dbo.trsdebitaccount_tr,Retail UAT.dbo.TRSDebitAccount_TR,6,3,7,1,1,1,1,1,5,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trsdebitaccount_tr.md
+retail.dbo.trspostingglbond_tt,Retail UAT.dbo.TRSPostingGLBond_TT,17,2,3,1,1,1,0,0,2,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trspostingglbond_tt.md
+sql_replicate.dbo.jhdata,SQL_REPLICATE.dbo.JHDATA,46,1,1,1,1,1,0,0,0,HAS_STATIC_CONVERSION_CONTEXT,tables/sql_replicate.dbo.jhdata.md
+retail.dbo.control_table,Retail UAT.dbo.control_table,8,7,120,79,0,0,80,35,5,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.control_table.md
+retail.dbo.ori_order_tt,Retail UAT.dbo.ORI_Order_TT,38,20,204,51,0,0,16,75,113,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.ori_order_tt.md
+retail.dbo.trsparamhargamodal_tr,Retail UAT.dbo.TRSParamHargaModal_TR,20,10,134,29,0,0,5,7,122,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trsparamhargamodal_tr.md
+retail.dbo.trsretailcustblock_tm,Retail UAT.dbo.TRSRetailCustBlock_TM,21,4,90,22,0,0,2,62,26,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trsretailcustblock_tm.md
+retail.dbo.riskprofiletrs_tm,Retail UAT.dbo.RiskProfileTRS_TM,19,5,119,21,0,0,0,96,23,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.riskprofiletrs_tm.md
+retail.dbo.trsmateraitransaction_tt,Retail UAT.dbo.TRSMateraiTransaction_TT,24,12,85,20,0,0,6,14,65,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trsmateraitransaction_tt.md
+retail.dbo.orionlinegeneralparam_tr,Retail UAT.dbo.ORIOnlineGeneralParam_TR,4,2,31,17,0,0,25,0,6,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.orionlinegeneralparam_tr.md
+sql_replicate.dbo.sibscurrencytable_tm,SQL_REPLICATE.dbo.SIBSCurrencyTable_TM,16,6,127,17,0,0,61,2,64,HAS_STATIC_CONVERSION_CONTEXT,tables/sql_replicate.dbo.sibscurrencytable_tm.md
+sql_replicate.dbo.tamast,SQL_REPLICATE.dbo.TAMAST,9,2,41,17,0,0,0,0,41,HAS_STATIC_CONVERSION_CONTEXT,tables/sql_replicate.dbo.tamast.md
+retail.dbo.ori_order_temp,Retail UAT.dbo.ORI_Order_Temp,27,11,54,16,0,0,7,9,38,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.ori_order_temp.md
+sql_replicate.dbo.ddpar2,SQL_REPLICATE.dbo.DDPAR2,60,5,86,15,0,0,2,47,37,HAS_STATIC_CONVERSION_CONTEXT,tables/sql_replicate.dbo.ddpar2.md
+retail.dbo.securitytransactionlink_tr,Retail UAT.dbo.SecurityTransactionLink_TR,12,6,54,14,0,0,6,17,31,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.securitytransactionlink_tr.md
+sql_replicate.dbo.ddtnew,SQL_REPLICATE.dbo.DDTNEW,36,7,39,14,0,0,17,0,22,HAS_STATIC_CONVERSION_CONTEXT,tables/sql_replicate.dbo.ddtnew.md
+retail.dbo.trssafekeepingfeelog_th,Retail UAT.dbo.TRSSafeKeepingFeeLog_TH,14,3,25,13,0,0,0,19,6,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trssafekeepingfeelog_th.md
+retail.dbo.trsecparamspread_tr,Retail UAT.dbo.TRSECParamSpread_TR,14,11,62,12,0,0,0,22,40,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trsecparamspread_tr.md
+retail.dbo.trsparambookbld_tr,Retail UAT.dbo.TRSParamBookBld_TR,8,6,52,12,0,0,0,24,28,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trsparambookbld_tr.md
+sql_replicate.dbo.jhcoun,SQL_REPLICATE.dbo.JHCOUN,11,3,30,12,0,0,3,10,17,HAS_STATIC_CONVERSION_CONTEXT,tables/sql_replicate.dbo.jhcoun.md
+sql_replicate.dbo.proobl_i,SQL_REPLICATE.dbo.PROOBL_I,42,2,22,12,0,0,0,0,22,HAS_STATIC_CONVERSION_CONTEXT,tables/sql_replicate.dbo.proobl_i.md
+retail.dbo.ori_order_log_th,Retail UAT.dbo.ORI_Order_Log_TH,43,2,16,10,0,0,0,4,12,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.ori_order_log_th.md
+retail.dbo.securitytransaction_tr,Retail UAT.dbo.SecurityTransaction_TR,2,1,25,10,0,0,3,21,1,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.securitytransaction_tr.md
+retail.dbo.trsparamspread_tr,Retail UAT.dbo.TRSParamSpread_TR,4,2,49,10,0,0,0,0,49,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trsparamspread_tr.md
+retail.dbo.orisbnordermainsched_tm,Retail UAT.dbo.ORISBNOrderMainSched_TM,16,6,12,9,0,0,4,0,8,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.orisbnordermainsched_tm.md
+sql_replicate.dbo.bis4_sub_accounts,SQL_REPLICATE.dbo.BIS4_SUB_ACCOUNTS,5,3,30,9,0,0,3,0,27,HAS_STATIC_CONVERSION_CONTEXT,tables/sql_replicate.dbo.bis4_sub_accounts.md
+sql_replicate.dbo.cfacct,SQL_REPLICATE.dbo.CFACCT,22,5,40,9,0,0,15,11,14,HAS_STATIC_CONVERSION_CONTEXT,tables/sql_replicate.dbo.cfacct.md
+sql_replicate.dbo.cfaidn,SQL_REPLICATE.dbo.CFAIDN,20,7,37,9,0,0,13,20,4,HAS_STATIC_CONVERSION_CONTEXT,tables/sql_replicate.dbo.cfaidn.md
+retail.dbo.securitymasterlog_th,Retail UAT.dbo.SecurityMasterLog_TH,107,2,23,8,0,0,0,13,10,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.securitymasterlog_th.md
+retail.dbo.securitytransaction_th,Retail UAT.dbo.SecurityTransaction_TH,95,17,23,8,0,0,0,1,22,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.securitytransaction_th.md
+retail.dbo.securitytransactionbuy_tt,Retail UAT.dbo.SecurityTransactionBuy_TT,46,12,56,8,0,0,0,4,52,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.securitytransactionbuy_tt.md
+retail.dbo.trsbatchheaderfile2cms_tm,Retail UAT.dbo.TRSBatchHeaderFile2CMS_TM,10,3,38,8,0,0,0,18,20,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trsbatchheaderfile2cms_tm.md
+retail.dbo.trsedithargamodal_th,Retail UAT.dbo.TRSEditHargaModal_TH,11,3,21,8,0,0,0,10,11,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trsedithargamodal_th.md
+retail.dbo.trsjobsendemail_tt,Retail UAT.dbo.TRSJobSendEmail_TT,9,2,15,8,0,0,0,0,15,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trsjobsendemail_tt.md
+retail.dbo.trsseller_tm,Retail UAT.dbo.TRSSeller_TM,12,3,29,8,0,0,0,22,7,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trsseller_tm.md
+retail.dbo.cfaddrkodekotamapping_tr,Retail UAT.dbo.CFADDRKodeKotaMapping_TR,2,1,7,7,0,0,0,7,0,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.cfaddrkodekotamapping_tr.md
+retail.dbo.orisbninvestorrekdana_tr,Retail UAT.dbo.ORISBNInvestorRekDana_TR,15,3,15,7,0,0,4,0,11,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.orisbninvestorrekdana_tr.md
+retail.dbo.ptosoutstanding_temp,Retail UAT.dbo.PTOSOutstanding_Temp,15,4,23,7,0,0,0,6,17,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.ptosoutstanding_temp.md
+retail.dbo.repoparameterproduct_tm,Retail UAT.dbo.REPOParameterProduct_TM,27,9,55,7,0,0,17,16,22,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.repoparameterproduct_tm.md
+retail.dbo.sbnschedmail_tt,Retail UAT.dbo.SBNSchedMail_TT,15,2,10,7,0,0,0,3,7,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.sbnschedmail_tt.md
+retail.dbo.sbnschednotification_tt,Retail UAT.dbo.SBNSchedNotification_TT,19,2,10,7,0,0,0,3,7,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.sbnschednotification_tt.md
+retail.dbo.treasurycustomerpending_tm,Retail UAT.dbo.TreasuryCustomerPending_TM,76,11,23,7,0,0,3,5,15,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.treasurycustomerpending_tm.md
+retail.dbo.trsmaturity_tt,Retail UAT.dbo.TRSMaturity_TT,32,17,36,7,0,0,2,18,16,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trsmaturity_tt.md
+retail.dbo.trsstatuscorporatebond_tr,Retail UAT.dbo.TRSStatusCorporateBond_TR,4,1,9,7,0,0,0,4,5,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trsstatuscorporatebond_tr.md
+sql_replicate.dbo.cfzemp,SQL_REPLICATE.dbo.CFZEMP,27,3,15,7,0,0,0,15,0,HAS_STATIC_CONVERSION_CONTEXT,tables/sql_replicate.dbo.cfzemp.md
+retail.dbo.kodekota_tr,Retail UAT.dbo.KodeKota_TR,3,1,6,6,0,0,0,0,6,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.kodekota_tr.md
+retail.dbo.process_table,Retail UAT.dbo.process_table,21,4,20,6,0,0,3,7,10,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.process_table.md
+retail.dbo.ptosloghasilbmw_th,Retail UAT.dbo.PTOSLogHasilBMW_TH,8,2,12,6,0,0,2,0,10,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.ptosloghasilbmw_th.md
+retail.dbo.ptostransaksi_temp,Retail UAT.dbo.PTOSTransaksi_Temp,25,7,38,6,0,0,0,8,30,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.ptostransaksi_temp.md
+retail.dbo.repoparamhargamodal_tr,Retail UAT.dbo.REPOParamHargaModal_TR,10,3,10,6,0,0,1,0,9,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.repoparamhargamodal_tr.md
+retail.dbo.securitymasterextmig_tm,Retail UAT.dbo.SecurityMasterExtMig_TM,8,2,26,6,0,0,0,13,13,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.securitymasterextmig_tm.md
+retail.dbo.treasurygeneralparam_tr,Retail UAT.dbo.TreasuryGeneralParam_TR,4,3,8,6,0,0,2,0,6,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.treasurygeneralparam_tr.md
+retail.dbo.treasurystoreprocedurelog_tl,Retail UAT.dbo.TreasuryStoreProcedureLog_TL,11,4,13,6,0,0,0,0,13,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.treasurystoreprocedurelog_tl.md
+retail.dbo.trsmaturitytaxamnesty_tt,Retail UAT.dbo.TRSMaturityTaxAmnesty_TT,25,3,17,6,0,0,0,9,8,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trsmaturitytaxamnesty_tt.md
+retail.dbo.trsparamhargamodal_tl,Retail UAT.dbo.TRSParamHargaModal_TL,24,5,18,6,0,0,0,5,13,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trsparamhargamodal_tl.md
+retail.dbo.trsparamhargamodalpending_tr,Retail UAT.dbo.TRSParamHargaModalPending_TR,26,6,10,6,0,0,1,0,9,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trsparamhargamodalpending_tr.md
+retail.dbo.trssecuritycurrency_tr,Retail UAT.dbo.TRSSecurityCurrency_TR,5,2,11,6,0,0,0,9,2,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trssecuritycurrency_tr.md
+retail.dbo.trssettlementmaturitylog_th,Retail UAT.dbo.TRSSettlementMaturityLog_TH,12,4,31,6,0,0,1,28,2,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trssettlementmaturitylog_th.md
+retail.dbo.trssettlementorderlog_th,Retail UAT.dbo.TRSSettlementOrderLog_TH,14,4,14,6,0,0,0,9,5,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trssettlementorderlog_th.md
+sql_replicate.dbo.tclogt,SQL_REPLICATE.dbo.TCLOGT,10,3,20,6,0,0,2,0,18,HAS_STATIC_CONVERSION_CONTEXT,tables/sql_replicate.dbo.tclogt.md
+retail.dbo.ori_order_pending_tt,Retail UAT.dbo.ORI_Order_Pending_TT,26,2,13,5,0,0,0,8,5,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.ori_order_pending_tt.md
+retail.dbo.securityfeenasabah_tr,Retail UAT.dbo.SecurityFeeNasabah_TR,21,10,39,5,0,0,3,2,34,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.securityfeenasabah_tr.md
+retail.dbo.securitysafekeepingfee_tr,Retail UAT.dbo.SecuritySafeKeepingFee_TR,16,14,94,5,0,0,6,14,78,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.securitysafekeepingfee_tr.md
+retail.dbo.securitytransferasetlink_tr,Retail UAT.dbo.SecurityTransferAsetLink_TR,17,3,21,5,0,0,9,8,4,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.securitytransferasetlink_tr.md
+retail.dbo.trsbondsprice_tm,Retail UAT.dbo.TRSBondsPrice_TM,17,6,14,5,0,0,2,0,12,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trsbondsprice_tm.md
+retail.dbo.trsmainapproval_tm,Retail UAT.dbo.TRSMainApproval_TM,7,2,8,5,0,0,1,0,7,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trsmainapproval_tm.md
+retail.dbo.trsparamhargamodal_th,Retail UAT.dbo.TRSParamHargaModal_TH,18,2,12,5,0,0,0,0,12,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trsparamhargamodal_th.md
+retail.dbo.trsprocessbuybacklog_th,Retail UAT.dbo.TRSProcessBuyBackLog_TH,12,5,15,5,0,0,0,6,9,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trsprocessbuybacklog_th.md
+retail.dbo.trsseller_th,Retail UAT.dbo.TRSSeller_TH,19,2,32,5,0,0,0,26,6,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trsseller_th.md
+retail.dbo.trssettlementtransaksibankbelilog_th,Retail UAT.dbo.TRSSettlementTransaksiBankBeliLog_TH,10,1,26,5,0,0,0,24,2,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trssettlementtransaksibankbelilog_th.md
+retail.dbo.trssettlementtransaksibankjuallog_th,Retail UAT.dbo.TRSSettlementTransaksiBankJualLog_TH,10,1,15,5,0,0,0,14,1,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trssettlementtransaksibankjuallog_th.md
+retail.dbo.coupon_source_tt,Retail UAT.dbo.coupon_source_tt,22,5,34,4,0,0,0,10,24,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.coupon_source_tt.md
+retail.dbo.custodysfeekupon_tr,Retail UAT.dbo.CustodySfeeKupon_TR,40,6,22,4,0,0,6,14,4,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.custodysfeekupon_tr.md
+retail.dbo.custodyuploadsfeekupon_tr,Retail UAT.dbo.CustodyUploadSfeeKupon_TR,39,2,6,4,0,0,1,1,4,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.custodyuploadsfeekupon_tr.md
+retail.dbo.mappingfundsource_tm,Retail UAT.dbo.MappingFundSource_TM,3,2,4,4,0,0,3,1,0,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.mappingfundsource_tm.md
+retail.dbo.maturity_source_tt,Retail UAT.dbo.maturity_source_tt,31,20,57,4,0,0,1,13,43,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.maturity_source_tt.md
+retail.dbo.paramstatus_tr,Retail UAT.dbo.ParamStatus_TR,3,2,7,4,0,0,0,5,2,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.paramstatus_tr.md
+retail.dbo.ptosoutstanding_th,Retail UAT.dbo.PTOSOutstanding_TH,25,13,39,4,0,0,0,0,39,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.ptosoutstanding_th.md
+retail.dbo.ptostransaksi_th,Retail UAT.dbo.PTOSTransaksi_TH,34,21,53,4,0,0,0,0,53,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.ptostransaksi_th.md
+retail.dbo.securityfeenasabah_th,Retail UAT.dbo.SecurityFeeNasabah_TH,13,2,11,4,0,0,0,5,6,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.securityfeenasabah_th.md
+retail.dbo.securitymasterpending_tm,Retail UAT.dbo.SecurityMasterPending_TM,104,19,57,4,0,0,5,32,20,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.securitymasterpending_tm.md
+retail.dbo.securitytransactiondetail_tt,Retail UAT.dbo.SecurityTransactionDetail_TT,14,5,8,4,0,0,6,2,0,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.securitytransactiondetail_tt.md
+retail.dbo.securitytrxresultlelang_tt,Retail UAT.dbo.SecurityTrxResultLelang_TT,28,2,6,4,0,0,0,0,6,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.securitytrxresultlelang_tt.md
+retail.dbo.tipeinvestor_tm,Retail UAT.dbo.TipeInvestor_TM,5,1,4,4,0,0,0,0,4,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.tipeinvestor_tm.md
+retail.dbo.tmp_ptos_outstanding_upload,Retail UAT.dbo.tmp_ptos_outstanding_upload,17,5,30,4,0,0,2,14,14,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.tmp_ptos_outstanding_upload.md
+retail.dbo.trsauthparamissuer_th,Retail UAT.dbo.TRSAuthParamIssuer_TH,6,1,7,4,0,0,0,6,1,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trsauthparamissuer_th.md
+retail.dbo.trsbankcustody_th,Retail UAT.dbo.TRSBankCustody_TH,40,3,11,4,0,0,0,5,6,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trsbankcustody_th.md
+retail.dbo.trsbankcustodypending_tm,Retail UAT.dbo.TRSBankCustodyPending_TM,37,3,42,4,0,0,0,36,6,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trsbankcustodypending_tm.md
+retail.dbo.trscpt_tm,Retail UAT.dbo.TRSCPT_TM,6,3,4,4,0,0,0,0,4,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trscpt_tm.md
+retail.dbo.trscustomerrepofunded_tr,Retail UAT.dbo.TRSCustomerRepoFunded_TR,7,1,10,4,0,0,0,3,7,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trscustomerrepofunded_tr.md
+retail.dbo.trsecbondsprice_tm,Retail UAT.dbo.TRSECBondsPrice_TM,20,10,24,4,0,0,0,0,24,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trsecbondsprice_tm.md
+retail.dbo.trspajakbelilog_th,Retail UAT.dbo.TRSPajakBeliLog_TH,11,1,11,4,0,0,0,10,1,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trspajakbelilog_th.md
+retail.dbo.trsparametergl_th,Retail UAT.dbo.TRSParameterGL_TH,25,4,30,4,0,0,0,18,12,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trsparametergl_th.md
+retail.dbo.trsparamlelang_tr,Retail UAT.dbo.TRSParamLelang_TR,23,11,23,4,0,0,1,0,22,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trsparamlelang_tr.md
+retail.dbo.trspendingaccruedinterest_th,Retail UAT.dbo.TRSPendingAccruedInterest_TH,9,1,8,4,0,0,0,5,3,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trspendingaccruedinterest_th.md
+retail.dbo.trsprocesstransaksi_tt,Retail UAT.dbo.TRSProcessTransaksi_TT,14,3,7,4,0,0,0,0,7,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trsprocesstransaksi_tt.md
+retail.dbo.trsrefundlog_th,Retail UAT.dbo.TRSRefundLog_TH,14,1,8,4,0,0,0,8,0,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trsrefundlog_th.md
+retail.dbo.trssettlementbuybacklog_th,Retail UAT.dbo.TRSSettlementBuyBackLog_TH,19,4,11,4,0,0,0,5,6,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trssettlementbuybacklog_th.md
+retail.dbo.trssettlementcashbacklog_th,Retail UAT.dbo.TRSSettlementCashBackLog_TH,10,2,10,4,0,0,0,8,2,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trssettlementcashbacklog_th.md
+retail.dbo.trssettlementearlylog_th,Retail UAT.dbo.TRSSettlementEarlyLog_TH,12,1,10,4,0,0,0,9,1,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trssettlementearlylog_th.md
+retail.dbo.trssettlementtransaksibankbelitalog_th,Retail UAT.dbo.TRSSettlementTransaksiBankBeliTALog_TH,10,1,14,4,0,0,0,13,1,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trssettlementtransaksibankbelitalog_th.md
+retail.dbo.trstransactionfeelogbeli_tr,Retail UAT.dbo.TRSTransactionFeeLogBeli_TR,11,1,9,4,0,0,0,8,1,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trstransactionfeelogbeli_tr.md
+sql_replicate.dbo.cfaltn,SQL_REPLICATE.dbo.CFALTN,13,2,18,4,0,0,9,0,9,HAS_STATIC_CONVERSION_CONTEXT,tables/sql_replicate.dbo.cfaltn.md
+sql_replicate.dbo.jhfxdt,SQL_REPLICATE.dbo.JHFXDT,12,2,23,4,0,0,3,0,20,HAS_STATIC_CONVERSION_CONTEXT,tables/sql_replicate.dbo.jhfxdt.md
+sql_replicate.dbo.mxholidaycurrency,SQL_REPLICATE.dbo.MXHolidayCurrency,2,1,15,4,0,0,0,0,15,HAS_STATIC_CONVERSION_CONTEXT,tables/sql_replicate.dbo.mxholidaycurrency.md
+sql_replicate.dbo.proobl_o,SQL_REPLICATE.dbo.PROOBL_O,32,1,5,4,0,0,5,0,0,HAS_STATIC_CONVERSION_CONTEXT,tables/sql_replicate.dbo.proobl_o.md
+retail.dbo.dump_coupon_daily_tt,Retail UAT.dbo.dump_coupon_daily_tt,23,2,4,3,0,0,1,0,3,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.dump_coupon_daily_tt.md
+retail.dbo.dump_maturity_daily_tt,Retail UAT.dbo.dump_maturity_daily_tt,30,8,15,3,0,0,2,0,13,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.dump_maturity_daily_tt.md
+retail.dbo.mappingincome_tm,Retail UAT.dbo.MappingIncome_TM,4,1,3,3,0,0,0,0,3,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.mappingincome_tm.md
+retail.dbo.orischedworkflow_tr,Retail UAT.dbo.ORISchedWorkflow_TR,7,3,10,3,0,0,0,0,10,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.orischedworkflow_tr.md
+retail.dbo.oriva_security_master,Retail UAT.dbo.oriva_security_master,9,2,4,3,0,0,0,2,2,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.oriva_security_master.md
+retail.dbo.oriva_settlement_log,Retail UAT.dbo.oriva_settlement_log,15,2,17,3,0,0,0,0,17,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.oriva_settlement_log.md
+retail.dbo.ptoscustomer_th,Retail UAT.dbo.PTOSCustomer_TH,32,3,12,3,0,0,0,0,12,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.ptoscustomer_th.md
+retail.dbo.ptossecuritymaster_temp,Retail UAT.dbo.PTOSSecurityMaster_Temp,6,2,20,3,0,0,0,16,4,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.ptossecuritymaster_temp.md
+retail.dbo.repoapprovalparameterdetail_tr,Retail UAT.dbo.REPOApprovalParameterDetail_TR,28,6,18,3,0,0,0,11,7,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.repoapprovalparameterdetail_tr.md
+retail.dbo.repoparammaturitydate_tr,Retail UAT.dbo.REPOParamMaturityDate_TR,8,4,8,3,0,0,1,0,7,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.repoparammaturitydate_tr.md
+retail.dbo.repoparamtenor_th,Retail UAT.dbo.REPOParamTenor_TH,15,3,5,3,0,0,1,0,4,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.repoparamtenor_th.md
+retail.dbo.repoproducttype_tm,Retail UAT.dbo.REPOProductType_TM,6,3,5,3,0,0,0,4,1,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.repoproducttype_tm.md
+retail.dbo.securityfeenasabahdetail_th,Retail UAT.dbo.SecurityFeeNasabahDetail_TH,23,1,4,3,0,0,0,2,2,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.securityfeenasabahdetail_th.md
+retail.dbo.securitynobankcustody_th,Retail UAT.dbo.SecurityNoBankCustody_TH,18,2,11,3,0,0,0,3,8,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.securitynobankcustody_th.md
+retail.dbo.securitytransferaset_th,Retail UAT.dbo.SecurityTransferAset_TH,32,1,6,3,0,0,0,0,6,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.securitytransferaset_th.md
+retail.dbo.treasurycustomerchange_th,Retail UAT.dbo.TreasuryCustomerChange_TH,4,3,15,3,0,0,0,5,10,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.treasurycustomerchange_th.md
+retail.dbo.trsbatchdetailfile2cms_tm,Retail UAT.dbo.TRSBatchDetailFile2CMS_TM,22,11,86,3,0,0,0,0,86,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trsbatchdetailfile2cms_tm.md
+retail.dbo.trsbondsprice_th,Retail UAT.dbo.TRSBondsPrice_TH,20,5,8,3,0,0,0,0,8,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trsbondsprice_th.md
+retail.dbo.trscustaccnumberlog_tl,Retail UAT.dbo.TRSCustAccNumberLog_TL,11,2,16,3,0,0,0,0,16,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trscustaccnumberlog_tl.md
+retail.dbo.trscustodyuploadmonitor_tr,Retail UAT.dbo.TRSCustodyUploadMonitor_TR,6,3,7,3,0,0,0,6,1,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trscustodyuploadmonitor_tr.md
+retail.dbo.trsexcludeproductcode_tr,Retail UAT.dbo.TRSExcludeProductCode_TR,1,1,3,3,0,0,0,0,3,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trsexcludeproductcode_tr.md
+retail.dbo.trsjobsendemailrecipientdetail_tr,Retail UAT.dbo.TRSJobSendEmailRecipientDetail_TR,3,1,3,3,0,0,0,0,3,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trsjobsendemailrecipientdetail_tr.md
+retail.dbo.trslistchannelbonds_tr,Retail UAT.dbo.TRSListChannelBonds_TR,15,3,3,3,0,0,0,2,1,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trslistchannelbonds_tr.md
+retail.dbo.trsmateraitransaction_th,Retail UAT.dbo.TRSMateraiTransaction_TH,28,2,4,3,0,0,0,0,4,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trsmateraitransaction_th.md
+retail.dbo.trsoncalldepositlistrek_tmp,Retail UAT.dbo.TRSOnCallDepositListRek_TMP,6,3,9,3,0,0,0,0,9,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trsoncalldepositlistrek_tmp.md
+retail.dbo.trspajakklog_th,Retail UAT.dbo.TRSPajakkLog_TH,11,4,7,3,0,0,0,1,6,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trspajakklog_th.md
+retail.dbo.trsparamaccrueddaysadjustment_th,Retail UAT.dbo.TRSParamAccruedDaysAdjustment_TH,13,2,12,3,0,0,0,3,9,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trsparamaccrueddaysadjustment_th.md
+retail.dbo.trsparamcounter_tm,Retail UAT.dbo.TRSParamCounter_TM,3,1,5,3,0,0,1,0,4,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trsparamcounter_tm.md
+retail.dbo.trsparamdeviasiharga_tl,Retail UAT.dbo.TRSParamDeviasiHarga_TL,12,2,14,3,0,0,0,14,0,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trsparamdeviasiharga_tl.md
+retail.dbo.trsparamdeviasitotalspread_tr_temp,Retail UAT.dbo.TRSParamDeviasiTotalSpread_TR_Temp,15,4,12,3,0,0,2,0,10,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trsparamdeviasitotalspread_tr_temp.md
+retail.dbo.trsparametergllog_th,Retail UAT.dbo.TRSParameterGLLog_TH,27,6,32,3,0,0,0,3,29,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trsparametergllog_th.md
+retail.dbo.trsparamspread_tl,Retail UAT.dbo.TRSParamSpread_TL,17,2,18,3,0,0,0,15,3,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trsparamspread_tl.md
+retail.dbo.trsparamspreadhargamodal_tr,Retail UAT.dbo.TRSParamSpreadHargaModal_TR,8,3,11,3,0,0,0,0,11,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trsparamspreadhargamodal_tr.md
+retail.dbo.trsprocesstransaksidetail_tr,Retail UAT.dbo.TRSProcessTransaksiDetail_TR,9,2,4,3,0,0,1,0,3,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trsprocesstransaksidetail_tr.md
+retail.dbo.trssecuritytransactionprebook_tt,Retail UAT.dbo.TRSSecurityTransactionPreBook_TT,33,2,6,3,0,0,3,2,1,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trssecuritytransactionprebook_tt.md
+retail.dbo.trssellerpending_tm,Retail UAT.dbo.TRSSellerPending_TM,16,3,11,3,0,0,0,6,5,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trssellerpending_tm.md
+retail.dbo.trssimanistransaction_tt,Retail UAT.dbo.TRSSimanisTransaction_TT,7,1,6,3,0,0,0,0,6,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trssimanistransaction_tt.md
+retail.dbo.trstransaksibuyback_tt,Retail UAT.dbo.TRSTransaksiBuyBack_TT,24,4,6,3,0,0,1,0,5,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trstransaksibuyback_tt.md
+retail.dbo.trsuntagsbnaccapproval_tt,Retail UAT.dbo.TRSUntagSBNAccApproval_TT,14,2,6,3,0,0,0,5,1,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trsuntagsbnaccapproval_tt.md
+retail.dbo.trsuploadsid_th,Retail UAT.dbo.TRSUploadSID_TH,10,2,18,3,0,0,0,8,10,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trsuploadsid_th.md
+sql_replicate.dbo.cfconn,SQL_REPLICATE.dbo.CFCONN,18,3,67,3,0,0,3,64,0,HAS_STATIC_CONVERSION_CONTEXT,tables/sql_replicate.dbo.cfconn.md
+sql_replicate.dbo.eacustomerflagging_tm,SQL_REPLICATE.dbo.EACustomerFlagging_TM,7,1,4,3,0,0,1,0,3,HAS_STATIC_CONVERSION_CONTEXT,tables/sql_replicate.dbo.eacustomerflagging_tm.md
+sql_replicate.dbo.pbflagdesc_tr,SQL_REPLICATE.dbo.PBFlagDesc_TR,5,1,3,3,0,0,0,3,0,HAS_STATIC_CONVERSION_CONTEXT,tables/sql_replicate.dbo.pbflagdesc_tr.md
+retail.dbo.acf_data_tt,Retail UAT.dbo.acf_data_tt,13,1,2,2,0,0,0,0,2,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.acf_data_tt.md
+retail.dbo.cifreplicatelog_th,Retail UAT.dbo.CIFReplicateLog_TH,6,3,3,2,0,0,0,0,3,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.cifreplicatelog_th.md
+retail.dbo.cifreplicatepending_tt,Retail UAT.dbo.CIFReplicatePending_TT,5,3,4,2,0,0,0,1,3,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.cifreplicatepending_tt.md
+retail.dbo.couponuploadtemp,Retail UAT.dbo.CouponUploadTemp,19,11,22,2,0,0,0,0,22,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.couponuploadtemp.md
+retail.dbo.earlyredemptiononline_tr,Retail UAT.dbo.EarlyRedemptionOnline_TR,22,1,5,2,0,0,0,0,5,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.earlyredemptiononline_tr.md
+retail.dbo.gwp_sched_process_log_th,Retail UAT.dbo.gwp_sched_process_log_th,7,1,2,2,0,0,0,0,2,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.gwp_sched_process_log_th.md
+retail.dbo.mappingkewarganegaraan_tm,Retail UAT.dbo.MappingKewarganegaraan_TM,3,2,4,2,0,0,2,0,2,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.mappingkewarganegaraan_tm.md
+retail.dbo.maturity_upload_temp,Retail UAT.dbo.maturity_upload_temp,25,15,30,2,0,0,0,0,30,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.maturity_upload_temp.md
+retail.dbo.mxbondtran,Retail UAT.dbo.MxBondTran,26,4,5,2,0,0,0,0,5,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.mxbondtran.md
+retail.dbo.orisbninvestormaster_tm,Retail UAT.dbo.ORISBNInvestorMaster_TM,28,3,7,2,0,0,0,0,7,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.orisbninvestormaster_tm.md
+retail.dbo.orisbninvestorpending_tt,Retail UAT.dbo.ORISBNInvestorPending_TT,27,2,4,2,0,0,4,0,0,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.orisbninvestorpending_tt.md
+retail.dbo.orisbninvestorrekdana_th,Retail UAT.dbo.ORISBNInvestorRekDana_TH,17,2,5,2,0,0,0,0,5,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.orisbninvestorrekdana_th.md
+retail.dbo.ptbcexcludeproducthargamodal_tt,Retail UAT.dbo.PTBCExcludeProductHargaModal_TT,2,1,3,2,0,0,0,0,3,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.ptbcexcludeproducthargamodal_tt.md
+retail.dbo.ptoscustomer_temp,Retail UAT.dbo.PTOSCustomer_Temp,23,2,2,2,0,0,0,0,2,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.ptoscustomer_temp.md
+retail.dbo.ptosnasabah_excel,Retail UAT.dbo.PTOSNasabah_Excel,18,16,43,2,0,0,15,0,28,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.ptosnasabah_excel.md
+retail.dbo.ptosoutstandingbond_excel,Retail UAT.dbo.PTOSOutstandingBond_Excel,15,6,26,2,0,0,0,0,26,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.ptosoutstandingbond_excel.md
+retail.dbo.ptosoutstandingequity_excel,Retail UAT.dbo.PTOSOutstandingEquity_Excel,15,6,24,2,0,0,0,0,24,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.ptosoutstandingequity_excel.md
+retail.dbo.ptosoutstandingmaster_tm,Retail UAT.dbo.PTOSOutstandingMaster_TM,17,2,4,2,0,0,0,0,4,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.ptosoutstandingmaster_tm.md
+retail.dbo.ptostransaksi_error,Retail UAT.dbo.PTOSTransaksi_Error,24,17,68,2,0,0,0,0,68,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.ptostransaksi_error.md
+retail.dbo.ptostransaksibond_excel,Retail UAT.dbo.PTOSTransaksiBond_Excel,23,7,25,2,0,0,0,0,25,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.ptostransaksibond_excel.md
+retail.dbo.ptostransaksiequity_excel,Retail UAT.dbo.PTOSTransaksiEquity_Excel,23,8,27,2,0,0,0,0,27,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.ptostransaksiequity_excel.md
+retail.dbo.repoapprovalparameterproduct_tm,Retail UAT.dbo.REPOApprovalParameterProduct_TM,7,2,2,2,0,0,0,0,2,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.repoapprovalparameterproduct_tm.md
+retail.dbo.repologsentmailkonfirmasi_th,Retail UAT.dbo.REPOLogSentMailKonfirmasi_TH,14,3,5,2,0,0,1,0,4,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.repologsentmailkonfirmasi_th.md
+retail.dbo.repologsentmailnotice_th,Retail UAT.dbo.REPOLogSentMailNotice_TH,15,4,6,2,0,0,1,0,5,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.repologsentmailnotice_th.md
+retail.dbo.rmmsecuritytransaction_th,Retail UAT.dbo.RMMSecurityTransaction_TH,24,1,3,2,0,0,0,0,3,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.rmmsecuritytransaction_th.md
+retail.dbo.sbnmailnotifparam_tr,Retail UAT.dbo.SBNMailNotifParam_TR,7,1,12,2,0,0,0,12,0,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.sbnmailnotifparam_tr.md
+retail.dbo.securityfeenasabahpending_tm,Retail UAT.dbo.SecurityFeeNasabahPending_TM,10,2,6,2,0,0,0,2,4,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.securityfeenasabahpending_tm.md
+retail.dbo.securitytransaction_temp_formurex,Retail UAT.dbo.SecurityTransaction_TEMP_ForMurex,17,6,7,2,0,0,0,0,7,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.securitytransaction_temp_formurex.md
+retail.dbo.securitytransactionextmig_tt,Retail UAT.dbo.SecurityTransactionExtMig_TT,12,1,2,2,0,0,0,0,2,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.securitytransactionextmig_tt.md
+retail.dbo.securitytrxresultlelang_th,Retail UAT.dbo.SecurityTrxResultLelang_TH,30,2,4,2,0,0,0,0,4,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.securitytrxresultlelang_th.md
+retail.dbo.tmp_ptos_transaction_upload,Retail UAT.dbo.tmp_ptos_transaction_upload,27,5,23,2,0,0,2,8,13,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.tmp_ptos_transaction_upload.md
+retail.dbo.treasurycustomer_th,Retail UAT.dbo.TreasuryCustomer_TH,74,4,4,2,0,0,1,0,3,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.treasurycustomer_th.md
+retail.dbo.treasurycustomerbalance_th,Retail UAT.dbo.TreasuryCustomerBalance_TH,5,2,5,2,0,0,1,0,4,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.treasurycustomerbalance_th.md
+retail.dbo.trscustodianuploadid_tr,Retail UAT.dbo.TRSCustodianUploadID_TR,17,3,10,2,0,0,1,9,0,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trscustodianuploadid_tr.md
+retail.dbo.trscustomerrepofundedpending_tr,Retail UAT.dbo.TRSCustomerRepoFundedPending_TR,6,1,6,2,0,0,0,5,1,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trscustomerrepofundedpending_tr.md
+retail.dbo.trsecbondsprice_th,Retail UAT.dbo.TRSECBondsPrice_TH,23,5,5,2,0,0,0,0,5,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trsecbondsprice_th.md
+retail.dbo.trsecgeneralparam_tr,Retail UAT.dbo.TRSECGeneralParam_TR,4,1,2,2,0,0,1,0,1,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trsecgeneralparam_tr.md
+retail.dbo.trshasilrevenue_th,Retail UAT.dbo.TRSHasilRevenue_TH,43,4,4,2,0,0,0,1,3,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trshasilrevenue_th.md
+retail.dbo.trshasilrevenuebulklog_tm,Retail UAT.dbo.TRSHasilRevenueBulkLog_TM,19,1,4,2,0,0,0,0,4,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trshasilrevenuebulklog_tm.md
+retail.dbo.trslistnumber_th,Retail UAT.dbo.TRSListNumber_TH,7,1,3,2,0,0,1,0,2,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trslistnumber_th.md
+retail.dbo.trsmappingmurexbis4temp,Retail UAT.dbo.TRSMappingMurexBIS4Temp,8,2,13,2,0,0,0,5,8,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trsmappingmurexbis4temp.md
+retail.dbo.trsntiparameter_tr,Retail UAT.dbo.TRSNTIParameter_TR,7,1,4,2,0,0,4,0,0,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trsntiparameter_tr.md
+retail.dbo.trsonlinedocslinkappdetail_th,Retail UAT.dbo.TRSOnlineDocsLinkAppDetail_TH,7,1,11,2,0,0,0,11,0,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trsonlinedocslinkappdetail_th.md
+retail.dbo.trsparambookbld_tl,Retail UAT.dbo.TRSParamBookBld_TL,9,1,7,2,0,0,0,7,0,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trsparambookbld_tl.md
+retail.dbo.trsparamdeviasitotalspread_tr,Retail UAT.dbo.TRSParamDeviasiTotalSpread_TR,15,5,11,2,0,0,4,0,7,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trsparamdeviasitotalspread_tr.md
+retail.dbo.trsparameterrevenuecabang_th,Retail UAT.dbo.TRSParameterRevenueCabang_TH,19,1,3,2,0,0,0,0,3,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trsparameterrevenuecabang_th.md
+retail.dbo.trsparameterrevenueinternal_th,Retail UAT.dbo.TRSParameterRevenueInternal_TH,19,1,3,2,0,0,0,0,3,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trsparameterrevenueinternal_th.md
+retail.dbo.trsparamissuer_tr,Retail UAT.dbo.TRSParamIssuer_TR,7,2,6,2,0,0,1,2,3,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trsparamissuer_tr.md
+retail.dbo.trsparamlelang_th,Retail UAT.dbo.TRSParamLelang_TH,20,1,3,2,0,0,0,1,2,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trsparamlelang_th.md
+retail.dbo.trsparamlelangdetailapproval_tr,Retail UAT.dbo.TRSParamLelangDetailApproval_TR,19,2,11,2,0,0,0,10,1,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trsparamlelangdetailapproval_tr.md
+retail.dbo.trsparamlelangmasterapproval_tm,Retail UAT.dbo.TRSParamLelangMasterApproval_TM,6,1,5,2,0,0,0,4,1,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trsparamlelangmasterapproval_tm.md
+retail.dbo.trsparammaterai_tr,Retail UAT.dbo.TRSParamMaterai_TR,6,2,10,2,0,0,0,0,10,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trsparammaterai_tr.md
+retail.dbo.trsretailautobatcherrlog,Retail UAT.dbo.TRSRetailAutoBatchErrLog,6,1,2,2,0,0,0,0,2,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trsretailautobatcherrlog.md
+retail.dbo.trssafekeepingfeecustody_th,Retail UAT.dbo.TRSSafeKeepingFeeCustody_TH,10,3,8,2,0,0,0,8,1,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trssafekeepingfeecustody_th.md
+retail.dbo.trssettlementbis4_th,Retail UAT.dbo.TRSSettlementBIS4_TH,36,2,4,2,0,0,0,0,4,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trssettlementbis4_th.md
+retail.dbo.trssimanistransaction_th,Retail UAT.dbo.TRSSimanisTransaction_TH,7,1,3,2,0,0,0,0,3,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trssimanistransaction_th.md
+retail.dbo.trsspdebugdetail_tt,Retail UAT.dbo.TRSSPDebugDetail_TT,5,1,2,2,0,0,0,0,2,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trsspdebugdetail_tt.md
+retail.dbo.trsstaticcustomeroutstanding_tm,Retail UAT.dbo.TRSStaticCustomerOutstanding_TM,11,3,7,2,0,0,1,2,6,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trsstaticcustomeroutstanding_tm.md
+retail.dbo.trstransactionfeelog_tr,Retail UAT.dbo.TRSTransactionFeeLog_TR,11,1,3,2,0,0,0,2,1,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trstransactionfeelog_tr.md
+sql_replicate.dbo.bis4_instrument,SQL_REPLICATE.dbo.BIS4_INSTRUMENT,5,3,22,2,0,0,12,0,10,HAS_STATIC_CONVERSION_CONTEXT,tables/sql_replicate.dbo.bis4_instrument.md
+sql_replicate.dbo.mxcustody,SQL_REPLICATE.dbo.MXCUSTODY,9,3,7,2,0,0,0,0,7,HAS_STATIC_CONVERSION_CONTEXT,tables/sql_replicate.dbo.mxcustody.md
+sql_replicate.dbo.mxholidaydate,SQL_REPLICATE.dbo.MXHolidayDate,2,1,2,2,0,0,0,0,2,HAS_STATIC_CONVERSION_CONTEXT,tables/sql_replicate.dbo.mxholidaydate.md
+sql_replicate.dbo.office_information,SQL_REPLICATE.dbo.office_information,19,2,4,2,0,0,1,3,0,HAS_STATIC_CONVERSION_CONTEXT,tables/sql_replicate.dbo.office_information.md
+sql_replicate.dbo.pbcustomerflagging_tm,SQL_REPLICATE.dbo.PBCustomerFlagging_TM,10,1,3,2,0,0,1,0,2,HAS_STATIC_CONVERSION_CONTEXT,tables/sql_replicate.dbo.pbcustomerflagging_tm.md
+sql_replicate.dbo.prociflastupdateriskprofile_tt,SQL_REPLICATE.dbo.ProCIFLastUpdateRiskProfile_TT,2,2,3,2,0,0,1,0,2,HAS_STATIC_CONVERSION_CONTEXT,tables/sql_replicate.dbo.prociflastupdateriskprofile_tt.md
+sql_replicate.dbo.tltel,SQL_REPLICATE.dbo.TLTEL,16,2,4,2,0,0,0,0,4,HAS_STATIC_CONVERSION_CONTEXT,tables/sql_replicate.dbo.tltel.md
+sql_replicate.dbo.vlsrate_tm,SQL_REPLICATE.dbo.VLSRate_TM,8,3,10,2,0,0,2,0,8,HAS_STATIC_CONVERSION_CONTEXT,tables/sql_replicate.dbo.vlsrate_tm.md
+retail.dbo.amendaccrued_tm,Retail UAT.dbo.AmendAccrued_TM,14,1,1,1,0,0,0,1,0,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.amendaccrued_tm.md
+retail.dbo.bkholdingdata_tm,Retail UAT.dbo.BKHoldingData_TM,8,1,2,1,0,0,0,2,0,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.bkholdingdata_tm.md
+retail.dbo.bondlogsentmailconfirmation_th,Retail UAT.dbo.BONDLogSentMailConfirmation_TH,13,1,2,1,0,0,0,2,0,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.bondlogsentmailconfirmation_th.md
+retail.dbo.bondsdetailtransaksibuyback_tr,Retail UAT.dbo.BONDSDetailTransaksiBuyBack_TR,30,2,2,1,0,0,0,0,2,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.bondsdetailtransaksibuyback_tr.md
+retail.dbo.bondtrxbelilogsentmailconfirmation_th,Retail UAT.dbo.BONDTrxBeliLogSentMailConfirmation_TH,13,1,2,1,0,0,0,2,0,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.bondtrxbelilogsentmailconfirmation_th.md
+retail.dbo.cifreplicatefinal_tt,Retail UAT.dbo.CIFReplicateFinal_TT,30,1,1,1,0,0,0,0,1,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.cifreplicatefinal_tt.md
+retail.dbo.control_office_table,Retail UAT.dbo.control_office_table,3,1,1,1,0,0,0,1,0,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.control_office_table.md
+retail.dbo.corporatebondlogsentmailkonfirmasi_th,Retail UAT.dbo.CorporateBondLogSentMailKonfirmasi_TH,15,1,2,1,0,0,1,0,1,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.corporatebondlogsentmailkonfirmasi_th.md
+retail.dbo.earlyredemption_temp,Retail UAT.dbo.EarlyRedemption_Temp,16,3,4,1,0,0,0,0,4,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.earlyredemption_temp.md
+retail.dbo.earlyredemption_th,Retail UAT.dbo.EarlyRedemption_TH,23,1,10,1,0,0,0,0,10,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.earlyredemption_th.md
+retail.dbo.earlyredemptiononline_th,Retail UAT.dbo.EarlyRedemptionOnline_TH,19,1,1,1,0,0,0,0,1,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.earlyredemptiononline_th.md
+retail.dbo.glonthoblrevenuelog_th,Retail UAT.dbo.GLONTHOblRevenueLog_TH,9,1,8,1,0,0,0,0,8,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.glonthoblrevenuelog_th.md
+retail.dbo.gwp_general_param_tr,Retail UAT.dbo.gwp_general_param_tr,5,2,2,1,0,0,1,0,1,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.gwp_general_param_tr.md
+retail.dbo.job_general_control_table_tm,Retail UAT.dbo.job_general_control_table_tm,5,3,8,1,0,0,0,0,8,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.job_general_control_table_tm.md
+retail.dbo.mappingprovcity_tm,Retail UAT.dbo.MappingProvCity_TM,7,2,2,1,0,0,0,0,2,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.mappingprovcity_tm.md
+retail.dbo.mxrepotran,Retail UAT.dbo.MxRepoTran,27,5,7,1,0,0,0,2,5,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.mxrepotran.md
+retail.dbo.ora_trn_hdr_dbf,Retail UAT.dbo.ORA_TRN_HDR_DBF,16,1,1,1,0,0,0,0,1,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.ora_trn_hdr_dbf.md
+retail.dbo.ori_payment_tr,Retail UAT.dbo.ORI_Payment_TR,5,2,2,1,0,0,0,0,2,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.ori_payment_tr.md
+retail.dbo.orisbnalertlog_th,Retail UAT.dbo.ORISBNAlertLog_TH,4,1,5,1,0,0,0,2,3,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.orisbnalertlog_th.md
+retail.dbo.oriva_parameter_gnc,Retail UAT.dbo.oriva_parameter_gnc,3,1,1,1,0,0,1,0,0,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.oriva_parameter_gnc.md
+retail.dbo.proaccddmul01h_th,Retail UAT.dbo.ProACCDDMUL01H_TH,20,1,1,1,0,0,0,0,1,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.proaccddmul01h_th.md
+retail.dbo.process_log,Retail UAT.dbo.process_log,5,1,1,1,0,0,0,0,1,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.process_log.md
+retail.dbo.process_usage_locking_temp,Retail UAT.dbo.process_usage_locking_temp,4,1,1,1,0,0,0,0,1,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.process_usage_locking_temp.md
+retail.dbo.process_usage_locking_th,Retail UAT.dbo.process_usage_locking_th,5,1,1,1,0,0,0,0,1,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.process_usage_locking_th.md
+retail.dbo.ptoscustomer_error,Retail UAT.dbo.PTOSCustomer_Error,19,15,67,1,0,0,0,0,67,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.ptoscustomer_error.md
+retail.dbo.ptoscustomerinfo_tm,Retail UAT.dbo.PTOSCustomerInfo_TM,4,1,1,1,0,0,0,0,1,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.ptoscustomerinfo_tm.md
+retail.dbo.ptosmappingproductcode_th,Retail UAT.dbo.PTOSMappingProductCode_TH,9,1,4,1,0,0,0,0,4,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.ptosmappingproductcode_th.md
+retail.dbo.ptosoutstandingmaster_th,Retail UAT.dbo.PTOSOutstandingMaster_TH,20,2,2,1,0,0,0,0,2,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.ptosoutstandingmaster_th.md
+retail.dbo.ptosparamemail_th,Retail UAT.dbo.PTOSParamEmail_TH,11,1,4,1,0,0,0,0,4,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.ptosparamemail_th.md
+retail.dbo.ptossecuritymaster_th,Retail UAT.dbo.PTOSSecurityMaster_TH,13,1,5,1,0,0,0,0,5,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.ptossecuritymaster_th.md
+retail.dbo.ptossecuritymaster_tm,Retail UAT.dbo.PTOSSecurityMaster_TM,10,1,1,1,0,0,0,0,1,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.ptossecuritymaster_tm.md
+retail.dbo.repoapprovalspreaddetail_tr,Retail UAT.dbo.REPOApprovalSpreadDetail_TR,21,1,1,1,0,0,0,0,1,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.repoapprovalspreaddetail_tr.md
+retail.dbo.repologsentmaildefault_th,Retail UAT.dbo.REPOLogSentMailDefault_TH,16,2,2,1,0,0,0,0,2,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.repologsentmaildefault_th.md
+retail.dbo.repomastertransaction_th,Retail UAT.dbo.REPOMasterTransaction_TH,56,1,2,1,0,0,0,0,2,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.repomastertransaction_th.md
+retail.dbo.repoparamhargamodal_th,Retail UAT.dbo.REPOParamHargaModal_TH,13,1,1,1,0,0,0,0,1,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.repoparamhargamodal_th.md
+retail.dbo.repospreadtransaksi_tm,Retail UAT.dbo.RepoSpreadTransaksi_TM,20,8,20,1,0,0,2,4,14,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.repospreadtransaksi_tm.md
+retail.dbo.reposysparameter_tr,Retail UAT.dbo.REPOSysParameter_TR,4,1,1,1,0,0,0,0,1,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.reposysparameter_tr.md
+retail.dbo.securitybatchresult_th,Retail UAT.dbo.SecurityBatchResult_TH,18,1,2,1,0,0,0,0,2,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.securitybatchresult_th.md
+retail.dbo.securitycoupondatepending_tr,Retail UAT.dbo.SecurityCouponDatePending_TR,6,1,2,1,0,0,2,0,0,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.securitycoupondatepending_tr.md
+retail.dbo.securityresultforta_tt,Retail UAT.dbo.SecurityResultForTA_TT,23,1,2,1,0,0,0,2,0,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.securityresultforta_tt.md
+retail.dbo.securityresultlelang_tm,Retail UAT.dbo.SecurityResultLelang_TM,15,1,5,1,0,0,0,3,2,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.securityresultlelang_tm.md
+retail.dbo.securitytransaction_listblokir,Retail UAT.dbo.SecurityTransaction_ListBlokir,7,1,2,1,0,0,0,1,1,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.securitytransaction_listblokir.md
+retail.dbo.securitytransactioncoupon_th,Retail UAT.dbo.SecurityTransactionCoupon_TH,89,1,1,1,0,0,0,0,1,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.securitytransactioncoupon_th.md
+retail.dbo.securitytransactiondetail_tr,Retail UAT.dbo.SecurityTransactionDetail_TR,2,1,1,1,0,0,0,1,0,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.securitytransactiondetail_tr.md
+retail.dbo.securitytransactionspread_tr,Retail UAT.dbo.SecurityTransactionSpread_TR,12,2,2,1,0,0,0,0,2,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.securitytransactionspread_tr.md
+retail.dbo.securitytransactionstatus_tm,Retail UAT.dbo.SecurityTransactionStatus_TM,2,1,2,1,0,0,0,0,2,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.securitytransactionstatus_tm.md
+retail.dbo.securitytranscationlink_tl,Retail UAT.dbo.SecurityTranscationLink_TL,15,1,1,1,0,0,0,0,1,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.securitytranscationlink_tl.md
+retail.dbo.srbilogsentmailconfirmation_th,Retail UAT.dbo.SRBILogSentMailConfirmation_TH,13,1,2,1,0,0,0,2,0,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.srbilogsentmailconfirmation_th.md
+retail.dbo.srbitrxbelilogsentmailconfirmation_th,Retail UAT.dbo.SRBITrxBeliLogSentMailConfirmation_TH,13,1,2,1,0,0,0,2,0,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.srbitrxbelilogsentmailconfirmation_th.md
+retail.dbo.srependingnotification_tr,Retail UAT.dbo.SREPendingNotification_TR,12,1,1,1,0,0,0,1,0,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.srependingnotification_tr.md
+retail.dbo.tempkurstgl18,Retail UAT.dbo.TempKursTgl18,2,1,1,1,0,0,0,0,1,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.tempkurstgl18.md
+retail.dbo.tibcotellerresource_tr,Retail UAT.dbo.TibcoTellerResource_TR,3,1,3,1,0,0,0,1,2,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.tibcotellerresource_tr.md
+retail.dbo.trs_getaccount_session,Retail UAT.dbo.trs_getaccount_session,2,1,1,1,0,0,0,0,1,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trs_getaccount_session.md
+retail.dbo.trs_list_source_reference_lelang,Retail UAT.dbo.trs_list_source_reference_lelang,6,1,1,1,0,0,0,0,1,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trs_list_source_reference_lelang.md
+retail.dbo.trsalamatsuratobligasilog_tl,Retail UAT.dbo.TRSAlamatSuratObligasiLog_TL,6,1,1,1,0,0,1,0,0,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trsalamatsuratobligasilog_tl.md
+retail.dbo.trsallowviewallbranch,Retail UAT.dbo.TRSAllowViewAllBranch,2,1,1,1,0,0,0,0,1,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trsallowviewallbranch.md
+retail.dbo.trsbungaftpparameter_th,Retail UAT.dbo.TRSBungaFTPParameter_TH,14,2,5,1,0,0,0,0,5,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trsbungaftpparameter_th.md
+retail.dbo.trscalculatefeelog_th,Retail UAT.dbo.TRSCalculateFeeLog_TH,34,1,1,1,0,0,0,0,1,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trscalculatefeelog_th.md
+retail.dbo.trscallnotifapilog_tl,Retail UAT.dbo.TRSCallNotifAPILog_TL,3,1,1,1,0,0,0,0,1,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trscallnotifapilog_tl.md
+retail.dbo.trscustaccnumberpending_tr,Retail UAT.dbo.TRSCustAccNumberPending_TR,8,1,1,1,0,0,0,0,1,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trscustaccnumberpending_tr.md
+retail.dbo.trscustodymaster_th,Retail UAT.dbo.TRSCustodyMaster_TH,10,1,2,1,0,0,0,2,0,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trscustodymaster_th.md
+retail.dbo.trscustomerrepofunded_th,Retail UAT.dbo.TRSCustomerRepoFunded_TH,12,2,2,1,0,0,0,0,2,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trscustomerrepofunded_th.md
+retail.dbo.trsdatauploadmaturity_tt,Retail UAT.dbo.TRSDataUploadMaturity_TT,25,2,2,1,0,0,0,0,2,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trsdatauploadmaturity_tt.md
+retail.dbo.trsddmast_tm,Retail UAT.dbo.TRSDDMAST_TM,17,1,2,1,0,0,0,0,2,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trsddmast_tm.md
+retail.dbo.trsfileformat_tm,Retail UAT.dbo.TRSFileFormat_TM,7,2,10,1,0,0,1,1,8,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trsfileformat_tm.md
+retail.dbo.trsgncparameter_th,Retail UAT.dbo.TRSGNCParameter_TH,14,1,1,1,0,0,0,1,0,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trsgncparameter_th.md
+retail.dbo.trsinputsid_tl,Retail UAT.dbo.TRSInputSID_TL,3,1,1,1,0,0,0,0,1,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trsinputsid_tl.md
+retail.dbo.trsjobpushnotifom_tt,Retail UAT.dbo.TRSJobPushNotifOM_TT,21,2,2,1,0,0,0,0,2,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trsjobpushnotifom_tt.md
+retail.dbo.trsjobsendemailrecipientparam_tr,Retail UAT.dbo.TRSJobSendEmailRecipientParam_TR,6,1,1,1,0,0,0,0,1,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trsjobsendemailrecipientparam_tr.md
+retail.dbo.trskuotareserved_tmp,Retail UAT.dbo.TRSKuotaReserved_TMP,6,1,2,1,0,0,1,0,1,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trskuotareserved_tmp.md
+retail.dbo.trskuponcustomersaldo_tt,Retail UAT.dbo.TRSKuponCustomerSaldo_TT,12,2,4,1,0,0,0,1,3,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trskuponcustomersaldo_tt.md
+retail.dbo.trslastcounterparameter_tr,Retail UAT.dbo.TRSLastCounterParameter_TR,2,1,4,1,0,0,2,0,2,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trslastcounterparameter_tr.md
+retail.dbo.trsmappekerjaan_tr,Retail UAT.dbo.TRSMapPekerjaan_TR,4,1,1,1,0,0,0,1,0,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trsmappekerjaan_tr.md
+retail.dbo.trsmappingmatchriskprofile_tr,Retail UAT.dbo.TRSMappingMatchRiskProfile_TR,4,1,1,1,0,0,0,0,1,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trsmappingmatchriskprofile_tr.md
+retail.dbo.trsmappingmurexbis4_th,Retail UAT.dbo.TRSMappingMurexBIS4_TH,12,1,1,1,0,0,0,0,1,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trsmappingmurexbis4_th.md
+retail.dbo.trsoncalldepositlistrek_th,Retail UAT.dbo.TRSOnCallDepositListRek_TH,30,1,1,1,0,0,0,0,1,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trsoncalldepositlistrek_th.md
+retail.dbo.trsoncalldepositlistrek_tt,Retail UAT.dbo.TRSOnCallDepositListRek_TT,27,5,10,1,0,0,0,0,10,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trsoncalldepositlistrek_tt.md
+retail.dbo.trsorimdb,Retail UAT.dbo.TRSORIMDB,30,3,5,1,0,0,0,0,5,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trsorimdb.md
+retail.dbo.trsparambookbld_th,Retail UAT.dbo.TRSParamBookBld_TH,8,2,2,1,0,0,0,0,2,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trsparambookbld_th.md
+retail.dbo.trsparamclassificationdivision,Retail UAT.dbo.TRSParamClassificationDivision,3,1,1,1,0,0,0,0,1,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trsparamclassificationdivision.md
+retail.dbo.trsparamdeviasiharga_tr,Retail UAT.dbo.TRSParamDeviasiHarga_TR,10,1,2,1,0,0,0,2,0,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trsparamdeviasiharga_tr.md
+retail.dbo.trsparameterjob_tm,Retail UAT.dbo.TRSParameterJob_TM,5,1,1,1,0,0,0,0,1,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trsparameterjob_tm.md
+retail.dbo.trsparameterrevenuecabanglog_tm,Retail UAT.dbo.TRSParameterRevenueCabangLog_TM,13,1,2,1,0,0,0,0,2,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trsparameterrevenuecabanglog_tm.md
+retail.dbo.trsparameterrevenueinternallog_tm,Retail UAT.dbo.TRSParameterRevenueInternalLog_TM,13,1,2,1,0,0,0,0,2,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trsparameterrevenueinternallog_tm.md
+retail.dbo.trsparameterriskprofile_tm,Retail UAT.dbo.TRSParameterRiskProfile_TM,4,1,1,1,0,0,0,0,1,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trsparameterriskprofile_tm.md
+retail.dbo.trsparametersettlementdate_tl,Retail UAT.dbo.TRSParameterSettlementDate_TL,15,2,2,1,0,0,0,0,2,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trsparametersettlementdate_tl.md
+retail.dbo.trsparametersettlementdate_tr,Retail UAT.dbo.TRSParameterSettlementDate_TR,10,1,1,1,0,0,0,0,1,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trsparametersettlementdate_tr.md
+retail.dbo.trsparamhargamodalsrbi_tl,Retail UAT.dbo.TRSParamHargaModalSRBI_TL,13,1,1,1,0,0,0,0,1,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trsparamhargamodalsrbi_tl.md
+retail.dbo.trsparaminterfacemurex_th,Retail UAT.dbo.TRSParamInterfaceMurex_TH,15,1,2,1,0,0,0,0,2,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trsparaminterfacemurex_th.md
+retail.dbo.trsparamissuer_th,Retail UAT.dbo.TRSParamIssuer_TH,8,1,4,1,0,0,0,4,0,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trsparamissuer_th.md
+retail.dbo.trsparamofftolerancehargamodal_th,Retail UAT.dbo.TRSParamOfftoleranceHargaModal_TH,9,1,4,1,0,0,0,0,4,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trsparamofftolerancehargamodal_th.md
+retail.dbo.trsparamofftolerancehargamodal_tr,Retail UAT.dbo.TRSParamOfftoleranceHargaModal_TR,7,4,10,1,0,0,0,0,10,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trsparamofftolerancehargamodal_tr.md
+retail.dbo.trsparamspreadhargamodal_th,Retail UAT.dbo.TRSParamSpreadHargaModal_TH,10,1,3,1,0,0,0,0,3,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trsparamspreadhargamodal_th.md
+retail.dbo.trsparamthreshold_th,Retail UAT.dbo.TRSParamThreshold_TH,12,2,5,1,0,0,0,0,5,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trsparamthreshold_th.md
+retail.dbo.trsparamthreshold_tm,Retail UAT.dbo.TRSParamThreshold_TM,6,1,4,1,0,0,0,2,2,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trsparamthreshold_tm.md
+retail.dbo.trsparamtradesettledate_tr,Retail UAT.dbo.TRSParamTradeSettleDate_TR,12,2,4,1,0,0,0,2,2,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trsparamtradesettledate_tr.md
+retail.dbo.trspekerjaan_tm,Retail UAT.dbo.TRSPekerjaan_TM,5,1,1,1,0,0,0,1,0,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trspekerjaan_tm.md
+retail.dbo.trsprocessdetail_tr,Retail UAT.dbo.TRSProcessDetail_TR,12,1,1,1,0,0,0,1,0,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trsprocessdetail_tr.md
+retail.dbo.trsprocesstransaksi_th,Retail UAT.dbo.TRSProcessTransaksi_TH,14,1,1,1,0,0,0,0,1,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trsprocesstransaksi_th.md
+retail.dbo.trsprocesstransaksidetail_th,Retail UAT.dbo.TRSProcessTransaksiDetail_TH,9,1,1,1,0,0,0,0,1,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trsprocesstransaksidetail_th.md
+retail.dbo.trsreksyariahlog_th,Retail UAT.dbo.TRSRekSyariahLog_TH,7,2,4,1,0,0,0,0,4,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trsreksyariahlog_th.md
+retail.dbo.trsreponotif_tl,Retail UAT.dbo.TRSRepoNotif_TL,21,1,2,1,0,0,0,0,2,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trsreponotif_tl.md
+retail.dbo.trsreportemailstatus_tl,Retail UAT.dbo.TRSReportEmailStatus_TL,20,4,4,1,0,0,2,2,0,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trsreportemailstatus_tl.md
+retail.dbo.trsreportemailstatusmap_tr,Retail UAT.dbo.TRSReportEmailStatusMap_TR,3,3,6,1,0,0,2,0,4,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trsreportemailstatusmap_tr.md
+retail.dbo.trsretailcustblock_sequencenumber,Retail UAT.dbo.TRSRetailCustBlock_SequenceNumber,2,1,4,1,0,0,0,0,4,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trsretailcustblock_sequencenumber.md
+retail.dbo.trsretailcustblock_th,Retail UAT.dbo.TRSRetailCustBlock_TH,25,1,1,1,0,0,0,1,0,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trsretailcustblock_th.md
+retail.dbo.trsretailgloballog_tl,Retail UAT.dbo.TRSRetailGlobalLog_TL,6,1,2,1,0,0,0,0,2,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trsretailgloballog_tl.md
+retail.dbo.trsretailuserclassificationhistory,Retail UAT.dbo.TRSRetailUserClassificationHistory,7,1,1,1,0,0,0,0,1,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trsretailuserclassificationhistory.md
+retail.dbo.trssecuritytransactionprimaryprebook_th,Retail UAT.dbo.TRSSecurityTransactionPrimaryPreBook_TH,24,1,1,1,0,0,1,0,0,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trssecuritytransactionprimaryprebook_th.md
+retail.dbo.trssettleparamrevenue_tm,Retail UAT.dbo.TRSSettleParamRevenue_TM,5,1,1,1,0,0,0,1,0,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trssettleparamrevenue_tm.md
+retail.dbo.trsstatuscorporatebond_th,Retail UAT.dbo.TRSStatusCorporateBond_TH,9,1,3,1,0,0,0,0,3,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trsstatuscorporatebond_th.md
+retail.dbo.trssyncmasteridandfunctemp,Retail UAT.dbo.TrsSyncMasterIdAndFuncTemp,9,3,7,1,0,0,0,1,6,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trssyncmasteridandfunctemp.md
+retail.dbo.trstenorparameter_th,Retail UAT.dbo.TRSTenorParameter_TH,10,2,5,1,0,0,0,0,5,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trstenorparameter_th.md
+retail.dbo.trsvalidationseclog_th,Retail UAT.dbo.TRSValidationSecLog_TH,4,1,1,1,0,0,0,0,1,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.trsvalidationseclog_th.md
+retail.dbo.upload_sid_sre_temp,Retail UAT.dbo.upload_sid_sre_temp,19,3,7,1,0,0,0,6,1,HAS_STATIC_CONVERSION_CONTEXT,tables/retail.dbo.upload_sid_sre_temp.md
+sql_replicate.dbo.accountsegment,SQL_REPLICATE.dbo.AccountSegment,11,1,1,1,0,0,0,1,0,HAS_STATIC_CONVERSION_CONTEXT,tables/sql_replicate.dbo.accountsegment.md
+sql_replicate.dbo.bis4_securitytrx,SQL_REPLICATE.dbo.BIS4_SecurityTrx,28,2,6,1,0,0,1,0,5,HAS_STATIC_CONVERSION_CONTEXT,tables/sql_replicate.dbo.bis4_securitytrx.md
+sql_replicate.dbo.cfbicd,SQL_REPLICATE.dbo.CFBICD,13,1,1,1,0,0,0,1,0,HAS_STATIC_CONVERSION_CONTEXT,tables/sql_replicate.dbo.cfbicd.md
+sql_replicate.dbo.cffince,SQL_REPLICATE.dbo.CFFINCE,13,1,1,1,0,0,0,0,1,HAS_STATIC_CONVERSION_CONTEXT,tables/sql_replicate.dbo.cffince.md
+sql_replicate.dbo.cfpar2,SQL_REPLICATE.dbo.CFPAR2,12,1,1,1,0,0,0,0,1,HAS_STATIC_CONVERSION_CONTEXT,tables/sql_replicate.dbo.cfpar2.md
+sql_replicate.dbo.cfymsc,SQL_REPLICATE.dbo.CFYMSC,22,1,1,1,0,0,0,1,0,HAS_STATIC_CONVERSION_CONTEXT,tables/sql_replicate.dbo.cfymsc.md
+sql_replicate.dbo.cfypin,SQL_REPLICATE.dbo.CFYPIN,3,1,1,1,0,0,0,0,1,HAS_STATIC_CONVERSION_CONTEXT,tables/sql_replicate.dbo.cfypin.md
+sql_replicate.dbo.counterp_dbf,SQL_REPLICATE.dbo.counterp_dbf,4,1,1,1,0,0,0,1,0,HAS_STATIC_CONVERSION_CONTEXT,tables/sql_replicate.dbo.counterp_dbf.md
+sql_replicate.dbo.ddhist,SQL_REPLICATE.dbo.DDHIST,58,2,12,1,0,0,0,0,12,HAS_STATIC_CONVERSION_CONTEXT,tables/sql_replicate.dbo.ddhist.md
+sql_replicate.dbo.ddpar2ext,SQL_REPLICATE.dbo.DDPAR2EXT,5,1,1,1,0,0,0,0,1,HAS_STATIC_CONVERSION_CONTEXT,tables/sql_replicate.dbo.ddpar2ext.md
+sql_replicate.dbo.ddpar2mc,SQL_REPLICATE.dbo.DDPAR2MC,5,1,1,1,0,0,0,0,1,HAS_STATIC_CONVERSION_CONTEXT,tables/sql_replicate.dbo.ddpar2mc.md
+sql_replicate.dbo.ddstop,SQL_REPLICATE.dbo.DDSTOP,31,1,1,1,0,0,0,0,1,HAS_STATIC_CONVERSION_CONTEXT,tables/sql_replicate.dbo.ddstop.md
+sql_replicate.dbo.ddtrn2,SQL_REPLICATE.dbo.DDTRN2,57,3,12,1,0,0,8,0,4,HAS_STATIC_CONVERSION_CONTEXT,tables/sql_replicate.dbo.ddtrn2.md
+sql_replicate.dbo.glacct,SQL_REPLICATE.dbo.GLACCT,7,1,1,1,0,0,0,0,1,HAS_STATIC_CONVERSION_CONTEXT,tables/sql_replicate.dbo.glacct.md
+sql_replicate.dbo.glmast,SQL_REPLICATE.dbo.GLMAST,8,1,1,1,0,0,0,0,1,HAS_STATIC_CONVERSION_CONTEXT,tables/sql_replicate.dbo.glmast.md
+sql_replicate.dbo.miscurrencyratehistory,SQL_REPLICATE.dbo.MISCurrencyRateHistory,3,1,2,1,0,0,1,0,1,HAS_STATIC_CONVERSION_CONTEXT,tables/sql_replicate.dbo.miscurrencyratehistory.md
+sql_replicate.dbo.mx_bondtran_tmp,SQL_REPLICATE.dbo.Mx_BondTran_TMP,24,3,3,1,0,0,2,0,1,HAS_STATIC_CONVERSION_CONTEXT,tables/sql_replicate.dbo.mx_bondtran_tmp.md
+sql_replicate.dbo.mx_repotran_tmp,SQL_REPLICATE.dbo.Mx_RepoTran_TMP,25,5,9,1,0,0,5,0,4,HAS_STATIC_CONVERSION_CONTEXT,tables/sql_replicate.dbo.mx_repotran_tmp.md
+sql_replicate.dbo.mx_security,SQL_REPLICATE.dbo.MX_SECURITY,6,2,25,1,0,0,0,0,25,HAS_STATIC_CONVERSION_CONTEXT,tables/sql_replicate.dbo.mx_security.md
+sql_replicate.dbo.mxoutstanding_repo_dbf,SQL_REPLICATE.dbo.MXOUTSTANDING_REPO_DBF,22,1,2,1,0,0,0,0,2,HAS_STATIC_CONVERSION_CONTEXT,tables/sql_replicate.dbo.mxoutstanding_repo_dbf.md
+sql_replicate.dbo.mxpergerakandana,SQL_REPLICATE.dbo.MXPergerakanDana,1,1,2,1,0,0,0,0,2,HAS_STATIC_CONVERSION_CONTEXT,tables/sql_replicate.dbo.mxpergerakandana.md
+sql_replicate.dbo.mxportofolidbf,SQL_REPLICATE.dbo.MXPortofoliDBF,7,2,9,1,0,0,0,0,9,HAS_STATIC_CONVERSION_CONTEXT,tables/sql_replicate.dbo.mxportofolidbf.md
+sql_replicate.dbo.mxpurpose,SQL_REPLICATE.dbo.MXPurpose,2,1,2,1,0,0,0,0,2,HAS_STATIC_CONVERSION_CONTEXT,tables/sql_replicate.dbo.mxpurpose.md
+sql_replicate.dbo.mxreasonreverse,SQL_REPLICATE.dbo.MXReasonReverse,6,2,5,1,0,0,0,0,5,HAS_STATIC_CONVERSION_CONTEXT,tables/sql_replicate.dbo.mxreasonreverse.md
+sql_replicate.dbo.ora_trn_hdr_dbf_rep,SQL_REPLICATE.dbo.ORA_TRN_HDR_DBF_REP,18,1,1,1,0,0,1,0,0,HAS_STATIC_CONVERSION_CONTEXT,tables/sql_replicate.dbo.ora_trn_hdr_dbf_rep.md
+sql_replicate.dbo.procifchangemaster_th,SQL_REPLICATE.dbo.ProCIFChangeMaster_TH,16,1,3,1,0,0,0,0,3,HAS_STATIC_CONVERSION_CONTEXT,tables/sql_replicate.dbo.procifchangemaster_th.md
+sql_replicate.dbo.repomastertransaction_tmp,SQL_REPLICATE.dbo.RepoMasterTransaction_Tmp,22,14,15,1,0,0,12,0,3,HAS_STATIC_CONVERSION_CONTEXT,tables/sql_replicate.dbo.repomastertransaction_tmp.md
+retail.dbo.account_segment_bonds_cache_tt,Retail UAT.dbo.account_segment_bonds_cache_tt,11,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.acf_data_th,Retail UAT.dbo.acf_data_th,13,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.attrep_truncation_safeguard,Retail UAT.dbo.attrep_truncation_safeguard,4,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.bis4_file_logging_th,Retail UAT.dbo.bis4_file_logging_th,5,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.bk_customer_obli_job_nasabah,Retail UAT.dbo.bk_customer_obli_job_nasabah,10,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.bk_customer_obli_job_trigger,Retail UAT.dbo.bk_customer_obli_job_trigger,7,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.bk_customer_obli_whitelist,Retail UAT.dbo.bk_customer_obli_whitelist,10,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.bkcustomeroblijobtransaction,Retail UAT.dbo.BKCustomerObliJobTransaction,17,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.bkholdingbalancelist_th,Retail UAT.dbo.BKHoldingBalanceList_TH,9,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.bkholdingbalancelist_tr,Retail UAT.dbo.BKHoldingBalanceList_TR,7,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.bkholdingdata_th,Retail UAT.dbo.BKHoldingData_TH,10,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.bkmappingsec_th,Retail UAT.dbo.BKMappingSec_TH,10,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.bkparamdatatype_tm,Retail UAT.dbo.BKParamDataType_TM,6,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.bondcpyresponselog_th,Retail UAT.dbo.BONDCPYResponseLog_TH,4,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.bondresponselog_th,Retail UAT.dbo.BONDResponseLog_TH,8,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.bonds_upload_secondary_sumber_dana_th,Retail UAT.dbo.bonds_upload_secondary_sumber_dana_th,9,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.bonds_upload_secondary_sumber_dana_tt,Retail UAT.dbo.bonds_upload_secondary_sumber_dana_tt,6,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.bonds_upload_secondary_trx_th,Retail UAT.dbo.bonds_upload_secondary_trx_th,29,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.bonds_upload_secondary_trx_tm,Retail UAT.dbo.bonds_upload_secondary_trx_tm,4,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.bonds_upload_secondary_trx_tt,Retail UAT.dbo.bonds_upload_secondary_trx_tt,26,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.bondsdocumentpooling_tt,Retail UAT.dbo.BondsDocumentPooling_TT,5,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.broker_tm,Retail UAT.dbo.Broker_TM,3,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.brokercommisions_tm,Retail UAT.dbo.BrokerCommisions_TM,5,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.buybackexcludetemp,Retail UAT.dbo.BuyBackExcludeTemp,1,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.cifreplicatefinal_th,Retail UAT.dbo.CIFReplicateFinal_TH,31,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.cifreplicateoracle_tt,Retail UAT.dbo.CIFReplicateOracle_TT,2,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.cifreplicatetemp_tt,Retail UAT.dbo.CIFReplicateTemp_TT,29,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.cifreplicateunprocessed_tt,Retail UAT.dbo.CIFReplicateUnprocessed_TT,5,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.combo_general_param_tr,Retail UAT.dbo.combo_general_param_tr,3,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.control_table_afs,Retail UAT.dbo.control_table_afs,6,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.control_table_resiko_pasar,Retail UAT.dbo.control_table_resiko_pasar,4,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.coupon_source_th,Retail UAT.dbo.coupon_source_th,24,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.custody_skf_temp_tt,Retail UAT.dbo.custody_skf_temp_tt,29,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.custodygeneralparam_tr,Retail UAT.dbo.CustodyGeneralParam_TR,4,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.custodypermataindividu_tt,Retail UAT.dbo.CustodyPermataIndividu_TT,59,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.custodypermataorchid_tt,Retail UAT.dbo.CustodyPermataOrchid_TT,23,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.custodypermataretailinstitusi_tt,Retail UAT.dbo.CustodyPermataRetailInstitusi_TT,58,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.ddmast_status,Retail UAT.dbo.ddmast_status,2,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.ede_log,Retail UAT.dbo.ede_log,14,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.excludeconfocif_tm,Retail UAT.dbo.ExcludeConfoCIF_TM,3,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.foptransferasetemailnotiflog_tl,Retail UAT.dbo.FOPTransferAsetEmailNotifLog_TL,19,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.general_control_table,Retail UAT.dbo.general_control_table,2,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.general_worker_parameter_tm,Retail UAT.dbo.general_worker_parameter_tm,2,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.generalftpparam_tr,Retail UAT.dbo.GeneralFTPParam_TR,9,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.gwp_bonds_customer_account_tr,Retail UAT.dbo.gwp_bonds_customer_account_tr,9,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.gwp_bonds_customer_portos_tr,Retail UAT.dbo.gwp_bonds_customer_portos_tr,11,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.gwp_bonds_customer_tr,Retail UAT.dbo.gwp_bonds_customer_tr,15,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.gwp_bonds_trade_outbox,Retail UAT.dbo.gwp_bonds_trade_outbox,36,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.gwp_bonds_transaction_recon_tt,Retail UAT.dbo.gwp_bonds_transaction_recon_tt,13,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.gwp_bonds_trx_onoff_outbox,Retail UAT.dbo.gwp_bonds_trx_onoff_outbox,26,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.gwp_fund_transfer_outbox,Retail UAT.dbo.gwp_fund_transfer_outbox,33,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.gwp_gics_classification_param_tr,Retail UAT.dbo.gwp_gics_classification_param_tr,8,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.gwp_process_log_th,Retail UAT.dbo.gwp_process_log_th,5,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.gwp_recon_file_load_audit,Retail UAT.dbo.gwp_recon_file_load_audit,8,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.gwp_recon_sec_trades,Retail UAT.dbo.gwp_recon_sec_trades,17,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.gwp_recon_trx_extended_attributes,Retail UAT.dbo.gwp_recon_trx_extended_attributes,4,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.gwp_sched_control_table_tt,Retail UAT.dbo.gwp_sched_control_table_tt,4,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.gwp_securities_block_outbox,Retail UAT.dbo.gwp_securities_block_outbox,19,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.gwp_transaction_outbox,Retail UAT.dbo.gwp_transaction_outbox,27,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.initialdatabankcustodypermata,Retail UAT.dbo.InitialDataBankCustodyPermata,19,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.initialdatacustodypermataindividu_tt,Retail UAT.dbo.InitialDataCustodyPermataIndividu_TT,96,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.initialdatacustodypermataretailinstitusi_tt,Retail UAT.dbo.InitialDataCustodyPermataRetailInstitusi_TT,91,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.kodeintern_tr,Retail UAT.dbo.KodeIntern_TR,5,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.kodepropinsi_tr,Retail UAT.dbo.KodePropinsi_TR,2,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.listtablehousekeepingprocess_tm,Retail UAT.dbo.ListTableHouseKeepingProcess_TM,12,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.mapmappartipantid,Retail UAT.dbo.MAPMapPartipantID,2,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.mappingacctaxcode_tm,Retail UAT.dbo.MappingAccTaxCode_TM,4,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.mappingpendidikan_tm,Retail UAT.dbo.MappingPendidikan_TM,3,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.maturity_source_th,Retail UAT.dbo.maturity_source_th,32,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.migprocifcusttagging_tm,Retail UAT.dbo.MIGProCIFCustTagging_TM,12,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.mx_trncpdf_dbf,Retail UAT.dbo.MX_TRNCPDF_DBF,2,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.obli301outright_tr,Retail UAT.dbo.Obli301Outright_TR,27,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.obli_log_calculate_bonds_th,Retail UAT.dbo.obli_log_calculate_bonds_th,23,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.obli_log_search_customer_th,Retail UAT.dbo.obli_log_search_customer_th,13,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.obli_log_submit_bonds_th,Retail UAT.dbo.obli_log_submit_bonds_th,33,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.oblitransactionmaillog_th,Retail UAT.dbo.ObliTransactionMailLog_TH,7,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.oblitransactionmaillog_tt,Retail UAT.dbo.ObliTransactionMailLog_TT,7,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.om_notif_error_th,Retail UAT.dbo.om_notif_error_th,2,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.onetrschedcontroltable_tm,Retail UAT.dbo.ONETRSchedControlTable_TM,6,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.ori_apierrormapping_tr,Retail UAT.dbo.ORI_APIErrorMapping_TR,3,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.ori_kemenkeutrxstatus_tr,Retail UAT.dbo.ORI_KemenkeuTrxStatus_TR,3,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.ori_onlinelog_tl,Retail UAT.dbo.ORI_OnlineLog_TL,25,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.ori_order_temp_th,Retail UAT.dbo.ORI_Order_Temp_TH,21,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.ori_order_th,Retail UAT.dbo.ORI_Order_TH,37,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.ori_orderextmig_tt,Retail UAT.dbo.ORI_OrderExtMig_TT,4,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.ori_paymentdirect_tr,Retail UAT.dbo.ORI_PaymentDirect_TR,7,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.ori_paymentdirectlog_th,Retail UAT.dbo.ORI_PaymentDirectLog_TH,7,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.ori_pending_rekening_dana,Retail UAT.dbo.ori_pending_rekening_dana,7,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.ori_unblokir_api_hist,Retail UAT.dbo.ori_unblokir_api_hist,6,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.oriordersellertemp,Retail UAT.dbo.ORIOrderSellerTemp,8,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.orisbnearlyredempptbc_tl,Retail UAT.dbo.ORISBNEarlyRedempPTBC_TL,5,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.orisbniearlyredemption_tmp,Retail UAT.dbo.ORISBNIEarlyRedemption_TMP,35,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.orisbniearlyredemption_tmp_th,Retail UAT.dbo.ORISBNIEarlyRedemption_TMP_TH,34,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.orisbninvestormaster_th,Retail UAT.dbo.ORISBNInvestorMaster_TH,29,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.orisbninvestorreksb_th,Retail UAT.dbo.ORISBNInvestorRekSB_TH,16,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.orisbnorderstatusschedlog_tl,Retail UAT.dbo.ORISBNOrderStatusSchedLog_TL,10,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.orischedworkflowlog_tl,Retail UAT.dbo.ORISchedWorkflowLog_TL,9,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.oriva_customer_whitelist,Retail UAT.dbo.oriva_customer_whitelist,2,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.oriva_mockrun_whitelist,Retail UAT.dbo.oriva_mockrun_whitelist,1,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.oriva_parameter,Retail UAT.dbo.oriva_parameter,4,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.paramsettlementdatebonds,Retail UAT.dbo.paramsettlementdatebonds,12,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.pctry_tm,Retail UAT.dbo.PCTRY_TM,6,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.pcussts_tm,Retail UAT.dbo.PCUSSTS_TM,5,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.pcustyp0_tm,Retail UAT.dbo.PCUSTYP0_TM,9,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.proaccddmul01h_tm,Retail UAT.dbo.ProACCDDMUL01H_TM,17,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.proaccddmul01hlog_th,Retail UAT.dbo.ProACCDDMUL01HLog_TH,12,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.process_group_type,Retail UAT.dbo.process_group_type,3,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.process_table_error_history,Retail UAT.dbo.process_table_error_history,7,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.process_table_last_data,Retail UAT.dbo.process_table_last_data,6,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.proobligasidetail_temp,Retail UAT.dbo.ProObligasiDetail_temp,12,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.ps_map_jobcode,Retail UAT.dbo.PS_MAP_JOBCODE,4,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.ptbcallowviewcustexception_tt,Retail UAT.dbo.PTBCAllowViewCustException_TT,1,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.ptbccustomermxinprogress_tt,Retail UAT.dbo.PTBCCustomerMxInProgress_TT,2,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.ptbcmappingsecuritymaster_tm,Retail UAT.dbo.PTBCMappingSecurityMaster_TM,3,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.ptbcmappingtreasurycustomer_tm,Retail UAT.dbo.PTBCMappingTreasuryCustomer_TM,3,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.ptoscustomerinfo_th,Retail UAT.dbo.PTOSCustomerInfo_TH,7,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.ptoslogsentmailhasilbmw_th,Retail UAT.dbo.PTOSLogSentMailHasilBMW_TH,11,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.ptosoutstandinglogjob_th,Retail UAT.dbo.PTOSOutstandingLogJob_TH,4,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.ptosparamemail_tm,Retail UAT.dbo.PTOSParamEmail_TM,5,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.repoapiservicelog_th,Retail UAT.dbo.REPOAPIServiceLog_TH,7,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.repoapprovalspreadtransaksi_tm,Retail UAT.dbo.REPOApprovalSpreadTransaksi_TM,7,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.repocanceltrx_tt,Retail UAT.dbo.REPOCancelTrx_TT,6,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.repointerfacemx_tt,Retail UAT.dbo.REPOInterfaceMx_TT,12,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.repologsentmailsettle_th,Retail UAT.dbo.REPOLogSentMailSettle_TH,14,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.repoparambookbuilding_th,Retail UAT.dbo.REPOParamBookBuilding_TH,19,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.repoparambookbuilding_tr,Retail UAT.dbo.REPOParamBookBuilding_TR,16,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.repoparameterproduct_th,Retail UAT.dbo.REPOParameterProduct_TH,29,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.repoparammaturitydate_th,Retail UAT.dbo.REPOParamMaturityDate_TH,11,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.repoprebooktransaction_th,Retail UAT.dbo.REPOPreBookTransaction_TH,43,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.report_permission_th,Retail UAT.dbo.Report_Permission_TH,14,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.reportflagreprint,Retail UAT.dbo.ReportFlagReprint,3,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.repospreadtransaksi_th,Retail UAT.dbo.RepoSpreadTransaksi_TH,22,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.reposysparameter_th,Retail UAT.dbo.REPOSysParameter_TH,8,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.rmmsecuritytransaction_tt,Retail UAT.dbo.RMMSecurityTransaction_TT,22,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.sbn_master_nasabah_format_grid,Retail UAT.dbo.sbn_master_nasabah_format_grid,4,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.sbn_pejabat_master,Retail UAT.dbo.sbn_pejabat_master,2,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.sbnmailnotifparam_tr_bu,Retail UAT.dbo.SBNMailNotifParam_TR_bu,7,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.sbnmailnotifparam_tr_html,Retail UAT.dbo.SBNMailNotifParam_TR_html,7,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.sbnschedlivelog_tl,Retail UAT.dbo.SBNSchedLiveLog_TL,3,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.schema_migrations,Retail UAT.dbo.schema_migrations,2,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.sectableec,Retail UAT.dbo.SecTableEC,8,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.securityapproveddealwewenang_tr,Retail UAT.dbo.SecurityApprovedDealWewenang_TR,7,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.securitybatchresult_tr,Retail UAT.dbo.SecurityBatchResult_TR,15,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.securitycekstatus_tr,Retail UAT.dbo.SecurityCekStatus_TR,4,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.securitycoupondaily_tt,Retail UAT.dbo.SecurityCouponDaily_TT,25,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.securitycoupondatelog_tr,Retail UAT.dbo.SecurityCouponDateLog_TR,10,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.securitycustodian_tr,Retail UAT.dbo.SecurityCustodian_TR,7,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.securityinteresttype_tr,Retail UAT.dbo.SecurityInterestType_TR,2,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.securitylogsentmailkonfirmasi_th,Retail UAT.dbo.SecurityLogSentMailKonfirmasi_TH,14,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.securitymaster_th,Retail UAT.dbo.SecurityMaster_TH,35,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.securitynobankcustody_temp,Retail UAT.dbo.SecurityNoBankCustody_Temp,13,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.securitynobankcustody_tm,Retail UAT.dbo.SecurityNoBankCustody_TM,12,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.securityparamlelang_tr,Retail UAT.dbo.SecurityParamLelang_TR,4,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.securityreplacetrxlelang_th,Retail UAT.dbo.SecurityReplaceTrxLelang_TH,10,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.securityreplacetrxlelang_tt,Retail UAT.dbo.SecurityReplaceTrxLelang_TT,7,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.securityresultforta_th,Retail UAT.dbo.SecurityResultForTA_TH,25,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.securityresultlelang_th,Retail UAT.dbo.SecurityResultLelang_TH,16,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.securitytransaction_deletetemp,Retail UAT.dbo.SecurityTransaction_deleteTemp,7,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.securitytransaction_sumberdana,Retail UAT.dbo.SecurityTransaction_SumberDana,3,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.securitytransaction_temp_formurex_th,Retail UAT.dbo.SecurityTransaction_TEMP_ForMurex_TH,18,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.securitytransactiondetail_th,Retail UAT.dbo.SecurityTransactionDetail_TH,17,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.securitytransferasetlink_th,Retail UAT.dbo.SecurityTransferAsetLink_TH,18,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.securitytrxlelang_th,Retail UAT.dbo.SecurityTrxLelang_TH,59,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.syrddmastibaccrue_th,Retail UAT.dbo.SYRDDMASTIBAccrue_TH,39,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.tibcomxoverbookinglog_th,Retail UAT.dbo.TibcoMxOverbookingLog_TH,5,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.tibcotellerresourcecounter_tmp,Retail UAT.dbo.TibcoTellerResourceCounter_TMP,2,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.tibcotellerresourceerror_tr,Retail UAT.dbo.TibcoTellerResourceError_TR,6,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.tmp_blotter,Retail UAT.dbo.tmp_blotter,20,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.tmp_data,Retail UAT.dbo.tmp_data,29,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.tmp_nominal,Retail UAT.dbo.tmp_Nominal,2,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.tmp_total,Retail UAT.dbo.tmp_Total,2,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.tmpapptrx,Retail UAT.dbo.tmpAppTrx,5,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.tmpdatanasabahkonfirmasi_th,Retail UAT.dbo.tmpDataNasabahKonfirmasi_TH,17,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.tmpdatatransaksikonfirmasi_th,Retail UAT.dbo.tmpDataTransaksiKonfirmasi_TH,15,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.tmpdetailnominal,Retail UAT.dbo.tmpDetailNominal,4,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.tmpformurexlog_th,Retail UAT.dbo.tmpForMurexLog_TH,22,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.treasurycustomerbalanceptbc,Retail UAT.dbo.TreasuryCustomerBalancePTBC,13,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.treasurycustomerbalancerepeod,Retail UAT.dbo.TreasuryCustomerBalanceRepEOD,12,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.treasurycustomerext_tm,Retail UAT.dbo.TreasuryCustomerExt_TM,7,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.treasurycustomerptbc_adhoc,Retail UAT.dbo.TreasuryCustomerPTBC_AdHoc,2,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.treasurycustomerptbc_tm,Retail UAT.dbo.TreasuryCustomerPTBC_TM,7,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.treasurycustomersaldorepeod_0921,Retail UAT.dbo.TreasuryCustomerSaldoRepEOD_0921,11,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trsbatchtransaction_temp,Retail UAT.dbo.TRSBatchTransaction_Temp,37,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trsbatchtransaction_th,Retail UAT.dbo.TRSBatchTransaction_TH,39,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trsbatchtransaction_uploadchunk,Retail UAT.dbo.TRSBatchTransaction_UploadChunk,10,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trsbisssstran_th,Retail UAT.dbo.TRSBISSSSTran_TH,6,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trsbisssstran_tt,Retail UAT.dbo.TRSBISSSSTran_TT,6,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trsbondresponsemx_tt,Retail UAT.dbo.TRSBondResponseMX_TT,10,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trsbondsdiscmessage_tr,Retail UAT.dbo.TRSBondsDiscMessage_TR,1,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trsbondtransactioneligibility_tr,Retail UAT.dbo.TRSBondTransactionEligibility_TR,6,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trsbondtransactionfailed_th,Retail UAT.dbo.TRSBondTransactionFailed_TH,16,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trsbungaftpparameter_tm,Retail UAT.dbo.TRSBungaFTPParameter_TM,6,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trscallbackonenotif_tl,Retail UAT.dbo.TRSCallbackOneNotif_TL,7,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trscitibanktran_th,Retail UAT.dbo.TRSCitibankTran_TH,6,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trscitibanktran_tt,Retail UAT.dbo.TRSCitibankTran_TT,6,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trsconfojobonenotif_tl,Retail UAT.dbo.TRSConfoJobOneNotif_TL,10,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trscustmaturitynotif_tt,Retail UAT.dbo.TRSCustMaturityNotif_TT,8,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trscustodybii_th,Retail UAT.dbo.TRSCustodyBII_TH,13,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trscustodybii_tt,Retail UAT.dbo.TRSCustodyBII_TT,13,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trscustodymaster_tm,Retail UAT.dbo.TRSCustodyMaster_TM,5,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trscustodyobl003,Retail UAT.dbo.TRSCustodyOBL003,9,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trscustodypermatabank_th,Retail UAT.dbo.TRSCustodyPermataBank_TH,11,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trscustodypermatabank_tt,Retail UAT.dbo.TRSCustodyPermataBank_TT,11,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trscustodypermatacustomer_th,Retail UAT.dbo.TRSCustodyPermataCustomer_TH,9,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trscustodypermatacustomer_tt,Retail UAT.dbo.TRSCustodyPermataCustomer_TT,9,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trscustomerexception_tr,Retail UAT.dbo.TRSCustomerException_TR,4,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trscustrequestsid_tm,Retail UAT.dbo.TRSCustRequestSID_TM,8,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trsdailyaccruedinterest_th,Retail UAT.dbo.TRSDailyAccruedInterest_TH,22,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trsdebugflag_tr,Retail UAT.dbo.TRSDebugFlag_TR,2,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trsecbondspriceposition_th,Retail UAT.dbo.TRSECBondsPricePosition_TH,21,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trsfilecustodystructure_tr,Retail UAT.dbo.TRSFileCustodyStructure_TR,5,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trsgltreasuryproductmx_th,Retail UAT.dbo.TRSGLTreasuryProductMx_TH,18,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trsgncparameter_tm,Retail UAT.dbo.TRSGNCParameter_TM,3,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trshargabondcontroltable_tm,Retail UAT.dbo.TRSHargaBondControlTable_TM,5,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trshargabonddaily_tl,Retail UAT.dbo.TRSHargaBondDaily_TL,16,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trsholidaydatetreasuryproduct_tm,Retail UAT.dbo.TRSHolidayDateTreasuryProduct_TM,4,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trsinputuploaddata,Retail UAT.dbo.TRSInputUploadData,1,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trsinquiryautoblock_tm,Retail UAT.dbo.TRSInquiryAutoBlock_TM,15,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trsjobsendemailrecipientattachment_tr,Retail UAT.dbo.TRSJobSendEmailRecipientAttachment_TR,4,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trskitaslog_th,Retail UAT.dbo.TRSKITASLog_TH,7,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trskuotareserved_th,Retail UAT.dbo.TRSKuotaReserved_TH,8,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trskupontfromdatabaselog_tl,Retail UAT.dbo.TRSKuponTFromDatabaseLog_TL,21,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trslogamendsecuritytransaction_tl,Retail UAT.dbo.TRSLogAmendSecurityTransaction_TL,7,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trslogobliapi_tl,Retail UAT.dbo.TRSLogObliAPI_TL,8,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trslogonenotifnti_tl,Retail UAT.dbo.TRSLogOneNotifNTI_TL,3,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trslogtimeprocess_th,Retail UAT.dbo.TRSLogTimeProcess_TH,7,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trsmailservicelog_tl,Retail UAT.dbo.TRSMailServiceLog_TL,10,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trsmappingkotacifmenkeu_tr,Retail UAT.dbo.TRSMappingKotaCIFMenkeu_TR,5,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trsmappingobligasibis4,Retail UAT.dbo.TRSMappingObligasiBIS4,7,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trsmappingobligasibis4temp,Retail UAT.dbo.TRSMappingObligasiBIS4Temp,7,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trsmappingphoneorderproduct_tr,Retail UAT.dbo.TRSMappingPhoneOrderProduct_TR,3,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trsmaturitytfromdatabaselog_tl,Retail UAT.dbo.TRSMaturityTFromDatabaseLog_TL,22,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trsmxccycontract_tr,Retail UAT.dbo.TRSMxCCYContract_TR,2,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trsnispaccountbis4,Retail UAT.dbo.TRSNISPAccountBIS4,6,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trsntiemaillog_tl,Retail UAT.dbo.TRSNTIEmailLog_TL,15,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trsntitreasurycust_tl,Retail UAT.dbo.TRSNTITreasuryCust_TL,7,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trsobligasiriskprofilelog_th,Retail UAT.dbo.TRSObligasiRiskProfileLog_TH,7,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trsomlogprocess_th,Retail UAT.dbo.TRSOMLogProcess_TH,9,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trsoneapprovallogprocess_th,Retail UAT.dbo.TRSONEApprovalLogProcess_TH,7,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trsonlinedocslink_tm,Retail UAT.dbo.TRSOnlineDocsLink_TM,5,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trsonlinedocslinkappmaster_tm,Retail UAT.dbo.TRSOnlineDocsLinkAppMaster_TM,6,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trsonlineproduktermtext_tm,Retail UAT.dbo.TRSOnlineProdukTermText_TM,16,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trspajakbankbeli_eom,Retail UAT.dbo.TRSPajakBankBeli_EOM,33,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trsparamaccrueddaysadjustment_tr,Retail UAT.dbo.TRSParamAccruedDaysAdjustment_TR,6,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trsparamalamatkonfirmasi_tm,Retail UAT.dbo.TRSParamAlamatKonfirmasi_TM,3,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trsparamblockaccount_tr,Retail UAT.dbo.TRSParamBlockAccount_TR,18,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trsparamblockobligasi_tr,Retail UAT.dbo.TRSParamBlockObligasi_TR,14,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trsparamcopywriting_tm,Retail UAT.dbo.TRSParamCopyWriting_TM,9,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trsparamcustodyperiod_tr,Retail UAT.dbo.TRSParamCustodyPeriod_TR,2,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trsparameterdokumentrasuryproduct_tm,Retail UAT.dbo.TRSParameterDokumenTrasuryProduct_TM,7,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trsparameteremail_tm,Retail UAT.dbo.TRSParameterEmail_TM,5,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trsparameteremailreceipt_tm,Retail UAT.dbo.TRSParameterEmailReceipt_TM,2,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trsparametergl_tm,Retail UAT.dbo.TRSParameterGL_TM,20,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trsparameterjeniskelamin_tm,Retail UAT.dbo.TRSParameterJenisKelamin_TM,4,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trsparameterkursref_th,Retail UAT.dbo.TRSParameterKursRef_TH,9,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trsparameterkursref_tm,Retail UAT.dbo.TRSParameterKursRef_TM,8,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trsparameterrevenuecabang_tm,Retail UAT.dbo.TRSParameterRevenueCabang_TM,11,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trsparameterrevenueinternal_tm,Retail UAT.dbo.TRSParameterRevenueInternal_TM,12,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trsparameterseriesbn_th,Retail UAT.dbo.TRSParameterSeriESBN_TH,22,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trsparameterseriesbn_tm,Retail UAT.dbo.TRSParameterSeriESBN_TM,19,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trsparametersettlementdate_th,Retail UAT.dbo.TRSParameterSettlementDate_TH,12,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trsparametersubregisty_tm,Retail UAT.dbo.TRSParameterSubRegisty_TM,3,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trsparamexecquery_tr,Retail UAT.dbo.TRSParamExecQuery_TR,14,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trsparamfilecustody_tr,Retail UAT.dbo.TRSParamFileCustody_TR,4,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trsparaminterfacemurex_tm,Retail UAT.dbo.TRSParamInterfaceMurex_TM,11,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trsparamlelangexeclog_tl,Retail UAT.dbo.TRSParamLelangExecLog_TL,5,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trsparamobliapi_tr,Retail UAT.dbo.TRSParamObliAPI_TR,7,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trsparamoverbooking_tr,Retail UAT.dbo.TRSParamOverBooking_TR,26,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trsparamprocesslinkapi_tm,Retail UAT.dbo.TRSParamProcessLinkAPI_TM,12,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trsparamrepoexeclog_tl,Retail UAT.dbo.TRSParamRepoExecLog_TL,5,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trsparamriskprofile_tr,Retail UAT.dbo.TRSParamRiskProfile_TR,3,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trsparamsendemail_tr,Retail UAT.dbo.TRSParamSendEmail_TR,11,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trsparamsourcecolumn_tr,Retail UAT.dbo.TRSParamSourceColumn_TR,5,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trsparamthresholdproduct_tr,Retail UAT.dbo.TRSParamThresholdProduct_TR,4,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trsparamvalidatebalanceaccount_tr,Retail UAT.dbo.TRSParamValidateBalanceAccount_TR,5,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trsparjumlahpembagihari_tm,Retail UAT.dbo.TRSParJumlahPembagiHari_TM,2,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trsparlist_tm,Retail UAT.dbo.TRSParList_TM,3,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trspaycouponoritaxamnesty_eom,Retail UAT.dbo.TRSPayCouponORITaxAmnesty_EOM,20,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trsprocessaddblock_tr,Retail UAT.dbo.TRSProcessAddBlock_TR,9,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trsprocesscallapiall_th,Retail UAT.dbo.TRSProcessCallAPIAll_TH,11,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trsprocesscallapisuccess_tr,Retail UAT.dbo.TRSProcessCallAPISuccess_TR,9,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trsprocesscolumn_tr,Retail UAT.dbo.TRSProcessColumn_TR,13,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trsprocessfilterdatatype_tr,Retail UAT.dbo.TRSProcessFilterDataType_TR,10,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trsprocessglobalparameter_tr,Retail UAT.dbo.TRSProcessGlobalParameter_TR,8,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trsprocessjurnallog_th,Retail UAT.dbo.TRSProcessJurnalLog_TH,4,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trsprocessmaster_tm,Retail UAT.dbo.TRSProcessMaster_TM,32,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trsprocessmasterlog_th,Retail UAT.dbo.TRSProcessMasterLog_TH,7,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trsprocessmeteraidetail_tr,Retail UAT.dbo.TRSProcessMeteraiDetail_TR,4,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trsprocessoverbooking_th,Retail UAT.dbo.TRSProcessOverBooking_TH,34,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trsprocesstablelog_th,Retail UAT.dbo.TRSProcessTableLog_TH,5,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trsproductcifpelaku_th,Retail UAT.dbo.TRSProductCIFPelaku_TH,10,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trsproductcifpelaku_tr,Retail UAT.dbo.TRSProductCIFPelaku_TR,9,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trsproductnasabah_th,Retail UAT.dbo.TRSProductNasabah_TH,9,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trsproductnasabah_tm,Retail UAT.dbo.TRSProductNasabah_TM,4,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trsproductparamaccountcode_tr,Retail UAT.dbo.TRSProductParamAccountCode_TR,4,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trsproducttreasury_tm,Retail UAT.dbo.TRSProductTreasury_TM,2,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trsreksyariahpending_tr,Retail UAT.dbo.TRSRekSyariahPending_TR,4,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trsrektaxamnestylog_tl,Retail UAT.dbo.TRSRekTaxAmnestyLog_TL,9,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trsrektaxamnestypending_tr,Retail UAT.dbo.TRSRekTaxAmnestyPending_TR,5,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trsrepomappingnotif_tr,Retail UAT.dbo.TRSRepoMappingNotif_TR,9,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trsreponotif_tr,Retail UAT.dbo.TRSRepoNotif_TR,11,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trsreportconfirmationcounter_tt,Retail UAT.dbo.TRSReportConfirmationCounter_TT,3,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trsreportcounter_tr,Retail UAT.dbo.TRSReportCounter_TR,2,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trsreporttype_tr,Retail UAT.dbo.TRSReportType_TR,5,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trsrequestsummary_th,Retail UAT.dbo.TRSRequestSummary_TH,17,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trsrequestsummary_tm,Retail UAT.dbo.TRSRequestSummary_TM,15,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trsretailreportlist_tr,Retail UAT.dbo.TRSRetailReportList_TR,4,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trsschedconfolog_th,Retail UAT.dbo.TRSSchedConfoLog_TH,4,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trssecuritycalculateprebook_tt,Retail UAT.dbo.TRSSecurityCalculatePreBook_TT,35,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trssecuritytransactionprebook_th,Retail UAT.dbo.TRSSecurityTransactionPreBook_TH,35,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trssecuritytransactionprimaryprebook_tt,Retail UAT.dbo.TRSSecurityTransactionPrimaryPreBook_TT,21,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trssecuritytypeparam_tr,Retail UAT.dbo.TRSSecurityTypeParam_TR,2,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trssettlementmaturityfromcustody_tr,Retail UAT.dbo.TRSSettlementMaturityFromCustody_TR,9,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trsskfeffectivedateparam_tr,Retail UAT.dbo.TRSSKFEffectiveDateParam_TR,2,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trsstaticcustomercoupon_th,Retail UAT.dbo.TRSStaticCustomerCoupon_TH,9,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trsstaticcustomercoupon_tm,Retail UAT.dbo.TRSStaticCustomerCoupon_TM,9,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trsstaticcustomeroutstanding_th,Retail UAT.dbo.TRSStaticCustomerOutstanding_TH,11,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trssumberdana_tl,Retail UAT.dbo.TRSSumberDana_TL,10,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trssyncmasterriskprofiletemp,Retail UAT.dbo.TrsSyncMasterRiskProfileTemp,5,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trssyncsidlog_th,Retail UAT.dbo.TRSSyncSIDLog_TH,7,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trstenorparameter_tm,Retail UAT.dbo.TRSTenorParameter_TM,2,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trsuploadkuponcleanlog_tl,Retail UAT.dbo.TRSUploadKuponCleanLog_TL,5,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trsuploadkuponlog_tl,Retail UAT.dbo.TRSUploadKuponLog_TL,4,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trsuploadmatchingmaturity_tl,Retail UAT.dbo.TRSUploadMatchingMaturity_TL,4,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.trsuploadmaturitycleanlog_tl,Retail UAT.dbo.TRSUploadMaturityCleanLog_TL,5,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+retail.dbo.user_customerflagging_tm,Retail UAT.dbo.USER_CustomerFlagging_TM,8,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+sql_replicate.dbo.accountsegmentyesterday,SQL_REPLICATE.dbo.AccountSegmentYesterday,11,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+sql_replicate.dbo.adhoc_vlsrate_tm,SQL_REPLICATE.dbo.Adhoc_VLSRate_TM,7,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+sql_replicate.dbo.adhoc_vlsresultfinal_tt,SQL_REPLICATE.dbo.Adhoc_VLSResultFinal_TT,25,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+sql_replicate.dbo.adhoc_vlsresultfinaltoday_tt,SQL_REPLICATE.dbo.Adhoc_VLSResultFinalToday_TT,25,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+sql_replicate.dbo.adhoc_vlssummary_tm,SQL_REPLICATE.dbo.Adhoc_VLSSummary_TM,10,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+sql_replicate.dbo.adhoc_vlssummarytoday_tm,SQL_REPLICATE.dbo.Adhoc_VLSSummaryToday_TM,10,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+sql_replicate.dbo.adhoc_vlstransactions_tr,SQL_REPLICATE.dbo.Adhoc_VLSTransactions_TR,24,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+sql_replicate.dbo.adhoc_vlstransactionstoday_tr,SQL_REPLICATE.dbo.Adhoc_VLSTransactionsToday_TR,18,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+sql_replicate.dbo.atc_cust,SQL_REPLICATE.dbo.ATC_CUST,9,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+sql_replicate.dbo.atc_dldt,SQL_REPLICATE.dbo.ATC_DLDT,13,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+sql_replicate.dbo.atc_fxdh,SQL_REPLICATE.dbo.ATC_FXDH,16,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+sql_replicate.dbo.atc_schd,SQL_REPLICATE.dbo.ATC_SCHD,4,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+sql_replicate.dbo.biparh,SQL_REPLICATE.dbo.BIPARH,7,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+sql_replicate.dbo.bis4_participant,SQL_REPLICATE.dbo.BIS4_PARTICIPANT,4,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+sql_replicate.dbo.bis4holdbalance_kon,SQL_REPLICATE.dbo.BIS4HoldBalance_KON,9,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+sql_replicate.dbo.bis4holdbalance_sya,SQL_REPLICATE.dbo.BIS4HoldBalance_SYA,9,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+sql_replicate.dbo.bt_llnis05,SQL_REPLICATE.dbo.BT_LLNIS05,27,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+sql_replicate.dbo.bt_loloc00,SQL_REPLICATE.dbo.BT_LOLOC00,26,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+sql_replicate.dbo.bt_loloc30,SQL_REPLICATE.dbo.BT_LOLOC30,20,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+sql_replicate.dbo.cdmast,SQL_REPLICATE.dbo.CDMAST,28,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+sql_replicate.dbo.cdpar2,SQL_REPLICATE.dbo.CDPAR2,111,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+sql_replicate.dbo.cdtnew,SQL_REPLICATE.dbo.CDTNEW,24,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+sql_replicate.dbo.cfgmbr,SQL_REPLICATE.dbo.CFGMBR,10,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+sql_replicate.dbo.cfnlog,SQL_REPLICATE.dbo.CFNLOG,17,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+sql_replicate.dbo.cfpar10,SQL_REPLICATE.dbo.CFPAR10,16,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+sql_replicate.dbo.cfpar9,SQL_REPLICATE.dbo.CFPAR9,5,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+sql_replicate.dbo.cfparu,SQL_REPLICATE.dbo.CFPARU,13,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+sql_replicate.dbo.cfppvb,SQL_REPLICATE.dbo.CFPPVB,16,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+sql_replicate.dbo.confomk005_a,SQL_REPLICATE.dbo.confomk005_a,41,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+sql_replicate.dbo.confomk006_a,SQL_REPLICATE.dbo.confomk006_a,41,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+sql_replicate.dbo.cpy_int_dbf,SQL_REPLICATE.dbo.CPY_INT_DBF,2,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+sql_replicate.dbo.csapmoffice_tm,SQL_REPLICATE.dbo.CSAPMOffice_TM,4,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+sql_replicate.dbo.ddbhis,SQL_REPLICATE.dbo.DDBHIS,13,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+sql_replicate.dbo.ddhld,SQL_REPLICATE.dbo.DDHLD,15,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+sql_replicate.dbo.ddyact,SQL_REPLICATE.dbo.DDYACT,25,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+sql_replicate.dbo.ddyinm,SQL_REPLICATE.dbo.DDYINM,21,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+sql_replicate.dbo.dhnaccountmapping,SQL_REPLICATE.dbo.DHNAccountMapping,14,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+sql_replicate.dbo.ede_log,SQL_REPLICATE.dbo.ede_log,14,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+sql_replicate.dbo.fldtransactionfrommx_tt,SQL_REPLICATE.dbo.FLDTransactionFromMx_TT,4,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+sql_replicate.dbo.fmcttransactionfrommx_tt,SQL_REPLICATE.dbo.FMCTTransactionFromMx_TT,23,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+sql_replicate.dbo.fx_cnt_dbf,SQL_REPLICATE.dbo.FX_CNT_DBF,8,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+sql_replicate.dbo.glonth,SQL_REPLICATE.dbo.GLONTH,50,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+sql_replicate.dbo.jhcldr,SQL_REPLICATE.dbo.JHCLDR,7,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+sql_replicate.dbo.jhrate,SQL_REPLICATE.dbo.JHRATE,18,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+sql_replicate.dbo.kafka_log_error,SQL_REPLICATE.dbo.kafka_log_error,7,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+sql_replicate.dbo.lnmast,SQL_REPLICATE.dbo.LNMAST,71,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+sql_replicate.dbo.lntnew,SQL_REPLICATE.dbo.LNTNEW,27,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+sql_replicate.dbo.misdatamodal,SQL_REPLICATE.dbo.MISDataModal,5,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+sql_replicate.dbo.mk005_a,SQL_REPLICATE.dbo.mk005_a,27,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+sql_replicate.dbo.mk005_a_actuate,SQL_REPLICATE.dbo.mk005_a_actuate,3,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+sql_replicate.dbo.mk006_a,SQL_REPLICATE.dbo.mk006_a,22,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+sql_replicate.dbo.mk006_a_actuate,SQL_REPLICATE.dbo.mk006_a_actuate,3,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+sql_replicate.dbo.mx_atc_cpdf,SQL_REPLICATE.dbo.MX_ATC_CPDF,12,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+sql_replicate.dbo.mx_atc_trn_hdr_fx,SQL_REPLICATE.dbo.MX_ATC_TRN_HDR_FX,26,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+sql_replicate.dbo.mx_delta,SQL_REPLICATE.dbo.MX_DELTA,2,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+sql_replicate.dbo.mxfutureproduct,SQL_REPLICATE.dbo.MXFutureProduct,6,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+sql_replicate.dbo.mxfutureproductmaturity,SQL_REPLICATE.dbo.MXFutureProductMaturity,4,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+sql_replicate.dbo.mxfxspot,SQL_REPLICATE.dbo.MXFXSpot,8,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+sql_replicate.dbo.mxpremicust,SQL_REPLICATE.dbo.MXPremiCust,6,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+sql_replicate.dbo.oneapprovalspvzone_tm2,SQL_REPLICATE.dbo.ONEApprovalSPVZone_TM2,3,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+sql_replicate.dbo.oneapprovalzone_tm2,SQL_REPLICATE.dbo.ONEApprovalZone_TM2,3,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+sql_replicate.dbo.pplmapmasterposition_tm,SQL_REPLICATE.dbo.PPLMAPMasterPosition_TM,43,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+sql_replicate.dbo.procifchangedetail_th,SQL_REPLICATE.dbo.ProCIFChangeDetail_TH,10,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+sql_replicate.dbo.procifcusttagging_tm,SQL_REPLICATE.dbo.ProCIFCustTagging_TM,12,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+sql_replicate.dbo.proobl_h,SQL_REPLICATE.dbo.PROOBL_H,1,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+sql_replicate.dbo.ps_jpm_profile,SQL_REPLICATE.dbo.PS_JPM_PROFILE,21,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+sql_replicate.dbo.ps_pye_bankacct,SQL_REPLICATE.dbo.PS_PYE_BANKACCT,15,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+sql_replicate.dbo.psemailaddress,SQL_REPLICATE.dbo.PSEmailAddress,3,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+sql_replicate.dbo.psemployee,SQL_REPLICATE.dbo.PSEmployee,12,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+sql_replicate.dbo.psemployeeaccount_tm,SQL_REPLICATE.dbo.PSEmployeeAccount_TM,15,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+sql_replicate.dbo.pspositiondata,SQL_REPLICATE.dbo.PSPositionData,9,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+sql_replicate.dbo.rdnmap,SQL_REPLICATE.dbo.RDNMAP,9,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+sql_replicate.dbo.sibscurrencymap_tm,SQL_REPLICATE.dbo.SIBSCurrencyMap_TM,5,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+sql_replicate.dbo.summary_valas,SQL_REPLICATE.dbo.summary_valas,13,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+sql_replicate.dbo.summary_valas_adhoc,SQL_REPLICATE.dbo.summary_valas_adhoc,13,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+sql_replicate.dbo.summary_valas_hist,SQL_REPLICATE.dbo.summary_valas_hist,13,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+sql_replicate.dbo.summary_valas_today,SQL_REPLICATE.dbo.summary_valas_today,13,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+sql_replicate.dbo.syr_ddmastibaccrue_th,SQL_REPLICATE.dbo.SYR_DDMASTIBAccrue_TH,39,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+sql_replicate.dbo.telgrp,SQL_REPLICATE.dbo.TELGRP,2,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+sql_replicate.dbo.trn_hdr_dbf,SQL_REPLICATE.dbo.trn_hdr_dbf,10,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+sql_replicate.dbo.trn_hdr_fx1,SQL_REPLICATE.dbo.TRN_HDR_FX1,27,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+sql_replicate.dbo.trn_hdr_fx_temp,SQL_REPLICATE.dbo.TRN_HDR_FX_TEMP,27,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+sql_replicate.dbo.trsddbhis_tm,SQL_REPLICATE.dbo.TRSDDBHIS_TM,11,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+sql_replicate.dbo.trsecl_eod,SQL_REPLICATE.dbo.TRSECL_EOD,2,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+sql_replicate.dbo.trspostingglbond_th,SQL_REPLICATE.dbo.TRSPostingGLBond_TH,18,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+sql_replicate.dbo.trspostingglbond_tt,SQL_REPLICATE.dbo.TRSPostingGLBond_TT,17,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+sql_replicate.dbo.trsstrpcollateral_tm,SQL_REPLICATE.dbo.TRSSTRPCollateral_TM,6,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+sql_replicate.dbo.vlsrate_th,SQL_REPLICATE.dbo.VLSRate_TH,7,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+sql_replicate.dbo.vlsratetoday_tm,SQL_REPLICATE.dbo.VLSRateToday_TM,7,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+sql_replicate.dbo.vlsresultfinal_th,SQL_REPLICATE.dbo.VLSResultFinal_TH,24,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+sql_replicate.dbo.vlsresultfinal_tt,SQL_REPLICATE.dbo.VLSResultFinal_TT,25,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+sql_replicate.dbo.vlsresultfinaltoday_tt,SQL_REPLICATE.dbo.VLSResultFinalToday_TT,25,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+sql_replicate.dbo.vlssummary_th,SQL_REPLICATE.dbo.VLSSummary_TH,9,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+sql_replicate.dbo.vlssummary_tm,SQL_REPLICATE.dbo.VLSSummary_TM,10,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+sql_replicate.dbo.vlssummaryfxoption_th,SQL_REPLICATE.dbo.VLSSummaryFXOption_TH,9,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+sql_replicate.dbo.vlssummaryfxoption_tm,SQL_REPLICATE.dbo.VLSSummaryFXOption_TM,10,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+sql_replicate.dbo.vlssummarytoday_tm,SQL_REPLICATE.dbo.VLSSummaryToday_TM,10,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+sql_replicate.dbo.vlssummarytodayfxoption_tm,SQL_REPLICATE.dbo.VLSSummaryTodayFXOption_TM,10,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+sql_replicate.dbo.vlstransactions_th,SQL_REPLICATE.dbo.VLSTransactions_TH,22,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+sql_replicate.dbo.vlstransactions_tr,SQL_REPLICATE.dbo.VLSTransactions_TR,24,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+sql_replicate.dbo.vlstransactionstoday_tl,SQL_REPLICATE.dbo.VLSTransactionsToday_TL,26,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+sql_replicate.dbo.vlstransactionstoday_tr,SQL_REPLICATE.dbo.VLSTransactionsToday_TR,25,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,
+sql_replicate.dbo.zfxmast,SQL_REPLICATE.dbo.ZFXMAST,63,0,0,0,0,0,0,0,0,NO_BOUND_MATCH_NOT_CERTIFIED,

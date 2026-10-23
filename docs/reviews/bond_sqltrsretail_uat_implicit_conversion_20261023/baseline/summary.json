@@ -1,0 +1,88 @@
+{
+  "date": "2026-10-23",
+  "input_files": 2756,
+  "retail_procedures": 1063,
+  "tables": 841,
+  "base_comparison_binding": {
+    "TYPED": 20577,
+    "UNRESOLVED_OR_COMPLEX": 1288
+  },
+  "all_sites": 13054,
+  "base_sites": 5871,
+  "supplementary_sites": 7183,
+  "sites_by_form": {
+    "COMPARISON": 5476,
+    "UDF_ARGUMENT": 214,
+    "ISNULL_REPLACEMENT": 3057,
+    "SELECTSETVARIABLE": 311,
+    "IN_VALUE_TYPE": 380,
+    "INSERT_SELECT": 2142,
+    "ASSIGNMENTSETCLAUSE": 904,
+    "BINARY_Add": 104,
+    "INSERT_VALUES": 6,
+    "IN_SUBQUERY": 4,
+    "LIKE": 41,
+    "CASE_BRANCH": 101,
+    "BINARY_Subtract": 16,
+    "BINARY_Divide": 108,
+    "UNION_OUTPUT": 22,
+    "BINARY_Multiply": 142,
+    "BETWEEN_BOUND_TYPE": 15,
+    "SETVARIABLESTATEMENT": 1,
+    "BINARY_Modulo": 3,
+    "COALESCE_BRANCH": 7
+  },
+  "physical_column_endpoints": 9734,
+  "retail_procedure_physical_endpoints": 9298,
+  "tables_in_procedure_conversion_context": 407,
+  "columns_in_procedure_conversion_context": 1548,
+  "procedure_column_predicate_risk_sites": 440,
+  "procedure_column_predicate_risk_tables": 56,
+  "procedure_column_predicate_risk_columns": 78,
+  "procedure_column_predicate_risk_procedures": 146,
+  "supplemental_visits": {
+    "BINARY_Divide": 705,
+    "BINARY_Subtract": 893,
+    "BINARY_Multiply": 762,
+    "BINARY_Add": 6991,
+    "SETVARIABLESTATEMENT": 5138,
+    "SELECTSETVARIABLE": 3566,
+    "UDF_ARGUMENT": 1471,
+    "ISNULL_REPLACEMENT": 6158,
+    "CASE_BRANCH": 6024,
+    "LIKE": 104,
+    "BINARY_Modulo": 58,
+    "ASSIGNMENTSETCLAUSE": 6600,
+    "INSERT_SELECT": 32095,
+    "BINARY_BitwiseAnd": 1,
+    "INSERT_VALUES": 30,
+    "IN_SUBQUERY": 67,
+    "UNION_OUTPUT": 5657,
+    "COALESCE_BRANCH": 102
+  },
+  "unresolved_extension_observations": 12185,
+  "parse_errors": [
+    {
+      "database": "retail",
+      "file": "procedures/dbo.TRSPopulateHapusTransaksiSuratBerharga.sql",
+      "errors": [
+        {
+          "line": 190,
+          "number": 46010,
+          "message": "Incorrect syntax near ','."
+        },
+        {
+          "line": 251,
+          "number": 46001,
+          "message": "An internal parser error occurred."
+        }
+      ]
+    }
+  ],
+  "limits": [
+    "Static type differences and rule-based direction only; no actual plans/data observed.",
+    "Equal base types with differing lengths/precision/scale are not inferred as separate conversions.",
+    "Unsupported/ambiguous mappings stay in unresolved files; all files scanned is not all SQL paths fully bound.",
+    "Inherited snapshot binder is casefold-based and does not model live collation or branch-specific temp schemas."
+  ]
+}
