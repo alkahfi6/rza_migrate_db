@@ -1,42 +1,42 @@
 {
     "schema":  "RZA_RELEASE_V1",
-    "version":  "20261012.133931",
-    "build_time":  "2026-10-12T13:39:31Z",
-    "source_sha256":  "c4b48b2d5e2161a949e6617f76ae1a6d0f914c3675e070285fa5ff87e6a425d0",
+    "version":  "20261105.153636",
+    "build_time":  "2026-11-05T15:36:36Z",
+    "source_sha256":  "79517a99ddb0315896efca758bf632aa6e449078980d2bf878fa3a0130b25706",
     "artifacts":  [
                       {
                           "path":  "tools/rza_migrate_db.exe",
-                          "sha256":  "90c23d43814efe74d6dba67cfade28bcf3299db02d39d5ffc8e6e8793268e3a3",
-                          "size":  5898240
+                          "sha256":  "0f6453ecc4ae136e6e950dfb6792a44e114190c122aea0b4e29913baefb92c61",
+                          "size":  6386176
                       },
                       {
                           "path":  "tools/rza_migrate_check.exe",
-                          "sha256":  "808ef039a1b673cd3e6258c81c8beabb03de6a92252f02bdc33bf5b1f7092c40",
-                          "size":  17775616
+                          "sha256":  "2a1211ed9d004fa244c090ad7400f2c042ae38b1a89cd646f20fb37803b6495b",
+                          "size":  18255360
                       },
                       {
                           "path":  "tools/rza_migrate_report.exe",
-                          "sha256":  "2e0e2b7ae99ca93b99a27b48887ca7113514d3b020e773ec747b7300e41b8d1f",
-                          "size":  3909120
+                          "sha256":  "3ad3f15b286f24e94929e4f1a1f4c4a0a4619a082ab618bd7e4640eae1ea2e84",
+                          "size":  4380672
                       },
                       {
                           "path":  "tools/linux-amd64/rza_migrate_db",
-                          "sha256":  "8953a59d1bf7acd9fcb35da2f312cd470aa8adb081f72743289113ef64768513",
-                          "size":  5628066
+                          "sha256":  "6fe9b07ece146e732ce258d8e4dc20c016c969e66469f46b385a0f27a1b4e886",
+                          "size":  6148256
                       },
                       {
                           "path":  "tools/linux-amd64/rza_migrate_check",
-                          "sha256":  "67ae8032601eb1bb606216befa8a21259e7fc22146394528924bc100de7d3e1f",
-                          "size":  17203362
+                          "sha256":  "98344c8566d7209213a8a89cbe3f6afcb70c8d62dffedf0a8695f75268196c63",
+                          "size":  17715360
                       },
                       {
                           "path":  "tools/linux-amd64/rza_migrate_report",
-                          "sha256":  "498c61af86aededffc35a2b4e67e7a5b8521f7c91528072979ca5f8832877a4d",
-                          "size":  3748002
+                          "sha256":  "44ccecaea61bf23e3008826891380249bebc9acfc7b65ad5d347ab8b30c0131c",
+                          "size":  4223136
                       },
                       {
                           "path":  "tools/license.key",
-                          "sha256":  "4e182653d9d3fdcd1223fef223fa009a314709113b83e58a7503a0e46d2fee95",
+                          "sha256":  "812a4a4eecfa2ebec9a37cfdeaac1308de877afd49bd51196a4fbff2ef552c2d",
                           "size":  169
                       }
                   ]
