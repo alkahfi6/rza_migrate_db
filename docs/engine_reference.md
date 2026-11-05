@@ -14,7 +14,7 @@ Referensi ini merangkum kontrak aplikasi yang sudah ada. Requirement normatif te
 
 | Kontrak | Penjelasan |
 | --- | --- |
-| Input | Catalog SQL Server dan definition module; config compiled/env atau JSON `-config`. |
+| Input | Catalog SQL Server dan definition module; YAML/JSON `-config`, local `config.yaml`, atau DSN env. |
 | Kategori | Table type/TVP, table, index, view, function FN/IF/TF, procedure dalam batas capability matrix. |
 | Output | Canonical `db_object/*`, `out/get_object_summary.json`; export apply juga menulis management manifest. |
 | Mutasi | Bisa membuat/mengubah/menghapus snapshot; tidak mengubah metadata/data SQL Server dan tidak menghasilkan migration. |
@@ -27,9 +27,9 @@ go run ./cmd/rza_get_object_db -config C:\local\extractor.json -profile bootstra
 go run ./cmd/rza_get_object_db -preview-input C:\local\sql -preview-output C:\local\preview
 ```
 
-`-dry-run` memerlukan akses DB dan hanya menahan snapshot writes; CLI summary tetap ditulis. Preview memakai file lokal tanpa DB. Config runtime, termasuk target repo, dimiliki extractor; tool ini tidak mempunyai flag `-repo` seperti checker. Sumber credential melalui JSON/env dijelaskan pada [bootstrap](bootstrap_four_repos.md); jangan memasukkan credential nyata ke dokumentasi.
+`-dry-run` memerlukan akses DB dan hanya menahan snapshot writes; CLI summary tetap ditulis. Preview memakai file lokal tanpa DB; tanpa `-config`, local YAML tidak auto-load. Config runtime, termasuk target repo, dimiliki extractor; tool ini tidak mempunyai flag `-repo` seperti checker. Sumber credential YAML/JSON/env, prioritas, dan literal special character dijelaskan pada [README](../README.md#konfigurasi-extractor-rza_get_object_db); jangan memasukkan credential nyata ke dokumentasi.
 
-Default `-profile strict` menuntut snapshot lengkap. `-skip-unsupported-tables` atau profile bootstrap mengizinkan skip/preserve dengan evidence unmanaged. `-require-healthy-constraints` mempromosikan disabled/untrusted CHECK/FK menjadi exit nonzero setelah export. Jangan mengartikan skipped object sebagai object yang boleh di-DROP.
+Default `-profile continue` melanjutkan object lain dan menulis diagnosis ke `out/get_object_issues.txt` serta summary JSON. Explicit `-profile strict` menuntut snapshot lengkap. `-skip-unsupported-tables` atau profile bootstrap mengizinkan skip/preserve dengan evidence unmanaged. `-require-healthy-constraints` mempromosikan disabled/untrusted CHECK/FK menjadi exit nonzero setelah export. Jangan mengartikan skipped object sebagai object yang boleh di-DROP.
 
 ## `rza_migrate_check`: authoring check tanpa generation
 

@@ -6,7 +6,7 @@ Gunakan katalog ini setelah [overview](overview.md). Nama file adalah titik navi
 
 | Direktori | Peran | Mulai baca |
 | --- | --- | --- |
-| `cmd/rza_get_object_db` | CLI extractor dan config compiled/env/JSON | [main.go](../../cmd/rza_get_object_db/main.go), [config.go](../../cmd/rza_get_object_db/config.go) |
+| `cmd/rza_get_object_db` | CLI extractor dan pemilihan config YAML/JSON/env/default | [main.go](../../cmd/rza_get_object_db/main.go), [config.go](../../cmd/rza_get_object_db/config.go) |
 | `cmd/rza_migrate_check` | Adapter executable checker | [main.go](../../cmd/rza_migrate_check/main.go), lalu `internal/cmd/migrate_check.go` |
 | `cmd/rza_migrate_db` | CLI authoring dan license generation | [main.go](../../cmd/rza_migrate_db/main.go) |
 | `cmd/rza_migrate_report` | CLI report offline | [main.go](../../cmd/rza_migrate_report/main.go) |

@@ -1,5 +1,7 @@
 # Development Plan - rza_migrate_db Engine Suite
 
+2026-11-03 delivery scope: runtime extractor `config.yaml` with literal database credentials and URL-safe DSN construction; retain legacy JSON/env and offline preview. Implementation/tests cover driver parsing, invalid/ambiguous config, source priority, no credential summary, and unchanged config/history. No object support/safe-fix/planner scope is added. Gates: full Go tests, existing hardening/fixtures, full authoring release rebuild and Linux identity/checker smoke; extractor is separately compiled because it is outside `build_all.bat`'s payload. Live database authentication remains a separate validation level. See [extractor configuration QA](docs/qa/extractor_yaml_config.md).
+
 2026-10-22 documentation delivery: tersedia [arsitektur](docs/architecture/overview.md),
 [call tree](docs/architecture/call_tree.md), [katalog paket](docs/architecture/package_catalog.md),
 [referensi engine](docs/engine_reference.md), [panduan agent](docs/engineering/agent_onboarding.md),
@@ -765,3 +767,21 @@ Report layout V2 delivery complete (2026-10-12): full tests/hardening, complete 
 Audit object precision selesai pada implementation dan focused regression; completion gate tetap full Go/hardening, complete Windows/Linux rebuild, source/checksum identity dan released checker/report smoke. Residual scope: full T-SQL AST, CTE projection, correlated scope, runtime dynamic metadata dan MERGE branch mapping tetap manual; lihat audit bertanggal untuk bukti dan hasil gate.
 
 Detail bukti: docs/review_report_object_precision_20261012.md.
+
+
+## Extractor catalog names (2026-11-05)
+
+`rza_get_object_db` no longer applies repository filename/authoring identifier rules to catalog object names, including table types, tables, modules, and FK reference names. Spaces, hyphens, leading digits, Unicode, dots and escaped brackets are preserved in SQL identifiers. Module header parsing reads delimited identifier parts without stripping their contents. Filename-only escaping uses `%HH` for percent, control bytes and Windows-reserved characters (`<>:"/\|?*`); SQL retains the catalog name. Case-colliding filenames still stop before writes to prevent loss on portable filesystems. Other extraction limitations (encrypted/inaccessible definitions, unsupported metadata, schema scope) remain in force.
+
+This is an explicit extractor-only exception requested for catalog acquisition. Checker apply, checker `-check`/Linux CI, and generator retain authoring name validation: successful extraction is not a promise that unusual names can generate migrations. Encoded filenames are not decoded/renamed by these tools and must be reviewed before authoring. Extractor never repairs migration history. Existing conventional names keep their original filenames/output. Full authoring release rebuild is required for shared-source identity; extractor is separately compiled because `build_all.bat` does not package it.
+
+Proof: `internal/getobject/catalog_names_test.go` covers real snapshot apply/read-only plan, idempotence, literal SQL identity/module headers, portable filename escaping, collision avoidance between slash and literal percent sequences, warning identity, and unchanged migration history. Existing checker/generator fixture tests remain the boundary control. No new SQL migration support or migration golden is introduced.
+
+
+## Continue-on-object-error extractor default (2026-11-05)
+
+Extractor executable defaults to `-profile continue`: individual table/index rendering failures and skipped module/type definitions do not stop other objects. Existing failed-object table/index/module/type snapshots are preserved; skipped objects remain recorded in the unmanaged manifest, preventing an extraction omission from becoming a DROP request. `out/get_object_summary.json` retains warnings and structured items, and `out/get_object_issues.txt` is refreshed every run with object names/reasons (or an explicit clean result). No extra flag is needed for `.exe` users. Database connection/global catalog reads, unsafe filename collisions, and output/report write errors remain fatal because safe acquisition/publication cannot be completed. Reports contain diagnostics, not invented SQL for inaccessible/encrypted definitions.
+
+Explicit `-profile strict` retains the previous fail-on-incomplete policy; `bootstrap` and the legacy skip flag remain supported. Shared extractor defaults also enable continuation (`SkipUnsupportedTables=true`). Per-table render errors are all eligible for preserve/report, rather than only errors matching an unsupported-message whitelist. No migration files are generated or repaired by extractor. Checker apply/read-only CI and generator keep existing authoring policy and consume unmanaged evidence; no safe-fix, migration semantics, or up/down support is changed. The authoring Windows/Linux release is rebuilt; the separately compiled extractor is supplied at `tools/rza_get_object_db.exe` for direct execution.
+
+Tests: `TestContinueExportsGoodTablePreservesFailedSnapshots` exercises mixed good/bad catalog metadata, apply/read-only plan, repeat execution, both table/index preservation, immutable migration history, and explicit strict behavior. `TestExeDefaultContinuesAndWritesReadableIssues` proves no-flag executable CLI defaults, JSON/text evidence, success-with-warnings, and removal of stale warnings after a clean run.

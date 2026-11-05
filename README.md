@@ -189,22 +189,32 @@ Saat berjalan, extractor akan menampilkan progress phase (`init/connect/load/ren
 Extractor juga menulis summary run ke `out/get_object_summary.json` agar hasil tetap bisa dicek saat aplikasi dijalankan via double-click.
 
 ## Konfigurasi Extractor (`rza_get_object_db`)
-Konfigurasi sekarang compile-time (bukan JSON runtime):
-- default compile-time config: `cmd/rza_get_object_db/config.go`
-- optional runtime JSON config: `rza_get_object_db -config .\extractor.json`
-- ubah nilai berikut lalu rebuild:
-- `ConnectionString`
-- `RepoRoot`
-- `DbObjectDir`
-- `Schema` (wajib `dbo`)
-- `ConnectTimeoutSeconds`
-- `QueryTimeoutSeconds`
-- `RenderWorkers` (jumlah worker untuk render snapshot object)
-- `WriteWorkers` (jumlah worker untuk write/delete file snapshot)
-- `StripModuleComments` (hapus komentar `--` / `/* */` pada view/function/procedure hasil extract)
-- `ReindentModuleSQL` (rapihkan indentasi blok `BEGIN ... END` untuk view/function/procedure)
-- `IndentSize` (jumlah spasi per level indent, default `2`)
-- `ModuleFormatterBackend` (`lite` atau `antlr`, default `lite`; `antlr` saat ini fallback otomatis ke `lite`)
+Salin `config.example.yaml` menjadi `config.yaml` di working directory dan isi credential lokal. File `config.yaml` diabaikan Git; jangan commit credential. Tidak perlu rebuild setelah mengubah konfigurasi.
+
+```yaml
+database:
+  host: 'localhost'
+  port: 1433
+  user: 'your_user'
+  password: 'your_password@with#special%characters'
+  initial_catalog: 'YourDatabase'
+  encrypt: 'disable'
+repo_root: '.'
+```
+
+Password/user/catalog ditulis literal, tanpa URL-encoding manual. Gunakan single quote YAML; apostrophe literal ditulis `''`. DSN dibentuk dengan `url.UserPassword`, `net.JoinHostPort`, dan `url.Values.Encode`, sesuai [panduan driver Microsoft](https://github.com/microsoft/go-mssqldb#connection-parameters-and-dsn).
+
+Prioritas: `-config <path.yaml|path.yml|path.json>` > `config.yaml` di working directory > `MSSQL_DSN` > `RZA_GET_OBJECT_DSN` > default tanpa credential nyata. File yang ada tetapi invalid menghentikan export; tidak fallback ke target lain. `-preview-input` tanpa `-config` tidak auto-load credential dan tetap offline. JSON lama dengan `connection_string` tetap didukung; jangan menggabungkannya dengan `database`. DSN legacy harus sudah valid/escaped.
+
+```powershell
+go run ./cmd/rza_get_object_db -config ./config.yaml -dry-run
+```
+
+`host` menerima hostname/IPv4/IPv6 tanpa port/instance; `port` default 1433 (rentang 1–65535). `initial_catalog`, `user`, dan `password` wajib diisi. `encrypt` menerima `disable` (default kompatibilitas), `false`, `true`, atau `strict`.
+
+Opsi YAML/JSON lain tetap mengikuti default `internal/getobject/app_config.go`: `db_object_dir`, `schema` (wajib `dbo`), `connect_timeout_seconds`, `query_timeout_seconds`, `render_workers`, `write_workers`, `skip_unsupported_tables`, `strip_module_comments`, `reindent_module_sql`, `indent_size`, dan `module_formatter_backend` (`lite` default, `antlr` fallback ke `lite`). Semua path relatif dihitung dari working directory, bukan lokasi config.
+
+Perubahan konfigurasi hanya dimiliki extractor. Checker interactive/`-check`, generator, dan MR pipeline tidak memerlukan credential ini; SQL canonical, aturan safe-fix, serta bentuk up/down tetap sama. Extractor tidak menulis migration. `build_all.bat` tetap menerbitkan paket authoring Windows/Linux; extractor dibangun terpisah atau lewat bundle Windows. Lihat [batas dan QA konfigurasi](docs/qa/extractor_yaml_config.md).
 
 Catatan export modul:
 - Jika ada object view/function/procedure yang tidak bisa dinormalisasi (mis. definition kosong/encrypted/header invalid), extractor tidak menghentikan seluruh run.
@@ -360,3 +370,21 @@ bila execution dan complete literal terbukti. Encoding Unicode dibaca di memory;
 source identity mismatch/encoding tak dikenal gagal tanpa mengubah SQL.
 Bukti corpus, temuan source, fixture, dan batas kemampuan ada pada
 [audit object report](docs/review_report_object_precision_20261012.md).
+
+
+## Extractor catalog names (2026-11-05)
+
+`rza_get_object_db` no longer applies repository filename/authoring identifier rules to catalog object names, including table types, tables, modules, and FK reference names. Spaces, hyphens, leading digits, Unicode, dots and escaped brackets are preserved in SQL identifiers. Module header parsing reads delimited identifier parts without stripping their contents. Filename-only escaping uses `%HH` for percent, control bytes and Windows-reserved characters (`<>:"/\|?*`); SQL retains the catalog name. Case-colliding filenames still stop before writes to prevent loss on portable filesystems. Other extraction limitations (encrypted/inaccessible definitions, unsupported metadata, schema scope) remain in force.
+
+This is an explicit extractor-only exception requested for catalog acquisition. Checker apply, checker `-check`/Linux CI, and generator retain authoring name validation: successful extraction is not a promise that unusual names can generate migrations. Encoded filenames are not decoded/renamed by these tools and must be reviewed before authoring. Extractor never repairs migration history. Existing conventional names keep their original filenames/output. Full authoring release rebuild is required for shared-source identity; extractor is separately compiled because `build_all.bat` does not package it.
+
+Proof: `internal/getobject/catalog_names_test.go` covers real snapshot apply/read-only plan, idempotence, literal SQL identity/module headers, portable filename escaping, collision avoidance between slash and literal percent sequences, warning identity, and unchanged migration history. Existing checker/generator fixture tests remain the boundary control. No new SQL migration support or migration golden is introduced.
+
+
+## Continue-on-object-error extractor default (2026-11-05)
+
+Extractor executable defaults to `-profile continue`: individual table/index rendering failures and skipped module/type definitions do not stop other objects. Existing failed-object table/index/module/type snapshots are preserved; skipped objects remain recorded in the unmanaged manifest, preventing an extraction omission from becoming a DROP request. `out/get_object_summary.json` retains warnings and structured items, and `out/get_object_issues.txt` is refreshed every run with object names/reasons (or an explicit clean result). No extra flag is needed for `.exe` users. Database connection/global catalog reads, unsafe filename collisions, and output/report write errors remain fatal because safe acquisition/publication cannot be completed. Reports contain diagnostics, not invented SQL for inaccessible/encrypted definitions.
+
+Explicit `-profile strict` retains the previous fail-on-incomplete policy; `bootstrap` and the legacy skip flag remain supported. Shared extractor defaults also enable continuation (`SkipUnsupportedTables=true`). Per-table render errors are all eligible for preserve/report, rather than only errors matching an unsupported-message whitelist. No migration files are generated or repaired by extractor. Checker apply/read-only CI and generator keep existing authoring policy and consume unmanaged evidence; no safe-fix, migration semantics, or up/down support is changed. The authoring Windows/Linux release is rebuilt; the separately compiled extractor is supplied at `tools/rza_get_object_db.exe` for direct execution.
+
+Tests: `TestContinueExportsGoodTablePreservesFailedSnapshots` exercises mixed good/bad catalog metadata, apply/read-only plan, repeat execution, both table/index preservation, immutable migration history, and explicit strict behavior. `TestExeDefaultContinuesAndWritesReadableIssues` proves no-flag executable CLI defaults, JSON/text evidence, success-with-warnings, and removal of stale warnings after a clean run.

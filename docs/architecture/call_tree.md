@@ -9,7 +9,10 @@ Source: [CLI](../../cmd/rza_get_object_db/main.go), [export](../../internal/geto
 ```text
 main -> run
   ValidateExecutableName + parse flags
-  loadCompiledGetObjectConfig / getobject.LoadAppConfig (-config)
+  loadGetObjectConfig
+    explicit -config / local config.yaml -> getobject.LoadAppConfig
+      YAML/JSON decode -> DatabaseConfig.ConnectionString (net/url) -> Validate
+    [no file / offline preview] loadCompiledGetObjectConfig (DSN env/defaults)
   [preview-input] previewFromDir -> getobject.PreviewModulesFromDir
   [export] exportFromDatabase -> getobject.ExportFromDatabaseWithOptions
     Normalize / Validate config
