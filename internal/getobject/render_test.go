@@ -145,20 +145,3 @@ func TestConstraintMetadataRendersLogicalDefinitionsAndRejectsUnknownKeyType(t *
 		t.Fatal("empty key backing index type must fail closed")
 	}
 }
-
-func TestValidateObjectNameForRules(t *testing.T) {
-	t.Parallel()
-
-	if err := validateObjectNameForRules("TableA_1"); err != nil {
-		t.Fatalf("expected valid object name: %v", err)
-	}
-	if err := validateObjectNameForRules("tmp_#data_param"); err != nil {
-		t.Fatalf("expected valid object name with hash in middle: %v", err)
-	}
-	if err := validateObjectNameForRules("Table$A"); err == nil {
-		t.Fatalf("expected invalid object name with unsupported symbol")
-	}
-	if err := validateObjectNameForRules("Table A"); err == nil {
-		t.Fatalf("expected invalid object name with space")
-	}
-}

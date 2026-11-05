@@ -1,0 +1,17 @@
+# Copy to config.yaml in the working directory and fill in your credentials.
+# Values are literal: do not URL-encode user/password/catalog yourself.
+# Single-quote passwords; write a literal apostrophe as two apostrophes ('').
+database:
+  host: 'localhost'
+  port: 1433
+  user: ''
+  password: ''
+  initial_catalog: ''
+  encrypt: 'disable'
+
+# Relative paths are resolved from the working directory, not this file.
+repo_root: '.'
+db_object_dir: 'db_object'
+schema: 'dbo'
+connect_timeout_seconds: 15
+query_timeout_seconds: 120

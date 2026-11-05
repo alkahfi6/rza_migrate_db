@@ -422,7 +422,7 @@ func quoteIdentifier(name string) string {
 }
 
 func qualifiedName(schema, object string) string {
-	return strings.TrimSpace(schema) + "." + strings.TrimSpace(object)
+	return extractionIdentifier(schema) + "." + extractionIdentifier(object)
 }
 
 func formatDataType(c columnMeta) string {
@@ -459,4 +459,17 @@ func dataTypeSupportsCollation(typeName string) bool {
 	default:
 		return false
 	}
+}
+
+// Preserve the established simple-name output; delimit all other catalog names.
+func extractionIdentifier(name string) string {
+	for i, r := range name {
+		if !((r >= 'a' && r <= 'z') || (r >= 'A' && r <= 'Z') || r == '_' || r == '#' || (i > 0 && r >= '0' && r <= '9')) {
+			return quoteIdentifier(name)
+		}
+	}
+	if name == "" {
+		return quoteIdentifier(name)
+	}
+	return name
 }

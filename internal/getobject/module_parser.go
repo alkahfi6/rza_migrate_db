@@ -125,63 +125,82 @@ func consumeLeadingGoLine(input string) (string, bool) {
 }
 
 func consumeLeadingModuleObjectToken(input string) (string, int) {
-	if input == "" {
+	_, end, ok := parseCatalogModuleName(input)
+	if !ok {
 		return "", 0
 	}
-	i := 0
-	for i < len(input) {
-		switch input[i] {
-		case ' ', '\t', '\n', '\r', '(', ',', ';':
-			return input[:i], i
-		default:
-			i++
-		}
-	}
-	return input, len(input)
+	return input[:end], end
 }
 
 func canonicalizeModuleObjectToken(token string) string {
-	trimmed := strings.TrimSpace(strings.TrimRight(token, ",;"))
-	if trimmed == "" {
+	parts, _, ok := parseCatalogModuleName(token)
+	if !ok || len(parts) < 1 || len(parts) > 2 {
 		return ""
 	}
-	withoutBrackets := strings.ReplaceAll(strings.ReplaceAll(trimmed, "[", ""), "]", "")
-	withoutBrackets = strings.ReplaceAll(withoutBrackets, " ", "")
-	if withoutBrackets == "" {
-		return ""
-	}
-
-	partsRaw := strings.Split(withoutBrackets, ".")
-	parts := make([]string, 0, len(partsRaw))
-	for _, part := range partsRaw {
-		part = strings.TrimSpace(part)
-		if part == "" {
-			continue
-		}
-		parts = append(parts, part)
-	}
-	if len(parts) == 0 {
-		return ""
-	}
-
-	schema := "dbo"
-	object := ""
-	switch len(parts) {
-	case 1:
-		object = parts[0]
-	case 2:
+	schema, object := "dbo", parts[len(parts)-1]
+	if len(parts) == 2 {
 		schema = parts[0]
-		object = parts[1]
-	default:
-		schema = parts[len(parts)-2]
-		object = parts[len(parts)-1]
 	}
 	if schema != "dbo" {
 		return ""
 	}
-	object = strings.TrimSpace(object)
-	if object == "" || strings.Contains(object, ".") {
-		return ""
+	return qualifiedName(schema, object)
+}
+
+// Read identifier parts without treating punctuation inside delimiters as syntax.
+func parseCatalogModuleName(input string) ([]string, int, bool) {
+	var parts []string
+	i := 0
+	for {
+		for i < len(input) && strings.ContainsRune(" \t\r\n", rune(input[i])) {
+			i++
+		}
+		if i >= len(input) {
+			return nil, 0, false
+		}
+		var part strings.Builder
+		if input[i] == '[' || input[i] == '"' {
+			close := byte(']')
+			if input[i] == '"' {
+				close = '"'
+			}
+			i++
+			closed := false
+			for i < len(input) {
+				b := input[i]
+				i++
+				if b == close {
+					if i < len(input) && input[i] == close {
+						part.WriteByte(close)
+						i++
+						continue
+					}
+					closed = true
+					break
+				}
+				part.WriteByte(b)
+			}
+			if !closed {
+				return nil, 0, false
+			}
+		} else {
+			start := i
+			for i < len(input) && !strings.ContainsRune(". \t\r\n(,;", rune(input[i])) {
+				i++
+			}
+			part.WriteString(input[start:i])
+		}
+		if part.Len() == 0 {
+			return nil, 0, false
+		}
+		parts = append(parts, part.String())
+		end := i
+		for i < len(input) && strings.ContainsRune(" \t\r\n", rune(input[i])) {
+			i++
+		}
+		if i >= len(input) || input[i] != '.' {
+			return parts, end, true
+		}
+		i++
 	}
-	return "dbo." + object
 }

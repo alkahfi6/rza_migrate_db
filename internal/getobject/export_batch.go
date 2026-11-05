@@ -150,9 +150,6 @@ func buildTableSnapshotSQLFromCache(cfg AppConfig, t tableMeta, cache tableSnaps
 		if strings.TrimSpace(fk.RefSchema) != strings.TrimSpace(cfg.Schema) {
 			return "", fmt.Errorf("foreign key %s references non-dbo schema %s", fk.Name, fk.RefSchema)
 		}
-		if err := validateObjectNameForRules(fk.RefTable); err != nil {
-			return "", fmt.Errorf("foreign key %s references invalid table %s: %w", fk.Name, fk.RefTable, err)
-		}
 		colMap := cache.ForeignKeyColumns[fk.ObjectID]
 		if len(colMap) == 0 {
 			return "", fmt.Errorf("foreign key %s has no column mapping", fk.Name)

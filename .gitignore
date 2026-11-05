@@ -8,6 +8,7 @@ mssql_credential.nfm
 .env
 .env.*
 !.env.example
+/config.yaml
 
 # Temporary copies of application/database repositories and manual test data.
 /App-DB/
@@ -17,6 +18,10 @@ mssql_credential.nfm
 /.tmp/
 /.tmp_*
 tmp_check*/
+/bond-sqltrsretail-*/
+/node_modules/
+/tools/config.yaml
+/tools/rza_get_object_db.exe*
 
 # Local archives and captured diagnostics.
 /*.zip

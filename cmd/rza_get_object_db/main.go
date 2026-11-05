@@ -87,7 +87,7 @@ func run(args []string) int {
 	}
 
 	fs := flag.NewFlagSet("rza_get_object_db", flag.ContinueOnError)
-	profile := fs.String("profile", "strict", "extractor policy profile: strict|bootstrap")
+	profile := fs.String("profile", "continue", "extractor policy profile: continue (default)|strict|bootstrap")
 	dryRun := fs.Bool("dry-run", false, "preview create/update/delete without writing files")
 	skipUnsupportedTables := fs.Bool(
 		"skip-unsupported-tables",
@@ -99,7 +99,7 @@ func run(args []string) int {
 		false,
 		"return a non-zero exit after export when disabled or untrusted constraints are observed",
 	)
-	configPath := fs.String("config", "", "optional JSON extractor config; overrides compiled config")
+	configPath := fs.String("config", "", "extractor YAML/JSON config (default: config.yaml in working directory, then DSN environment)")
 	previewInput := fs.String("preview-input", "", "local folder containing .sql samples (no DB connection)")
 	previewOutput := fs.String("preview-output", filepath.FromSlash("out/preview_modules"), "output folder for local preview formatting")
 	fs.SetOutput(os.Stderr)
@@ -108,26 +108,25 @@ func run(args []string) int {
 		return finishRun(".", summary, 1)
 	}
 	profileValue := strings.ToLower(strings.TrimSpace(*profile))
-	if profileValue != "strict" && profileValue != "bootstrap" {
-		summary.Error = fmt.Sprintf("invalid profile %q (allowed: strict|bootstrap)", profileValue)
+	if profileValue != "continue" && profileValue != "strict" && profileValue != "bootstrap" {
+		summary.Error = fmt.Sprintf("invalid profile %q (allowed: continue|strict|bootstrap)", profileValue)
 		fmt.Fprintln(os.Stderr, "error: "+summary.Error)
 		return finishRun(".", summary, 1)
 	}
 
-	cfg := loadCompiledGetObjectConfig()
-	if strings.TrimSpace(*configPath) != "" {
-		loaded, loadErr := getobject.LoadAppConfig(*configPath)
-		if loadErr != nil {
-			fmt.Fprintf(os.Stderr, "error: load config: %v\n", loadErr)
-			summary.Error = "load config: " + loadErr.Error()
-			return finishRun(".", summary, 1)
-		}
-		cfg = loaded
+	cfg, loadErr := loadGetObjectConfig(*configPath, strings.TrimSpace(*previewInput) != "")
+	if loadErr != nil {
+		fmt.Fprintf(os.Stderr, "error: load config: %v\n", loadErr)
+		summary.Error = "load config: " + loadErr.Error()
+		return finishRun(".", summary, 1)
+	}
+	if profileValue == "strict" {
+		cfg.SkipUnsupportedTables = false
 	}
 	if *skipUnsupportedTables {
 		cfg.SkipUnsupportedTables = true
 	}
-	if profileValue == "bootstrap" {
+	if profileValue == "bootstrap" || profileValue == "continue" {
 		cfg.SkipUnsupportedTables = true
 	}
 	repoRoot := cfg.RepoRoot
@@ -326,10 +325,11 @@ func finishRun(repoRoot string, summary cliRunSummary, exitCode int) int {
 
 	path, err := writeRunSummary(repoRoot, summary)
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "warning: write summary failed: %v\n", err)
-		return exitCode
+		fmt.Fprintf(os.Stderr, "error: write extraction reports failed: %v\n", err)
+		return 1
 	}
 	fmt.Fprintf(os.Stdout, "summary written: %s\n", filepath.ToSlash(path))
+	fmt.Fprintf(os.Stdout, "object issues written: %s\n", filepath.ToSlash(filepath.Join(filepath.Dir(path), "get_object_issues.txt")))
 	return exitCode
 }
 
@@ -347,6 +347,24 @@ func writeRunSummary(repoRoot string, summary cliRunSummary) (string, error) {
 		return "", err
 	}
 	if err := os.WriteFile(summaryPath, append(raw, '\n'), 0o644); err != nil {
+		return "", err
+	}
+	issuesPath := filepath.Join(root, "out", "get_object_issues.txt")
+	var issues strings.Builder
+	issues.WriteString("Extractor object issues\n")
+	if summary.Error != "" {
+		fmt.Fprintf(&issues, "Run error: %s\n", summary.Error)
+	}
+	if summary.Export != nil {
+		fmt.Fprintf(&issues, "Warnings: %d\n", summary.Export.WarningCount)
+		for _, warning := range summary.Export.Warnings {
+			fmt.Fprintf(&issues, "- %s\n", warning)
+		}
+	}
+	if summary.Error == "" && (summary.Export == nil || summary.Export.WarningCount == 0) {
+		issues.WriteString("No object issues reported.\n")
+	}
+	if err := os.WriteFile(issuesPath, []byte(issues.String()), 0o644); err != nil {
 		return "", err
 	}
 	return summaryPath, nil

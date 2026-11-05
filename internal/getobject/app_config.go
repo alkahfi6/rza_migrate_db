@@ -4,26 +4,29 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"io"
 	"os"
 	"path/filepath"
 	"strings"
+
+	"gopkg.in/yaml.v3"
 )
 
 // AppConfig controls runtime settings for rza_get_object_db.
 type AppConfig struct {
-	ConnectionString       string `json:"connection_string"`
-	RepoRoot               string `json:"repo_root"`
-	DbObjectDir            string `json:"db_object_dir"`
-	Schema                 string `json:"schema"`
-	ConnectTimeoutSeconds  int    `json:"connect_timeout_seconds"`
-	QueryTimeoutSeconds    int    `json:"query_timeout_seconds"`
-	RenderWorkers          int    `json:"render_workers"`
-	WriteWorkers           int    `json:"write_workers"`
-	SkipUnsupportedTables  bool   `json:"skip_unsupported_tables"`
-	StripModuleComments    bool   `json:"strip_module_comments"`
-	ReindentModuleSQL      bool   `json:"reindent_module_sql"`
-	IndentSize             int    `json:"indent_size"`
-	ModuleFormatterBackend string `json:"module_formatter_backend"`
+	ConnectionString       string `json:"connection_string" yaml:"connection_string,omitempty"`
+	RepoRoot               string `json:"repo_root" yaml:"repo_root"`
+	DbObjectDir            string `json:"db_object_dir" yaml:"db_object_dir"`
+	Schema                 string `json:"schema" yaml:"schema"`
+	ConnectTimeoutSeconds  int    `json:"connect_timeout_seconds" yaml:"connect_timeout_seconds"`
+	QueryTimeoutSeconds    int    `json:"query_timeout_seconds" yaml:"query_timeout_seconds"`
+	RenderWorkers          int    `json:"render_workers" yaml:"render_workers"`
+	WriteWorkers           int    `json:"write_workers" yaml:"write_workers"`
+	SkipUnsupportedTables  bool   `json:"skip_unsupported_tables" yaml:"skip_unsupported_tables"`
+	StripModuleComments    bool   `json:"strip_module_comments" yaml:"strip_module_comments"`
+	ReindentModuleSQL      bool   `json:"reindent_module_sql" yaml:"reindent_module_sql"`
+	IndentSize             int    `json:"indent_size" yaml:"indent_size"`
+	ModuleFormatterBackend string `json:"module_formatter_backend" yaml:"module_formatter_backend"`
 
 	// initialMigrationObjects is populated at export time from migrations/*_v1.up.sql.
 	// It is intentionally runtime-only and is not part of the JSON config contract.
@@ -41,7 +44,7 @@ func DefaultAppConfig(repoRoot string) AppConfig {
 		QueryTimeoutSeconds:    120,
 		RenderWorkers:          4,
 		WriteWorkers:           4,
-		SkipUnsupportedTables:  false,
+		SkipUnsupportedTables:  true,
 		StripModuleComments:    true,
 		ReindentModuleSQL:      true,
 		IndentSize:             2,
@@ -49,16 +52,45 @@ func DefaultAppConfig(repoRoot string) AppConfig {
 	}
 }
 
-// LoadAppConfig loads JSON config from disk and applies default values.
+// LoadAppConfig loads YAML or legacy JSON config and resolves database credentials
+// into the DSN consumed by the exporter. Decoder errors never echo secret values.
 func LoadAppConfig(path string) (AppConfig, error) {
 	raw, err := os.ReadFile(path)
 	if err != nil {
 		return AppConfig{}, err
 	}
 
-	cfg := DefaultAppConfig(".")
-	if err := json.Unmarshal(raw, &cfg); err != nil {
-		return AppConfig{}, fmt.Errorf("parse app config %s: %w", path, err)
+	file := struct {
+		AppConfig `yaml:",inline"`
+		Database  *DatabaseConfig `json:"database" yaml:"database"`
+	}{AppConfig: DefaultAppConfig(".")}
+	// A file must explicitly supply one credential source; do not confuse the
+	// compiled placeholder with a connection_string actually present in the file.
+	file.ConnectionString = ""
+	if strings.EqualFold(filepath.Ext(path), ".json") {
+		if err := json.Unmarshal(raw, &file); err != nil {
+			return AppConfig{}, fmt.Errorf("parse app config %s: invalid JSON; check field names and value types", path)
+		}
+	} else {
+		decoder := yaml.NewDecoder(strings.NewReader(string(raw)))
+		decoder.KnownFields(true)
+		if err := decoder.Decode(&file); err != nil {
+			return AppConfig{}, fmt.Errorf("parse app config %s: invalid YAML; check field names, duplicates and value types", path)
+		}
+		var extra any
+		if err := decoder.Decode(&extra); err != io.EOF {
+			return AppConfig{}, fmt.Errorf("parse app config %s: expected one YAML document", path)
+		}
+	}
+	cfg := file.AppConfig
+	if file.Database != nil {
+		if cfg.ConnectionString != "" {
+			return AppConfig{}, errors.New("use either database or connection_string, not both")
+		}
+		cfg.ConnectionString, err = file.Database.ConnectionString()
+		if err != nil {
+			return AppConfig{}, err
+		}
 	}
 	cfg.Normalize()
 	return cfg, cfg.Validate()
@@ -67,14 +99,20 @@ func LoadAppConfig(path string) (AppConfig, error) {
 // WriteAppConfigTemplate writes a starter config file.
 func WriteAppConfigTemplate(path string, cfg AppConfig) error {
 	cfg.Normalize()
-	raw, err := json.MarshalIndent(cfg, "", "  ")
+	var raw []byte
+	var err error
+	if strings.EqualFold(filepath.Ext(path), ".json") {
+		raw, err = json.MarshalIndent(cfg, "", "  ")
+	} else {
+		raw, err = yaml.Marshal(cfg)
+	}
 	if err != nil {
 		return err
 	}
 	if err := os.MkdirAll(filepath.Dir(path), 0o755); err != nil {
 		return err
 	}
-	return os.WriteFile(path, append(raw, '\n'), 0o644)
+	return os.WriteFile(path, append(raw, '\n'), 0o600)
 }
 
 // Normalize applies empty-value defaults.

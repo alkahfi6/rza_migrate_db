@@ -106,7 +106,7 @@ func TestDefaultAppConfigUsesLiteBackend(t *testing.T) {
 	if cfg.ModuleFormatterBackend != "lite" {
 		t.Fatalf("expected DefaultAppConfig module formatter backend lite, got %s", cfg.ModuleFormatterBackend)
 	}
-	if cfg.SkipUnsupportedTables {
-		t.Fatalf("expected DefaultAppConfig skip_unsupported_tables=false for complete source-of-truth snapshots")
+	if !cfg.SkipUnsupportedTables {
+		t.Fatalf("expected DefaultAppConfig skip_unsupported_tables=true for continuation")
 	}
 }

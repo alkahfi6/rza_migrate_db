@@ -5,6 +5,7 @@ import (
 	"database/sql"
 	"errors"
 	"fmt"
+	"net/url"
 	"os"
 	"path/filepath"
 	"sort"
@@ -20,11 +21,6 @@ import (
 	"rza_migrate_db/internal/management"
 	"rza_migrate_db/internal/sqlfmt"
 )
-
-var migrationObjectTokenRunes = func() map[rune]struct{} {
-	cfg := migrateconfig.Default(".")
-	return cfg.AllowedObjectTokenRunes
-}()
 
 type tableMeta struct {
 	ObjectID int
@@ -383,6 +379,17 @@ func ExportFromDatabaseWithOptions(cfg AppConfig, opts ExportOptions) (ExportSum
 		{Dir: filepath.Join(cfg.DbObjectDir, "procedures"), Files: procedureFiles, Preserve: procedurePreserve},
 	}
 	objectWarnings := warningsFromPreserved("types", cfg.Schema, typePreserve)
+	// Check all categories before writing any snapshot on a case-insensitive disk.
+	for _, item := range writes {
+		seen := map[string]string{}
+		for name := range item.Files {
+			key := strings.ToLower(name)
+			if previous, ok := seen[key]; ok && previous != name {
+				return ExportSummary{}, fmt.Errorf("catalog names cannot share a portable snapshot filename: %s and %s; no files were changed", previous, name)
+			}
+			seen[key] = name
+		}
+	}
 	objectWarnings = append(objectWarnings, warningsFromPreserved("views", cfg.Schema, viewPreserve)...)
 	objectWarnings = append(objectWarnings, warningsFromPreserved("functions", cfg.Schema, functionPreserve)...)
 	objectWarnings = append(objectWarnings, warningsFromPreserved("procedures", cfg.Schema, procedurePreserve)...)
@@ -418,6 +425,9 @@ func warningsFromPreserved(category, schema string, preserved map[string]struct{
 	out := make([]ExportWarning, 0, len(preserved))
 	for file := range preserved {
 		object := strings.TrimSuffix(filepath.Base(file), filepath.Ext(file))
+		if decoded, err := url.PathUnescape(object); err == nil {
+			object = decoded
+		}
 		if !strings.Contains(object, ".") {
 			object = strings.TrimSpace(schema) + "." + object
 		}
@@ -621,11 +631,6 @@ ORDER BY tt.name;
 			continue
 		}
 		fileName := fileNameForObject(item.Name)
-		if err := validateObjectNameForRules(item.Name); err != nil {
-			warnings = append(warnings, fmt.Sprintf("table type %s.%s skipped: invalid object name (%v)", cfg.Schema, item.Name, err))
-			preserve[fileName] = struct{}{}
-			continue
-		}
 		typeSQL, buildErr := buildTableTypeSnapshotSQL(db, cfg, item)
 		if buildErr != nil {
 			warnings = append(warnings, fmt.Sprintf("table type %s.%s skipped: %v", cfg.Schema, item.Name, buildErr))
@@ -801,11 +806,6 @@ ORDER BY o.name;
 			continue
 		}
 		fileName := fileNameForObject(obj.Name)
-		if err := validateObjectNameForRules(obj.Name); err != nil {
-			warnings = append(warnings, fmt.Sprintf("%s %s.%s skipped: invalid object name (%v)", strings.ToLower(kind), cfg.Schema, obj.Name, err))
-			preserve[fileName] = struct{}{}
-			continue
-		}
 		if !definition.Valid || strings.TrimSpace(definition.String) == "" {
 			warnings = append(warnings, fmt.Sprintf("%s %s.%s skipped: definition is empty or encrypted", strings.ToLower(kind), cfg.Schema, obj.Name))
 			preserve[fileName] = struct{}{}
@@ -836,12 +836,12 @@ func preserveNamesFromTableWarnings(warnings []ExportWarning) map[string]struct{
 		if warning.Rule != "TABLE_EXTRACT_SKIPPED_UNSUPPORTED" {
 			continue
 		}
-		name := strings.TrimSpace(warning.Object)
+		name := warning.Object
 		if dot := strings.Index(name, "."); dot >= 0 {
 			name = name[dot+1:]
 		}
 		if name != "" {
-			out[fileNameForObject(strings.Trim(name, "[]"))] = struct{}{}
+			out[fileNameForObject(name)] = struct{}{}
 		}
 	}
 	return out
@@ -866,9 +866,6 @@ func buildTableAndIndexFiles(cfg AppConfig, tables []tableMeta, cache tableSnaps
 
 	caseFoldedFiles := make(map[string]string, len(tables))
 	for _, t := range tables {
-		if err := validateObjectNameForRules(t.Name); err != nil {
-			return nil, nil, nil, fmt.Errorf("table %q invalid for rules contract: %w", t.Name, err)
-		}
 		fileName := fileNameForObject(t.Name)
 		folded := strings.ToLower(fileName)
 		if existing, ok := caseFoldedFiles[folded]; ok && existing != fileName {
@@ -921,12 +918,15 @@ func buildTableAndIndexFiles(cfg AppConfig, tables []tableMeta, cache tableSnaps
 	for _, r := range results {
 		warnings = append(warnings, r.Warnings...)
 		if r.Err != nil {
-			if cfg.SkipUnsupportedTables && isUnsupportedTableBuildError(r.Err) {
+			if cfg.SkipUnsupportedTables {
 				objectName := strings.TrimSuffix(strings.TrimPrefix(r.TableFile, "dbo."), ".sql")
+				if decoded, err := url.PathUnescape(objectName); err == nil {
+					objectName = decoded
+				}
 				warnings = append(warnings, ExportWarning{
 					Rule:     "TABLE_EXTRACT_SKIPPED_UNSUPPORTED",
 					Category: "tables",
-					Object:   qualifiedName(cfg.Schema, objectName),
+					Object:   cfg.Schema + "." + objectName,
 					Message:  r.Err.Error(),
 				})
 				continue
@@ -1189,9 +1189,6 @@ func buildTableSnapshotSQL(db *sql.DB, cfg AppConfig, t tableMeta) (string, erro
 		}
 		if strings.TrimSpace(fk.RefSchema) != strings.TrimSpace(cfg.Schema) {
 			return "", fmt.Errorf("foreign key %s references non-dbo schema %s", fk.Name, fk.RefSchema)
-		}
-		if err := validateObjectNameForRules(fk.RefTable); err != nil {
-			return "", fmt.Errorf("foreign key %s references invalid table %s: %w", fk.Name, fk.RefTable, err)
 		}
 		colMap, err := loadForeignKeyColumns(db, cfg, fk.ObjectID)
 		if err != nil {
@@ -1617,7 +1614,17 @@ WHERE ic.object_id = @obj
 }
 
 func fileNameForObject(objectName string) string {
-	return "dbo." + objectName + ".sql"
+	// Encode only bytes forbidden in portable filenames, including percent itself.
+	// SQL identity is preserved in the snapshot, not rewritten to this filename.
+	var name strings.Builder
+	for _, b := range []byte(objectName) {
+		if b < 32 || strings.ContainsRune(`%<>:"/\|?*`, rune(b)) {
+			fmt.Fprintf(&name, "%%%02X", b)
+		} else {
+			name.WriteByte(b)
+		}
+	}
+	return "dbo." + name.String() + ".sql"
 }
 
 func normalizeSQL(input string) string {
@@ -1727,32 +1734,6 @@ func applySQLCategoryPreserving(cfg AppConfig, relDir string, files map[string]s
 		return change, err
 	}
 	return change, nil
-}
-
-func validateObjectNameForRules(name string) error {
-	name = strings.TrimSpace(name)
-	if name == "" {
-		return errors.New("object name is empty")
-	}
-	if strings.Contains(name, ".") {
-		return errors.New("object name must not contain dot")
-	}
-	if strings.ContainsAny(name, " \t\r\n/\\") {
-		return errors.New("object name must not contain spaces or path separators")
-	}
-	for _, r := range name {
-		if r == '.' {
-			return errors.New("object name must not contain dot")
-		}
-		if _, ok := migrationObjectTokenRunes[r]; ok {
-			continue
-		}
-		return fmt.Errorf("object name contains unsupported character %q", r)
-	}
-	if name[0] >= '0' && name[0] <= '9' {
-		return errors.New("object name must not start with digit")
-	}
-	return nil
 }
 
 func mustIntString(v sql.NullString, fallback int) int {

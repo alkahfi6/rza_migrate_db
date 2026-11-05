@@ -193,7 +193,7 @@ func TestRunUnsupportedTableErrorIncludesContinuationHint(t *testing.T) {
 		return getobject.ExportSummary{}, errors.New("build table snapshot dbo.Child: foreign key FK_Child is disabled or untrusted and cannot be normalized safely")
 	}
 
-	exit := run([]string{"rza_get_object_db"})
+	exit := run([]string{"rza_get_object_db", "-profile", "strict"})
 	if exit != 1 {
 		t.Fatalf("expected exit 1, got %d", exit)
 	}
